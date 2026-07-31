@@ -22,8 +22,8 @@ document.title = query ? `${query} — Research Hub` : "Results — Research Hub
 wirePdfButton();
 
 const [sources, opportunities] = await Promise.all([
-  fetch("/data/sources.json").then((r) => r.json()),
-  fetch("/data/opportunities.json").then((r) => r.json()),
+  fetch("data/sources.json").then((r) => r.json()),
+  fetch("data/opportunities.json").then((r) => r.json()),
 ]);
 
 const results = opportunities.filter((item) => matchesQuery(item, query));

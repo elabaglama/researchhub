@@ -12,8 +12,8 @@ const today = new Date().toLocaleDateString(undefined, {
 document.getElementById("daily-meta").textContent = today;
 
 const [sources, opportunities] = await Promise.all([
-  fetch("/data/sources.json").then((r) => r.json()),
-  fetch("/data/opportunities.json").then((r) => r.json()),
+  fetch("data/sources.json").then((r) => r.json()),
+  fetch("data/opportunities.json").then((r) => r.json()),
 ]);
 
 // Starter digest: first entries across the indexed library.

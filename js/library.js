@@ -3,7 +3,7 @@ import { escapeHtml, wirePdfButton } from "./shared.js";
 wirePdfButton();
 
 const list = document.getElementById("library-list");
-const sources = await fetch("/data/sources.json").then((r) => r.json());
+const sources = await fetch("data/sources.json").then((r) => r.json());
 
 list.innerHTML = sources
   .map(

@@ -6,7 +6,7 @@ function ensureAudio() {
 
   audio = document.createElement("audio");
   audio.id = "hub-audio";
-  audio.src = "/audio/amore-dice-ciao.mp3";
+  audio.src = "audio/amore-dice-ciao.mp3";
   audio.loop = true;
   audio.preload = "auto";
   document.body.appendChild(audio);
@@ -40,7 +40,7 @@ function mountPlayer() {
 
   root.innerHTML = `
     <button class="music-player" type="button" aria-label="Pause music" title="Amore Dice Ciao — click to play/pause">
-      <img class="vinyl" src="/assets/turntable.png" alt="" width="96" height="96" draggable="false" />
+      <img class="vinyl" src="assets/turntable.png" alt="" width="96" height="96" draggable="false" />
     </button>
   `;
 
