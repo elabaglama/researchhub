@@ -13,14 +13,11 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="page-white">
-    <header class="white-header">
-      <a class="wordmark" href="index.html">Research Hub</a>
-      <nav class="white-nav">
-        <a href="daily.html" aria-current="page">Daily Report</a>
-        <a href="library.html">Library</a>
-        <a href="#" id="pdf-link">PDF</a>
-      </nav>
-    </header>
+    <nav class="top-pills top-pills-light" aria-label="Primary">
+      <a class="pill" href="daily.html" aria-current="page">Daily Report</a>
+      <a class="pill" href="library.html">Library</a>
+      <a class="pill" href="#" id="pdf-link">PDF</a>
+    </nav>
 
     <main class="white-main">
       <h1>Daily Report</h1>
@@ -28,6 +25,7 @@
       <div id="daily-list" class="simple-list"></div>
     </main>
 
+    <a class="brand-mark brand-mark-dark" href="index.html">Research<br />Hub</a>
     <div id="music-player-root"></div>
     <script type="module" src="js/daily.js"></script>
     <script type="module" src="js/player.js"></script>

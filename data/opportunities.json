@@ -5,8 +5,9 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "program",
+    "deadline": "Open",
     "tags": ["youth", "environment", "dialogue", "UNEP"],
-    "summary": "Applications open to host a Youth Environmental Dialogue with UNEP’s Children and Youth Major Group."
+    "summary": "Applications open to host a Youth Environmental Dialogue with UNEP's Children and Youth Major Group."
   },
   {
     "id": "ofy-wipo",
@@ -14,6 +15,7 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "program",
+    "deadline": "Open",
     "tags": ["youth", "IP", "fellowship"],
     "summary": "World Intellectual Property Organization programs for young professionals and researchers."
   },
@@ -23,6 +25,7 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "fellowship",
+    "deadline": "2026",
     "tags": ["fellowship", "leadership", "global"],
     "summary": "Mid-career leadership fellowship at Yale for global practitioners."
   },
@@ -32,8 +35,9 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "program",
+    "deadline": "Open",
     "tags": ["youth", "Africa", "leadership", "education"],
-    "summary": "Applications open for ALA’s next secondary leadership cohort."
+    "summary": "Applications open for ALA's next secondary leadership cohort."
   },
   {
     "id": "ofy-world-bank-africa",
@@ -41,6 +45,7 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "fellowship",
+    "deadline": "2027 cycle",
     "tags": ["fellowship", "Africa", "development", "World Bank"],
     "summary": "Fellowship track for African PhD candidates and recent graduates with the World Bank Group."
   },
@@ -50,6 +55,7 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "grant",
+    "deadline": "Open call",
     "tags": ["grant", "agriculture", "development", "call"],
     "summary": "Open call for proposals backed by a US$1.2M IFAD grant envelope."
   },
@@ -59,6 +65,7 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "scholarship",
+    "deadline": "2027 intake",
     "tags": ["PhD", "scholarship", "Germany", "urban", "mobility"],
     "summary": "Fully funded international PhD scholarship via Dresden Leibniz Graduate School."
   },
@@ -68,6 +75,7 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "grant",
+    "deadline": "2026",
     "tags": ["grant", "Scotland", "development", "citizenship"],
     "summary": "Grants up to £50,000 for international development and global citizenship projects."
   },
@@ -77,6 +85,7 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "competition",
+    "deadline": "2026",
     "tags": ["startup", "AI", "climate", "Africa", "competition"],
     "summary": "Smart Africa and FAO challenge for AI-driven climate-smart agriculture startups."
   },
@@ -86,6 +95,7 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "scholarship",
+    "deadline": "2027 cycle",
     "tags": ["scholarship", "Oxford", "West Africa", "Masters"],
     "summary": "Fully funded postgraduate study at the University of Oxford for West African scholars."
   },
@@ -95,6 +105,7 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "internship",
+    "deadline": "2027",
     "tags": ["internship", "EU", "Brussels", "disability"],
     "summary": "Paid traineeships in Brussels for EU nationals with disabilities."
   },
@@ -104,6 +115,7 @@
     "sourceId": "opportunities-for-youth",
     "url": "http://opportunitiesforyouth.org/",
     "type": "fellowship",
+    "deadline": "2027",
     "tags": ["fellowship", "UN", "ocean", "law"],
     "summary": "Fellowship supporting ocean affairs and law of the sea capacity building."
   },
@@ -113,6 +125,7 @@
     "sourceId": "still-hiring",
     "url": "https://stillhiring.today/",
     "type": "jobs",
+    "deadline": "Ongoing",
     "tags": ["jobs", "tech", "hiring", "startups"],
     "summary": "Live, community-sourced directory of tech employers with open roles — no pay-to-play."
   },
@@ -122,8 +135,9 @@
     "sourceId": "artinfoland",
     "url": "https://artinfoland.com/",
     "type": "residency",
+    "deadline": "November 15, 2026",
     "tags": ["residency", "China", "visual arts", "literature", "sound", "open-call"],
-    "summary": "Open call residency in China across visual arts, literature, sound, and interdisciplinary practice. Deadline Nov 15, 2026."
+    "summary": "Open call residency in China across visual arts, literature, sound, and interdisciplinary practice."
   },
   {
     "id": "ail-las-curator",
@@ -131,6 +145,7 @@
     "sourceId": "artinfoland",
     "url": "https://artinfoland.com/",
     "type": "jobs",
+    "deadline": "Ongoing",
     "tags": ["jobs", "curatorial", "Germany", "public art"],
     "summary": "Ongoing curatorial role at LAS Art Foundation in Germany."
   },
@@ -140,7 +155,8 @@
     "sourceId": "artinfoland",
     "url": "https://artinfoland.com/",
     "type": "residency",
+    "deadline": "August 27, 2026",
     "tags": ["residency", "Beijing", "curatorial", "research", "visual arts"],
-    "summary": "Research and residency opportunity with Inside-Out Art Museum. Deadline Aug 27, 2026."
+    "summary": "Research and residency opportunity with Inside-Out Art Museum."
   }
 ]

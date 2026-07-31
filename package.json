@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "All-in-one research hub for opportunities, calls, and programs",
   "scripts": {
-    "dev": "npx --yes serve . -p 5173",
-    "start": "npx --yes serve . -p 5173"
+    "dev": "python -m http.server 5173",
+    "start": "python -m http.server 5173"
   }
 }

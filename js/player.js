@@ -40,7 +40,7 @@ function mountPlayer() {
 
   root.innerHTML = `
     <button class="music-player" type="button" aria-label="Pause music" title="Amore Dice Ciao — click to play/pause">
-      <img class="vinyl" src="assets/turntable.png" alt="" width="96" height="96" draggable="false" />
+      <img class="vinyl" src="assets/music-element.png?v=1" alt="" width="128" height="128" draggable="false" />
     </button>
   `;
 

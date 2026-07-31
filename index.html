@@ -18,26 +18,32 @@
     <nav class="top-pills" aria-label="Primary">
       <a class="pill" href="daily.html">Daily Report</a>
       <a class="pill" href="library.html">Library</a>
-      <a class="pill" href="library.html?print=1" id="pdf-link">PDF</a>
+      <a class="pill" href="#" id="pdf-link">PDF</a>
     </nav>
 
     <main class="home-main">
-      <form class="hero-search" action="results.html" method="get" role="search">
+      <form class="hero-search" id="search-form" role="search">
         <label class="sr-only" for="query">Search</label>
         <input
           id="query"
           name="q"
           type="search"
-          placeholder="search here"
+          placeholder="search"
           autocomplete="off"
           autofocus
         />
       </form>
+
+      <section class="home-results" id="home-results" hidden>
+        <p id="results-meta" class="results-meta"></p>
+        <div id="results-list" class="results-cards"></div>
+      </section>
     </main>
 
     <a class="brand-mark" href="index.html">Research<br />Hub</a>
 
     <div id="music-player-root"></div>
+    <script type="module" src="js/home.js"></script>
     <script type="module" src="js/player.js"></script>
   </body>
 </html>
