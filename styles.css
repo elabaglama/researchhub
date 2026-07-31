@@ -58,32 +58,16 @@ body {
   top: 1.35rem;
   right: 1.35rem;
   z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.1rem;
-  padding: 0.55rem 0.95rem;
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.38);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   color: #fff;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
-  line-height: 1.1;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+  line-height: 1;
+  pointer-events: none;
 }
 
 .count-number {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-}
-
-.count-label {
-  font-size: 0.72rem;
-  font-weight: 500;
-  opacity: 0.92;
-  text-transform: lowercase;
 }
 
 .pill {
@@ -258,12 +242,115 @@ body {
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
 }
 
+.result-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
 .result-card .simple-title {
   color: var(--ink);
 }
 
 .result-card .simple-summary {
   color: #444;
+}
+
+.result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+  margin-top: 0.85rem;
+}
+
+.result-open {
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.result-open:hover {
+  text-decoration: underline;
+}
+
+.notion-save-btn {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
+  background: #111;
+  color: #fff;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.notion-save-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.daily-greeting {
+  margin: 0.35rem 0 0.25rem;
+  color: var(--ink);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.daily-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.daily-group-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.daily-group-head h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.daily-source-link {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.daily-source-link:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.simple-item {
+  display: block;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+
+.simple-item:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.simple-item .result-link:hover .simple-title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ——— White pages ——— */
@@ -521,11 +608,10 @@ body {
   .count-badge {
     top: 0.9rem;
     right: 0.9rem;
-    padding: 0.45rem 0.75rem;
   }
 
   .count-number {
-    font-size: 1rem;
+    font-size: 1.15rem;
   }
 
   .brand-mark {

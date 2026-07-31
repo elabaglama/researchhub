@@ -1,4 +1,9 @@
 const KEY = "research-hub-music";
+const TRACK = {
+  src: "audio/pinar-basindan.m4a",
+  fallbackSrc: "audio/pinar-basindan.webm",
+  title: "Pınar Başından Bulanır — Hande Dalkılıç",
+};
 
 function ensureAudio() {
   let audio = document.getElementById("hub-audio");
@@ -6,9 +11,15 @@ function ensureAudio() {
 
   audio = document.createElement("audio");
   audio.id = "hub-audio";
-  audio.src = "audio/amore-dice-ciao.mp3";
+  audio.src = TRACK.src;
   audio.loop = true;
   audio.preload = "auto";
+  audio.addEventListener("error", () => {
+    if (audio.dataset.fallbackApplied) return;
+    audio.dataset.fallbackApplied = "1";
+    audio.src = TRACK.fallbackSrc;
+    audio.load();
+  });
   document.body.appendChild(audio);
   return audio;
 }
@@ -39,7 +50,7 @@ function mountPlayer() {
   const state = savedState();
 
   root.innerHTML = `
-    <button class="music-player" type="button" aria-label="Pause music" title="Amore Dice Ciao — click to play/pause">
+    <button class="music-player" type="button" aria-label="Pause music" title="${TRACK.title} — tap to play/pause">
       <img class="vinyl" src="assets/music-element.png?v=1" alt="" width="128" height="128" draggable="false" />
     </button>
   `;
@@ -91,6 +102,7 @@ function mountPlayer() {
     if (!audio.paused) persist(audio, true);
   });
 
+  // Auto-start whenever the page opens (unless user previously paused this session).
   if (state.playing !== false) {
     try {
       if (state.time > 0) audio.currentTime = state.time;

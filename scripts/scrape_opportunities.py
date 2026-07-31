@@ -7,8 +7,8 @@ import hashlib
 import json
 import re
 import ssl
-import urllib.error
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from html import unescape
 from pathlib import Path
@@ -23,7 +23,10 @@ SSL_CTX = ssl._create_unverified_context()
 
 
 def fetch(url: str, timeout: int = 35) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,application/xhtml+xml"})
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": UA, "Accept": "text/html,application/json,application/xhtml+xml"},
+    )
     with urllib.request.urlopen(req, timeout=timeout, context=SSL_CTX) as resp:
         return resp.read().decode("utf-8", "ignore")
 
@@ -64,19 +67,66 @@ def guess_type(title: str) -> str:
 
 
 def extract_deadline(text: str) -> str:
+    """Pull the last application / deadline date from free text."""
+    text = clean_text(text)
     patterns = [
-        r"Deadline[:\s]+([A-Za-z]+ \d{1,2},?\s*\d{4})",
+        r"Application Deadline[:\s]+([A-Za-z]+ \d{1,2},?\s*\d{4})",
+        r"Applications? (?:close|due|deadline)[:\s]+([A-Za-z]+ \d{1,2},?\s*\d{4})",
         r"Apply by[:\s]+([A-Za-z]+ \d{1,2},?\s*\d{4})",
-        r"(\d{4}/\d{2}/\d{2})",
-        r"(\d{1,2} [A-Za-z]+ \d{4})",
+        r"Deadline[:\s]+([A-Za-z]+ \d{1,2},?\s*\d{4})",
+        r"Closing date[:\s]+([A-Za-z]+ \d{1,2},?\s*\d{4})",
+        r"Last (?:application|apply) date[:\s]+([A-Za-z]+ \d{1,2},?\s*\d{4})",
+        r"Due date[:\s]+([A-Za-z]+ \d{1,2},?\s*\d{4})",
+        r"(?:Application Deadline|Deadline|Apply by|Closing date)[:\s]+(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})",
+        r"(?:Application Deadline|Deadline|Apply by|Closing date)[:\s]+(\d{4}[/-]\d{1,2}[/-]\d{1,2})",
+        r"(?:Application Deadline|Deadline|Apply by)[:\s]+(\d{1,2} [A-Za-z]+ \d{4})",
     ]
     for pattern in patterns:
         match = re.search(pattern, text, re.I)
         if match:
-            return match.group(1)
-    if re.search(r"\bongoing\b", text, re.I):
+            return match.group(1).replace(",", "").strip()
+    if re.search(r"\bon[\s-]?going\b", text, re.I):
         return "Ongoing"
     return "Open"
+
+
+def enrich_ofy_deadline(item: dict) -> dict:
+    """Fetch detail page for Opportunities for Youth to get real deadline."""
+    try:
+        html = fetch(item["url"], timeout=25)
+        # Slice around the post body to avoid sidebar widgets.
+        start = re.search(r'class="[^"]*post-content[^"]*"', html, flags=re.I)
+        search_html = html[start.start() : start.start() + 12000] if start else html
+        deadline = extract_deadline(search_html)
+        if deadline and deadline != "Open":
+            item["deadline"] = deadline
+        # Also try explicit date phrases near "before the deadline" context
+        if item.get("deadline") in (None, "Open"):
+            soft = re.search(
+                r"(?:before the deadline|deadline is|deadline of)\s*([A-Za-z]+ \d{1,2},?\s*\d{4}|\d{1,2} [A-Za-z]+ \d{4})",
+                search_html,
+                flags=re.I,
+            )
+            if soft:
+                item["deadline"] = soft.group(1).replace(",", "").strip()
+        meta = re.search(
+            r'<meta[^>]+property=["\']og:description["\'][^>]+content=["\']([^"\']+)["\']',
+            html,
+            flags=re.I,
+        )
+        if not meta:
+            meta = re.search(
+                r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']+)["\']',
+                html,
+                flags=re.I,
+            )
+        if meta:
+            summary = clean_text(meta.group(1))
+            if len(summary) > 40:
+                item["summary"] = summary[:280]
+    except Exception:
+        pass
+    return item
 
 
 def scrape_opportunities_for_youth(source: dict) -> list[dict]:
@@ -113,7 +163,15 @@ def scrape_opportunities_for_youth(source: dict) -> list[dict]:
         if items:
             break
 
-    return items[:80]
+    # Enrich deadlines from detail pages (parallel, capped)
+    enriched: list[dict] = []
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        futures = [pool.submit(enrich_ofy_deadline, item) for item in items[:80]]
+        for fut in as_completed(futures):
+            enriched.append(fut.result())
+    # Keep stable order by original list
+    by_id = {item["id"]: item for item in enriched}
+    return [by_id[item["id"]] for item in items[:80] if item["id"] in by_id]
 
 
 def scrape_still_hiring(source: dict) -> list[dict]:
@@ -162,7 +220,10 @@ def scrape_still_hiring(source: dict) -> list[dict]:
         if len(title) < 3 or len(title) > 60:
             continue
         low = title.lower()
-        if any(x in low for x in ("privacy", "terms", "cookie", "login", "sign", "airtable", "full screen", "how it")):
+        if any(
+            x in low
+            for x in ("privacy", "terms", "cookie", "login", "sign", "airtable", "full screen", "how it")
+        ):
             continue
         if "stillhiring" in href or "airtable.com" in href or "super.so" in href:
             continue
@@ -187,11 +248,14 @@ def scrape_still_hiring(source: dict) -> list[dict]:
 
 
 def scrape_artinfoland(source: dict) -> list[dict]:
-    """Prefer WordPress REST API for ArtInfoLand opportunities."""
+    """WordPress REST API with full content for real application deadlines."""
     items: list[dict] = []
     page = 1
     while page <= 5:
-        api = f"https://artinfoland.com/wp-json/wp/v2/opportunities?per_page=50&page={page}"
+        api = (
+            "https://artinfoland.com/wp-json/wp/v2/opportunities"
+            f"?per_page=50&page={page}&_fields=id,title,link,content,excerpt"
+        )
         try:
             raw = fetch(api)
             data = json.loads(raw)
@@ -207,14 +271,17 @@ def scrape_artinfoland(source: dict) -> list[dict]:
                 continue
             excerpt_obj = entry.get("excerpt") or {}
             excerpt = clean_text(excerpt_obj.get("rendered") if isinstance(excerpt_obj, dict) else "")
+            content_obj = entry.get("content") or {}
+            content = clean_text(content_obj.get("rendered") if isinstance(content_obj, dict) else "")
+            blob = f"{title} {excerpt} {content}"
             items.append(
                 {
                     "id": make_id(source["id"], title, href),
                     "title": title[:180],
                     "sourceId": source["id"],
                     "url": href,
-                    "type": guess_type(title + " " + excerpt),
-                    "deadline": extract_deadline(title + " " + excerpt) or "Open",
+                    "type": guess_type(blob),
+                    "deadline": extract_deadline(blob),
                     "tags": [guess_type(title), "arts"],
                     "summary": (excerpt or title)[:280],
                 }
