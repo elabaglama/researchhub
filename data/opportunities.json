@@ -1,0 +1,146 @@
+[
+  {
+    "id": "ofy-yedx-2026",
+    "title": "YEDx 2026: Host a Youth Environmental Dialogue",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "program",
+    "tags": ["youth", "environment", "dialogue", "UNEP"],
+    "summary": "Applications open to host a Youth Environmental Dialogue with UNEP’s Children and Youth Major Group."
+  },
+  {
+    "id": "ofy-wipo",
+    "title": "WIPO Youth Opportunities",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "program",
+    "tags": ["youth", "IP", "fellowship"],
+    "summary": "World Intellectual Property Organization programs for young professionals and researchers."
+  },
+  {
+    "id": "ofy-yale-fellows",
+    "title": "Yale Maurice R. Greenberg World Fellows Program 2026",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "fellowship",
+    "tags": ["fellowship", "leadership", "global"],
+    "summary": "Mid-career leadership fellowship at Yale for global practitioners."
+  },
+  {
+    "id": "ofy-ala-2027",
+    "title": "African Leadership Academy Class of 2027",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "program",
+    "tags": ["youth", "Africa", "leadership", "education"],
+    "summary": "Applications open for ALA’s next secondary leadership cohort."
+  },
+  {
+    "id": "ofy-world-bank-africa",
+    "title": "World Bank Group Africa Fellowship Program 2027",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "fellowship",
+    "tags": ["fellowship", "Africa", "development", "World Bank"],
+    "summary": "Fellowship track for African PhD candidates and recent graduates with the World Bank Group."
+  },
+  {
+    "id": "ofy-ifad-grant",
+    "title": "IFAD US$1.2 Million Grant Call for Proposals",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "grant",
+    "tags": ["grant", "agriculture", "development", "call"],
+    "summary": "Open call for proposals backed by a US$1.2M IFAD grant envelope."
+  },
+  {
+    "id": "ofy-dlgs-phd",
+    "title": "DLGS Call for Applications 2027: PhD in Sustainable Urban Mobility",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "scholarship",
+    "tags": ["PhD", "scholarship", "Germany", "urban", "mobility"],
+    "summary": "Fully funded international PhD scholarship via Dresden Leibniz Graduate School."
+  },
+  {
+    "id": "ofy-scotland-solidarity",
+    "title": "Scottish Government Global Solidarity Fund 2026",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "grant",
+    "tags": ["grant", "Scotland", "development", "citizenship"],
+    "summary": "Grants up to £50,000 for international development and global citizenship projects."
+  },
+  {
+    "id": "ofy-innovate-africa",
+    "title": "Innovate Africa Challenge 2026",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "competition",
+    "tags": ["startup", "AI", "climate", "Africa", "competition"],
+    "summary": "Smart Africa and FAO challenge for AI-driven climate-smart agriculture startups."
+  },
+  {
+    "id": "ofy-rhodes-wa",
+    "title": "Rhodes Scholarship for West Africa 2027",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "scholarship",
+    "tags": ["scholarship", "Oxford", "West Africa", "Masters"],
+    "summary": "Fully funded postgraduate study at the University of Oxford for West African scholars."
+  },
+  {
+    "id": "ofy-eu-traineeship",
+    "title": "Council of the EU Positive Action Programme 2027 Traineeships",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "internship",
+    "tags": ["internship", "EU", "Brussels", "disability"],
+    "summary": "Paid traineeships in Brussels for EU nationals with disabilities."
+  },
+  {
+    "id": "ofy-un-nippon",
+    "title": "United Nations–Nippon Foundation Fellowship 2027",
+    "sourceId": "opportunities-for-youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "type": "fellowship",
+    "tags": ["fellowship", "UN", "ocean", "law"],
+    "summary": "Fellowship supporting ocean affairs and law of the sea capacity building."
+  },
+  {
+    "id": "still-hiring-hub",
+    "title": "Tech companies still hiring right now",
+    "sourceId": "still-hiring",
+    "url": "https://stillhiring.today/",
+    "type": "jobs",
+    "tags": ["jobs", "tech", "hiring", "startups"],
+    "summary": "Live, community-sourced directory of tech employers with open roles — no pay-to-play."
+  },
+  {
+    "id": "ail-sixi-2027",
+    "title": "Sixi International Artist-in-Residence Project 2027",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/",
+    "type": "residency",
+    "tags": ["residency", "China", "visual arts", "literature", "sound", "open-call"],
+    "summary": "Open call residency in China across visual arts, literature, sound, and interdisciplinary practice. Deadline Nov 15, 2026."
+  },
+  {
+    "id": "ail-las-curator",
+    "title": "Assistant Curator Job at LAS Art Foundation",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/",
+    "type": "jobs",
+    "tags": ["jobs", "curatorial", "Germany", "public art"],
+    "summary": "Ongoing curatorial role at LAS Art Foundation in Germany."
+  },
+  {
+    "id": "ail-inside-out",
+    "title": "Inside-Out Art Museum Residency 2027 in Beijing",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/",
+    "type": "residency",
+    "tags": ["residency", "Beijing", "curatorial", "research", "visual arts"],
+    "summary": "Research and residency opportunity with Inside-Out Art Museum. Deadline Aug 27, 2026."
+  }
+]

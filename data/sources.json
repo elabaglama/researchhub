@@ -1,0 +1,26 @@
+[
+  {
+    "id": "opportunities-for-youth",
+    "name": "Opportunities for Youth",
+    "url": "http://opportunitiesforyouth.org/",
+    "searchUrl": "http://opportunitiesforyouth.org/?s={query}",
+    "blurb": "Scholarships, fellowships, grants, internships, and youth programs worldwide.",
+    "focus": "Youth & education"
+  },
+  {
+    "id": "still-hiring",
+    "name": "Still Hiring Today",
+    "url": "https://stillhiring.today/",
+    "searchUrl": "https://www.google.com/search?q=site%3Astillhiring.today+{query}",
+    "blurb": "Community-sourced list of tech companies that are actually hiring right now.",
+    "focus": "Tech hiring"
+  },
+  {
+    "id": "artinfoland",
+    "name": "ArtInfoLand",
+    "url": "https://artinfoland.com/",
+    "searchUrl": "https://artinfoland.com/?s={query}",
+    "blurb": "Verified art residencies, grants, open calls, exhibitions, and curatorial roles.",
+    "focus": "Arts & culture"
+  }
+]
