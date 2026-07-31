@@ -6,8 +6,8 @@
   --glass: rgba(255, 255, 255, 0.42);
   --glass-border: rgba(255, 255, 255, 0.55);
   --glass-text: rgba(255, 255, 255, 0.92);
-  --deadline: #c45a12;
-  --deadline-glow: rgba(255, 196, 80, 0.95);
+  --deadline: #1a1a1a;
+  --deadline-glow: rgba(255, 255, 255, 0.85);
   --font: "Manrope", Helvetica, Arial, sans-serif;
 }
 
@@ -178,6 +178,17 @@ body {
 .hero-search input:focus {
   background: rgba(255, 255, 255, 0.52);
   box-shadow: 0 12px 44px rgba(0, 0, 0, 0.12);
+}
+
+.hero-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  margin-left: 0.4rem;
+  cursor: pointer;
+  background: center / contain no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M3.2 3.2a1 1 0 0 1 1.4 0L8 6.6l3.4-3.4a1 1 0 1 1 1.4 1.4L9.4 8l3.4 3.4a1 1 0 0 1-1.4 1.4L8 9.4l-3.4 3.4a1 1 0 0 1-1.4-1.4L6.6 8 3.2 4.6a1 1 0 0 1 0-1.4z'/%3E%3C/svg%3E");
 }
 
 .home-results {
@@ -385,15 +396,15 @@ body {
   margin-top: 0.55rem;
   padding: 0.28rem 0.7rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, #ffe08a 0%, #ffb347 55%, #ff8a3d 100%);
-  color: #5a2a00;
+  background: #fff;
+  color: #1a1a1a;
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.65) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.95),
     0 0 18px var(--deadline-glow),
-    0 4px 14px rgba(255, 140, 40, 0.35);
+    0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
 .saved-tag {

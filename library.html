@@ -32,34 +32,14 @@
 
       <form class="add-resource-form" id="add-resource-form" hidden>
         <label>
-          Name
-          <input name="name" type="text" required placeholder="Example Opportunities" />
-        </label>
-        <label>
-          Website URL
+          Website link
           <input name="url" type="url" required placeholder="https://example.com" />
-        </label>
-        <label>
-          Focus
-          <input name="focus" type="text" placeholder="Grants & fellowships" />
-        </label>
-        <label>
-          Description
-          <textarea name="blurb" rows="3" placeholder="What this source is useful for"></textarea>
-        </label>
-        <label>
-          Search URL template (optional)
-          <input
-            name="searchUrl"
-            type="text"
-            placeholder="https://example.com/?s={query}"
-          />
         </label>
         <div class="form-actions">
           <button type="submit" class="add-resource-btn">Save resource</button>
           <button type="button" class="cancel-btn" id="cancel-add-btn">Cancel</button>
         </div>
-        <p class="form-note">Saved resources stay in this browser and will not be lost after refresh.</p>
+        <p class="form-note">Only the link is required. Saved resources stay in this browser.</p>
       </form>
 
       <div id="library-list" class="simple-list"></div>
