@@ -15,7 +15,7 @@ const today = new Date().toLocaleDateString("en-US", {
 });
 
 document.getElementById("daily-meta").textContent =
-  `${today} · Fresh picks from each source, each linked to its original page.`;
+  `${today} · Fresh picks, each linked to its original page.`;
 
 const [sources, opportunities] = await Promise.all([
   loadAllSources(),
@@ -24,33 +24,32 @@ const [sources, opportunities] = await Promise.all([
 
 const root = document.getElementById("daily-list");
 
-// Build a daily digest: up to 4 newest/first items per source, clearly separated.
-const bySource = new Map();
+// Mixed digest: prefer items with real deadlines, keep source variety without grouping.
+const withDeadline = [];
+const open = [];
 for (const item of opportunities) {
-  if (!bySource.has(item.sourceId)) bySource.set(item.sourceId, []);
-  const list = bySource.get(item.sourceId);
-  if (list.length < 4) list.push(item);
+  const d = String(item.deadline || "").trim();
+  if (d && d.toLowerCase() !== "open") withDeadline.push(item);
+  else open.push(item);
+}
+
+const picks = [];
+const seenSources = new Map();
+const pool = [...withDeadline, ...open];
+
+for (const item of pool) {
+  if (picks.length >= 12) break;
+  const count = seenSources.get(item.sourceId) || 0;
+  if (count >= 5) continue;
+  picks.push(item);
+  seenSources.set(item.sourceId, count + 1);
 }
 
 root.innerHTML = "";
+root.className = "simple-list";
 
-for (const source of sources) {
-  const items = bySource.get(source.id) || [];
-  if (!items.length) continue;
-
-  const section = document.createElement("section");
-  section.className = "daily-group";
-  section.innerHTML = `
-    <div class="daily-group-head">
-      <h2>${escapeHtml(source.name)}</h2>
-      <a class="daily-source-link" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">Visit source →</a>
-    </div>
-    <div class="daily-group-list"></div>
-  `;
-  root.appendChild(section);
-  renderResultCards(section.querySelector(".daily-group-list"), items, sources);
-}
-
-if (!root.children.length) {
+if (!picks.length) {
   root.innerHTML = `<p class="empty-note">No opportunities available yet. Wait for the next automatic scrape.</p>`;
+} else {
+  renderResultCards(root, picks, sources);
 }

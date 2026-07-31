@@ -88,26 +88,32 @@ function getNotionConfig() {
 }
 
 function saveNotionConfig(config) {
-  localStorage.setItem(NOTION_KEY, JSON.stringify(config));
+  localStorage.setItem(
+    NOTION_KEY,
+    JSON.stringify({
+      token: (config.token || "").trim(),
+      databaseId: (config.databaseId || "").trim(),
+    })
+  );
+}
+
+function clearNotionConfig() {
+  localStorage.removeItem(NOTION_KEY);
+}
+
+function isNotionConnected() {
+  const config = getNotionConfig();
+  return Boolean(config.token && config.databaseId);
 }
 
 async function saveOpportunityToNotion(item, sourceName = "") {
-  const config = getNotionConfig();
-  if (!config.token || !config.databaseId) {
-    const token = window.prompt(
-      "Paste your Notion integration secret (starts with ntn_ or secret_):",
-      config.token || ""
+  const latest = getNotionConfig();
+  if (!latest.token || !latest.databaseId) {
+    throw new Error(
+      "Connect Notion once in Library (Connect Notion), then Save works with one click."
     );
-    if (!token) throw new Error("Notion token required");
-    const databaseId = window.prompt(
-      "Paste your Notion database ID:",
-      config.databaseId || ""
-    );
-    if (!databaseId) throw new Error("Notion database ID required");
-    saveNotionConfig({ token: token.trim(), databaseId: databaseId.trim() });
   }
 
-  const latest = getNotionConfig();
   const payload = {
     title: item.title,
     url: item.url,
@@ -117,63 +123,31 @@ async function saveOpportunityToNotion(item, sourceName = "") {
     type: item.type || "opportunity",
   };
 
-  // Prefer local/Vercel proxy when available (avoids browser CORS).
-  try {
-    const proxy = await fetch("/api/save-to-notion", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...payload, ...latest }),
-    });
-    if (proxy.ok) return await proxy.json();
-  } catch {
-    /* fall through to direct Notion call */
-  }
-
-  const response = await fetch("https://api.notion.com/v1/pages", {
+  const response = await fetch("/api/save-to-notion", {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${latest.token}`,
-      "Notion-Version": "2022-06-28",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      parent: { database_id: latest.databaseId },
-      properties: {
-        Name: {
-          title: [{ text: { content: payload.title.slice(0, 2000) } }],
-        },
-        URL: { url: payload.url || null },
-        Deadline: {
-          rich_text: [{ text: { content: String(payload.deadline).slice(0, 200) } }],
-        },
-        Source: {
-          rich_text: [{ text: { content: String(payload.source).slice(0, 200) } }],
-        },
-        Type: {
-          rich_text: [{ text: { content: String(payload.type).slice(0, 100) } }],
-        },
-      },
-      children: payload.summary
-        ? [
-            {
-              object: "block",
-              type: "paragraph",
-              paragraph: {
-                rich_text: [
-                  { type: "text", text: { content: payload.summary.slice(0, 1900) } },
-                ],
-              },
-            },
-          ]
-        : [],
-    }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...payload, ...latest }),
   });
 
-  if (!response.ok) {
-    const errText = await response.text();
-    throw new Error(errText || "Notion save failed");
+  const text = await response.text();
+  let data = null;
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    data = null;
   }
-  return response.json();
+
+  if (!response.ok) {
+    const message =
+      data?.message ||
+      data?.error ||
+      (typeof data === "string" ? data : "") ||
+      text ||
+      "Notion save failed";
+    throw new Error(String(message));
+  }
+
+  return data || { ok: true };
 }
 
 function renderResultCards(container, items, sources, { carded = false } = {}) {
@@ -189,14 +163,20 @@ function renderResultCards(container, items, sources, { carded = false } = {}) {
       const source = sourceById(sources, item.sourceId);
       const sourceName = source?.name || "";
       const deadline = item.deadline
-        ? `<span class="deadline">Deadline: ${escapeHtml(item.deadline)}</span>`
+        ? `<span class="deadline"> · ${escapeHtml(item.deadline)}</span>`
         : "";
+      const metaBits = [
+        sourceName,
+        item.type || "",
+      ]
+        .filter(Boolean)
+        .map(escapeHtml)
+        .join(" · ");
       return `
         <article class="${itemClass}" data-index="${index}">
           <a class="result-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">
             <h2 class="simple-title">${escapeHtml(item.title)}</h2>
-            <p class="simple-meta">${escapeHtml(sourceName)}${item.type ? ` · ${escapeHtml(item.type)}` : ""}</p>
-            ${deadline}
+            <p class="simple-meta">${metaBits}${deadline}</p>
             <p class="simple-summary">${escapeHtml(item.summary)}</p>
           </a>
           <div class="result-actions">
@@ -225,7 +205,7 @@ function renderResultCards(container, items, sources, { carded = false } = {}) {
         console.error(error);
         button.textContent = "Failed";
         window.alert(
-          "Could not save to Notion.\n\n1) Create an integration at notion.so/my-integrations\n2) Share your database with that integration\n3) Use property names: Name, URL, Deadline, Source, Type\n\n" +
+          "Could not save to Notion.\n\nConnect once under Library → Connect Notion.\nThen each Save uses those saved details.\n\n" +
             (error?.message || "")
         );
         setTimeout(() => {
@@ -264,6 +244,8 @@ export {
   slugify,
   getNotionConfig,
   saveNotionConfig,
+  clearNotionConfig,
+  isNotionConnected,
   saveOpportunityToNotion,
   renderResultCards,
   wirePdfButton,

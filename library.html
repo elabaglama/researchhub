@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
   </head>
   <body class="page-white">
     <nav class="top-pills top-pills-light" aria-label="Primary">
@@ -25,10 +26,47 @@
           <h1>Library</h1>
           <p class="lede">All source sites in one place.</p>
         </div>
-        <button type="button" class="add-resource-btn" id="add-resource-btn">
-          Add resource
-        </button>
+        <div class="library-actions">
+          <button type="button" class="add-resource-btn" id="notion-connect-btn">Connect Notion</button>
+          <button type="button" class="add-resource-btn" id="add-resource-btn">
+            Add resource
+          </button>
+        </div>
       </div>
+
+      <p id="notion-status" class="notion-status" aria-live="polite"></p>
+
+      <form class="add-resource-form" id="notion-form" hidden>
+        <p class="form-note">
+          Paste once. Saved in this browser — every Save to Notion after that is one click.
+        </p>
+        <label>
+          Integration secret
+          <input
+            name="token"
+            type="password"
+            required
+            autocomplete="off"
+            placeholder="ntn_… or secret_…"
+          />
+        </label>
+        <label>
+          Database ID
+          <input
+            name="databaseId"
+            type="text"
+            required
+            autocomplete="off"
+            value="c4e56b17d92d40b59aeb00878c6066eb"
+            placeholder="32-character ID from the Notion URL"
+          />
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="add-resource-btn">Save Notion connection</button>
+          <button type="button" class="cancel-btn" id="notion-disconnect-btn">Disconnect</button>
+          <button type="button" class="cancel-btn" id="notion-cancel-btn">Cancel</button>
+        </div>
+      </form>
 
       <form class="add-resource-form" id="add-resource-form" hidden>
         <label>

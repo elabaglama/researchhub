@@ -5,6 +5,10 @@ import {
   saveCustomSources,
   slugify,
   wirePdfButton,
+  getNotionConfig,
+  saveNotionConfig,
+  clearNotionConfig,
+  isNotionConnected,
 } from "./shared.js";
 
 wirePdfButton();
@@ -13,6 +17,11 @@ const list = document.getElementById("library-list");
 const addBtn = document.getElementById("add-resource-btn");
 const form = document.getElementById("add-resource-form");
 const cancelBtn = document.getElementById("cancel-add-btn");
+const notionBtn = document.getElementById("notion-connect-btn");
+const notionForm = document.getElementById("notion-form");
+const notionCancel = document.getElementById("notion-cancel-btn");
+const notionDisconnect = document.getElementById("notion-disconnect-btn");
+const notionStatus = document.getElementById("notion-status");
 
 function nameFromUrl(url) {
   try {
@@ -21,6 +30,23 @@ function nameFromUrl(url) {
   } catch {
     return url;
   }
+}
+
+function refreshNotionStatus() {
+  if (isNotionConnected()) {
+    notionStatus.textContent = "Notion connected — Save to Notion is one click.";
+    notionBtn.textContent = "Update Notion";
+  } else {
+    notionStatus.textContent = "Notion not connected yet.";
+    notionBtn.textContent = "Connect Notion";
+  }
+}
+
+function fillNotionForm() {
+  const config = getNotionConfig();
+  notionForm.querySelector("input[name='token']").value = config.token || "";
+  notionForm.querySelector("input[name='databaseId']").value =
+    config.databaseId || "c4e56b17d92d40b59aeb00878c6066eb";
 }
 
 async function renderLibrary() {
@@ -43,6 +69,7 @@ async function renderLibrary() {
 }
 
 addBtn.addEventListener("click", () => {
+  notionForm.hidden = true;
   form.hidden = false;
   form.querySelector("input[name='url']").focus();
 });
@@ -50,6 +77,38 @@ addBtn.addEventListener("click", () => {
 cancelBtn.addEventListener("click", () => {
   form.hidden = true;
   form.reset();
+});
+
+notionBtn.addEventListener("click", () => {
+  form.hidden = true;
+  fillNotionForm();
+  notionForm.hidden = false;
+  notionForm.querySelector("input[name='token']").focus();
+});
+
+notionCancel.addEventListener("click", () => {
+  notionForm.hidden = true;
+});
+
+notionDisconnect.addEventListener("click", () => {
+  clearNotionConfig();
+  notionForm.reset();
+  notionForm.hidden = true;
+  refreshNotionStatus();
+});
+
+notionForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const data = new FormData(notionForm);
+  const token = String(data.get("token") || "").trim();
+  const databaseId = String(data.get("databaseId") || "")
+    .trim()
+    .replace(/-/g, "");
+  if (!token || !databaseId) return;
+
+  saveNotionConfig({ token, databaseId });
+  notionForm.hidden = true;
+  refreshNotionStatus();
 });
 
 form.addEventListener("submit", (event) => {
@@ -84,6 +143,7 @@ form.addEventListener("submit", (event) => {
   renderLibrary();
 });
 
+refreshNotionStatus();
 await renderLibrary();
 
 if (new URLSearchParams(window.location.search).get("print") === "1") {
