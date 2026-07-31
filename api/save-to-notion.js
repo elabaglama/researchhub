@@ -1,3 +1,73 @@
+async function fetchDatabase(token, databaseId) {
+  const res = await fetch(`https://api.notion.com/v1/databases/${databaseId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Notion-Version": "2022-06-28",
+    },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    const err = new Error(data.message || data.error || "Could not open Notion database");
+    err.details = data;
+    err.status = res.status;
+    throw err;
+  }
+  return data;
+}
+
+function buildProperties(schema, body) {
+  const propsMeta = schema.properties || {};
+  const titleName =
+    Object.keys(propsMeta).find((name) => propsMeta[name]?.type === "title") || "Name";
+  const byLower = Object.fromEntries(
+    Object.keys(propsMeta).map((name) => [name.toLowerCase(), name])
+  );
+
+  function resolve(...candidates) {
+    for (const cand of candidates) {
+      if (propsMeta[cand]) return cand;
+      if (byLower[cand.toLowerCase()]) return byLower[cand.toLowerCase()];
+    }
+    return null;
+  }
+
+  const out = {
+    [titleName]: {
+      title: [{ text: { content: String(body.title || "Untitled").slice(0, 2000) } }],
+    },
+  };
+
+  const urlName = resolve("URL", "Link", "Url");
+  if (urlName && propsMeta[urlName].type === "url") {
+    out[urlName] = { url: body.url || null };
+  }
+
+  const deadlineName = resolve("Deadline", "Due", "Date");
+  if (deadlineName && propsMeta[deadlineName].type === "rich_text") {
+    out[deadlineName] = {
+      rich_text: [{ text: { content: String(body.deadline || "Open").slice(0, 200) } }],
+    };
+  }
+
+  const sourceName = resolve("Source", "Website", "Site");
+  if (sourceName && propsMeta[sourceName].type === "rich_text") {
+    out[sourceName] = {
+      rich_text: [{ text: { content: String(body.source || "").slice(0, 200) } }],
+    };
+  }
+
+  const typeName = resolve("Type", "Category");
+  if (typeName && propsMeta[typeName].type === "rich_text") {
+    out[typeName] = {
+      rich_text: [
+        { text: { content: String(body.type || "opportunity").slice(0, 100) } },
+      ],
+    };
+  }
+
+  return out;
+}
+
 export default async function handler(req, res) {
   if (req.method === "OPTIONS") {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -15,7 +85,10 @@ export default async function handler(req, res) {
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
     const token = body.token || process.env.NOTION_TOKEN;
-    const databaseId = body.databaseId || process.env.NOTION_DATABASE_ID;
+    const databaseId = String(body.databaseId || process.env.NOTION_DATABASE_ID || "").replace(
+      /-/g,
+      ""
+    );
 
     if (!token || !databaseId) {
       return res.status(400).json({
@@ -23,23 +96,18 @@ export default async function handler(req, res) {
       });
     }
 
+    const schema = await fetchDatabase(token, databaseId);
+
+    if (body.testOnly) {
+      return res.status(200).json({
+        ok: true,
+        properties: Object.keys(schema.properties || {}),
+      });
+    }
+
     const payload = {
       parent: { database_id: databaseId },
-      properties: {
-        Name: {
-          title: [{ text: { content: String(body.title || "Untitled").slice(0, 2000) } }],
-        },
-        URL: { url: body.url || null },
-        Deadline: {
-          rich_text: [{ text: { content: String(body.deadline || "Open").slice(0, 200) } }],
-        },
-        Source: {
-          rich_text: [{ text: { content: String(body.source || "").slice(0, 200) } }],
-        },
-        Type: {
-          rich_text: [{ text: { content: String(body.type || "opportunity").slice(0, 100) } }],
-        },
-      },
+      properties: buildProperties(schema, body),
     };
 
     if (body.summary) {
@@ -75,6 +143,9 @@ export default async function handler(req, res) {
     }
     return res.status(200).json({ ok: true, id: data.id });
   } catch (error) {
-    return res.status(500).json({ error: error.message || "Server error" });
+    return res.status(error.status || 500).json({
+      error: error.message || "Server error",
+      details: error.details || null,
+    });
   }
 }

@@ -141,9 +141,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background:
-    linear-gradient(rgba(20, 18, 16, 0.1), rgba(20, 18, 16, 0.16)),
-    url("assets/hero-bg.png") center / cover no-repeat;
+  background: url("assets/hero-bg.png") center / cover no-repeat;
 }
 
 .home-main {
@@ -396,9 +394,20 @@ body {
 }
 
 .notion-status {
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.85rem;
   color: var(--muted);
   font-size: 0.86rem;
+}
+
+.notion-panel {
+  margin: 0 0 2rem;
+}
+
+.notion-panel h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .add-resource-btn,

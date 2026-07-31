@@ -14,8 +14,7 @@ const today = new Date().toLocaleDateString("en-US", {
   day: "numeric",
 });
 
-document.getElementById("daily-meta").textContent =
-  `${today} · Fresh picks, each linked to its original page.`;
+document.getElementById("daily-meta").textContent = today;
 
 const [sources, opportunities] = await Promise.all([
   loadAllSources(),

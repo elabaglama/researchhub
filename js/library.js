@@ -17,11 +17,10 @@ const list = document.getElementById("library-list");
 const addBtn = document.getElementById("add-resource-btn");
 const form = document.getElementById("add-resource-form");
 const cancelBtn = document.getElementById("cancel-add-btn");
-const notionBtn = document.getElementById("notion-connect-btn");
 const notionForm = document.getElementById("notion-form");
-const notionCancel = document.getElementById("notion-cancel-btn");
 const notionDisconnect = document.getElementById("notion-disconnect-btn");
 const notionStatus = document.getElementById("notion-status");
+const notionSaveBtn = document.getElementById("notion-save-btn");
 
 function nameFromUrl(url) {
   try {
@@ -32,21 +31,21 @@ function nameFromUrl(url) {
   }
 }
 
-function refreshNotionStatus() {
-  if (isNotionConnected()) {
-    notionStatus.textContent = "Notion connected — Save to Notion is one click.";
-    notionBtn.textContent = "Update Notion";
-  } else {
-    notionStatus.textContent = "Notion not connected yet.";
-    notionBtn.textContent = "Connect Notion";
-  }
-}
-
 function fillNotionForm() {
   const config = getNotionConfig();
   notionForm.querySelector("input[name='token']").value = config.token || "";
   notionForm.querySelector("input[name='databaseId']").value =
     config.databaseId || "c4e56b17d92d40b59aeb00878c6066eb";
+}
+
+function refreshNotionStatus(extra = "") {
+  if (isNotionConnected()) {
+    notionStatus.textContent =
+      extra || "Notion connected — Save to Notion is one click on any opportunity.";
+  } else {
+    notionStatus.textContent =
+      extra || "Paste your integration secret once below, then save.";
+  }
 }
 
 async function renderLibrary() {
@@ -69,7 +68,6 @@ async function renderLibrary() {
 }
 
 addBtn.addEventListener("click", () => {
-  notionForm.hidden = true;
   form.hidden = false;
   form.querySelector("input[name='url']").focus();
 });
@@ -79,25 +77,13 @@ cancelBtn.addEventListener("click", () => {
   form.reset();
 });
 
-notionBtn.addEventListener("click", () => {
-  form.hidden = true;
-  fillNotionForm();
-  notionForm.hidden = false;
-  notionForm.querySelector("input[name='token']").focus();
-});
-
-notionCancel.addEventListener("click", () => {
-  notionForm.hidden = true;
-});
-
 notionDisconnect.addEventListener("click", () => {
   clearNotionConfig();
-  notionForm.reset();
-  notionForm.hidden = true;
-  refreshNotionStatus();
+  fillNotionForm();
+  refreshNotionStatus("Disconnected.");
 });
 
-notionForm.addEventListener("submit", (event) => {
+notionForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const data = new FormData(notionForm);
   const token = String(data.get("token") || "").trim();
@@ -107,8 +93,35 @@ notionForm.addEventListener("submit", (event) => {
   if (!token || !databaseId) return;
 
   saveNotionConfig({ token, databaseId });
-  notionForm.hidden = true;
-  refreshNotionStatus();
+  const original = notionSaveBtn.textContent;
+  notionSaveBtn.disabled = true;
+  notionSaveBtn.textContent = "Testing…";
+  refreshNotionStatus("Saved locally. Testing Notion access…");
+
+  try {
+    const response = await fetch("/api/test-notion", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, databaseId }),
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(
+        payload.error ||
+          payload.message ||
+          "Could not reach Notion. Share the database with your integration."
+      );
+    }
+    const props = (payload.properties || []).join(", ") || "ok";
+    refreshNotionStatus(`Connected. Database properties: ${props}`);
+  } catch (error) {
+    refreshNotionStatus(
+      `Saved in this browser, but test failed: ${error.message || error}. Check the integration is invited to the database.`
+    );
+  } finally {
+    notionSaveBtn.disabled = false;
+    notionSaveBtn.textContent = original;
+  }
 });
 
 form.addEventListener("submit", (event) => {
@@ -143,6 +156,7 @@ form.addEventListener("submit", (event) => {
   renderLibrary();
 });
 
+fillNotionForm();
 refreshNotionStatus();
 await renderLibrary();
 

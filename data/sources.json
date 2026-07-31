@@ -11,6 +11,7 @@
     "id": "still-hiring",
     "name": "Still Hiring Today",
     "url": "https://stillhiring.today/",
+    "airtableUrl": "https://airtable.com/shrI8dno1rMGKZM8y/tblKU0jQiyIX182uU",
     "searchUrl": "https://www.google.com/search?q=site%3Astillhiring.today+{query}",
     "blurb": "Community-sourced list of tech companies that are actually hiring right now.",
     "focus": "Tech hiring"

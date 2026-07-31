@@ -175,76 +175,141 @@ def scrape_opportunities_for_youth(source: dict) -> list[dict]:
 
 
 def scrape_still_hiring(source: dict) -> list[dict]:
-    """Still Hiring Today is an Airtable embed; keep a board entry plus any parseable links."""
-    html = fetch(source["url"])
-    items: list[dict] = []
-    seen: set[str] = set()
+    """Pull company rows from the public Still Hiring Airtable shared view."""
+    import http.cookiejar
 
-    airtable = re.search(
-        r"https://airtable\.com/(?:embed/)?(shr[A-Za-z0-9]+)(?:/tbl[A-Za-z0-9]+)?",
-        html,
-    )
     board_url = (
-        f"https://airtable.com/{airtable.group(1)}"
-        if airtable
-        else "https://airtable.com/shrI8dno1rMGKZM8y/tblKU0jQiyIX182uU"
+        source.get("airtableUrl")
+        or "https://airtable.com/shrI8dno1rMGKZM8y/tblKU0jQiyIX182uU"
+    )
+    browser_ua = (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
     )
 
-    items.append(
-        {
-            "id": make_id(source["id"], "Still Hiring Today board", board_url),
-            "title": "Still Hiring Today — live tech hiring board",
-            "sourceId": source["id"],
-            "url": board_url,
-            "type": "jobs",
-            "deadline": "Ongoing",
-            "tags": ["jobs", "tech", "hiring", "board"],
-            "summary": "Community-sourced Airtable board of tech companies that are still hiring.",
-        }
+    jar = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(
+        urllib.request.HTTPCookieProcessor(jar),
+        urllib.request.HTTPSHandler(context=SSL_CTX),
     )
-    items.append(
-        {
-            "id": make_id(source["id"], "Still Hiring Today", source["url"]),
-            "title": "Still Hiring Today portal",
-            "sourceId": source["id"],
-            "url": source["url"],
-            "type": "jobs",
-            "deadline": "Ongoing",
-            "tags": ["jobs", "tech", "hiring"],
-            "summary": "Browse and filter companies with open tech roles on Still Hiring Today.",
-        }
-    )
+    html = opener.open(
+        urllib.request.Request(
+            board_url,
+            headers={
+                "User-Agent": browser_ua,
+                "Accept": "text/html,application/xhtml+xml",
+                "Accept-Language": "en-US,en;q=0.9",
+            },
+        ),
+        timeout=45,
+    ).read().decode("utf-8", "ignore")
 
-    for href, label in re.findall(r'href="(https?://[^"]+)"[^>]*>(.*?)</a>', html, flags=re.I | re.S):
-        title = clean_text(label)
-        if len(title) < 3 or len(title) > 60:
+    start = html.find("window.initData = ")
+    if start < 0:
+        raise RuntimeError("Airtable initData missing")
+    start = html.find("{", start)
+    depth = 0
+    end = None
+    for i, ch in enumerate(html[start:], start):
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                end = i + 1
+                break
+    if end is None:
+        raise RuntimeError("Airtable initData incomplete")
+    init = json.loads(html[start:end])
+    csrf = init.get("csrfToken") or ""
+
+    view_id = re.search(r'"sharedViewId":"(viw[a-zA-Z0-9]+)"', html)
+    app_id = re.search(r'"applicationId":"(app[a-zA-Z0-9]+)"', html)
+    access = re.search(r"accessPolicy=([a-zA-Z0-9%*\-.,]+)", html)
+    if not (view_id and app_id and access and csrf):
+        raise RuntimeError("Airtable share metadata incomplete")
+
+    endpoint = (
+        f"https://airtable.com/v0.3/view/{view_id.group(1)}/readSharedViewData"
+        f"?stringifiedObjectParams=%7B%22shouldUseNestedResponseFormat%22%3Atrue%7D"
+        f"&x-time-zone=Europe%2FIstanbul&x-user-locale=en"
+        f"&accessPolicy={access.group(1)}"
+    )
+    raw = opener.open(
+        urllib.request.Request(
+            endpoint,
+            headers={
+                "User-Agent": browser_ua,
+                "Accept": "application/json",
+                "Referer": board_url,
+                "x-airtable-application-id": app_id.group(1),
+                "x-csrf-token": csrf,
+                "x-requested-with": "XMLHttpRequest",
+            },
+        ),
+        timeout=90,
+    ).read().decode("utf-8", "ignore")
+    payload = json.loads(raw)
+    table = ((payload.get("data") or {}).get("table")) or {}
+    cols = {c["id"]: c.get("name") or c["id"] for c in table.get("columns") or []}
+    rows = table.get("rows") or []
+
+    items: list[dict] = []
+    for row in rows:
+        cells = row.get("cellValuesByColumnId") or {}
+        mapped = {cols.get(cid, cid): value for cid, value in cells.items()}
+        company = clean_text(str(mapped.get("Company Name") or ""))
+        if len(company) < 2:
             continue
-        low = title.lower()
-        if any(
-            x in low
-            for x in ("privacy", "terms", "cookie", "login", "sign", "airtable", "full screen", "how it")
-        ):
-            continue
-        if "stillhiring" in href or "airtable.com" in href or "super.so" in href:
-            continue
-        key = title.lower()
-        if key in seen:
-            continue
-        seen.add(key)
+
+        jobs = mapped.get("Jobs Page") or {}
+        jobs_url = ""
+        if isinstance(jobs, dict):
+            jobs_url = str(jobs.get("url") or "").strip()
+        elif isinstance(jobs, str):
+            jobs_url = jobs.strip()
+        href = jobs_url or board_url
+
+        tagline = clean_text(str(mapped.get("Tagline") or ""))
+        city = clean_text(str(mapped.get("HQ City") or ""))
+        country = clean_text(str(mapped.get("HQ Country") or ""))
+        place = ", ".join(p for p in (city, country) if p)
+        employees = mapped.get("Employees")
+        bits = [tagline]
+        if place:
+            bits.append(place)
+        if employees not in (None, ""):
+            bits.append(f"{employees} employees")
+        summary = " · ".join(b for b in bits if b)[:280] or f"{company} is hiring on Still Hiring Today."
+
         items.append(
             {
-                "id": make_id(source["id"], title, href),
-                "title": f"{title} — hiring",
+                "id": make_id(source["id"], company, href),
+                "title": f"{company} — hiring",
                 "sourceId": source["id"],
                 "url": href,
                 "type": "jobs",
                 "deadline": "Ongoing",
                 "tags": ["jobs", "tech", "hiring"],
-                "summary": f"{title} appears on Still Hiring Today.",
+                "summary": summary,
             }
         )
 
-    return items[:40]
+    items.insert(
+        0,
+        {
+            "id": make_id(source["id"], "Still Hiring Today board", board_url),
+            "title": "Still Hiring Today — full Airtable board",
+            "sourceId": source["id"],
+            "url": board_url,
+            "type": "jobs",
+            "deadline": "Ongoing",
+            "tags": ["jobs", "tech", "hiring", "board"],
+            "summary": f"Live board with {len(items)} companies currently hiring.",
+        },
+    )
+
+    return items
 
 
 def scrape_artinfoland(source: dict) -> list[dict]:
