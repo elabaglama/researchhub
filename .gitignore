@@ -4,3 +4,10 @@ Thumbs.db
 node_modules/
 .vscode/
 .idea/
+.vercel/
+data/_*.html
+data/_*.json
+data/_*.txt
+scripts/_probe*.py
+scripts/extract_still.py
+.vercel

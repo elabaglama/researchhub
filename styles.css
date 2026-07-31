@@ -53,6 +53,39 @@ body {
   gap: 0.55rem;
 }
 
+.count-badge {
+  position: fixed;
+  top: 1.35rem;
+  right: 1.35rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.1rem;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.38);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  line-height: 1.1;
+}
+
+.count-number {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.count-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  opacity: 0.92;
+  text-transform: lowercase;
+}
+
 .pill {
   display: inline-flex;
   align-items: center;
@@ -481,7 +514,18 @@ body {
   .top-pills {
     top: 0.9rem;
     left: 0.9rem;
+    right: auto;
+    max-width: calc(100% - 7.5rem);
+  }
+
+  .count-badge {
+    top: 0.9rem;
     right: 0.9rem;
+    padding: 0.45rem 0.75rem;
+  }
+
+  .count-number {
+    font-size: 1rem;
   }
 
   .brand-mark {
@@ -510,6 +554,7 @@ body {
   .music-player,
   .top-pills,
   .brand-mark,
+  .count-badge,
   .add-resource-btn,
   .add-resource-form {
     display: none !important;

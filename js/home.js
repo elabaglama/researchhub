@@ -19,6 +19,11 @@ const [sources, opportunities] = await Promise.all([
   fetch("data/opportunities.json").then((r) => r.json()),
 ]);
 
+const countNumber = document.getElementById("count-number");
+if (countNumber) {
+  countNumber.textContent = String(opportunities.length);
+}
+
 function runSearch(query) {
   const q = query.trim();
   const url = new URL(window.location.href);

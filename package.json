@@ -5,6 +5,7 @@
   "description": "All-in-one research hub for opportunities, calls, and programs",
   "scripts": {
     "dev": "python -m http.server 5173",
-    "start": "python -m http.server 5173"
+    "start": "python -m http.server 5173",
+    "scrape": "python scripts/scrape_opportunities.py"
   }
 }
