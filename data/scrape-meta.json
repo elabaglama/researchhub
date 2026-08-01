@@ -1,5 +1,5 @@
 {
-  "scrapedAt": "2026-08-01T08:11:13.159840+00:00",
+  "scrapedAt": "2026-08-01T13:06:32.544155+00:00",
   "sources": {
     "opportunities-for-youth": {
       "ok": true,
@@ -11,8 +11,8 @@
     },
     "artinfoland": {
       "ok": true,
-      "count": 200
+      "count": 0
     }
   },
-  "total": 1410
+  "total": 1210
 }
