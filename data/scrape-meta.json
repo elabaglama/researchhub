@@ -1,9 +1,9 @@
 {
-  "scrapedAt": "2026-08-03T09:33:19.360781+00:00",
+  "scrapedAt": "2026-08-03T14:27:15.761295+00:00",
   "sources": {
     "opportunities-for-youth": {
       "ok": true,
-      "count": 78
+      "count": 80
     },
     "still-hiring": {
       "ok": true,
@@ -14,5 +14,5 @@
       "count": 200
     }
   },
-  "total": 1408
+  "total": 1410
 }

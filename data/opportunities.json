@@ -39,6 +39,19 @@
     "summary": "Applications are now open for the prestigious Newnham College Research Fellowships 2027 at the University of Cambridge, offering exceptional early-career"
   },
   {
+    "id": "opportunities-for-youth-a5af9c976aac",
+    "title": "Gates Foundation Grand Challenges 2026: Up to US$500,000 for AI-Enabled Family Planning Solutions in Sub-Saharan Africa",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/gates-foundation-grand-challenges-2026-up-to-us500000-for-ai-enabled-family-planning-solutions-in-sub-saharan-africa/",
+    "type": "competition",
+    "deadline": "Open",
+    "tags": [
+      "competition",
+      "youth"
+    ],
+    "summary": "Gates Foundation Grand Challenges 2026: Up to US$500,000 for AI-Enabled Family Planning Solutions in Sub-Saharan Africa"
+  },
+  {
     "id": "opportunities-for-youth-3f5c4cefda64",
     "title": "Texas Education Agency Grants 2026 in the USA | Funding Opportunities for Schools, Universities, and Nonprofits",
     "sourceId": "opportunities-for-youth",
@@ -49,7 +62,7 @@
       "grant",
       "youth"
     ],
-    "summary": "Are you seeking funding to expand educational programs, improve student outcomes, or strengthen community services in Texas? The Texas Education Agency (TEA)"
+    "summary": "Texas Education Agency Grants 2026 in the USA | Funding Opportunities for Schools, Universities, and Nonprofits"
   },
   {
     "id": "opportunities-for-youth-1e133220d37a",
@@ -63,19 +76,6 @@
       "youth"
     ],
     "summary": "The African Union Commission (AUC), through its Women, Gender and Youth Directorate (AUC-WGYD), has officially launched an Open Call for National Convenors to"
-  },
-  {
-    "id": "opportunities-for-youth-dc19a7bcccb2",
-    "title": "USDA SUN Grant Program 2026 in the USA | Funding for Bioenergy, Agriculture, and Rural Development Projects",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/usda-sun-grant-program-2026-in-the-usa-funding-for-bioenergy-agriculture-and-rural-development-projects/",
-    "type": "grant",
-    "deadline": "Open",
-    "tags": [
-      "grant",
-      "youth"
-    ],
-    "summary": "The USDA Sun Grant Program 2026 is now accepting applications from eligible land-grant university consortia across the United States. Administered by the"
   },
   {
     "id": "opportunities-for-youth-b203259612e5",
@@ -117,6 +117,32 @@
     "summary": "The University of Oxford has opened applications for an exciting Research Officer position within the Oxford Department of International Development (ODID)."
   },
   {
+    "id": "opportunities-for-youth-8b1f91d2ada8",
+    "title": "Olympic Refuge Foundation Lived Experience Fellowship 2026–2027: Remote International Programme with Up to US$730 Monthly Stipend",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/olympic-refuge-foundation-lived-experience-fellowship-2026-2027-remote-international-programme-with-up-to-us730-monthly-stipend/",
+    "type": "fellowship",
+    "deadline": "Open",
+    "tags": [
+      "fellowship",
+      "youth"
+    ],
+    "summary": "Olympic Refuge Foundation Lived Experience Fellowship 2026–2027: Remote International Programme with Up to US$730 Monthly Stipend"
+  },
+  {
+    "id": "opportunities-for-youth-7059f9ea9acb",
+    "title": "CDRI ASEAN Scholar Fellowship 2026: Five-Month Research Fellowship for Mid- to Senior-Level ASEAN Researchers",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/02/cdri-asean-fellowship/",
+    "type": "fellowship",
+    "deadline": "Open",
+    "tags": [
+      "fellowship",
+      "youth"
+    ],
+    "summary": "CDRI ASEAN Scholar Fellowship 2026: Five-Month Research Fellowship for Mid- to Senior-Level ASEAN Researchers"
+  },
+  {
     "id": "opportunities-for-youth-2160d72c4d98",
     "title": "American Academy in Berlin Berlin Prize Fellowship 2027–2028 in Germany | Fully Funded Fellowship for Scholars, Journalists, Writers and Public Policy Professionals",
     "sourceId": "opportunities-for-youth",
@@ -127,33 +153,7 @@
       "fellowship",
       "youth"
     ],
-    "summary": "Applications are now open for the prestigious American Academy in Berlin Berlin Prize Fellowship 2027–2028, a fully funded international fellowship that"
-  },
-  {
-    "id": "opportunities-for-youth-ae63d003fe7e",
-    "title": "UNICEF Youth Advisors 2026: Join the Technical Advisory Group on Child and Adolescent Mental Health Measurement (TAG-CAMHM)",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/01/unicef-youth-advisors-2026-join-the-technical-advisory-group-on-child-and-adolescent-mental-health-measurement-tag-camhm/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Applications are now open for the UNICEF Technical Advisory Group on Child and Adolescent Mental Health Measurement (TAG-CAMHM) Youth Advisors 2026. UNICEF is"
-  },
-  {
-    "id": "opportunities-for-youth-6b74aad4f9dc",
-    "title": "OHCHR Indigenous Fellowship Programme 2027: Fully Funded UN Human Rights Fellowship in Geneva",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/01/2025-united-nations-ohchr-indigenous-fellowship-programfully-funded/",
-    "type": "fellowship",
-    "deadline": "Open",
-    "tags": [
-      "fellowship",
-      "youth"
-    ],
-    "summary": "The Office of the United Nations High Commissioner for Human Rights (OHCHR) is now accepting applications for the Indigenous Fellowship Programme 2027. This"
+    "summary": "American Academy in Berlin Berlin Prize Fellowship 2027–2028 in Germany | Fully Funded Fellowship for Scholars, Journalists, Writers and Public Policy Professionals"
   },
   {
     "id": "opportunities-for-youth-c4a54519f7d0",
@@ -166,7 +166,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "YEDx 2026 Applications Open: Host a Youth Environmental Dialogue with UNEP's Children and Youth Major Group (CYMG)"
+    "summary": "The YEDx 2026 Application is now open for youth organizations and environmental groups worldwide interested in hosting a Youth Environmental Dialogue (YEDx)"
   },
   {
     "id": "opportunities-for-youth-732ad48e08c6",
@@ -208,6 +208,19 @@
     "summary": "COP31 Call for Proposals: Submit Your Climate Rese..."
   },
   {
+    "id": "opportunities-for-youth-fd73ecf6250b",
+    "title": "OHCHR Indigenous Fellowship Programme 2027: Fully ...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/01/2025-united-nations-ohchr-indigenous-fellowship-programfully-funded/",
+    "type": "fellowship",
+    "deadline": "Open",
+    "tags": [
+      "fellowship",
+      "youth"
+    ],
+    "summary": "The Office of the United Nations High Commissioner for Human Rights (OHCHR) is now accepting applications for the Indigenous Fellowship Programme 2027. This"
+  },
+  {
     "id": "opportunities-for-youth-17792ae28ea6",
     "title": "Norec Grant for Work Exchange Cooperation 2026–202...",
     "sourceId": "opportunities-for-youth",
@@ -218,7 +231,7 @@
       "grant",
       "youth"
     ],
-    "summary": "The Norec Grant for Work Exchange Cooperation is now accepting applications for its Phase 1: Concept Development funding opportunity, offering organizations"
+    "summary": "Norec Grant for Work Exchange Cooperation 2026–202..."
   },
   {
     "id": "opportunities-for-youth-800f61017100",
@@ -232,6 +245,19 @@
       "youth"
     ],
     "summary": "The African Union (AU) Peace Fund has officially launched its Call for Applications for the 2028 Funding Cycle, inviting eligible African Union Member States,"
+  },
+  {
+    "id": "opportunities-for-youth-348b99f2e83f",
+    "title": "UNICEF Youth Advisors 2026: Join the Technical Adv...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/01/unicef-youth-advisors-2026-join-the-technical-advisory-group-on-child-and-adolescent-mental-health-measurement-tag-camhm/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Applications are now open for the UNICEF Technical Advisory Group on Child and Adolescent Mental Health Measurement (TAG-CAMHM) Youth Advisors 2026. UNICEF is"
   },
   {
     "id": "opportunities-for-youth-a542ea512cb3",
@@ -387,7 +413,7 @@
       "grant",
       "youth"
     ],
-    "summary": "Organizations working in rural development, policy research, and agricultural investment now have an exciting opportunity to secure funding through the"
+    "summary": "IFAD Announces US$1.2 Million Grant Call for Propo..."
   },
   {
     "id": "opportunities-for-youth-54d8b4c20456",
@@ -491,7 +517,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "The United Nations Convention to Combat Desertification (UNCCD) has officially opened the Expression of Interest (EOI) for organizations and individuals"
+    "summary": "Expression of Interest for UNCCD COP17 Children & Youth Resilience Hub Sessions: Submit Your Session Proposal for the Global Youth Platform."
   },
   {
     "id": "opportunities-for-youth-9d62a83e89e5",
@@ -504,7 +530,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "Are you a refugee or asylum seeker in Rwanda looking to pursue a university education? Applications are now open for the UNHCR Albert Einstein German Academic"
+    "summary": "DAFI Scholarship Programme 2026/2027 in Rwanda: Fully Funded Undergraduate Scholarships for Refugees and Asylum Seekers"
   },
   {
     "id": "opportunities-for-youth-f78ae5a9bdd2",
@@ -520,6 +546,19 @@
     "summary": "For more scholarships opportunities visit OFY Website HERE"
   },
   {
+    "id": "opportunities-for-youth-8a40ce27330e",
+    "title": "African Water Facility (AWF) 2026 Call for Proposals: Apply for Up to EUR 1 Million in Grant Funding to Strengthen Africa’s Water and Sanitation Investment Pipeline",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/african-water-facility-awf-2026-call-for-proposals-apply-for-up-to-eur-1-million-in-grant-funding-to-strengthen-africas-water-and-sanitation-investment-pipeline/",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "youth"
+    ],
+    "summary": "African Water Facility (AWF) 2026 Call for Proposals: Apply for Up to EUR 1 Million in Grant Funding to Strengthen Africa’s Water and Sanitation Investment Pipeline"
+  },
+  {
     "id": "opportunities-for-youth-c11257fc4f5d",
     "title": "SFU Climate Innovation Seed Funds 2026: Up to $100,000 Available to Advance Community-Centred Climate Research and Innovation",
     "sourceId": "opportunities-for-youth",
@@ -530,98 +569,111 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Simon Fraser University (SFU) has officially launched the 2026 SFU Climate Innovation Seed Funds, providing $100,000 in total funding to accelerate innovative"
+    "summary": "SFU Climate Innovation Seed Funds 2026: Up to $100,000 Available to Advance Community-Centred Climate Research and Innovation"
   },
   {
-    "id": "opportunities-for-youth-a5af9c976aac",
-    "title": "Gates Foundation Grand Challenges 2026: Up to US$500,000 for AI-Enabled Family Planning Solutions in Sub-Saharan Africa",
+    "id": "opportunities-for-youth-054174bba03a",
+    "title": "Become a Churchill Fellow 2026–2027: App...",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/gates-foundation-grand-challenges-2026-up-to-us500000-for-ai-enabled-family-planning-solutions-in-sub-saharan-africa/",
-    "type": "competition",
-    "deadline": "Open",
-    "tags": [
-      "competition",
-      "youth"
-    ],
-    "summary": "Gates Foundation Grand Challenges 2026: Up to US$500,000 for AI-Enabled Family Planning Solutions in Sub-Saharan Africa"
-  },
-  {
-    "id": "opportunities-for-youth-74ac399b2db1",
-    "title": "Olympic Refuge Foundation Lived Experien...",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/olympic-refuge-foundation-lived-experience-fellowship-2026-2027-remote-international-programme-with-up-to-us730-monthly-stipend/",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/become-a-churchill-fellow-2026-2027-applications-open-soon-for-changemakers-seeking-global-solutions-to-local-challenges/",
     "type": "opportunity",
     "deadline": "Open",
     "tags": [
       "opportunity",
       "youth"
     ],
-    "summary": "Applications are open for the Olympic Refuge Foundation Lived Experience Fellowship Programme 2026–2027, a part-time, remote opportunity for adults who have"
+    "summary": "Become a Churchill Fellow 2026–2027: App..."
   },
   {
-    "id": "opportunities-for-youth-65e1ce05f4e3",
-    "title": "Introduction to Sports for Climate Actio...",
+    "id": "opportunities-for-youth-60d63b33adb8",
+    "title": "Aspire Leadership Accelerator Powered by...",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/free-un-training-make-sports-more-sustainable/",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/aspire-leaders-program-2026-cohort-3-applications-now-open-global-free-online-leadership-development-opportunity-for-young-changemakers/",
     "type": "opportunity",
     "deadline": "Open",
     "tags": [
       "opportunity",
       "youth"
     ],
-    "summary": "Climate change is reshaping every sector of society, and the world of sports is no exception. From extreme weather disrupting major sporting events to the"
+    "summary": "Aspire Leadership Accelerator Powered by..."
   },
   {
-    "id": "opportunities-for-youth-8b52d9003542",
-    "title": "Call for Applications: U.S. Democracy Re...",
+    "id": "opportunities-for-youth-25b7d9f9e754",
+    "title": "Council of Europe Youth Advocacy for Dem...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/council-of-europe-youth-advocacy-for-democracy-and-human-rights-training-course-2026-fully-funded-apply-by-14-august/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Council of Europe Youth Advocacy for Dem..."
+  },
+  {
+    "id": "opportunities-for-youth-02d635635f55",
+    "title": "CAPSHA South-South Collaboration Innovat...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/capsha-south-south-collaboration-innovation-pitch-challenge-2026-up-to-usd-15000-grants-for-innovative-agricultural-capacity-sharing-partnerships/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "CAPSHA South-South Collaboration Innovat..."
+  },
+  {
+    "id": "opportunities-for-youth-23d13a4936ba",
+    "title": "Eric and Wendy Schmidt AI in Science Pos...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/eric-and-wendy-schmidt-ai-in-science-postdoctoral-fellowship-at-the-university-of-oxford-2026-fully-funded-opportunity-for-early-career-researchers-applying-artificial-intelligence-to-stem-research/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Eric and Wendy Schmidt AI in Science Pos..."
+  },
+  {
+    "id": "opportunities-for-youth-dc19a7bcccb2",
+    "title": "USDA SUN Grant Program 2026 in the USA | Funding for Bioenergy, Agriculture, and Rural Development Projects",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/usda-sun-grant-program-2026-in-the-usa-funding-for-bioenergy-agriculture-and-rural-development-projects/",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "youth"
+    ],
+    "summary": "USDA SUN Grant Program 2026 in the USA | Funding for Bioenergy, Agriculture, and Rural Development Projects"
+  },
+  {
+    "id": "opportunities-for-youth-fa66e8548ace",
+    "title": "Call for Applications: U.S. Democracy Reporting Grants 2026 – Pulitzer Center Funds Investigative Journalism on Democracy Issues",
     "sourceId": "opportunities-for-youth",
     "url": "https://opportunitiesforyouth.org/2026/08/03/call-for-applications-u-s-democracy-reporting-grants-2026-pulitzer-center-funds-investigative-journalism-on-democracy-issues/",
-    "type": "call",
-    "deadline": "Open",
-    "tags": [
-      "call",
-      "youth"
-    ],
-    "summary": "The Pulitzer Center has officially opened applications for its U.S. Democracy Reporting Grants 2026, providing funding opportunities for journalists, editors,"
-  },
-  {
-    "id": "opportunities-for-youth-d8ac5d36bfff",
-    "title": "ATCMA-ECCAS Call for Expressions of Interest 2026: EU-Funded Opportunity for Timber, Cocoa, and Cassava SMEs in Central Africa",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/31/atcma-eccas-call-for-expressions-of-interest-2026-eu-funded-opportunity-for-timber-cocoa-and-cassava-smes-in-central-africa/",
-    "type": "call",
-    "deadline": "Open",
-    "tags": [
-      "call",
-      "youth"
-    ],
-    "summary": "The Programme for Trade Competitiveness and Market Access in Central Africa (ATCMA-ECCAS) has officially launched a Call for Expressions of Interest inviting"
-  },
-  {
-    "id": "opportunities-for-youth-be557aec7b28",
-    "title": "Investigative Journalism Grant – IWMF Fault Lines Fund for U.S. Hate Narrative Reporting",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/31/reporting-fund/",
     "type": "grant",
     "deadline": "Open",
     "tags": [
       "grant",
       "youth"
     ],
-    "summary": "Fund supporting investigative journalism: The IWMF Fault Lines Reporting Fund empowers staff and freelance journalists in the U.S. to expose hate‑based narratives, racism, antisemitism, Islamophobia, and misogyny through evidence‑based reporting."
+    "summary": "Call for Applications: U.S. Democracy Reporting Grants 2026 – Pulitzer Center Funds Investigative Journalism on Democracy Issues"
   },
   {
-    "id": "opportunities-for-youth-e30febe57a47",
-    "title": "ERC Starting Grant 2027: A Complete Guide to Europe’s Prestigious Research Grant for Early-Career Scientists",
+    "id": "opportunities-for-youth-73777a97b0ae",
+    "title": "Nathan Cummings Foundation Grants 2026: Year-Round Funding for Organizations Advancing Racial, Economic, and Environmental Justice",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/31/european-research-council-erc-funded-opportunities-in-netherlands-phd-positions-at-wageningen-university-research/",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/nathan-cummings-foundation-funding-opportunities-2025-grants-investments-for-racial-economic-and-environmental-justice/",
     "type": "grant",
     "deadline": "Open",
     "tags": [
       "grant",
       "youth"
     ],
-    "summary": "The European Research Council (ERC) has officially opened applications for the ERC Starting Grant 2027 (ERC-2027-STG), one of the world's most prestigious"
+    "summary": "Nathan Cummings Foundation Grants 2026: Year-Round Funding for Organizations Advancing Racial, Economic, and Environmental Justice"
   },
   {
     "id": "opportunities-for-youth-cb590f0d39a6",
@@ -661,6 +713,19 @@
       "youth"
     ],
     "summary": "Artificial Intelligence is transforming industries worldwide, but one of the biggest barriers preventing widespread AI adoption across Africa is the high cost"
+  },
+  {
+    "id": "opportunities-for-youth-65e1ce05f4e3",
+    "title": "Introduction to Sports for Climate Actio...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/free-un-training-make-sports-more-sustainable/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Introduction to Sports for Climate Actio..."
   },
   {
     "id": "opportunities-for-youth-e13ade4ae592",
@@ -725,7 +790,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "The International Conference on Theory and Practice of Electronic Governance (ICEGOV) 2026 has officially opened applications for its scholarship programme,"
+    "summary": "ICEGOV 2026 Scholarships: Apply for Free Conference Registration and a $300 Grant to Attend the International Conference on Theory and Practice of Electronic Governance"
   },
   {
     "id": "opportunities-for-youth-12e668171548",
@@ -738,7 +803,7 @@
       "internship",
       "youth"
     ],
-    "summary": "AmaliTech Immersive Internship Programme 2026 in Ghana (Paid): Gain Real World Software Engineering Experience with Mentorship and a Stipend"
+    "summary": "The AmaliTech Immersive Internship Programme (IIP) 2026 is now accepting applications from eligible students who are passionate about building careers in"
   },
   {
     "id": "opportunities-for-youth-560ff096e0c4",
@@ -751,7 +816,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "The 2027 KAS-SAIIA Scholarships are now open for applications, offering an exceptional opportunity for outstanding young graduates who aspire to pursue"
+    "summary": "Applications Open for the 2027 KAS-SAIIA Scholarships in South Africa: Fully Funded Master’s Scholarship and Internship Programme for Future Leaders"
   },
   {
     "id": "opportunities-for-youth-d6a5d8c825eb",
@@ -777,7 +842,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "University of Rwanda Mastercard Foundation Scholarship 2026–2027: 30 Fully Funded Master’s Scholarships for African Students"
+    "summary": "Through this competitive opportunity, the University of Rwanda will recruit 30 scholars for eligible two-year master’s degree programmes. The scholarship is"
   },
   {
     "id": "opportunities-for-youth-63cc3e602d7a",
@@ -816,7 +881,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Are you passionate about migration studies, sociology, digital platforms, labor research, or social sciences? The University of Helsinki is inviting"
+    "summary": "Doctoral Researcher in the Social Sciences at the University of Helsinki 2026: Fully Funded PhD Opportunity on Migration, Platform Work and Digital Labor in Finland"
   },
   {
     "id": "opportunities-for-youth-6b5482085221",
@@ -842,7 +907,7 @@
       "internship",
       "youth"
     ],
-    "summary": "UNESCO Doctoral Internships 2026–2027 in Paris, France | Fully Supported Research Internship for UCL PhD Students"
+    "summary": "The UNESCO Doctoral Internships 2026–2027 present an outstanding opportunity for doctoral researchers at University College London (UCL) to gain international"
   },
   {
     "id": "opportunities-for-youth-46f7699710b4",
@@ -868,7 +933,7 @@
       "internship",
       "youth"
     ],
-    "summary": "Applications are open for the National Defense University Student Trainee Internship 2026, a paid federal Pathways Internship Program opportunity based at"
+    "summary": "NDU Student Trainee Internship 2026: Pai..."
   },
   {
     "id": "opportunities-for-youth-3b697554c55a",
@@ -907,7 +972,7 @@
       "fellowship",
       "youth"
     ],
-    "summary": "NYC Civil Service Pathways Fellowship 2027: Launch Your Career in New York City Government"
+    "summary": "Applications are now open for the January 2027 cohort of the New York City Civil Service Pathways Fellowship, a paid, full-time professional programme"
   },
   {
     "id": "opportunities-for-youth-095cdad0c501",
@@ -923,19 +988,6 @@
     "summary": "The North Atlantic Treaty Organization (NATO) is currently advertising a wide range of international civilian career opportunities and internships across"
   },
   {
-    "id": "opportunities-for-youth-7059f9ea9acb",
-    "title": "CDRI ASEAN Scholar Fellowship 2026: Five-Month Research Fellowship for Mid- to Senior-Level ASEAN Researchers",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/02/cdri-asean-fellowship/",
-    "type": "fellowship",
-    "deadline": "Open",
-    "tags": [
-      "fellowship",
-      "youth"
-    ],
-    "summary": "CDRI ASEAN Scholar Fellowship 2026: Five-Month Research Fellowship for Mid- to Senior-Level ASEAN Researchers"
-  },
-  {
     "id": "opportunities-for-youth-9dbfbee53740",
     "title": "Ghana2Germany Initiative Opens Applications for Lifeguard Training and Germany Apprenticeship Pathway for Young Ghanaians",
     "sourceId": "opportunities-for-youth",
@@ -947,19 +999,6 @@
       "youth"
     ],
     "summary": "Ghana2Germany Initiative Opens Applications for Lifeguard Training and Germany Apprenticeship Pathway for Young Ghanaians"
-  },
-  {
-    "id": "opportunities-for-youth-f9a6f563f389",
-    "title": "GAUC Climate x Leadership Training Program 2025: Empowering the Next Generation of Global Climate Leaders for a Carbon-Neutral Future",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/31/gauc-climate-x-leadership-training-program-2025-empowering-the-next-generation-of-global-climate-leaders-for-a-carbon-neutral-future/",
-    "type": "program",
-    "deadline": "Open",
-    "tags": [
-      "program",
-      "youth"
-    ],
-    "summary": "Climate change remains one of the defining challenges of the 21st century, affecting economies, ecosystems, communities, and future generations across the"
   },
   {
     "id": "opportunities-for-youth-4e7b428b9841",
@@ -999,19 +1038,6 @@
       "youth"
     ],
     "summary": "Disasters do not discriminate—but their impacts often do. Across the Asia‑Pacific and Pacific Island regions, women and marginalized communities bear"
-  },
-  {
-    "id": "opportunities-for-youth-c074a1d1d48e",
-    "title": "OpenAI Student Collective 2026–2027: Apply to Become a Campus Lead and Receive Funding, ChatGPT Access, Codex Credits and a Cash Stipend",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/31/openai-student-collective-2026-2027-apply-to-become-a-campus-lead-and-receive-funding-chatgpt-access-codex-credits-and-a-cash-stipend/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Applications are now open for the OpenAI Student Collective 2026–2027, a campus leadership initiative designed to empower undergraduate students to help their"
   },
   {
     "id": "still-hiring-44739946ab32",
@@ -16835,6 +16861,32 @@
     "summary": "Transportation brokerage connecting shippers with extensive carrier network solutions. · Columbus, US · 326 employees"
   },
   {
+    "id": "artinfoland-0ee5497b683e",
+    "title": "Impart & Nalli Fellowships 2027–28 Open Call",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/opportunities/impart-nalli-fellowship-2027-28/",
+    "type": "fellowship",
+    "deadline": "31 August 2026",
+    "tags": [
+      "fellowship",
+      "arts"
+    ],
+    "summary": "Organizer Information The Impart & Nalli Fellowships are a collaborative initiative between Impart and Nalli Silks, designed to support original research on the diverse textile traditions of South Asia. Impart is an online platform dedicated to making South Asian art histories mo"
+  },
+  {
+    "id": "artinfoland-2f4d6303148d",
+    "title": "International Museum Cooperation Grant – Engage in Dialogues Programme 2027",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/opportunities/museum-cooperation-grant-germany-2027/",
+    "type": "grant",
+    "deadline": "31 August 2026",
+    "tags": [
+      "grant",
+      "arts"
+    ],
+    "summary": "Organizer Information The Agency for International Museum Cooperation (Museumsagentur) is a German organization funded by the German Federal Foreign Office that promotes international collaboration between museums, exhibition venues, and memorial sites. The agency supports projec"
+  },
+  {
     "id": "artinfoland-1c615cb36cb7",
     "title": "British Museum Project Curator: Eighteenth-Century Britain and Europe",
     "sourceId": "artinfoland",
@@ -19407,31 +19459,5 @@
       "arts"
     ],
     "summary": "Organizer Information K3 | Tanzplan Hamburg is one of Europe’s leading choreographic development centers, based at Kampnagel, Hamburg’s internationally renowned contemporary performing arts venue in Germany. K3 supports the creation, research, and presentation of contemporary cho"
-  },
-  {
-    "id": "artinfoland-4734e6e8b799",
-    "title": "Atlantic Fellows for Social Equity Fellowship 2027 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/atlantic-fellows-social-equity-fellowship-2027/",
-    "type": "fellowship",
-    "deadline": "27 July 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information The Atlantic Fellows for Social Equity (AFSE) is a prestigious international fellowship program based at the University of Melbourne in Australia and supported by Waipapa Taumata Rau – University of Auckland in New Zealand. Established as one of the seven gl"
-  },
-  {
-    "id": "artinfoland-a0060ee5eefa",
-    "title": "Call for Applications: Night as Commons and the Dark Side of Light",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/night-as-commons-dark-side-of-light-residency-romania-2026/",
-    "type": "residency",
-    "deadline": "1 August 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information Hypha ETC is an independent artist-run organization based in Transylvania, Romania, dedicated to interdisciplinary artistic research, ecological thinking, and socially engaged cultural practices. The organization develops residency programs, exhibitions, res"
   }
 ]
