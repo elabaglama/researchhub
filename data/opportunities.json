@@ -1,5 +1,18 @@
 [
   {
+    "id": "opportunities-for-youth-d2858680e8c8",
+    "title": "Heinrich Böll Foundation Tailwind for Talents Scholarships 2026/2027 in Germany for International Master's and PhD Students",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/01/heinrich-boll-foundation-tailwind-for-talents-scholarships-2026-2027-in-germany-for-international-masters-and-phd-students/",
+    "type": "scholarship",
+    "deadline": "Open",
+    "tags": [
+      "scholarship",
+      "youth"
+    ],
+    "summary": "For more scholarships opportunities visit OFY Website HERE"
+  },
+  {
     "id": "opportunities-for-youth-52cc1979a7b5",
     "title": "University of Manchester Equity and Merit Scholarships 2027–2028 in the UK (Fully Funded Master's Scholarships for African Students)",
     "sourceId": "opportunities-for-youth",
@@ -26,17 +39,30 @@
     "summary": "The Japan Africa Dream Scholarship (JADS) is now accepting applications from outstanding African students seeking to pursue fully funded Master's degree"
   },
   {
-    "id": "opportunities-for-youth-448fe7f9e727",
-    "title": "Newnham College Research Fellowships 2027: Fully Funded Research Opportunities for Outstanding Female Early-Career Researchers Worldwide",
+    "id": "opportunities-for-youth-78c551ed63cb",
+    "title": "African Water Facility (AWF) 2026 Call for Proposals: Apply for Up to EUR 1 Million in Grant Funding to Strengthen Africa's Water and Sanitation Investment Pipeline",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/31/newnham-college-research-fellowships-2027-fully-funded-research-opportunities-for-outstanding-female-early-career-researchers-worldwide/",
-    "type": "fellowship",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/african-water-facility-awf-2026-call-for-proposals-apply-for-up-to-eur-1-million-in-grant-funding-to-strengthen-africas-water-and-sanitation-investment-pipeline/",
+    "type": "grant",
     "deadline": "Open",
     "tags": [
-      "fellowship",
+      "grant",
       "youth"
     ],
-    "summary": "Applications are now open for the prestigious Newnham College Research Fellowships 2027 at the University of Cambridge, offering exceptional early-career"
+    "summary": "The African Water Facility (AWF) has officially launched its 2026 Call for Proposals (CfP) under the AWF 2026–2030 Strategy, providing an exciting funding"
+  },
+  {
+    "id": "opportunities-for-youth-c11257fc4f5d",
+    "title": "SFU Climate Innovation Seed Funds 2026: Up to $100,000 Available to Advance Community-Centred Climate Research and Innovation",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/sfu-climate-innovation-seed-funds-2026-up-to-100000-available-to-advance-community-centred-climate-research-and-innovation/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Simon Fraser University (SFU) has officially launched the 2026 SFU Climate Innovation Seed Funds, providing $100,000 in total funding to accelerate innovative"
   },
   {
     "id": "opportunities-for-youth-a5af9c976aac",
@@ -50,32 +76,6 @@
       "youth"
     ],
     "summary": "The Gates Foundation has opened applications for the 2026 Grand Challenges funding opportunity, “AI-Enabled Consumer Engagement to Advance Family Planning.”"
-  },
-  {
-    "id": "opportunities-for-youth-3f5c4cefda64",
-    "title": "Texas Education Agency Grants 2026 in the USA | Funding Opportunities for Schools, Universities, and Nonprofits",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/texas-education-agency-grants-2026-in-the-usa/",
-    "type": "grant",
-    "deadline": "Open",
-    "tags": [
-      "grant",
-      "youth"
-    ],
-    "summary": "Are you seeking funding to expand educational programs, improve student outcomes, or strengthen community services in Texas? The Texas Education Agency (TEA)"
-  },
-  {
-    "id": "opportunities-for-youth-1e133220d37a",
-    "title": "African Union Opens Call for National Convenors for the 2nd Egumeni Dialogue: Building a Resilient Africa through Accelerated Women Financial and Economic Inclusion",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/auc-2nd-national-convenors/",
-    "type": "call",
-    "deadline": "Open",
-    "tags": [
-      "call",
-      "youth"
-    ],
-    "summary": "The African Union Commission (AUC), through its Women, Gender and Youth Directorate (AUC-WGYD), has officially launched an Open Call for National Convenors to"
   },
   {
     "id": "opportunities-for-youth-543e4a84102d",
@@ -153,7 +153,7 @@
       "fellowship",
       "youth"
     ],
-    "summary": "The Cambodia Development Resource Institute is accepting applications for the ASEAN Scholar Fellowship 2026, a five-month regional research opportunity for"
+    "summary": "CDRI ASEAN Scholar Fellowship 2026: Five-Month Research Fellowship for Mid- to Senior-Level ASEAN Researchers"
   },
   {
     "id": "opportunities-for-youth-c4a54519f7d0",
@@ -179,7 +179,7 @@
       "jobs",
       "youth"
     ],
-    "summary": "The Alexander von Humboldt Foundation and British Academy Knowledge Frontiers Symposium 2027 for Early Career Researchers (Fully Funded to Germany)"
+    "summary": "The Alexander von Humboldt Foundation and the British Academy have officially opened applications for the Knowledge Frontiers Symposium 2027, a prestigious"
   },
   {
     "id": "opportunities-for-youth-dfbf41dbca1c",
@@ -231,7 +231,7 @@
       "grant",
       "youth"
     ],
-    "summary": "Norec Grant for Work Exchange Cooperation 2026–202..."
+    "summary": "The Norec Grant for Work Exchange Cooperation is now accepting applications for its Phase 1: Concept Development funding opportunity, offering organizations"
   },
   {
     "id": "opportunities-for-youth-800f61017100",
@@ -244,7 +244,7 @@
       "call",
       "youth"
     ],
-    "summary": "African Union Peace Fund Call for Applications 202..."
+    "summary": "The African Union (AU) Peace Fund has officially launched its Call for Applications for the 2028 Funding Cycle, inviting eligible African Union Member States,"
   },
   {
     "id": "opportunities-for-youth-348b99f2e83f",
@@ -374,7 +374,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Africa CDC African Epidemic Services (AES) Epidemi..."
+    "summary": "Applications are now open for the Africa CDC African Epidemic Services (AES) – Epidemiology Track 2026–2028, a fully funded two-year fellowship for young"
   },
   {
     "id": "opportunities-for-youth-152f0a44838c",
@@ -465,7 +465,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "The African Union International Centre for Girls’ and Women’s Education in Africa (AU CIEFFA), in partnership with ImpactHER, has officially opened"
+    "summary": "African Union CIEFFA Online Capacity Building Trai..."
   },
   {
     "id": "opportunities-for-youth-525f345c51bc",
@@ -478,7 +478,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "The European Economic and Social Committee (EESC) offers traineeships to university graduates and students twice a year. These opportunities are designed to"
+    "summary": "Paid Traineeships at the European Economic and Soc..."
   },
   {
     "id": "opportunities-for-youth-15594f6b5218",
@@ -520,6 +520,19 @@
     "summary": "The United Nations Convention to Combat Desertification (UNCCD) has officially opened the Expression of Interest (EOI) for organizations and individuals"
   },
   {
+    "id": "opportunities-for-youth-35cb15f6d608",
+    "title": "DAAD Doctoral Scholarships 2027 in Germany: €1,400 Monthly Funding for Full PhD and Bi-National Cotutelle Programmes",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/daad-doctoral-scholarships-2027-in-germany-e1400-monthly-funding-for-full-phd-and-bi-national-cotutelle-programmes/",
+    "type": "scholarship",
+    "deadline": "Open",
+    "tags": [
+      "scholarship",
+      "youth"
+    ],
+    "summary": "DAAD Doctoral Scholarships 2027 in Germany: €1,400 Monthly Funding for Full PhD and Bi-National Cotutelle Programmes"
+  },
+  {
     "id": "opportunities-for-youth-9d62a83e89e5",
     "title": "DAFI Scholarship Programme 2026/2027 in Rwanda: Fully Funded Undergraduate Scholarships for Refugees and Asylum Seekers",
     "sourceId": "opportunities-for-youth",
@@ -533,43 +546,30 @@
     "summary": "Are you a refugee or asylum seeker in Rwanda looking to pursue a university education? Applications are now open for the UNHCR Albert Einstein German Academic"
   },
   {
-    "id": "opportunities-for-youth-f78ae5a9bdd2",
-    "title": "Heinrich Böll Foundation Tailwind for Talents Scholarships 2026/2027 in Germany for International Master’s and PhD Students",
+    "id": "opportunities-for-youth-2d78b2f7b8b7",
+    "title": "Canadian Red Cross Resilience Fund 2026 in Canada | Up to $5,000 for Youth-Led Community Projects",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/01/heinrich-boll-foundation-tailwind-for-talents-scholarships-2026-2027-in-germany-for-international-masters-and-phd-students/",
-    "type": "scholarship",
-    "deadline": "Open",
-    "tags": [
-      "scholarship",
-      "youth"
-    ],
-    "summary": "For more scholarships opportunities visit OFY Website HERE"
-  },
-  {
-    "id": "opportunities-for-youth-8a40ce27330e",
-    "title": "African Water Facility (AWF) 2026 Call for Proposals: Apply for Up to EUR 1 Million in Grant Funding to Strengthen Africa’s Water and Sanitation Investment Pipeline",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/african-water-facility-awf-2026-call-for-proposals-apply-for-up-to-eur-1-million-in-grant-funding-to-strengthen-africas-water-and-sanitation-investment-pipeline/",
-    "type": "grant",
-    "deadline": "Open",
-    "tags": [
-      "grant",
-      "youth"
-    ],
-    "summary": "The African Water Facility (AWF) has officially launched its 2026 Call for Proposals (CfP) under the AWF 2026–2030 Strategy, providing an exciting funding"
-  },
-  {
-    "id": "opportunities-for-youth-c11257fc4f5d",
-    "title": "SFU Climate Innovation Seed Funds 2026: Up to $100,000 Available to Advance Community-Centred Climate Research and Innovation",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/sfu-climate-innovation-seed-funds-2026-up-to-100000-available-to-advance-community-centred-climate-research-and-innovation/",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/canadian-red-cross-resilience-fund-2026-in-canada-up-to-5000-for-youth-led-community-projects/",
     "type": "opportunity",
     "deadline": "Open",
     "tags": [
       "opportunity",
       "youth"
     ],
-    "summary": "Simon Fraser University (SFU) has officially launched the 2026 SFU Climate Innovation Seed Funds, providing $100,000 in total funding to accelerate innovative"
+    "summary": "Canadian Red Cross Resilience Fund 2026 in Canada | Up to $5,000 for Youth-Led Community Projects"
+  },
+  {
+    "id": "opportunities-for-youth-dee29f2dd150",
+    "title": "British Council TNE Grants with India 2026–27: £30,000 Funding for UK–India Higher Education Partnerships in Emerging Technologies",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/british-council-tne-grants/",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "youth"
+    ],
+    "summary": "British Council TNE Grants with India 2026–27: £30,000 Funding for UK–India Higher Education Partnerships in Emerging Technologies"
   },
   {
     "id": "opportunities-for-youth-3b8d818c6100",
@@ -582,7 +582,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Are you passionate about understanding how social inequality shapes educational opportunities and life outcomes? Do you have a strong academic background in"
+    "summary": "PhD in Contextual (Dis)advantage and Edu..."
   },
   {
     "id": "opportunities-for-youth-bf93df96b40e",
@@ -595,7 +595,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "Are you passionate about advancing research on gender equality, migration, displacement, and the prevention of violence against women? The Australian National"
+    "summary": "PhD Scholarship on Violence Against Wome..."
   },
   {
     "id": "opportunities-for-youth-b3a6a8672dbf",
@@ -634,7 +634,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Individuals who are passionate about creating meaningful change in the issues they care about will soon have an opportunity to join one of the world's most"
+    "summary": "Become a Churchill Fellow 2026–2027: App..."
   },
   {
     "id": "opportunities-for-youth-60d63b33adb8",
@@ -650,30 +650,30 @@
     "summary": "Artificial Intelligence is fundamentally transforming industries, redefining job roles, and reshaping how professionals collaborate, communicate, and solve"
   },
   {
-    "id": "opportunities-for-youth-25b7d9f9e754",
-    "title": "Council of Europe Youth Advocacy for Dem...",
+    "id": "opportunities-for-youth-3f5c4cefda64",
+    "title": "Texas Education Agency Grants 2026 in the USA | Funding Opportunities for Schools, Universities, and Nonprofits",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/council-of-europe-youth-advocacy-for-democracy-and-human-rights-training-course-2026-fully-funded-apply-by-14-august/",
-    "type": "opportunity",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/texas-education-agency-grants-2026-in-the-usa/",
+    "type": "grant",
     "deadline": "Open",
     "tags": [
-      "opportunity",
+      "grant",
       "youth"
     ],
-    "summary": "Council of Europe Youth Advocacy for Dem..."
+    "summary": "Are you seeking funding to expand educational programs, improve student outcomes, or strengthen community services in Texas? The Texas Education Agency (TEA)"
   },
   {
-    "id": "opportunities-for-youth-02d635635f55",
-    "title": "CAPSHA South-South Collaboration Innovat...",
+    "id": "opportunities-for-youth-1e133220d37a",
+    "title": "African Union Opens Call for National Convenors for the 2nd Egumeni Dialogue: Building a Resilient Africa through Accelerated Women Financial and Economic Inclusion",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/capsha-south-south-collaboration-innovation-pitch-challenge-2026-up-to-usd-15000-grants-for-innovative-agricultural-capacity-sharing-partnerships/",
-    "type": "opportunity",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/auc-2nd-national-convenors/",
+    "type": "call",
     "deadline": "Open",
     "tags": [
-      "opportunity",
+      "call",
       "youth"
     ],
-    "summary": "CAPSHA South-South Collaboration Innovat..."
+    "summary": "The African Union Commission (AUC), through its Women, Gender and Youth Directorate (AUC-WGYD), has officially launched an Open Call for National Convenors to"
   },
   {
     "id": "opportunities-for-youth-dc19a7bcccb2",
@@ -689,30 +689,17 @@
     "summary": "The USDA Sun Grant Program 2026 is now accepting applications from eligible land-grant university consortia across the United States. Administered by the"
   },
   {
-    "id": "opportunities-for-youth-fa66e8548ace",
-    "title": "Call for Applications: U.S. Democracy Reporting Grants 2026 – Pulitzer Center Funds Investigative Journalism on Democracy Issues",
+    "id": "opportunities-for-youth-bd24b970aa80",
+    "title": "CAPSHA South-South Collaboration Innovation Pitch Challenge 2026: Up to USD 15,000 Grants for Innovative Agricultural Capacity-Sharing Partnerships",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/call-for-applications-u-s-democracy-reporting-grants-2026-pulitzer-center-funds-investigative-journalism-on-democracy-issues/",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/capsha-south-south-collaboration-innovation-pitch-challenge-2026-up-to-usd-15000-grants-for-innovative-agricultural-capacity-sharing-partnerships/",
     "type": "grant",
     "deadline": "Open",
     "tags": [
       "grant",
       "youth"
     ],
-    "summary": "Call for Applications: U.S. Democracy Reporting Grants 2026 – Pulitzer Center Funds Investigative Journalism on Democracy Issues"
-  },
-  {
-    "id": "opportunities-for-youth-73777a97b0ae",
-    "title": "Nathan Cummings Foundation Grants 2026: Year-Round Funding for Organizations Advancing Racial, Economic, and Environmental Justice",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/nathan-cummings-foundation-funding-opportunities-2025-grants-investments-for-racial-economic-and-environmental-justice/",
-    "type": "grant",
-    "deadline": "Open",
-    "tags": [
-      "grant",
-      "youth"
-    ],
-    "summary": "Nathan Cummings Foundation Grants 2026: Year-Round Funding for Organizations Advancing Racial, Economic, and Environmental Justice"
+    "summary": "The CAPSHA South-South Collaboration Innovation Pitch Challenge 2026 is an innovation funding opportunity designed to support creative, demand-driven"
   },
   {
     "id": "opportunities-for-youth-cb590f0d39a6",
@@ -741,19 +728,6 @@
     "summary": "Applications are open for the Innovate Africa Challenge 2026 (3rd Edition), a major continental innovation initiative jointly organized by Smart Africa and"
   },
   {
-    "id": "opportunities-for-youth-d0dd739fef36",
-    "title": "Africa Deep Tech Challenge 2026: Win Up to $8,000 by Building Offline AI That Runs on Everyday Laptops Across Africa.",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/27/africa-deep-tech-challenge-2026-win-up-to-8000-by-building-offline-ai-that-runs-on-everyday-laptops-across-africa/",
-    "type": "competition",
-    "deadline": "Open",
-    "tags": [
-      "competition",
-      "youth"
-    ],
-    "summary": "Artificial Intelligence is transforming industries worldwide, but one of the biggest barriers preventing widespread AI adoption across Africa is the high cost"
-  },
-  {
     "id": "opportunities-for-youth-65e1ce05f4e3",
     "title": "Introduction to Sports for Climate Actio...",
     "sourceId": "opportunities-for-youth",
@@ -764,7 +738,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Introduction to Sports for Climate Actio..."
+    "summary": "Climate change is reshaping every sector of society, and the world of sports is no exception. From extreme weather disrupting major sporting events to the"
   },
   {
     "id": "opportunities-for-youth-e13ade4ae592",
@@ -816,7 +790,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "Applications are available for the Slovakia Scholarships for Talented Students from All Over the World for the 2026/2027 academic year, an international..."
+    "summary": "Slovakia Scholarships for Talented International Students 2026/27: Study in Europe and Receive Up to €15,000"
   },
   {
     "id": "opportunities-for-youth-c79f88db50e4",
@@ -842,7 +816,7 @@
       "internship",
       "youth"
     ],
-    "summary": "The AmaliTech Immersive Internship Programme (IIP) 2026 is now accepting applications from eligible students who are passionate about building careers in"
+    "summary": "AmaliTech Immersive Internship Programme 2026 in Ghana (Paid): Gain Real World Software Engineering Experience with Mentorship and a Stipend"
   },
   {
     "id": "opportunities-for-youth-560ff096e0c4",
@@ -868,7 +842,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "The 2027 France-South Africa Scholarship Programme is officially open for applications, offering an exceptional opportunity for eligible students from South"
+    "summary": "France-South Africa Scholarship Programme 2027: Fully Funded Master’s and PhD Scholarships to Study in France for Students from South Africa, Lesotho, and Malawi"
   },
   {
     "id": "opportunities-for-youth-7ab04353f5ca",
@@ -881,7 +855,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "Through this competitive opportunity, the University of Rwanda will recruit 30 scholars for eligible two-year master’s degree programmes. The scholarship is"
+    "summary": "University of Rwanda Mastercard Foundation Scholarship 2026–2027: 30 Fully Funded Master’s Scholarships for African Students"
   },
   {
     "id": "opportunities-for-youth-63cc3e602d7a",
@@ -897,6 +871,19 @@
     "summary": "The Rosa Luxemburg Foundation Scholarship Programme is one of Germany's most respected funding opportunities for academically outstanding and socially engaged"
   },
   {
+    "id": "opportunities-for-youth-448fe7f9e727",
+    "title": "Newnham College Research Fellowships 2027: Fully Funded Research Opportunities for Outstanding Female Early-Career Researchers Worldwide",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/07/31/newnham-college-research-fellowships-2027-fully-funded-research-opportunities-for-outstanding-female-early-career-researchers-worldwide/",
+    "type": "fellowship",
+    "deadline": "Open",
+    "tags": [
+      "fellowship",
+      "youth"
+    ],
+    "summary": "Applications are now open for the prestigious Newnham College Research Fellowships 2027 at the University of Cambridge, offering exceptional early-career"
+  },
+  {
     "id": "opportunities-for-youth-eb9ee07b71fc",
     "title": "DLGS Call for Applications 2027: Fully Funded International PhD Scholarship in Sustainable Urban Mobility Transformations in Germany",
     "sourceId": "opportunities-for-youth",
@@ -907,7 +894,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "The Dresden Leibniz Graduate School (DLGS) has officially opened applications for its 2027 International PhD Programme, offering fully funded doctoral"
+    "summary": "DLGS Call for Applications 2027: Fully Funded International PhD Scholarship in Sustainable Urban Mobility Transformations in Germany"
   },
   {
     "id": "opportunities-for-youth-d630b362ac9a",
@@ -936,19 +923,6 @@
     "summary": "Applications are now open for the 42nd Cycle of the National PhD Programme in Sustainable Development and Climate Change for the 2026–2027 academic year."
   },
   {
-    "id": "opportunities-for-youth-58b1e503b0ba",
-    "title": "UNESCO Doctoral Internships 2026–2027 in Paris, France | Fully Supported Research Internship for UCL PhD Students",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/27/unesco-doctoral-internships-2026-2027-in-paris-france-fully-supported-research-internship-for-ucl-phd-students/",
-    "type": "internship",
-    "deadline": "Open",
-    "tags": [
-      "internship",
-      "youth"
-    ],
-    "summary": "The UNESCO Doctoral Internships 2026–2027 present an outstanding opportunity for doctoral researchers at University College London (UCL) to gain international"
-  },
-  {
     "id": "opportunities-for-youth-46f7699710b4",
     "title": "Program Officer – Methane at the CVF-V20...",
     "sourceId": "opportunities-for-youth",
@@ -959,7 +933,7 @@
       "program",
       "youth"
     ],
-    "summary": "The Climate Vulnerable Forum and Vulnerable Twenty Group (CVF-V20) Secretariat has announced an exciting opportunity for experienced climate and environmental"
+    "summary": "Program Officer – Methane at the CVF-V20..."
   },
   {
     "id": "opportunities-for-youth-8f24281277e0",
@@ -972,7 +946,7 @@
       "internship",
       "youth"
     ],
-    "summary": "NDU Student Trainee Internship 2026: Pai..."
+    "summary": "Applications are open for the National Defense University Student Trainee Internship 2026, a paid federal Pathways Internship Program opportunity based at"
   },
   {
     "id": "opportunities-for-youth-b20421c924c0",
@@ -985,7 +959,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Women’s World Banking is now accepting applications for its Fall 2026 internship opportunities. Graduate students interested in international development,"
+    "summary": "Women’s World Banking Fall 2026 Internsh..."
   },
   {
     "id": "opportunities-for-youth-ce6dc7962938",
@@ -1014,6 +988,32 @@
     "summary": "NYC Civil Service Pathways Fellowship 2027: Launch Your Career in New York City Government"
   },
   {
+    "id": "opportunities-for-youth-471e612b663d",
+    "title": "Council of Europe Youth Advocacy for Democracy and Human Rights Training Course 2026 (Fully Funded) – Apply by 14 August",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/council-of-europe-youth-advocacy-for-democracy-and-human-rights-training-course-2026-fully-funded-apply-by-14-august/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "The Council of Europe Youth Department is inviting applications for the third edition of the Youth Advocacy for Democracy and Human Rights Training Course,"
+  },
+  {
+    "id": "opportunities-for-youth-fa66e8548ace",
+    "title": "Call for Applications: U.S. Democracy Reporting Grants 2026 – Pulitzer Center Funds Investigative Journalism on Democracy Issues",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/call-for-applications-u-s-democracy-reporting-grants-2026-pulitzer-center-funds-investigative-journalism-on-democracy-issues/",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "youth"
+    ],
+    "summary": "The Pulitzer Center has officially opened applications for its U.S. Democracy Reporting Grants 2026, providing funding opportunities for journalists, editors,"
+  },
+  {
     "id": "opportunities-for-youth-2160d72c4d98",
     "title": "American Academy in Berlin Berlin Prize Fellowship 2027–2028 in Germany | Fully Funded Fellowship for Scholars, Journalists, Writers and Public Policy Professionals",
     "sourceId": "opportunities-for-youth",
@@ -1024,20 +1024,20 @@
       "fellowship",
       "youth"
     ],
-    "summary": "American Academy in Berlin Berlin Prize Fellowship 2027–2028 in Germany | Fully Funded Fellowship for Scholars, Journalists, Writers and Public Policy Professionals"
+    "summary": "Applications are now open for the prestigious American Academy in Berlin Berlin Prize Fellowship 2027–2028, a fully funded international fellowship that"
   },
   {
-    "id": "opportunities-for-youth-9dbfbee53740",
-    "title": "Ghana2Germany Initiative Opens Applications for Lifeguard Training and Germany Apprenticeship Pathway for Young Ghanaians",
+    "id": "opportunities-for-youth-4e7b428b9841",
+    "title": "2026 African Plant Nutrition Outreach Fellowship: Win a USD $5,000 Fellowship to Advance Sustainable Agriculture Across Africa",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/31/ghana2germany-initiative-opens-applications-for-lifeguard-training-and-germany-apprenticeship-pathway-for-young-ghanaians/",
-    "type": "opportunity",
+    "url": "https://opportunitiesforyouth.org/2026/07/31/2026-african-plant-nutrition-outreach-fellowship-win-a-usd-5000-fellowship-to-advance-sustainable-agriculture-across-africa/",
+    "type": "fellowship",
     "deadline": "Open",
     "tags": [
-      "opportunity",
+      "fellowship",
       "youth"
     ],
-    "summary": "Ghana2Germany Initiative Opens Applications for Lifeguard Training and Germany Apprenticeship Pathway for Young Ghanaians"
+    "summary": "Improving agricultural productivity while protecting natural resources remains one of Africa's greatest development priorities. Healthy soils, efficient"
   },
   {
     "id": "still-hiring-44739946ab32",
@@ -16859,2605 +16859,5 @@
       "hiring"
     ],
     "summary": "Transportation brokerage connecting shippers with extensive carrier network solutions. · Columbus, US · 326 employees"
-  },
-  {
-    "id": "artinfoland-3294727e7efa",
-    "title": "Community Outreach Coordinator – esea contemporary",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/community-outreach-coordinator-esea-contemporary/",
-    "type": "program",
-    "deadline": "12 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information esea contemporary is a contemporary art space based in Manchester, UK, dedicated to presenting and supporting experimental and international contemporary art practices. Formerly known as the Centre for Chinese Contemporary Art (CFCCA), the organization has e"
-  },
-  {
-    "id": "artinfoland-b83b638f281b",
-    "title": "Assistant Curator, European Paintings Job at The Met",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/assistant-curator-european-paintings-met/",
-    "type": "scholarship",
-    "deadline": "August 14 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information The Metropolitan Museum of Art was established in 1870 by a group of American businessmen, financiers, artists, and thinkers who wanted to bring art and art education to the American public, and it opened to visitors in 1872. The museum is located on Fifth A"
-  },
-  {
-    "id": "artinfoland-80d119b3e5cb",
-    "title": "Gallery Manager Job at Fabian Lang Gallery Zurich",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/gallery-manager-fabian-lang-gallery-zurich/",
-    "type": "jobs",
-    "deadline": "13 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information Fabian Lang founded his eponymous contemporary art gallery after more than a decade as director of two internationally recognized galleries and a curatorially driven project space in London, returning to his native Zurich to open his own space. The gallery l"
-  },
-  {
-    "id": "artinfoland-6ae7859b50de",
-    "title": "Curatorial Research Residency at Villa Arson 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/curatorial-research-residency-villa-arson-france/",
-    "type": "residency",
-    "deadline": "15 September 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Villa Arson is a national public institution under France’s Ministry of Culture, based in Nice. It is described as the only national institution dedicated to contemporary art that brings together an art center and a higher art school under one roof, and it s"
-  },
-  {
-    "id": "artinfoland-abdee2eaea57",
-    "title": "Delfina Foundation Curator Residency 2027 in London",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/delfina-foundation-curator-residency-2027/",
-    "type": "residency",
-    "deadline": "30 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Delfina Foundation is a London-based non-profit dedicated to facilitating artistic exchange and developing creative practice through residencies, partnerships, and public programming. It was founded in 2007 by Delfina Entrecanales CBE as the successor to the"
-  },
-  {
-    "id": "artinfoland-30eea7164c52",
-    "title": "ICA CREATIVES 2026–2027: Young Schemers (Assistant Producers)",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/ica-creatives-young-schemers-assistant-producers-2026/",
-    "type": "jobs",
-    "deadline": "31 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Institute of Contemporary Arts (ICA) is one of the United Kingdom’s leading contemporary arts institutions, dedicated to supporting experimental artistic practices, emerging talent, and critical conversations across visual arts, performance, film, music, pub"
-  },
-  {
-    "id": "artinfoland-21957c3c1ea7",
-    "title": "KNOWCASE Open Call 2027: International Digital Art Installation Commission",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/knowcase-open-call-2027/",
-    "type": "grant",
-    "deadline": "7 September 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information The KNOWCASE Open Call 2027 is organized by Sónar+D in collaboration with Fundación Cotec para la Innovación. Sónar+D is the innovation, creativity, and technology platform of the internationally renowned Sónar Festival, bringing together artists, researcher"
-  },
-  {
-    "id": "artinfoland-0ee5497b683e",
-    "title": "Impart & Nalli Fellowships 2027–28 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/impart-nalli-fellowship-2027-28/",
-    "type": "fellowship",
-    "deadline": "31 August 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information The Impart & Nalli Fellowships are a collaborative initiative between Impart and Nalli Silks, designed to support original research on the diverse textile traditions of South Asia. Impart is an online platform dedicated to making South Asian art histories mo"
-  },
-  {
-    "id": "artinfoland-2f4d6303148d",
-    "title": "International Museum Cooperation Grant – Engage in Dialogues Programme 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/museum-cooperation-grant-germany-2027/",
-    "type": "grant",
-    "deadline": "31 August 2026",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information The Agency for International Museum Cooperation (Museumsagentur) is a German organization funded by the German Federal Foreign Office that promotes international collaboration between museums, exhibition venues, and memorial sites. The agency supports projec"
-  },
-  {
-    "id": "artinfoland-1c615cb36cb7",
-    "title": "British Museum Project Curator: Eighteenth-Century Britain and Europe",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/british-museum-project-curator-eighteenth-century-britain-europe-job-2026/",
-    "type": "fellowship",
-    "deadline": "12 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The British Museum was established on 7 June 1753 and is located on Great Russell Street in the Bloomsbury area of London. It opened its doors in 1759 as the first national museum to cover all fields of human knowledge, open to visitors from across the world"
-  },
-  {
-    "id": "artinfoland-d7cf24476714",
-    "title": "MONO NO AWARE XX Expanded Cinema Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/mono-no-aware-xx-expanded-cinema-call/",
-    "type": "call",
-    "deadline": "15 October 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information MONO NO AWARE is a 501(c)(3) cinema-arts nonprofit organization and film-positive community based in Brooklyn, NY, working to promote connectivity through the cinematic experience. Founded in 2007, the organization began as an exhibition of expanded cinema p"
-  },
-  {
-    "id": "artinfoland-718d130d5f2b",
-    "title": "Finno-Ugric Creative Residency 2026 in Estonia",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/finno-ugric-creative-residency-2026-narva/",
-    "type": "residency",
-    "deadline": "10 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Narva Art Residency (NART) is a cultural platform founded in 2015, facilitating residencies, art exhibitions, talks, and educational workshops. It is located in Narva, on the Estonian-Russian border, at the historic Kreenholm site, in a historicist villa ori"
-  },
-  {
-    "id": "artinfoland-0d0d4520ad32",
-    "title": "Leuven Light Artwork Open Call 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/leuven-light-artwork-open-call-2026/",
-    "type": "jobs",
-    "deadline": "1 September 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information This open call is issued jointly by three partners. The City of Leuven’s 15th-century Gothic town hall has been closed since autumn 2025 for a thorough restoration and is set to reopen in 2029 as “Stadhuis – European House for Democracy,” conceived as a shar"
-  },
-  {
-    "id": "artinfoland-8877892ae670",
-    "title": "STORIES OF IDENTITY 2026 Exhibition Italy",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/stories-of-identity-2026-italy/",
-    "type": "jobs",
-    "deadline": "21 September 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information MUST – Museo Storico della Città di Lecce is a municipal history museum established in 2015, housed in the former Convent of Santa Chiara, which for over four centuries served as the cloistered residence of the Poor Clares, an order founded within the Franci"
-  },
-  {
-    "id": "artinfoland-c514d192e248",
-    "title": "Museum Curator Job Opportunity at Pepperdine University",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/museum-curator-job-pepperdine-university/",
-    "type": "grant",
-    "deadline": "Ongoing",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information The Frederick R. Weisman Museum of Art sits on Pepperdine University’s Malibu campus and was dedicated on September 12, 1992. It was founded with a $1.5 million gift from Frederick R. Weisman, a noted art collector and philanthropist. Weisman, a self-trained"
-  },
-  {
-    "id": "artinfoland-6debb88d7287",
-    "title": "Dallas Museum of Art: The Pauline Gill Sullivan Assistant/Associate/Curator of American Art",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/dallas-museum-of-art-curator-job/",
-    "type": "jobs",
-    "deadline": "Ongoing",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The Dallas Museum of Art traces its origins to the Dallas Art Association, founded by a group of eighty citizens in 1903. The DMA relocated in 1984 to its current 370,000-square-foot Edward Larrabee Barnes–designed building in the Dallas Arts District, becom"
-  },
-  {
-    "id": "artinfoland-2ac0a207d3b2",
-    "title": "Art Basel Hong Kong: Head of Partnership Development Asia",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/art-basel-hong-kong-senior-sales-manager-director-partnerships-asia/",
-    "type": "jobs",
-    "deadline": "Ongoing",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Art Basel operates the world’s premier art shows for modern and contemporary art, connecting galleries, collectors, curators, and cultural institutions across four flagship locations: Basel, Miami Beach, Paris, and Hong Kong. The organization traces its root"
-  },
-  {
-    "id": "artinfoland-1de43efbd811",
-    "title": "Scientific Trainee Museum Job in Germany | Chemnitz",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/scientific-trainee-museum-job-chemnitz-germany/",
-    "type": "jobs",
-    "deadline": "19 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information The Kunstsammlungen Chemnitz (Chemnitz Art Collections) house one of the largest and most important municipal art collections in Germany. The institution grew out of civic groups such as the Kunsthütte zu Chemnitz art association, founded in 1860; these were"
-  },
-  {
-    "id": "artinfoland-577885dc50dd",
-    "title": "Assistant Curator Design and Digital Job at V&A",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/assistant-curator-design-digital-v-and-a-museum/",
-    "type": "jobs",
-    "deadline": "14 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information The V&A (Victoria and Albert Museum) is a family of museums dedicated to the power of creativity, with its foundation dating to 1852, a year after the Great Exhibition of 1851 championed by Prince Albert, whose profits helped establish South Kensington’s mus"
-  },
-  {
-    "id": "artinfoland-cc4778f7339a",
-    "title": "Arbella International Photography Contest 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/arbella-international-photography-contest-2026/",
-    "type": "competition",
-    "deadline": "6 September 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Durum Gıda Sanayi ve Ticaret A.Ş., known through its pasta brand Arbella Makarna, is a Turkish food manufacturer based in Mersin, Turkey, exporting products to close to 80 countries. The company has organized the Arbella International Photography Contest for"
-  },
-  {
-    "id": "artinfoland-fdf7e1798698",
-    "title": "MUSICONNECT ITALY Napoli World 2026 Call for Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/musiconnect-italy-napoli-world-2026-call-for-artists/",
-    "type": "grant",
-    "deadline": "31 August 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information MUSICONNECT ITALY – Napoli World is Italy’s only international showcase festival and professional meeting entirely dedicated to world music, held annually in Naples’ historic center. The event is promoted by Italian World Beat and AUDIOIMAGE under the organi"
-  },
-  {
-    "id": "artinfoland-dc22ffab680b",
-    "title": "Art Fair Beppu Spring 2027 Open Call for Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/art-fair-beppu-spring-2027-open-call/",
-    "type": "grant",
-    "deadline": "21 August 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information The Mixed Bathing World Executive Committee was founded in 2008 with the goal of hosting an international art festival in Beppu City, Oita Prefecture, and works under the philosophy of sharing time and space across nationalities, genders, and generations. It"
-  },
-  {
-    "id": "artinfoland-5150c25a915c",
-    "title": "AFAF AWARD 2026 Open Call for Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/afaf-award-2026-open-call/",
-    "type": "call",
-    "deadline": "9 August 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information ART FAIR ASIA FUKUOKA (AFAF) is an art fair that has developed in Fukuoka as a bridge between Japan and the wider Asian art market since its founding in 2015. The 2026 edition marks its 11th year and takes place at the Fukuoka Kokusai Center; the fair is org"
-  },
-  {
-    "id": "artinfoland-29b689f563ac",
-    "title": "Frappant Studio Scholarship 2026/2027 in Germany",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/frappant-studio-scholarship-2026-2027-germany/",
-    "type": "scholarship",
-    "deadline": "12 August 2026",
-    "tags": [
-      "scholarship",
-      "arts"
-    ],
-    "summary": "Organizer Information Frappant e.V. is a non-profit artists’ association based in the former Viktoria Kaserne (barracks) in Hamburg-Altona, active since 2009 and rooted in an artist community that has grown there since 2005. The association has been a partner of the fux eG cooper"
-  },
-  {
-    "id": "artinfoland-aa9474693a36",
-    "title": "Frappant Gallery Open Call for Exhibition 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/frappant-gallery-open-call-2027-germany/",
-    "type": "call",
-    "deadline": "17 August 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information Frappant e.V. is an artists’ association founded in 2009, growing out of a community of artists, designers and cultural practitioners active in Hamburg-Altona since 2005 (initially in the nearby Forum Altona). In 2010 the association moved into its current h"
-  },
-  {
-    "id": "artinfoland-506644ad21b7",
-    "title": "Hamburg International Artist Residency 2027–2028 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/hamburg-international-artist-residency-2027-2028/",
-    "type": "residency",
-    "deadline": "27 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information This residency is funded by the Hamburg Ministry for Culture and Media (Behörde für Kultur und Medien), the city government body responsible for Hamburg’s international cultural exchange programmes, and hosted at Westwerk, an artists’ centre on Hamburg’s Fle"
-  },
-  {
-    "id": "artinfoland-dd1150becaa7",
-    "title": "Nutrimenti_Habitat Creativo 2026 Residency Italy",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/nutrimenti-habitat-creativo-2026-residency-italy/",
-    "type": "residency",
-    "deadline": "15 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Demetra APS is a cultural association based in Terni, Umbria, active for more than 18 years in supporting creativity across artistic disciplines and in developing innovative formats for community-based cultural work. Demetra is one of five founding members o"
-  },
-  {
-    "id": "artinfoland-4ecb972c05dd",
-    "title": "Equisoain Artistic Residencies 2026–2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/equisoain-artistic-residencies-2026-2027/",
-    "type": "residency",
-    "deadline": "August 25 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Equisoain Art Residency is a living eco-laboratory and cultural initiative founded by artists and curators Eliana Perinat and Lívia Diniz. Located in Navarra, Spain, under the shadow of Mount La Higa, Equisoain operates in collaboration with LABEA (Laborator"
-  },
-  {
-    "id": "artinfoland-a470efcacf8f",
-    "title": "Sixi International Artist-in-Residence Project 2027 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/sixi-international-artist-in-residence-project-2027/",
-    "type": "residency",
-    "deadline": "15 November 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Sixi Museum is a non-profit art institution based on three founders’ art collections and artistic ideals, integrating the functions of collection, exhibition, academic research, and public education. Since its inauguration in 2023, Sixi has established itsel"
-  },
-  {
-    "id": "artinfoland-6853c779ed43",
-    "title": "Assistant Curator Job at LAS Art Foundation",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/assistant-curator-las-art-foundation-berlin/",
-    "type": "jobs",
-    "deadline": "Ongoing",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information LAS Art Foundation is a non-profit arts organisation based in Berlin, launched in 2019 by transport entrepreneur Jan Fischer and art historian Bettina Kames, focused on exploring the intersection of art, science, and technology. The foundation’s primary obje"
-  },
-  {
-    "id": "artinfoland-af0ae92c80c0",
-    "title": "Inside-Out Art Museum Residency 2027 in Beijing",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/inside-out-art-museum-residency-beijing-2027/",
-    "type": "residency",
-    "deadline": "27 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The Inside-Out Art Museum (IOAM) is a privately owned contemporary art museum in Beijing, registered with the Beijing Municipal Civil Affairs Bureau in 2011, with a total area of 2,600 square meters spread across three floors of exhibition halls, equipped wi"
-  },
-  {
-    "id": "artinfoland-3811f258ec4d",
-    "title": "Mondriaan Fund Residency Grant for Artists & Curators",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/mondriaan-fund-residency-grant/",
-    "type": "residency",
-    "deadline": "27 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The Mondriaan Fund is the Dutch national fund for the visual arts and cultural heritage sector, one of six public cultural funds (rijkscultuurfondsen) operating under the Dutch Ministry of Education, Culture and Science. The fund invests approximately €43 mi"
-  },
-  {
-    "id": "artinfoland-f99eff4faf33",
-    "title": "AAP Magazine Nature Photography Contest 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/aap-magazine-nature-photography-contest-2026/",
-    "type": "competition",
-    "deadline": "18 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information All About Photo (AAP) is an international photography magazine and platform, launched in February 2013 by photographer Sandrine Hermand-Grisel and her husband, Fabien Hermand. Based in California, the platform is known for its photography competitions, inclu"
-  },
-  {
-    "id": "artinfoland-26a184c7d266",
-    "title": "ArtFundMe Summer 2026 Grant for Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/artfundme-summer-2026-grant/",
-    "type": "grant",
-    "deadline": "20 August 2026",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information ArtFundMe is a self-described independent creative award platform, based in the UK and open to applicants worldwide. It positions itself as running quarterly $1,000 grants (see note on conflicting figures above) for artists, makers, and creative storytellers"
-  },
-  {
-    "id": "artinfoland-fbf7b560e5b6",
-    "title": "Nature Online Art Competition 2026 | Art Room Gallery",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/nature-online-art-competition-2026-art-room-gallery/",
-    "type": "competition",
-    "deadline": "13 August 2026",
-    "tags": [
-      "competition",
-      "arts"
-    ],
-    "summary": "Organizer Information Contemporary Art Room Gallery runs a series of recurring monthly online art competitions through its website, artroomgalleryonline.com, each built around a themed subject — past editions have included Colors, Botanicals, and Portrait, alongside open-theme ev"
-  },
-  {
-    "id": "artinfoland-e9a916e64584",
-    "title": "Timor-Leste Residency Programme in Paris 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/timor-leste-residency-programme-paris-2027/",
-    "type": "scholarship",
-    "deadline": "30 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The Institut Français d’Indonésie (IFI) is the French cultural institution in Indonesia, attached to the French Ministry for Europe and Foreign Affairs. It is one of the largest French cultural centers in the world, serving over 5,000 students each year, and"
-  },
-  {
-    "id": "artinfoland-26e7f736f161",
-    "title": "Cité internationale des arts: Kota Residency Programme 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/kota-residency-programme-2027/",
-    "type": "residency",
-    "deadline": "30 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The Institut Français d’Indonésie (IFI) is the French cultural institution in Indonesia, attached to the French Ministry for Europe and Foreign Affairs. It is one of the largest French cultural centers in the world, serving over 5,000 students each year, and"
-  },
-  {
-    "id": "artinfoland-de334309c539",
-    "title": "Cité internationale des arts Art X Association Françoise pour l’œuvre contemporaine Psychiatry & Humanities Residency",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/art-psychiatry-humanities-residency-france-2027/",
-    "type": "residency",
-    "deadline": "16 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The Association Françoise pour l’œuvre contemporaine supports contemporary artists in overcoming isolation within their markets, championing freedom of expression and the recognition of singular artistic identities. Since 2016 it has run the Concours Interna"
-  },
-  {
-    "id": "artinfoland-8fc25a899df4",
-    "title": "WeDirectory Best Projects & Websites Award 2026: $7K Call for Creative Websites",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/wedirectory-best-projects-websites-award-2026/",
-    "type": "grant",
-    "deadline": "December 31 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information WeDirectory is a global curated directory and discovery platform showcasing leading projects, independent brands, and creative practitioners across art, design, fashion, architecture, and visual culture. Operating as a bridge between creators, curators, coll"
-  },
-  {
-    "id": "artinfoland-583b3b5c3ccc",
-    "title": "Künstlerdorf Schöppingen Residency Fellowship 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/kunstlerdorf-schoppingen-residency-fellowship-2027/",
-    "type": "fellowship",
-    "deadline": "31 August 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information Künstlerdorf Schöppingen is an internationally recognized artist residency program located in Schöppingen, North Rhine-Westphalia, Germany. Founded in 1989, the Künstlerdorf (Artist Village) was established as a place dedicated to supporting professional art"
-  },
-  {
-    "id": "artinfoland-8a6a5a161bc3",
-    "title": "PS122 Gallery — 2027 Exhibition Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/ps122-gallery-2027-exhibition-open-call/",
-    "type": "residency",
-    "deadline": "1 September 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information PS122 Gallery is a nonprofit alternative exhibition space located in the East Village of New York City. Founded in 1979, PS122 Gallery has played a significant role in supporting experimental, interdisciplinary, and emerging artistic practices. The gallery o"
-  },
-  {
-    "id": "artinfoland-e1d12583f3ad",
-    "title": "Teatri Riflessi Festival 2027: International Short Performance Competition",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/teatri-riflessi-festival-2027-international-short-performance-competition/",
-    "type": "residency",
-    "deadline": "October 15 2026",
-    "tags": [
-      "competition",
-      "arts"
-    ],
-    "summary": "Organizer Information Teatri Riflessi Festival is organized by IterCulture APS in collaboration with the Municipality of Zafferana Etnea, supported by the Italian Ministry of Culture and the Sicilian Region, under the patronage of the National Centre for Contemporary Italian Dram"
-  },
-  {
-    "id": "artinfoland-f885b4d826cd",
-    "title": "Pritzker Director at the Museum of Contemporary Art Chicago (MCA)",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/pritzker-director-mca-chicago/",
-    "type": "competition",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The Museum of Contemporary Art Chicago (MCA Chicago) is one of the world’s leading museums dedicated exclusively to contemporary art. Established in 1967, the institution was founded by a coalition of collectors, artists, critics, architects, and art dealers"
-  },
-  {
-    "id": "artinfoland-7eb41d39b356",
-    "title": "A VISTA Contemporary Photography Open Call 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/a-vista-contemporary-photography-call-2026/",
-    "type": "call",
-    "deadline": "August 24 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Neowise Studio is an established production studio based in Rome, Italy, operating across photography, film, and creative production. Expanding upon its foundation, the team launched Neowisevent, an independent cultural organization dedicated to developing e"
-  },
-  {
-    "id": "artinfoland-35abb1ca2aa1",
-    "title": "Director of Production and Presentation Job at PRAx",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/director-of-production-presentation-job-prax-oregon-state-university/",
-    "type": "fellowship",
-    "deadline": "Ongoing",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information The Patricia Valian Reser Center for the Creative Arts (PRAx) is a multidisciplinary arts center located on the campus of Oregon State University (OSU) in Corvallis, Oregon, USA. Opened in 2024, the 49,900-square-foot facility serves as one of the Pacific No"
-  },
-  {
-    "id": "artinfoland-4c0ea7babe71",
-    "title": "Call for Apila’s First Printing Award 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/apilas-first-printing-award-2027/",
-    "type": "jobs",
-    "deadline": "14 February 2027",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information Apila Ediciones is an independent Spanish publishing house specializing in high-quality illustrated children’s books and picture books. Since its founding, the publisher has focused on discovering emerging illustration talent and promoting innovative visual "
-  },
-  {
-    "id": "artinfoland-a770ab400c3e",
-    "title": "Biennale Images Vevey 2027 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/biennale-images-vevey-2027-open-call-switzerland/",
-    "type": "call",
-    "deadline": "Open",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Biennale Images Vevey is one of Switzerland’s leading visual arts festivals, internationally recognized for presenting ambitious photography and lens-based art projects in public spaces. Held every two years in the lakeside town of Vevey, the biennale transf"
-  },
-  {
-    "id": "artinfoland-156d1a482cd9",
-    "title": "Open call: International Touring & Environmental Responsibility Programme 2026 (ITER)",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/international-touring-environmental-responsibility-programme-2026-iter/",
-    "type": "call",
-    "deadline": "10 December 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information The International Touring & Environmental Responsibility programme (ITER) is designed and delivered by Julie’s Bicycle, a UK-based environmental charity that has worked with the cultural sector on climate action since a founding period that has grown to incl"
-  },
-  {
-    "id": "artinfoland-90e4dff1696a",
-    "title": "Institut français Cité Arts Residency 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/institut-francais-cite-internationale-des-arts-residency-2026/",
-    "type": "residency",
-    "deadline": "8 October 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information This programme is jointly run by the Institut français and the Cité internationale des arts. The Institut français supports French culture internationally, helping to promote the French language, the circulation of works and ideas, and the mobility of artist"
-  },
-  {
-    "id": "artinfoland-3e79c051187a",
-    "title": "CPR Artist-in-Residence Program 2027 in New York",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/cpr-artist-in-residence-program-2027-new-york/",
-    "type": "residency",
-    "deadline": "24 August 2026",
-    "tags": [
-      "program",
-      "arts"
-    ],
-    "summary": "Organizer Information CPR – Center for Performance Research is a nonprofit organization co-founded in 2007 by choreographers Jonah Bokaer and John Jasperse to support artists developing new work in contemporary dance, performance, and time-based art. CPR’s founding organizations,"
-  },
-  {
-    "id": "artinfoland-710afa63c4ab",
-    "title": "Italy International Fellowship 2027 at Scuola Piccola Zattere",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/scuola-piccola-zattere-international-fellowship-2027-italy/",
-    "type": "fellowship",
-    "deadline": "4 September 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information Scuola Piccola Zattere is an independent non-profit center for continuous education and research working across the expanded field of contemporary arts, housed at Palazzo delle Zattere in Venice’s Dorsoduro district. Founded in November 2024 and gaining visi"
-  },
-  {
-    "id": "artinfoland-a9624ead9be5",
-    "title": "Curatorial Researcher Job at White Cube Gallery",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/curatorial-researcher-job-white-cube/",
-    "type": "jobs",
-    "deadline": "7 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information White Cube is one of the world’s leading contemporary art galleries, representing internationally acclaimed artists across painting, sculpture, photography, installation, film, and digital media. Founded in London in 1993, the gallery has established a globa"
-  },
-  {
-    "id": "artinfoland-f7ba82c3208a",
-    "title": "WOLDA Logo Design Competition 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/wolda-logo-design-competition-2026/",
-    "type": "competition",
-    "deadline": "Open",
-    "tags": [
-      "competition",
-      "arts"
-    ],
-    "summary": "Organizer Information WOLDA is organized by the International Editorial-Design & Research Forum, an organization based in Meerbusch, Germany, led by designer Norbert Küpper. Küpper also organizes other design competitions, including the trends publications documenting each WOLDA "
-  },
-  {
-    "id": "artinfoland-38d469466932",
-    "title": "Nordic Currents Grant 2027–2028 for Cultural Projects",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/nordic-currents-grant-2027-2028/",
-    "type": "grant",
-    "deadline": "Open",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information Nordic Currents is issued by the Nordic Council of Ministers, the framework for official inter-governmental co-operation in the Nordic Region, bringing together ministers and senior officials responsible for policy areas across the region. Cultural co-operat"
-  },
-  {
-    "id": "artinfoland-03dd4267e584",
-    "title": "IMPACT26 – Friction Energy Symposium 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/impact26-friction-energy-symposium-2026/",
-    "type": "competition",
-    "deadline": "13 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The call is issued by PACT Zollverein (Performing Arts Choreographisches Zentrum NRW – Tanzlandschaft Ruhr), a center for dance, performance, and interdisciplinary art housed in the former colliery wash house of the UNESCO World Heritage site Zeche Zollverei"
-  },
-  {
-    "id": "artinfoland-8f95bc450747",
-    "title": "*** in Residence Kyoto 2026 Exchange Programme | Japan Residency",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/in-residence-kyoto-2026-exchange-programme/",
-    "type": "residency",
-    "deadline": "16 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information This programme is jointly organized by Artist-in-Residence Vietnam Network (AiRViNe) and *** in Residence Kyoto. AiRViNe was established as the first platform connecting artists, creatives, and cultural enthusiasts with residency opportunities in Vietnam and"
-  },
-  {
-    "id": "artinfoland-39f248067a00",
-    "title": "Spiritual Pedagogies Fellowship 2026–27 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/spiritual-pedagogies-fellowship-dia-chelsea-2026-2027/",
-    "type": "fellowship",
-    "deadline": "9 August 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information Dia Art Foundation is a nonprofit contemporary arts organization founded in New York in 1974 by Philippa de Menil, Heiner Friedrich, and Helen Winkler. Dia was established to help artists realize ambitious, often large-scale projects that traditional museums"
-  },
-  {
-    "id": "artinfoland-e350cb5cd5a1",
-    "title": "SIP Fellowship 2027 – EFA Robert Blackburn Printmaking Workshop",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/sip-fellowship-2027-printmaking/",
-    "type": "fellowship",
-    "deadline": "9 August 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information The EFA Robert Blackburn Printmaking Workshop (RBPMW) is a professional printmaking facility dedicated to supporting artists through access to printmaking resources, education, studio facilities, and community-based creative exchange. Located within the EFA "
-  },
-  {
-    "id": "artinfoland-67a23fec50a0",
-    "title": "Communications Director Job at United States Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/communications-director-united-states-artists/",
-    "type": "fellowship",
-    "deadline": "Open",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information United States Artists (USA) is a national nonprofit organization dedicated to supporting artists and strengthening the conditions that allow creative professionals to thrive. Founded in 2005 in response to research highlighting the gap between public appreci"
-  },
-  {
-    "id": "artinfoland-1cedd3d6b13b",
-    "title": "Exhibition and Program Assistant Fellow – Van Every/Smith Galleries, Davidson College",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/exhibition-program-assistant-fellow-davidson-college/",
-    "type": "fellowship",
-    "deadline": "Ongoing",
-    "tags": [
-      "program",
-      "arts"
-    ],
-    "summary": "Organizer Information Davidson College is a highly selective residential liberal arts college located in Davidson, North Carolina, near Charlotte, United States. Founded on the principles of academic excellence, community engagement, and inclusive learning, Davidson College offer"
-  },
-  {
-    "id": "artinfoland-f10186ff8710",
-    "title": "Curatorial Assistant – NYU Abu Dhabi Art Gallery",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/curatorial-assistant-nyu-abu-dhabi-art-gallery/",
-    "type": "grant",
-    "deadline": "Ongoing",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information New York University Abu Dhabi (NYUAD) is a degree-granting research university and a key campus within the global network of New York University, alongside NYU New York and NYU Shanghai. Established as an international hub for research, education, and creati"
-  },
-  {
-    "id": "artinfoland-37a547a66111",
-    "title": "Head Archivist Job at Museo de Arte de Ponce",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/head-archivist-job-museo-de-arte-de-ponce/",
-    "type": "grant",
-    "deadline": "Ongoing",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information The Museo de Arte de Ponce opened its doors to the public on January 3, 1959, in a colonial house in Ponce, and in 1965 moved into the building that remains its home today, designed by the renowned architect Edward Durell Stone. The building is recognized al"
-  },
-  {
-    "id": "artinfoland-68f3ac28549c",
-    "title": "Production Coordination Job at documenta 16",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/production-coordination-documenta-16-job-germany/",
-    "type": "jobs",
-    "deadline": "Ongoing",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information documenta und Museum Fridericianum gGmbH is the organization behind the periodic documenta exhibitions, founded by Arnold Bode, which first opened in Kassel on July 15, 1955; a total of 15 editions have taken place since then, with documenta 16 currently in "
-  },
-  {
-    "id": "artinfoland-f791077576f4",
-    "title": "International Coin Design Competition 2026 Japan",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/international-coin-design-competition-2026-japan/",
-    "type": "competition",
-    "deadline": "16 September 2026",
-    "tags": [
-      "competition",
-      "arts"
-    ],
-    "summary": "Organizer Information The Japan Mint is an Independent Administrative Institution of the Japanese government responsible for producing and circulating the coins of Japan, headquartered in Osaka with branches in Saitama and Hiroshima. It was established in Osaka by the Meiji gover"
-  },
-  {
-    "id": "artinfoland-3cca1d1efb57",
-    "title": "International Contemporary Dance Residency 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/international-contemporary-dance-residency-2027-north-macedonia/",
-    "type": "residency",
-    "deadline": "15 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The residency is hosted by Interart Culture Center, an independent cultural organization based in Skopje, North Macedonia, that has shaped North Macedonia’s contemporary dance scene for more than 30 years as the organizer and producer of Dance Fest and Skopj"
-  },
-  {
-    "id": "artinfoland-f8d1b0df33ec",
-    "title": "Max Planck Institute for Empirical Aesthetics: INHABIT Artist Residency 2027 in Germany",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/inhabit-artist-residency-2027-germany/",
-    "type": "residency",
-    "deadline": "1 September 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The Max Planck Institute for Empirical Aesthetics (MPIEA) was founded in 2013 and is located in Frankfurt am Main, bringing researchers from the humanities and the sciences together to investigate the field of aesthetics. It is currently the only research in"
-  },
-  {
-    "id": "artinfoland-7ff6194a311e",
-    "title": "SOPRA SOTTO (October) 2026: “Sound of Resilience” Residency in Sardinia",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/sound-of-resilience-residency-sardinia-2026/",
-    "type": "residency",
-    "deadline": "Ongoing",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information SOPRA SOTTO is an international interdisciplinary residency platform founded in 2023. Rooted in the Hermetic axiom “As above, so below”, it approaches artistic practice as a tool for collective imagination, cultural resilience, and social transformation. Thr"
-  },
-  {
-    "id": "artinfoland-c847287ba041",
-    "title": "New Visionary Magazine Issue 18 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/new-visionary-magazine-issue-18-submission/",
-    "type": "jobs",
-    "deadline": "2 August 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Visionary Art Collective is a New York City-based contemporary art & artist development company whose mission is to uplift artists through magazine features, exhibitions, podcast interviews, and mentorship programs. It was founded in 2020 by Victoria J. Fry,"
-  },
-  {
-    "id": "artinfoland-1dd5db122499",
-    "title": "BBA 360 Online Exhibition 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/bba-360-online-exhibition-2026/",
-    "type": "grant",
-    "deadline": "3 August 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information BBA (Berlin Blue Art Gallery) began as an artist-run curatorial space in 2015, founded by artists Renata Kudlacek and Vishal Shah, who wanted to push the boundaries of how art is thought about rather than simply exhibit it. It was officially established as a"
-  },
-  {
-    "id": "artinfoland-efeb096666c6",
-    "title": "Manifest VISAGE International Portraiture Exhibition Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/manifest-visage-international-portraiture-exhibition/",
-    "type": "residency",
-    "deadline": "2 August 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Manifest is a 501(c)(3) charitable nonprofit founded on Woodburn Avenue in Cincinnati, Ohio, in 2004 by professors and students from area universities seeking to make a positive community impact, and continues to be operated by professors, students, and work"
-  },
-  {
-    "id": "artinfoland-3a3fb34c2227",
-    "title": "Vilém Flusser Residency 2027 in Berlin",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/vilem-flusser-residency-artistic-research-2027/",
-    "type": "scholarship",
-    "deadline": "28 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information transmediale is an annual festival and year-round cultural platform for art, digital culture, and media theory in Berlin, founded in 1988 as VideoFilmFest, a video and media art programme connected to the Berlin International Film Festival, which later expan"
-  },
-  {
-    "id": "artinfoland-ffef14d88b04",
-    "title": "transmediale x ARKO Residency 2027 in Germany",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/transmediale-x-arko-residency-2027/",
-    "type": "residency",
-    "deadline": "28 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information transmediale is an annual festival and year-round cultural platform for art, digital culture, and media theory in Berlin, founded in 1988 as VideoFilmFest, a video and media art programme connected to the Berlin International Film Festival, which later expan"
-  },
-  {
-    "id": "artinfoland-e8dd86aacbe1",
-    "title": "Digital Art Residency 2027 in Germany | transmediale",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/digital-art-residency-2027-transmediale-germany/",
-    "type": "residency",
-    "deadline": "28 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information transmediale is an annual festival and year-round cultural platform for art, digital culture, and media theory in Berlin, founded in 1988 as VideoFilmFest, a video and media art programme connected to the Berlin International Film Festival, which later expan"
-  },
-  {
-    "id": "artinfoland-e2b6dabfb53d",
-    "title": "OBJECTivity Journal Inaugural Issue Call for Entry",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/objectivity-journal-inaugural-issue-call-for-entry/",
-    "type": "grant",
-    "deadline": "25 August 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information Limited public information is available about OBJECTivity Journal beyond what the platform states about itself. Its mission is to connect artists and writers to the public, publishing work that prioritizes themes on the material culture of objecthood, while "
-  },
-  {
-    "id": "artinfoland-02424cbc52b9",
-    "title": "Fotograf Zone Festival 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/fotograf-zone-festival-2026-open-call/",
-    "type": "open-call",
-    "deadline": "15 July 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Fotograf Magazine is a comprehensive periodical published in both Czech and English since 2002. Building on the magazine’s activities, Fotograf Gallery opened in 2009, and the first Fotograf Festival was held two years later, leading to the establishment of "
-  },
-  {
-    "id": "artinfoland-79f645b97a5b",
-    "title": "HUAWEI XMAGE Awards 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/huawei-xmage-awards-2026/",
-    "type": "grant",
-    "deadline": "16 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Huawei is a Chinese multinational technology company headquartered in Shenzhen, founded in 1987 by Ren Zhengfei, and it has grown into one of the world’s leading manufacturers of telecommunications equipment and consumer electronics, including smartphones, t"
-  },
-  {
-    "id": "artinfoland-d81e7bc1752b",
-    "title": "TOURBUS EUROPA Open Call 2026 for Music Professionals",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/tourbus-europa-open-call-2026/",
-    "type": "open-call",
-    "deadline": "14 September 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information TOURBUS EUROPA is delivered by a five-partner consortium spanning Denmark, Sweden, and Germany. Art Music Denmark is the Danish national organisation for contemporary music, classical music and sound art, working as a network-based specialist organisation th"
-  },
-  {
-    "id": "artinfoland-0088f7846277",
-    "title": "Creative Practitioner Residency at Royal Museums Greenwich",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/creative-practitioner-residency-royal-museums-greenwich/",
-    "type": "residency",
-    "deadline": "3 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Royal Museums Greenwich (RMG) forms a key part of the Maritime Greenwich UNESCO World Heritage Site and is made up of the National Maritime Museum, historic ship Cutty Sark, the Royal Observatory Greenwich, and the 17th-century Queen’s House, alongside the P"
-  },
-  {
-    "id": "artinfoland-6424c17079fe",
-    "title": "SKOG Open Call 2027 for Artists in Oslo",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/skog-open-call-2027/",
-    "type": "jobs",
-    "deadline": "16 August 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information SKOG is an art space on Galgeberg in Oslo, established in autumn 2022, prioritizing exhibitions with material-based art and newly established artists. The space is built on the foundation of Skogen design, a vintage interior shop run by Brian Noguera-Gabriel"
-  },
-  {
-    "id": "artinfoland-d3cee330e2dc",
-    "title": "Assemble Sound Musician Studio Residency in Detroit",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/assemble-sound-musician-studio-residency/",
-    "type": "residency",
-    "deadline": "Ongoing",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Assemble Sound was founded in 2015 with the guiding hypothesis that sustainable artist development could be fostered by creating a physical studio space that facilitated collaboration. The company purchased a historic 1872 church in Detroit’s Corktown neighb"
-  },
-  {
-    "id": "artinfoland-26173031c61a",
-    "title": "JamFactory x Helpmann Academy Scholarships 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/jamfactory-x-helpmann-academy-scholarships-2027/",
-    "type": "scholarship",
-    "deadline": "30 September 2026",
-    "tags": [
-      "scholarship",
-      "arts"
-    ],
-    "summary": "Organizer Information The scholarships are jointly presented by JamFactory and the Helpmann Academy. JamFactory is Australia’s leading craft and design organisation, established in 1973 by the South Australian Government under Premier Don Dunstan as the South Australian Craft Aut"
-  },
-  {
-    "id": "artinfoland-104820dbb5f2",
-    "title": "Platform Dalí Open Call for Residencies 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/platform-dali-open-call-residencies-2027/",
-    "type": "fellowship",
-    "deadline": "7 September 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information Platform Dalí is a new international art-and-science programme launched by the Gala-Salvador Dalí Foundation, based in Barcelona and anchored in the city’s scientific ecosystem, established through collaborations with five leading science centers: the Barcel"
-  },
-  {
-    "id": "artinfoland-9d60df343553",
-    "title": "Lisa Brown and Daniel Handler Residency 2026–2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/lisa-brown-and-daniel-handler-residency-2026-2027/",
-    "type": "fellowship",
-    "deadline": "10 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Friends of the San Francisco Public Library is a nonprofit organization that raises funds and advocates for a premier public library system in San Francisco, working to ensure equity and access to free resources for all residents. The organization serves as "
-  },
-  {
-    "id": "artinfoland-d64c54725e58",
-    "title": "Tokyo Biennale 2027 Social Dive Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/tokyo-biennale-2027-social-dive-open-call/",
-    "type": "residency",
-    "deadline": "30 September 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Tokyo Biennale is organized by the General Non-Profit Incorporated Organization Tokyo Biennale, led by Masato Nakamura, an artist who founded the art collective Command N in 1997 and established the public-oriented cultural facility Arts Chiyoda 3331 in 2010"
-  },
-  {
-    "id": "artinfoland-d9b5821d3bb8",
-    "title": "Phenomenon Grant 2026 for Contemporary Art Projects",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/phenomenon-grant-2026-greece/",
-    "type": "residency",
-    "deadline": "Ongoing",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information The Phenomenon Grant is a program run by the Kerenidis Pepe Collection, created in 2025 as a yearly grant program supporting art projects in Greece for individuals, collectives, and non-profit organizations engaged with queer, feminist, anti-colonial, and ot"
-  },
-  {
-    "id": "artinfoland-684addd47dcc",
-    "title": "Helpmann Fellowships 2026 for South Australian Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/helpmann-fellowships-2026-south-australia/",
-    "type": "fellowship",
-    "deadline": "31 August 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information The Helpmann Academy was formed in 1994 in honour of South Australia’s actor and dancer Sir Robert Helpmann, to maximise professional development opportunities that help arts students transition from study into professional practice. It is based in Adelaide,"
-  },
-  {
-    "id": "artinfoland-ab47f2e7120d",
-    "title": "ANAT Synapse Residency Program 2027 Australia",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/anat-synapse-residency-program-2027-australia/",
-    "type": "residency",
-    "deadline": "14 October 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The Australian Network for Art & Technology (ANAT) is a not-for-profit organization incorporated as the Australian Network for Art in Technology in 1988, growing out of an art and technology project first presented at the Adelaide Festival of Arts in 1984. B"
-  },
-  {
-    "id": "artinfoland-bfe6777e4bb7",
-    "title": "Queer|Art Design Grant 2026: $10K Call for LGBTQ+ Designers",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/queer-art-design-grant-2026/",
-    "type": "grant",
-    "deadline": "August 14 2026",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information Queer|Art is a non-profit arts organization founded to support, connect, and empower LGBTQ+ artists across generations and creative disciplines. Launched in partnership with lifestyle brand UGG®, the inaugural Queer|Art Design Grant stands as the largest dir"
-  },
-  {
-    "id": "artinfoland-d6147b22c998",
-    "title": "Dezi Art Prize 2026: $1,000 Unrestricted Grants for Visual Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/dezi-art-prize-2026/",
-    "type": "grant",
-    "deadline": "September 10 2026",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information Dezi is an artist career support platform launching in 2026, operated by Phistream LLC. Founded by Nitya Mehrotra—a multidisciplinary creator whose work spans animation, filmmaking, public art, and brand strategy—Dezi was created to bridge the gap between ar"
-  },
-  {
-    "id": "artinfoland-d4bd3e58fe93",
-    "title": "North Lincolnshire Photography Residency 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/north-lincolnshire-photography-residency-2026/",
-    "type": "residency",
-    "deadline": "24 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Over the Bridge is a photography exchange and collaborative network connecting photographers across Grimsby, Hull, and Scunthorpe in the Humber region of England. Delivered in partnership with Our Big Picture, Artlink Hull | 87 Gallery, and Fountain Arts, th"
-  },
-  {
-    "id": "artinfoland-f29956400fff",
-    "title": "Copenhagen Photo Festival Open Call 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/copenhagen-photo-festival-open-call-2027/",
-    "type": "jobs",
-    "deadline": "1 September 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Copenhagen Photo Festival (CPF) is an annual photography festival based in Copenhagen, Denmark, with programming extending to collaborating galleries, museums, and cultural institutions across Copenhagen and southern Sweden. The festival is directed by Maja "
-  },
-  {
-    "id": "artinfoland-c7df5da9754b",
-    "title": "Head of Collection Department Job at mumok Vienna",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/head-of-department-collection-mumok-vienna-job/",
-    "type": "jobs",
-    "deadline": "9 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information mumok – Museum moderner Kunst Stiftung Ludwig Wien is the largest museum for modern and contemporary art in Austria, located in Vienna’s MuseumsQuartier. The institution was founded on September 21, 1962, as the Museum of the Twentieth Century, initially hou"
-  },
-  {
-    "id": "artinfoland-b600cb3da1f9",
-    "title": "Project Curator: Contemporary & Modern Middle Eastern Art – The British Museum",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/project-curator-contemporary-modern-middle-eastern-art-british-museum/",
-    "type": "jobs",
-    "deadline": "9 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The British Museum is one of the world’s leading cultural institutions, dedicated to the preservation, research, interpretation, and public accessibility of global collections spanning thousands of years of human history. Founded in 1753 and opened to the pu"
-  },
-  {
-    "id": "artinfoland-ab22fda61f20",
-    "title": "FROM SHOT TO SHOW – BBA One Shot Award 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/bba-one-shot-award-2026/",
-    "type": "grant",
-    "deadline": "3 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The BBA Gallery is a contemporary art gallery based in Berlin, Germany, dedicated to supporting emerging and established artists through exhibitions, international art prizes, and opportunities for global visibility. The gallery focuses on creating accessibl"
-  },
-  {
-    "id": "artinfoland-10356c5711dc",
-    "title": "UNDERPRACTICE Community Call for Artists in UK",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/underpractice-community-call-artists/",
-    "type": "residency",
-    "deadline": "31 July 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information UNDERPRACTICE is an independent multi-use creative studio and community space based in East London, United Kingdom, designed to support artistic practice, experimentation, research, and embodied creative work. The project aims to create an accessible environ"
-  },
-  {
-    "id": "artinfoland-64d8688a6cb9",
-    "title": "Guildford Festival of the Arts 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/guildford-festival-of-the-arts-2026-open-call/",
-    "type": "call",
-    "deadline": "31 July 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information The Guildford Festival of the Arts is an annual arts event celebrating creativity and artistic expression in Guildford, United Kingdom. The festival provides a platform for artists and creatives to showcase their work to a wider public audience, supporting b"
-  },
-  {
-    "id": "artinfoland-da6191cb4217",
-    "title": "Sony Future Filmmaker Awards 2027 Call for Entry",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/sony-future-filmmaker-awards-2027/",
-    "type": "grant",
-    "deadline": "15 December 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information The Sony Future Filmmaker Awards are organized by Creo Arts Group Limited (“Creo”), a UK-based cultural organizer founded in 2007 (originally as the World Photography Organisation), whose stated mission is to develop meaningful opportunities for creatives an"
-  },
-  {
-    "id": "artinfoland-a9fe19a3c8e9",
-    "title": "Green Product Award 2027 – Sustainable Design",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/green-product-award-2027/",
-    "type": "program",
-    "deadline": "17 September 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The Green Product Award has been recognizing sustainable products, services, and concepts since 2013, and describes itself as an international platform for design, innovation, and sustainability spanning 95 countries, with an annual media reach of over 7 mil"
-  },
-  {
-    "id": "artinfoland-02a965093cb1",
-    "title": "Europasinfonie Composition Competition 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/europasinfonie-composition-competition-2026/",
-    "type": "competition",
-    "deadline": "31 July 2026",
-    "tags": [
-      "competition",
-      "arts"
-    ],
-    "summary": "Organizer Information Europasinfonie is a project of the Dresdner Sinfoniker, a Dresden-based symphony orchestra dedicated to contemporary music that has worked exclusively on a project basis for 25 years, drawing musicians from across Europe. The orchestra has built an internati"
-  },
-  {
-    "id": "artinfoland-de59f02a935d",
-    "title": "Assistant Curator, NAGPRA – Fine Arts Museums of San Francisco (FAMSF)",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/assistant-curator-nagpra-famsf-job/",
-    "type": "fellowship",
-    "deadline": "2 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The Fine Arts Museums of San Francisco (FAMSF) is one of the largest public arts institutions in the United States and the primary public art museum organization serving the City and County of San Francisco. Operated with support from the Corporation of Fine"
-  },
-  {
-    "id": "artinfoland-3565e730646c",
-    "title": "Head On Photo Awards 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/head-on-photo-awards-2026/",
-    "type": "jobs",
-    "deadline": "16 August 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information The Head On Photo Awards are presented by the Head On Foundation, a non-profit organization dedicated to supporting photographers, promoting photographic excellence, and making photography accessible to diverse audiences worldwide. Established in 2008, the f"
-  },
-  {
-    "id": "artinfoland-864a45e9331d",
-    "title": "POSTHUMANAMENTE HABLANDO IV – 2026: Cuerpos, Artes, Tecnologías",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/posthumanamente-hablando-iv-2026-art-call/",
-    "type": "scholarship",
-    "deadline": "2 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Plataforma Arte y Medios (PAM) is an artistic and research platform focused on the intersections between contemporary art, media, technology, and emerging cultural practices. The organization develops initiatives that investigate the relationship between art"
-  },
-  {
-    "id": "artinfoland-b8f0f5bed5b2",
-    "title": "Invitation to Tender for the Use of the Large Gallery Space at Kunstgebäude Stuttgart (2027–2028)",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/kunstgebaude-stuttgart-exhibition-space-2027/",
-    "type": "jobs",
-    "deadline": "31 July 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Kunstgebäude Stuttgart is a historic exhibition building located at Schlossplatz in the center of Stuttgart, Germany. Originally connected to the architectural heritage of the former Württemberg ducal residence, the building has played an important role in t"
-  },
-  {
-    "id": "artinfoland-f3f69c7d4bc7",
-    "title": "LINA Open Call 2026–2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/lina-open-call-2026-2027-spotlight-lina-fellows/",
-    "type": "fellowship",
-    "deadline": "3 August 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information LINA (Learning, Interacting and Networking in Architecture) is a European architecture platform connecting a growing alliance of institutions — currently a network of 35 organisations including museums, universities, biennials, triennials, festivals, publish"
-  },
-  {
-    "id": "artinfoland-ceac37688e37",
-    "title": "Artivism Alliance: In Motion Open Call 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/artivism-alliance-in-motion-open-call-2026/",
-    "type": "residency",
-    "deadline": "31 July 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information PLACE Network is a European organization working to advance inclusive societies by centering the leadership, creativity, and expertise of people with migration backgrounds, operating across Europe and beyond at the intersection of culture, democracy, and soc"
-  },
-  {
-    "id": "artinfoland-688429282816",
-    "title": "Akademie Schloss Solitude Web Residencies Call 22",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/akademie-schloss-solitude-web-residencies-call-22/",
-    "type": "residency",
-    "deadline": "7 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Akademie Schloss Solitude is a German public-law foundation founded in 1990 and housed in the Schloss Solitude palace overlooking Stuttgart. It runs an international, transdisciplinary artist-in-residence program that has supported roughly 1,700 artists and "
-  },
-  {
-    "id": "artinfoland-b7cb0dbdccdd",
-    "title": "SILA VIII Online Gallery International Open Call 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/sila-viii-online-gallery-international-open-call-2026/",
-    "type": "grant",
-    "deadline": "1 August 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information SILA VIII (also referenced as СИЛА VIII, operating in affiliation with “POWER VIII”) is a contemporary art gallery dedicated to the mystical traditions of the West, East, and ancient archaism, physically based in Moscow, Russia (Trekhprudny Lane, 9). The gal"
-  },
-  {
-    "id": "artinfoland-ca432702fa7b",
-    "title": "Siena Art Institute 2027 Residency in Italy",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/siena-art-institute-2027-residency-italy/",
-    "type": "residency",
-    "deadline": "30 September 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The Siena Art Institute (SART) is a non-profit international center for art and creativity based in Siena, Italy, founded in 2010. Its mission centers on fostering artistic excellence alongside cultural awareness and social responsibility, welcoming artists "
-  },
-  {
-    "id": "artinfoland-20981a5d3278",
-    "title": "Ars Biologica ArtXScience Residency Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/ars-biologica-artxscience-residency-open-call/",
-    "type": "residency",
-    "deadline": "28 September 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information České Budějovice holds the title of European Capital of Culture 2028, with the whole ECoC 2028 project built on the principles of (perma)culture — care for place, community, and an environment that fosters ideas, sharing, and long-term positive change. The ("
-  },
-  {
-    "id": "artinfoland-994bd7126e1b",
-    "title": "Connect & Create Performing Arts Grant 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/connect-create-performing-arts-music-grant-2027/",
-    "type": "grant",
-    "deadline": "30 September 2026",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information Connect & Create – Africa-Europe Partnerships for Culture is a European Union-funded programme aimed at strengthening cultural ties between Sub-Saharan Africa and Europe through fair, inclusive, and sustainable cooperation. The programme is implemented by a "
-  },
-  {
-    "id": "artinfoland-e2f35bda5ef1",
-    "title": "TrenAir Residency Program 2026 in Slovakia",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/trenair-residency-program-2026-slovakia/",
-    "type": "residency",
-    "deadline": "31 July 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Trenčín, a historic city on the Váh River in Slovakia, holds the title of European Capital of Culture 2026 alongside Oulu, Finland — an initiative of the European Union, launched in 1985, that recognizes cities for their cultural richness and diversity. Tren"
-  },
-  {
-    "id": "artinfoland-714941db68dc",
-    "title": "Artist Curator Traineeship in Birmingham 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/artist-curator-traineeship-eastside-projects-birmingham/",
-    "type": "jobs",
-    "deadline": "21 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Eastside Projects is an artist-run space and free public gallery in the Digbeth area of Birmingham, England, founded in 2008 by six artists — Simon Bloor, Tom Bloor, Céline Condorelli, Ruth Claxton, James Langdon, and Gavin Wade. It operates as a not-for-pro"
-  },
-  {
-    "id": "artinfoland-3eb1981d74ed",
-    "title": "Curator Job Opportunity at Forma London",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/curator-job-forma-london/",
-    "type": "jobs",
-    "deadline": "16 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information Forma is a London-based contemporary arts organisation established in 2001, working with emerging and mid-career British and international artists to commission, produce, and present ambitious interdisciplinary art projects. As a non-gallery-based organisati"
-  },
-  {
-    "id": "artinfoland-345aebdfb0ba",
-    "title": "Head of Department Art Education Job at mumok Vienna",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/mumok-head-of-department-art-education-job-vienna/",
-    "type": "jobs",
-    "deadline": "9 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information The mumok – Museum of Modern Art Ludwig Foundation Vienna is the largest museum for modern and contemporary art in Austria, with a comprehensive collection of international art of the 20th and 21st centuries. Founded on September 21, 1962, as the Museum of t"
-  },
-  {
-    "id": "artinfoland-19a25e0c8517",
-    "title": "Silent Book Contest 2027 – Gianni De Conno Award",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/silent-book-contest-2027-gianni-de-conno-award/",
-    "type": "grant",
-    "deadline": "15 January 2027",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The Silent Book Contest – Gianni De Conno Award is organized by Carthusia Edizioni, a Milan-based publishing house founded in 1987 by Patrizia Zerbi, dedicated to designing and publishing educational and illustrated books for children and teenagers, with an "
-  },
-  {
-    "id": "artinfoland-962b301f1d20",
-    "title": "Global Gastronomy Museum: Food Artist Residency in Shanghai",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/food-artist-residency-shanghai-china/",
-    "type": "residency",
-    "deadline": "15 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Global Gastronomy Museum is a museum of gastronomy based at 158 Gaoqing Road in the Pudong New Area of Shanghai, founded by Nie Xinyong. Independent research on the institution itself is limited beyond what the source describes, so this section relies primar"
-  },
-  {
-    "id": "artinfoland-c2dbc2bad43f",
-    "title": "Confluence of Myths Residency 2026 – Tra Vinh, Vietnam",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/confluence-of-myths-residency-2026-vietnam/",
-    "type": "residency",
-    "deadline": "9 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The Goethe-Institut Ho Chi Minh City and Goethe-Institut Bangkok, in partnership with the Nổ Cái Bùm (NCB) Festival, present the Confluence of Myths Residency 2026, a regional artist residency dedicated to research-driven contemporary artistic practice in th"
-  },
-  {
-    "id": "artinfoland-fd87c4e129dc",
-    "title": "Beca Constelaciones 2026 Residency Grant in Argentina",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/beca-constelaciones-2026-argentina-residency-grant/",
-    "type": "residency",
-    "deadline": "9 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Red Quincho (Asociación Civil Red Quincho) is a nonprofit network that brings together art residencies across Argentina. Formed in 2020 out of a series of weekly virtual meetings held by Argentine residency spaces during the pandemic, the network has since g"
-  },
-  {
-    "id": "artinfoland-878811c9c5eb",
-    "title": "Solas / Shadow Gallery Photography Open Call 2026: Focus / Expand",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/solas-shadow-gallery-focus-expand-open-call/",
-    "type": "grant",
-    "deadline": "Open",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Solas / Shadow is an online international photography gallery dedicated to showcasing the work of contemporary image-makers through engaging, thoughtfully curated exhibitions. Backed by over 10 years of experience in lens-based media and arts curation, the p"
-  },
-  {
-    "id": "artinfoland-7a6742036a89",
-    "title": "German Federal Cultural Foundation Project Funding",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/german-federal-cultural-foundation-general-project-funding/",
-    "type": "grant",
-    "deadline": "31 July 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The German Federal Cultural Foundation (Kulturstiftung des Bundes) was founded on 21 March 2002 at the initiative of the then Federal Minister of Culture, Julian Nida-Rümelin, and is financed by the Federal Government Commissioner for Culture and the Media. "
-  },
-  {
-    "id": "artinfoland-ccf9ac11aa6d",
-    "title": "Msgr. Otto Mauer-Preis 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/msgr-otto-mauer-preis-2026-austria-art-prize/",
-    "type": "open-call",
-    "deadline": "Open",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information The Otto Mauer Fonds was established in 1980 by the Archdiocese of Vienna to carry forward, in an institutional form, the dialogue between the church and contemporary art that Msgr. Otto Mauer (1907–1973) had championed during his lifetime. As a priest, art "
-  },
-  {
-    "id": "artinfoland-f9f2602d41de",
-    "title": "Tiny House 2026 Architecture Competition | Global Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/tiny-house-2026-architecture-competition/",
-    "type": "competition",
-    "deadline": "15 October 2026",
-    "tags": [
-      "competition",
-      "arts"
-    ],
-    "summary": "Organizer Information Volume Zero is an international architecture and design magazine and competitions platform run by a team of young architectural professionals based in Mumbai, India. Founded in 2016, Volume Zero Magazine set out to inspire, empower, and connect designers by "
-  },
-  {
-    "id": "artinfoland-bbead44a88d5",
-    "title": "Jacques Rougerie Foundation International Architecture Competition 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/international-architecture-innovation-competition-2026/",
-    "type": "competition",
-    "deadline": "24 September 2026",
-    "tags": [
-      "competition",
-      "arts"
-    ],
-    "summary": "Organizer Information The Fondation Jacques Rougerie – Académie des beaux-arts is based at the Institut de France, 23 quai Conti, Paris. It was founded by Jacques Rougerie, a French visionary architect and member of the Académie des beaux-arts specializing in marine and coastal h"
-  },
-  {
-    "id": "artinfoland-4b263a524004",
-    "title": "AMADEUS Festival Design Competition 2026/2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/amadeus-festival-international-design-competition-2026-2027/",
-    "type": "competition",
-    "deadline": "9 October 2026",
-    "tags": [
-      "competition",
-      "arts"
-    ],
-    "summary": "Organizer Information AMADEUS Festival Vienna is an annual open-air classical music festival held on the grounds of the AMADEUS International School Vienna, in the city’s 18th district (Währing). The festival brings international musicians to Vienna each summer and, according to "
-  },
-  {
-    "id": "artinfoland-999cfcc4557b",
-    "title": "Curating Journalism Residency Munich 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/curating-journalism-residency-munich-2027/",
-    "type": "residency",
-    "deadline": "10 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Lothringer 13 Halle is the City of Munich’s municipal art space for international contemporary art, founded in 1980 in a former industrial building in the Haidhausen district of Munich. Since then, it has operated under the auspices of the city’s Department "
-  },
-  {
-    "id": "artinfoland-544b6911dee6",
-    "title": "Ceramics Now Annual 2026 Open Call for Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/ceramics-now-annual-2026-open-call/",
-    "type": "call",
-    "deadline": "15 September 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information Founded in 2010 by Vasi Hirdo, Ceramics Now is a leading art publication dedicated to contemporary ceramics, read by over 70,000 people monthly. Ceramics Now has been a member of the International Academy of Ceramics (AIC-IAC) since 2023. In 2024, the organi"
-  },
-  {
-    "id": "artinfoland-413b011847ad",
-    "title": "ArtsWest Gallery Exhibition Open Call 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/artswest-gallery-exhibition-open-call-2026/",
-    "type": "grant",
-    "deadline": "1 August 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information ArtsWest is a professional theatre and gallery in West Seattle, Washington, opened in November 1999. Since then, the organization has presented several hundred performing arts productions and gallery exhibitions to more than 200,000 visitors. ArtsWest’s thea"
-  },
-  {
-    "id": "artinfoland-e03ed9b09284",
-    "title": "HYPERVIEW Art Exhibition Open Call 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/hyperview-international-art-exhibition-2026/",
-    "type": "residency",
-    "deadline": "31 July 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Manifest is a 501(c)(3) charitable nonprofit founded in 2004 in Cincinnati, Ohio, by professors and students from area universities who wanted to make a positive community impact. It continues to be operated by professors, students, and working artists, with"
-  },
-  {
-    "id": "artinfoland-26d66436f2e5",
-    "title": "La Maldita Estampa: Barcelona Printmaking Residency 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/barcelona-printmaking-residency-2026-la-maldita-estampa/",
-    "type": "residency",
-    "deadline": "31 July 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information La Maldita Estampa is a print studio and gallery in Barcelona, Spain, self-managed by artists and created with the specific aim of supporting other artists working in the field of printmaking. The organization positions itself as a space for the production, "
-  },
-  {
-    "id": "artinfoland-3a41de3b7351",
-    "title": "University of Washington Public Art Commission 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/university-of-washington-public-art-commission-2026/",
-    "type": "grant",
-    "deadline": "30 July 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The Washington State Arts Commission (ArtsWA) is a state agency formed by the Washington State Legislature in 1961, when House Bill 57 created a commission of governor-appointed members charged with advising the state on the beautification and cultural devel"
-  },
-  {
-    "id": "artinfoland-e4e23c58514e",
-    "title": "German Photography Scholarship 2026 | Krupp Foundation",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/german-photography-scholarship-2026-krupp-foundation/",
-    "type": "fellowship",
-    "deadline": "31 August 2026",
-    "tags": [
-      "scholarship",
-      "arts"
-    ],
-    "summary": "Organizer Information The Alfried Krupp von Bohlen und Halbach-Stiftung is a major German charitable foundation based in Essen, established through the will of industrialist Alfried Krupp von Bohlen und Halbach and active since 1 January 1968. It is a nonprofit foundation with an"
-  },
-  {
-    "id": "artinfoland-e4791a85ac5a",
-    "title": "Curatorial Assistant Contemporary Architecture Job Opportunity",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/curatorial-assistant-contemporary-architecture-moma-2026/",
-    "type": "jobs",
-    "deadline": "7 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information Founded in 1929 by Lillie P. Bliss, Mary Quinn Sullivan, and Abby Aldrich Rockefeller, along with fellow trustees A. Conger Goodyear, Paul Sachs, Frank Crowninshield, and Josephine Boardman Crane, The Museum of Modern Art (MoMA) was established in New York C"
-  },
-  {
-    "id": "artinfoland-50b9e2768de2",
-    "title": "Studio Museum in Harlem: Associate Curator Job Opportunity",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/associate-curator-studio-museum-harlem-2026/",
-    "type": "grant",
-    "deadline": "31 July 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information Founded in 1968, the Studio Museum in Harlem was established by a diverse coalition of artists, activists, and philanthropists to address the exclusion of artists of African descent from mainstream museums, galleries, and academic institutions. Today, under "
-  },
-  {
-    "id": "artinfoland-accb402cd970",
-    "title": "The Nature Photography Contest 2026: €2,000 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/the-nature-photography-contest-2026/",
-    "type": "grant",
-    "deadline": "November 15 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information The Nature Photography Contest is an international, sustainability-minded online photography competition committed to celebrating the raw wonders of our planet while driving tangible ecological conservation. More than a typical creative platform, the organiz"
-  },
-  {
-    "id": "artinfoland-83deea06d11a",
-    "title": "Keith Haring Exhibition Project Assistant Job 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/keith-haring-exhibition-project-assistant-job-berlin-2026/",
-    "type": "jobs",
-    "deadline": "26 July 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information The KBB – Kulturveranstaltungen des Bundes in Berlin GmbH forms the common foundation for three cultural institutions: the Berlin International Film Festival (Berlinale), the Haus der Kulturen der Welt, and the Berliner Festspiele, which includes the Festspi"
-  },
-  {
-    "id": "artinfoland-95bc4f2e2cee",
-    "title": "Deptford X Weekender 2026: Visual Arts Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/deptford-x-weekender-2026/",
-    "type": "call",
-    "deadline": "August 9 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Deptford X is one of London’s longest-running independent contemporary visual arts festivals and charitable organizations, operating out of the heart of South East London. Founded to celebrate the vibrant, localized creative communities of Deptford and the w"
-  },
-  {
-    "id": "artinfoland-240cd6590212",
-    "title": "Art in Public Space Tyrol Funding Scheme 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/art-in-public-space-tyrol-funding-scheme-2027/",
-    "type": "call",
-    "deadline": "14 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The Künstler*innen Vereinigung Tirol (KüVeTi), formerly known as the Tiroler Künstler:innenschaft, was founded in 1946 and describes itself as a forum for contemporary art in Tyrol. It is a non-profit, politically independent association of visual artists ba"
-  },
-  {
-    "id": "artinfoland-87ce481e29b6",
-    "title": "Produit Rien Exhibition Submission in Montreal",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/produit-rien-exhibition-submission/",
-    "type": "grant",
-    "deadline": "Ongoing",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Produit Rien is an independent, artist-run project space located at 6909 rue Marconi in the Mile-Ex neighbourhood of Montreal, Quebec, housed in a former tofu factory (its name comes from the ghost signage of “Produit Oriental,” the building’s previous tenan"
-  },
-  {
-    "id": "artinfoland-91a30e357585",
-    "title": "Blue Night Art Competition 2027 in Germany",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/blue-night-art-competition-germany-2027/",
-    "type": "jobs",
-    "deadline": "31 July 2026",
-    "tags": [
-      "competition",
-      "arts"
-    ],
-    "summary": "Organizer Information Die Blaue Nacht | The Blue Night is organized by the Projektbüro im Geschäftsbereich Kultur (Culture Department Project Office) of the City of Nuremberg. Launched in 2000, the year after Nuremberg’s 950th anniversary, the festival has grown into Germany’s la"
-  },
-  {
-    "id": "artinfoland-05e5c4e91cf0",
-    "title": "Projet Betula Screening Series Open Call 2026: Deafening Silence",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/projet-betula-screening-series-2026/",
-    "type": "call",
-    "deadline": "August 10 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Projet Betula is an independent, non-profit cultural platform dedicated to supporting international contemporary art with an explicit focus on migration, nomadism, and structural resilience. The platform provides an intentional space for artists uprooted by "
-  },
-  {
-    "id": "artinfoland-9734c246d488",
-    "title": "German Design Award 2027 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/german-design-award-2027/",
-    "type": "competition",
-    "deadline": "12 June 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information The German Design Award is organized by the German Design Council (Rat für Formgebung), a non-profit foundation founded in 1953 at the initiative of the German Bundestag to strengthen German industry’s competitiveness through design. Established in the wake "
-  },
-  {
-    "id": "artinfoland-a0c101410ab9",
-    "title": "LTK4 Open Call for Sound Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/ltk4-open-call-germany-sound-artists/",
-    "type": "call",
-    "deadline": "31 July 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information LTK4 — Sound-based Arts is a dedicated venue for sound art housed inside the Luther Tower (Lutherturm) of the Lutherkirche, in Cologne-Südstadt, Germany. Since 2017, LTK4 has offered a permanent home for sound-based art forms in the region — a space made up "
-  },
-  {
-    "id": "artinfoland-dc662b1c3440",
-    "title": "Neimënster: Résidences Land Art Open Call 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/residences-land-art-luxembourg-2026/",
-    "type": "residency",
-    "deadline": "26 July 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information neimënster — the Neumünster Abbey Cultural Exchange Centre — occupies a former Benedictine abbey in the Grund district of Luxembourg City, within a site classified as UNESCO World Heritage. The original Benedictine abbey was destroyed in 1542, after which th"
-  },
-  {
-    "id": "artinfoland-eb9f0d9bf1d9",
-    "title": "IDRA Teatro – Culture Moves Europe 2027 Residency in Italy",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/culture-moves-europe-2027-residency-brescia-italy/",
-    "type": "residency",
-    "deadline": "5 September 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information IDRA Teatro is a residency centre, cultural organisation, and production hub based at MO.CA – Centro per le Nuove Culture, in Brescia, Northern Italy. Originally founded in 1998 as a theatre production company, IDRA has evolved over more than 25 years into a"
-  },
-  {
-    "id": "artinfoland-97cdd547c004",
-    "title": "UAxEU Internship Programme 2026 for Ukrainian Professionals",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/uaxeu-internship-programme-2026/",
-    "type": "internship",
-    "deadline": "31 July 2026",
-    "tags": [
-      "internship",
-      "arts"
-    ],
-    "summary": "Organizer Information UAxEU (Ukrainian cultural eXchange with the European Union) is a Creative Europe cooperation project supporting the recovery and long-term strengthening of Ukraine’s cultural and creative sectors and industries. It is coordinated by ELIA — the European Leagu"
-  },
-  {
-    "id": "artinfoland-aa7484796cdd",
-    "title": "REC.ON Spain Eco-Village Residency: October 2026 Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/rec-on-spain-eco-village-art-residency-2026/",
-    "type": "residency",
-    "deadline": "September 12 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Founded in 2019 by Bart and Paulina Bielecki, REC.ON Spain is an independent, artist-run ecovillage and coliving art residency. The project stands as a pioneering model for rural revitalization, having transformed the century-old, abandoned stone buildings o"
-  },
-  {
-    "id": "artinfoland-59f782086575",
-    "title": "Printed Matter Publisher Work Grant 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/printed-matter-publisher-work-grant-2026/",
-    "type": "grant",
-    "deadline": "Ongoing",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information Founded in 1976, Printed Matter, Inc. is the world’s leading non-profit organization dedicated to the dissemination, understanding, and appreciation of artists’ books and related publications. Operating out of its expansive New York space, the organization c"
-  },
-  {
-    "id": "artinfoland-47e2e5c72a26",
-    "title": "Cité internationale des arts: Bridges Research Residency for Art Critics 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/bridges-research-residency-art-critics-2026-france/",
-    "type": "residency",
-    "deadline": "30 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The Cité internationale des arts is a nonprofit foundation based in Paris, dedicated to hosting research and creative work by international artists across all disciplines — visual arts, music, performing arts, architecture, and writing. Inaugurated in 1965, "
-  },
-  {
-    "id": "artinfoland-9faa089758ce",
-    "title": "Native and Indigenous Art Exhibition Open Call 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/native-and-indigenous-art-exhibition-open-call-2026-angels-gate/",
-    "type": "jobs",
-    "deadline": "23 July 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Angels Gate Cultural Center (AGCC) is a nonprofit contemporary arts center located at 3601 S. Gaffey St. in San Pedro, California, within the Los Angeles Harbor region. AGCC emerged from a group of San Pedro artists in the 1970s who created studio and exhibi"
-  },
-  {
-    "id": "artinfoland-c7d2908d06a3",
-    "title": "Artistic Residency Italy 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/artistic-residency-italy-2026-why-are-we-creative-suvereto/",
-    "type": "scholarship",
-    "deadline": "20 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Ente Musicale e Culturale Filarmonica “G. Puccini” is a cultural institution based in Suvereto, a medieval hilltop town in Tuscany. It was formally established in 1991 to continue the work of the Società Filarmonica Puccini, a musical band founded in Suveret"
-  },
-  {
-    "id": "artinfoland-323b5b165c86",
-    "title": "Malaysia Painting Competition 2026 | UOB Painting of the Year",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/malaysia-uob-painting-of-the-year-2026/",
-    "type": "residency",
-    "deadline": "31 July 2026",
-    "tags": [
-      "competition",
-      "arts"
-    ],
-    "summary": "Organizer Information United Overseas Bank (Malaysia) Bhd (UOBM) is the Malaysian subsidiary of United Overseas Bank Limited, a leading bank in Asia and a longstanding patron of Southeast Asian art. UOB’s involvement in art began in the 1970s with a collection of paintings by Sin"
-  },
-  {
-    "id": "artinfoland-46a4bba03953",
-    "title": "WOWTE Residency Awards 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/we-only-want-the-earth-residency-awards-2026-ireland/",
-    "type": "residency",
-    "deadline": "6 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information A4 Sounds is a non-profit, artist-run workspace and gallery in north-inner-city Dublin, and one of the biggest artist-led spaces in Ireland, currently providing studio facilities and professional development supports to 60 artists. Its mission is to transfor"
-  },
-  {
-    "id": "artinfoland-efc88b66e2e8",
-    "title": "Re-Sounding Archives Music Residency 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/re-sounding-archives-music-residency-italy/",
-    "type": "residency",
-    "deadline": "30 July 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Ente Musicale e Culturale Filarmonica “G. Puccini” is a cultural institution based in Suvereto, a medieval hilltop town in Tuscany. It was formally established in 1991 to continue the work of the Società Filarmonica Puccini, a musical band founded in Suveret"
-  },
-  {
-    "id": "artinfoland-8d80561f62ce",
-    "title": "Stomping Ground Call Out 2027",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/stomping-ground-call-out-2027/",
-    "type": "program",
-    "deadline": "3 September 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The Place is a dance and performance centre based in Duke’s Road, near Euston, in the London Borough of Camden, and is the home of London Contemporary Dance School (LCDS) and the Robin Howard Dance Theatre. Founded in 1969 by Robin Howard and first artistic "
-  },
-  {
-    "id": "artinfoland-39e80648af3a",
-    "title": "Silicon Valley Artists-in-Residence Program 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/quinn-emanuel-silicon-valley-artists-in-residence-program-2026/",
-    "type": "fellowship",
-    "deadline": "14 August 2026",
-    "tags": [
-      "program",
-      "arts"
-    ],
-    "summary": "Organizer Information Quinn Emanuel Urquhart & Sullivan, LLP is an American law firm headquartered in Los Angeles, established in 1986, and now the largest law firm in the world devoted solely to business litigation and arbitration. The firm employs over 1,000 attorneys across 35"
-  },
-  {
-    "id": "artinfoland-4b33d5e9ca42",
-    "title": "Zero Material: ESEA Artist Open Call at Kakilang London",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/kakilang-zero-material-open-call-london/",
-    "type": "open-call",
-    "deadline": "10 August 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Kakilang is a non-profit arts organisation based in London, championing East and Southeast Asian (ESEA) artists and communities. Its name means “one of us” in the Hokkien dialect, reflecting the sense of kinship and connection it fosters within and beyond ES"
-  },
-  {
-    "id": "artinfoland-5814c4bedfad",
-    "title": "Convergenze Festival 2026: Open Call for Documentary Theatre",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/convergenze-festival-documentary-theatre-open-call/",
-    "type": "call",
-    "deadline": "24 July 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information Kepler-452 is a Bologna-based theatre company founded in 2015 by Nicola Borghesi, Enrico Baraldi, and Paola Aiello, with Roberta Gabriele handling organization since 2021. Since its founding, the company has built its work around a strong interest in the rel"
-  },
-  {
-    "id": "artinfoland-eccbb02623e4",
-    "title": "Czernecki Educational Foundation Fellowship at Columbia University’s Institute for Ideas and Imagination (2027–2028)",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/efc-columbia-university-paris-fellowship-2027/",
-    "type": "fellowship",
-    "deadline": "September 30 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information The Czernecki Educational Foundation (EFC) is a leading Polish philanthropic foundation dedicated to supporting the arts and humanities in Central and Eastern Europe and fostering a vibrant international exchange of ideas. In partnership with Columbia Univer"
-  },
-  {
-    "id": "artinfoland-504856a0fe45",
-    "title": "Grid Photo Gallery: Animals 2026 Photography Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/grid-photo-gallery-animals-2026-open-call/",
-    "type": "grant",
-    "deadline": "August 15 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Grid Photo Gallery is an international contemporary photography platform specializing in curated, theme-driven virtual exhibitions. By designing accessible digital viewing rooms, the gallery bypasses traditional physical space limitations to showcase emergin"
-  },
-  {
-    "id": "artinfoland-d5ae6e468109",
-    "title": "Royal Institute of Oil Painters Annual Exhibition 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/royal-institute-of-oil-painters-annual-exhibition-2026/",
-    "type": "competition",
-    "deadline": "9 October 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Mall Galleries is a contemporary art venue on The Mall in central London, between Buckingham Palace and Trafalgar Square, and is home to the Federation of British Artists (FBA), a visual arts charity founded in 1961 that opened the gallery in 1971. The FBA i"
-  },
-  {
-    "id": "artinfoland-dded654d0375",
-    "title": "OD Photo Prize 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/od-photo-prize-2026/",
-    "type": "grant",
-    "deadline": "11 August 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Open Doors Gallery was founded in 2017 as a global platform for emerging contemporary photographic artists. Operating without a permanent fixed location, the gallery presents its artists through a rotating programme of exhibitions, pop-ups, and international"
-  },
-  {
-    "id": "artinfoland-88579146e8ec",
-    "title": "Werkstattwoche 2027 – International Artist Residency in Lüben",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/werkstattwoche-2027-artist-residency-germany/",
-    "type": "residency",
-    "deadline": "31 July 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Kulturverein Wittingen e. V. in collaboration with the City of Wittingen organizes Werkstattwoche, an international artist residency program dedicated to fostering artistic exchange, creative development, and cultural dialogue in a rural environment. The pro"
-  },
-  {
-    "id": "artinfoland-523c9e3d31d6",
-    "title": "Urban Bodies International Artistic Residency 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/urban-bodies-artist-residency-2026-italy/",
-    "type": "residency",
-    "deadline": "30 July 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Spazio13 is an independent cultural organization and urban regeneration center based in the Libertà neighborhood of Bari, Italy. Established as a civic and cultural infrastructure, Spazio13 transforms underused urban spaces into platforms for artistic produc"
-  },
-  {
-    "id": "artinfoland-2539610e8e42",
-    "title": "APOSTAXIS Artist Residency & Exhibition Open Call 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/apostaxis-artist-residency-2026-ukraine-cyprus/",
-    "type": "residency",
-    "deadline": "26 July 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information APOSTAXIS is an international cultural cooperation project dedicated to exploring displacement, memory, resilience, and cultural heritage through contemporary artistic practice. The initiative is implemented within the ZMINA: Resilience program, a European c"
-  },
-  {
-    "id": "artinfoland-2814ef876469",
-    "title": "SAH IDEAS Research Fellowship 2027 for Emerging Scholars",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/sah-ideas-research-fellowship-2027/",
-    "type": "fellowship",
-    "deadline": "31 August 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information The Society of Architectural Historians (SAH) is an international nonprofit membership organization founded at Harvard University in 1940, originally as the Society of American Architectural Historians. Headquartered in Chicago, Illinois, SAH serves an inter"
-  },
-  {
-    "id": "artinfoland-ccc0ad2e5524",
-    "title": "SAH Fellows 2027 Call for Nominations",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/sah-fellows-2027-call-for-nominations/",
-    "type": "scholarship",
-    "deadline": "15 August 2026",
-    "tags": [
-      "call",
-      "arts"
-    ],
-    "summary": "Organizer Information The Society of Architectural Historians (SAH) is an international nonprofit membership organization founded at Harvard University in 1940, originally under the name Society of American Architectural Historians. Headquartered in Chicago, Illinois, SAH serves "
-  },
-  {
-    "id": "artinfoland-876313d7f3f6",
-    "title": "H. Allen Brooks Travelling Fellowship 2027 for Architecture",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/h-allen-brooks-travelling-fellowship-2027/",
-    "type": "fellowship",
-    "deadline": "31 August 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information The Society of Architectural Historians (SAH) is an international not-for-profit membership organization founded at Harvard University in 1940, originally as the Society of American Architectural Historians. Based in Chicago, Illinois, SAH serves roughly 2,3"
-  },
-  {
-    "id": "artinfoland-bb3377e2321a",
-    "title": "The Hanover Theatre & Conservatory – Vice President, Programming & Production Job Opportunity",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/vice-president-programming-production-hanover-theatre-job/",
-    "type": "jobs",
-    "deadline": "Ongoing",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information The Hanover Theatre and Conservatory for the Performing Arts is a leading nonprofit performing arts institution located in downtown Worcester, Massachusetts. Since opening in 2008, the organization has become one of New England’s premier cultural destination"
-  },
-  {
-    "id": "artinfoland-ecb656000f8d",
-    "title": "All About Photo Solo Exhibition Competition 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/all-about-photo-solo-exhibition-competition-2026/",
-    "type": "jobs",
-    "deadline": "21 July 2026",
-    "tags": [
-      "competition",
-      "arts"
-    ],
-    "summary": "Organizer Information All About Photo is a global photography platform dedicated to promoting photographers, discovering new talent, and providing opportunities for artists to gain international visibility. The platform serves as a resource for photography enthusiasts, profession"
-  },
-  {
-    "id": "artinfoland-497ddce6ff33",
-    "title": "Independent Projects Grant 2026 for Designers",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/independent-projects-grant-2026/",
-    "type": "residency",
-    "deadline": "22 July 2026",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information The Independent Projects Grant Program is a collaborative funding initiative administered by The Architectural League of New York in partnership with the New York State Council on the Arts (NYSCA). The program supports independent designers, architects, and "
-  },
-  {
-    "id": "artinfoland-b8542f192727",
-    "title": "Andy Warhol Preserve Artist Workshop 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/andy-warhol-preserve-artist-workshop-2026/",
-    "type": "program",
-    "deadline": "July 24 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information The Andy Warhol Visual Arts Program is a collaborative initiative supported by the Andy Warhol Foundation for the Visual Arts and organized by The Nature Conservancy in New York, a regional branch of the global environmental nonprofit dedicated to conserving"
-  },
-  {
-    "id": "artinfoland-31daeca07271",
-    "title": "Executive Director Theatre Job at The Gamm Theatre",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/executive-director-the-gamm-theatre-job/",
-    "type": "fellowship",
-    "deadline": "Open",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information The Gamm Theatre is a leading professional theatre organization in New England dedicated to producing ambitious, intimate, and socially engaged theatrical experiences. Founded in 1984 by a collective of Trinity Rep Conservatory graduates, the theatre began a"
-  },
-  {
-    "id": "artinfoland-11417132015e",
-    "title": "Community Music Center of Boston Chief Executive Officer Job Opportunity",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/community-music-center-of-boston-chief-executive-officer-job/",
-    "type": "internship",
-    "deadline": "Ongoing",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information Community Music Center of Boston (CMCB) is an arts education nonprofit founded in 1910 with a mission to transform lives by providing equitable access to excellent music education and arts experiences. Originally established to serve a wave of new American i"
-  },
-  {
-    "id": "artinfoland-38242311ee42",
-    "title": "ZAMEK Culture Centre Art Residencies 2027 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/zamek-culture-centre-art-residencies-2027-poland/",
-    "type": "residency",
-    "deadline": "27 July 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information ZAMEK Culture Centre is one of Poland’s largest cultural institutions, based in a former imperial castle in Poznań that was built in the early 20th century as a residence for Kaiser Wilhelm II. Today the centre hosts around 2,500 events per year, showcasing "
-  },
-  {
-    "id": "artinfoland-d4f102088ee8",
-    "title": "Harvard Radcliffe Fellowship Program 2027–2028",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/harvard-radcliffe-fellowship-program-2027-2028/",
-    "type": "fellowship",
-    "deadline": "Open",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information The Radcliffe Institute for Advanced Study at Harvard University, known as Harvard Radcliffe Institute, is one of the world’s leading centers for interdisciplinary research and exploration. Its work grows out of the history of Radcliffe College, founded in t"
-  },
-  {
-    "id": "artinfoland-97e16111bbda",
-    "title": "Luxembourg Art Prize 2026 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/luxembourg-art-prize-2026-international-art-competition/",
-    "type": "grant",
-    "deadline": "Open",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information The Luxembourg Art Prize is organized by the Pinacothèque, a private museum located in the Grand Duchy of Luxembourg. The Pinacothèque is a not-for-profit cultural and educational museum and does not receive any money from applicants — the registration fee c"
-  },
-  {
-    "id": "artinfoland-d24b3ad201ad",
-    "title": "Fondation d’entreprise Martell 2026–2027 Residency Program",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/fondation-dentreprise-artist-residency-2026/",
-    "type": "residency",
-    "deadline": "23 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The Fondation d’entreprise Martell is a corporate cultural foundation created in 2016 by Maison Martell, the oldest cognac house in France, founded in 1715 by Jean Martell. The Foundation is housed in a renovated 1929 Bauhaus-style former bottling factory in"
-  },
-  {
-    "id": "artinfoland-6ecc1d57d4b8",
-    "title": "Write Imagined Worlds: A Virtual Cohort-Based Fiction Writing Programme",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/online-write-imagined-worlds/",
-    "type": "program",
-    "deadline": "July 31 2026",
-    "tags": [
-      "program",
-      "arts"
-    ],
-    "summary": "Organizer Information The United World Colleges (UWC) is a global educational movement and international network of schools dedicated to making education a force to unite people, nations, and cultures for peace and a sustainable future. Under its official short course branch, the"
-  },
-  {
-    "id": "artinfoland-e410e2007a6a",
-    "title": "TMT Institute Fellowship 2026–2027 for Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/tmt-institute-fellowship-2026-2027/",
-    "type": "fellowship",
-    "deadline": "22 July 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information Target Margin Theater (TMT) is an award-winning experimental theater company based in Brooklyn, New York, dedicated to creating innovative, interdisciplinary, and socially engaged performance. Founded in 1991, the organization has become one of New York City"
-  },
-  {
-    "id": "artinfoland-2b9c170e3b0e",
-    "title": "CUSP Artist Residency Iceland 2027 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/cusp-artist-residency-iceland-2027/",
-    "type": "residency",
-    "deadline": "3 September 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information The National Gallery of Iceland is Iceland’s leading public museum dedicated to collecting, preserving, researching, and exhibiting Icelandic and international visual art. Through exhibitions, research initiatives, educational programs, and international par"
-  },
-  {
-    "id": "artinfoland-d3073cf81ed9",
-    "title": "La Storta Residency Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/la-storta-residency-venice-italy/",
-    "type": "residency",
-    "deadline": "Open",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information La Storta Residency is an artist residency program operated by Venezia Contemporanea, an independent cultural platform based in Venice, Italy, dedicated to supporting contemporary artistic practice and fostering international cultural exchange. Located withi"
-  },
-  {
-    "id": "artinfoland-1cace546b4f7",
-    "title": "Venice Skyline Creative Residency for Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/venice-skyline-creative-residency-italy/",
-    "type": "residency",
-    "deadline": "Open",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Skyline Residency Space is an artist residency and creative platform located in Venice, Italy, operated by Venezia Contemporanea. The residency is situated in the historic Jewish Ghetto of Venice, the first Jewish Ghetto in Europe, established in 1516. The p"
-  },
-  {
-    "id": "artinfoland-2e2891c641d2",
-    "title": "KUNSTFONDS_Plattformen 2026 Art Grant",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/kunstfonds-plattformen-2026-art-grant/",
-    "type": "grant",
-    "deadline": "31 August 2026",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information Stiftung Kunstfonds is a German cultural foundation dedicated to promoting contemporary visual art and strengthening its role within society. Founded to support artistic production, communication, and discourse, the foundation provides funding opportunities "
-  },
-  {
-    "id": "artinfoland-7357b1621e8c",
-    "title": "Dr. Dormagen-Guffanti Fellowship 2027 Germany",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/dr-dormagen-guffanti-fellowship-2027-germany/",
-    "type": "fellowship",
-    "deadline": "31 August 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information The Dr. Dormagen-Guffanti Foundation is a legally dependent foundation of the City of Cologne, with roots tracing back to Dr. Hubert Dormagen, a Cologne physician and art collector who, upon his death in 1886, bequeathed his fortune to the city for the care "
-  },
-  {
-    "id": "artinfoland-6b4caa3bbee7",
-    "title": "In the Thicket Photography Open Call 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/in-the-thicket-photography-open-call-germany-2026/",
-    "type": "call",
-    "deadline": "16 August 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information weissraum. Atelier für Fotografie is a photography studio and exhibition space in Eltville am Rhein, Germany, founded by photographer Petra van Husen. Van Husen studied at the Prager Fotoschule in Austria with a focus on narrative and conceptual photography,"
-  },
-  {
-    "id": "artinfoland-ce64af6e2378",
-    "title": "Paul & Daisy Soros Fellowship 2027 for New Americans",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/paul-daisy-soros-fellowship-2027-new-americans/",
-    "type": "fellowship",
-    "deadline": "29 October 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information The Paul & Daisy Soros Fellowships for New Americans is a US postgraduate fellowship program founded in 1997 by Hungarian immigrants and philanthropists Paul and Daisy Soros, established with an initial charitable trust and later expanded through additional "
-  },
-  {
-    "id": "artinfoland-60ac29b03b92",
-    "title": "Labó Bosa Art Residency 2027 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/labo-bosa-art-residency-2027/",
-    "type": "residency",
-    "deadline": "10 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Labó Bosa is a contemporary art gallery, artist residency, and printmaking studio based in a historic tannery on the river Temo in Bosa, Sardinia. The organisation is led by founder and director Marco Sebastianelli, and its programming combines exhibitions, "
-  },
-  {
-    "id": "artinfoland-05d0d6ae1f52",
-    "title": "DRIFT Mid-Career Choreographers Programme 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/drift-mid-career-choreographers-programme-2026/",
-    "type": "residency",
-    "deadline": "31 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information DRIFT (Dance & Research in the Future Time) is a four-year European cooperation project (2026–2029) coordinated by the Théâtre de Liège in Belgium, together with nine partner organisations spanning Belgium, France, Germany, Italy, Spain, Greece, Norway, Port"
-  },
-  {
-    "id": "artinfoland-5886b43f0c32",
-    "title": "SYNO Annual Open Call 2026: Grants for Cypriot & Diaspora Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/syno-annual-open-call-2026/",
-    "type": "grant",
-    "deadline": "August 31 2026",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information SYNO is a contemporary cultural organization and art initiative dedicated to supporting, documenting, and archiving innovative contemporary artistic practices connected to Cyprus. By launching structured platforms like its annual open call and specialized pu"
-  },
-  {
-    "id": "artinfoland-e60f4b8fc0c1",
-    "title": "Exhibit in Paris 2027: galerie marie-robin Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/galerie-marie-robin-paris-exhibition/",
-    "type": "jobs",
-    "deadline": "July 31 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Established in Paris 42 years ago, galerie marie-robin has carved out a unique, sophisticated niche within the contemporary landscape, focusing on the dynamic intersection of geometry, architecture, color, and functional design. The gallery is celebrated for"
-  },
-  {
-    "id": "artinfoland-c56d68698d0f",
-    "title": "Education & Programs Director Job at PCNW",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/education-programs-director-pcnw-2026/",
-    "type": "jobs",
-    "deadline": "28 July 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information Photographic Center Northwest (PCNW) is a 501(c)(3) non-profit photography education organization based in Seattle, Washington. It was founded in the early 1980s as the Exposure School of Photography, later renamed the Northwest Center for Photography, befor"
-  },
-  {
-    "id": "artinfoland-88983c2d0e3c",
-    "title": "Brighton Artist Showcase Open Call 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/brighton-artist-showcase-open-call-2026/",
-    "type": "jobs",
-    "deadline": "24 July 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Arrival Gallery describes itself as running an international artist open-call programme across multiple cities, including Brighton, London, Athens, Madrid, Paris, Lisbon, Manila, Milan, and others, offering artists physical and digital exhibition options. Ac"
-  },
-  {
-    "id": "artinfoland-2cd9090dad52",
-    "title": "A.I.R. National Artists Program 2026–2029",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/a-i-r-gallery-national-artists-program-2026/",
-    "type": "grant",
-    "deadline": "21 July 2026",
-    "tags": [
-      "program",
-      "arts"
-    ],
-    "summary": "Organizer Information A.I.R. Gallery (Artists in Residence, Inc.) was founded in 1972 to provide a professional, permanent exhibition space for women artists at a time when work shown at commercial New York galleries was almost exclusively by male artists, offering an alternative"
-  },
-  {
-    "id": "artinfoland-3e21b20e37bf",
-    "title": "Chasing the Wind Juried Art Exhibition 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/chasing-the-wind-juried-art-exhibition-2026/",
-    "type": "grant",
-    "deadline": "20 July 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information UPWARD Gallery is a fully remote, online platform founded in 2021 for painters, artisans, and arts professionals of all levels and ages, with a team spread across the world. UPWARD Gallery does not sell art directly, nor does it hold a drawing for cash prize"
-  },
-  {
-    "id": "artinfoland-606d964922de",
-    "title": "The Sweep of Time: Beyond the Horizon Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/the-sweep-of-time-beyond-the-horizon-open-call/",
-    "type": "residency",
-    "deadline": "19 July 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Manifest Creative Research Gallery is a 501(c)(3) non-profit arts organization founded in May 2004 by Cincinnati-area professors and students, and continues to be operated by professors, students, and working artists in the East Walnut Hills neighborhood of "
-  },
-  {
-    "id": "artinfoland-720de575a3f7",
-    "title": "Curator of 19th- and 20th-Century Art",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/curator-19th-20th-century-art-museum-de-fundatie-netherlands/",
-    "type": "program",
-    "deadline": "30 August 2026",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Museum de Fundatie is a museum for the visual arts based in Zwolle, the Netherlands, with a second site at Kasteel het Nijenhuis, a historic castle with a sculpture garden near Heino. The institution is part of the Hannema-de Stuers Foundation and traces its"
-  },
-  {
-    "id": "artinfoland-d1bbad46f24b",
-    "title": "Curator Job at Schinkel Pavillon Berlin 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/curator-job-schinkel-pavillon-berlin-2026/",
-    "type": "jobs",
-    "deadline": "28 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information Schinkel Pavillon Trägerverein e.V. is a Kunstverein (art association) founded in 2007, dedicated to contemporary art in Berlin and curated under the artistic direction of Nina Pohl. The institution occupies the Schinkel Pavillon, a pavilion built in 1969 by"
-  },
-  {
-    "id": "artinfoland-079e3ebaae99",
-    "title": "KOKUYO DESIGN AWARD 2027 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/kokuyo-design-award-2027/",
-    "type": "jobs",
-    "deadline": "Open",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information KOKUYO Co., Ltd. is a Japanese manufacturer headquartered in Osaka, led by Representative Corporate Officer and President Hidekuni Kuroda. The company is best known internationally for stationery, office furniture, and workplace and lifestyle products. Accor"
-  },
-  {
-    "id": "artinfoland-12caf330a22d",
-    "title": "Curator of Costume Job Opportunity at Rijksmuseum, Netherlands",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/curator-of-costume-job-rijksmuseum-netherlands/",
-    "type": "scholarship",
-    "deadline": "23 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information The Rijksmuseum is the national museum of the Netherlands, located on Museumplein in Amsterdam. It traces its origins to 1798, when the Dutch government resolved to establish a national museum, which opened as the National Art Gallery in The Hague on 31 May "
-  },
-  {
-    "id": "artinfoland-aea15730988b",
-    "title": "Curator of Modern and Contemporary Art at Fubon Art Museum",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/curator-modern-contemporary-art-fubon-art-museum/",
-    "type": "program",
-    "deadline": "Ongoing",
-    "tags": [
-      "opportunity",
-      "arts"
-    ],
-    "summary": "Organizer Information Fubon Art Museum (FAM) is a private museum located within the Fubon Xinyi A25 complex in Taipei’s Xinyi District, designed by Pritzker Prize-winning architect Renzo Piano together with Kris Yao Artech, and opened to the public in 2024. The museum grew out of"
   }
 ]
