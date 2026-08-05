@@ -35,19 +35,20 @@
       <div id="daily-columns" class="daily-columns"></div>
     </main>
 
-    <!-- Preferences drawer — outside <main> so it's never blurred by auth gate -->
-    <div class="prefs-overlay" id="prefs-overlay" hidden></div>
-    <aside class="prefs-panel" id="prefs-panel" hidden aria-label="Customize daily report">
-      <div class="prefs-panel-head">
-        <h2>Customize Report</h2>
-        <button type="button" class="notion-close-btn" id="prefs-close-btn" aria-label="Close">✕</button>
+    <!-- Preferences popup — outside <main> so auth-gated blur cannot trap it -->
+    <div class="prefs-overlay" id="prefs-overlay" hidden>
+      <div class="prefs-popup" id="prefs-panel" role="dialog" aria-modal="true" aria-labelledby="prefs-heading">
+        <div class="prefs-popup-head">
+          <h2 id="prefs-heading">Customize Report</h2>
+          <button type="button" class="notion-close-btn" id="prefs-close-btn" aria-label="Close">✕</button>
+        </div>
+        <p class="prefs-hint">Toggle the sections you want to see in your daily report.</p>
+        <div id="prefs-toggles" class="prefs-toggles"></div>
+        <div class="prefs-footer">
+          <button type="button" class="add-resource-btn" id="prefs-save-btn">Done</button>
+        </div>
       </div>
-      <p class="prefs-hint">Toggle the sections you want to see in your daily report.</p>
-      <div id="prefs-toggles" class="prefs-toggles"></div>
-      <div class="prefs-footer">
-        <button type="button" class="add-resource-btn" id="prefs-save-btn">Done</button>
-      </div>
-    </aside>
+    </div>
 
     <a class="brand-mark brand-mark-dark" href="index.html">Research<br />Hub</a>
     <div id="music-player-root"></div>

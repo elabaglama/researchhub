@@ -60,14 +60,12 @@ const prefsSaveBtn = document.getElementById("prefs-save-btn");
 function openPrefsPanel() {
   renderToggles();
   prefsOverlay.hidden = false;
-  prefsPanel.hidden = false;
   customizeBtn.setAttribute("aria-expanded", "true");
   document.body.style.overflow = "hidden";
 }
 
 function closePrefsPanel() {
   prefsOverlay.hidden = true;
-  prefsPanel.hidden = true;
   customizeBtn.setAttribute("aria-expanded", "false");
   document.body.style.overflow = "";
 }
@@ -103,9 +101,11 @@ function renderToggles() {
 customizeBtn.addEventListener("click", openPrefsPanel);
 prefsCloseBtn.addEventListener("click", closePrefsPanel);
 prefsSaveBtn.addEventListener("click", closePrefsPanel);
-prefsOverlay.addEventListener("click", closePrefsPanel);
+prefsOverlay.addEventListener("click", (e) => {
+  if (e.target === prefsOverlay) closePrefsPanel();
+});
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && !prefsPanel.hidden) closePrefsPanel();
+  if (e.key === "Escape" && !prefsOverlay.hidden) closePrefsPanel();
 });
 
 // ── Data ─────────────────────────────────────────────────────────────────────
