@@ -142,23 +142,24 @@ function _renderGate() {
 }
 
 // ── Auth state observer ──────────────────────────────────────────────────────
-onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged(auth, (user) => {
   currentUser = user;
-  if (user) {
-    // Ensure profile doc exists
-    try {
-      await setDoc(
-        userRef(user.uid),
-        { name: user.displayName || "", email: user.email || "", photoURL: user.photoURL || "" },
-        { merge: true }
-      );
-    } catch { /* offline */ }
-    // Pull their Notion config into localStorage for the rest of the page
-    await syncNotionFromFirestore(user.uid);
-  }
+
+  // Update UI immediately — never block on Firestore.
   _notify();
   _applyGate(user);
   _renderAllAuthRoots();
+
+  // Firestore sync runs in the background; failures are silently ignored.
+  if (user) {
+    setDoc(
+      userRef(user.uid),
+      { name: user.displayName || "", email: user.email || "", photoURL: user.photoURL || "" },
+      { merge: true }
+    ).catch(() => {});
+
+    syncNotionFromFirestore(user.uid).catch(() => {});
+  }
 });
 
 // ── Auth actions ─────────────────────────────────────────────────────────────
