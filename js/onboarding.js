@@ -37,7 +37,7 @@ const STEPS = [
   {
     type: "wishlist",
     title: "No payments needed.",
-    body: "This tool is completely free for you. Ela accepts only physical gifts.",
+    body: "This tool is completely free for you but we accept physical gifts.",
   },
   {
     type: "standard",
