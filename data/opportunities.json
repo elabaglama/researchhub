@@ -1,5 +1,18 @@
 [
   {
+    "id": "opportunities-for-youth-ed296a2e6f87",
+    "title": "DAAD Study Scholarships for STEM Disciplines 2027: Fully Funded Master’s Opportunity in Germany",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/daad-funded-programmes/",
+    "type": "scholarship",
+    "deadline": "Open",
+    "tags": [
+      "scholarship",
+      "youth"
+    ],
+    "summary": "DAAD Study Scholarships for STEM Disciplines 2027: Fully Funded Master’s Opportunity in Germany"
+  },
+  {
     "id": "opportunities-for-youth-4b6cb194ed15",
     "title": "PhD Opportunities in Community Ecology (Marine and Coastal Systems) at the University of Melbourne, Australia",
     "sourceId": "opportunities-for-youth",
@@ -10,7 +23,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Are you passionate about understanding how biodiversity is shaped across natural ecosystems? The University of Melbourne is inviting expressions of interest"
+    "summary": "PhD Opportunities in Community Ecology (Marine and Coastal Systems) at the University of Melbourne, Australia"
   },
   {
     "id": "opportunities-for-youth-73799f272500",
@@ -24,19 +37,6 @@
       "youth"
     ],
     "summary": "The Coca-Cola Scholars Program Scholarship 2027 is now accepting applications from eligible high school seniors across the United States. Recognized as one of"
-  },
-  {
-    "id": "opportunities-for-youth-c72d323328ce",
-    "title": "Fully Funded PhD in Political Science at UCLouvain 2026 in Belgium: Study Inclusive Political Representation Through the WEAVE Research Project",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/05/fully-funded-phd-in-political-science-at-uclouvain-2026-in-belgium-study-inclusive-political-representation-through-the-weave-research-project/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Political representation is one of the most debated and pressing issues in modern democracies. As societies become increasingly diverse, ensuring that all"
   },
   {
     "id": "opportunities-for-youth-63eb26c41ccf",
@@ -127,7 +127,7 @@
       "jobs",
       "youth"
     ],
-    "summary": "Girls Who Invest Scholars Program 2027 Applications Open: Apply for Tuition-Free Investment Management Training and Career Development"
+    "summary": "Applications are now open for the 2027 Girls Who Invest (GWI) Scholars Program, an exceptional tuition-free opportunity designed to equip undergraduate"
   },
   {
     "id": "opportunities-for-youth-e79e3ffcba14",
@@ -140,7 +140,7 @@
       "program",
       "youth"
     ],
-    "summary": "FAO Fellows Programme 2026: Global Research Assignments at FAO Offices Worldwide"
+    "summary": "The Food and Agriculture Organization of the United Nations has opened applications for its 2026 Call for Expression of Interest for the Fellows Programme."
   },
   {
     "id": "opportunities-for-youth-d92f7bce9a31",
@@ -465,7 +465,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "African Union CIEFFA Online Capacity Building Trai..."
+    "summary": "The African Union International Centre for Girls’ and Women’s Education in Africa (AU CIEFFA), in partnership with ImpactHER, has officially opened"
   },
   {
     "id": "opportunities-for-youth-525f345c51bc",
@@ -517,11 +517,11 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Expression of Interest for UNCCD COP17 Children & Youth Resilience Hub Sessions: Submit Your Session Proposal for the Global Youth Platform."
+    "summary": "The United Nations Convention to Combat Desertification (UNCCD) has officially opened the Expression of Interest (EOI) for organizations and individuals"
   },
   {
-    "id": "opportunities-for-youth-4e586f5bc7ce",
-    "title": "PhD Position Urban Health Equity 2026: Heat Risks, Pediatric Respiratory Health, and Greenspace Interventions at the University of Amsterdam",
+    "id": "opportunities-for-youth-596c01c9ec65",
+    "title": "PhD Position in Urban Health Equity 2026: Heat Risks, Pediatric Respiratory Health and Greenspace Interventions at the University of Amsterdam",
     "sourceId": "opportunities-for-youth",
     "url": "https://opportunitiesforyouth.org/2026/08/05/urban-health-jobs/",
     "type": "opportunity",
@@ -530,7 +530,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "PhD Position Urban Health Equity 2026: Heat Risks, Pediatric Respiratory Health, and Greenspace Interventions at the University of Amsterdam"
+    "summary": "PhD Position in Urban Health Equity 2026: Heat Risks, Pediatric Respiratory Health and Greenspace Interventions at the University of Amsterdam"
   },
   {
     "id": "opportunities-for-youth-180244d6177c",
@@ -543,7 +543,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "The David Sainsbury International MSc Scholarships 2026/27 provide an exceptional opportunity for talented students from around the world to pursue a"
+    "summary": "David Sainsbury International MSc Scholarships 2026/27: Fully Funded and 50% Tuition Scholarships for the MSc in Global Plant Health at the University of East Anglia"
   },
   {
     "id": "opportunities-for-youth-2eb163122574",
@@ -621,20 +621,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "CDC Campaign and Audience Research Team ..."
-  },
-  {
-    "id": "opportunities-for-youth-84462356fa65",
-    "title": "Youth-ID Network of Multipliers 2026: Jo...",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/05/youth-id-network-of-multipliers-2026-join-the-erasmus-programme-empowering-youth-workers-to-build-inclusive-communities-across-europe/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Youth-ID Network of Multipliers 2026: Jo..."
+    "summary": "Public health communication plays a critical role in helping communities make informed decisions that improve health outcomes. The Centers for Disease Control"
   },
   {
     "id": "opportunities-for-youth-64efc3bb727d",
@@ -660,7 +647,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Canadian Red Cross Resilience Fund 2026 in Canada | Up to $5,000 for Youth-Led Community Projects"
+    "summary": "Young changemakers in Canada now have an exciting opportunity to transform their ideas into meaningful action through the Canadian Red Cross Resilience Fund"
   },
   {
     "id": "opportunities-for-youth-dee29f2dd150",
@@ -673,7 +660,7 @@
       "grant",
       "youth"
     ],
-    "summary": "British Council TNE Grants with India 2026–27: £30,000 Funding for UK–India Higher Education Partnerships in Emerging Technologies"
+    "summary": "The British Council has officially launched the highly anticipated TNE Grants with India 2026–27 under the Going Global Partnerships initiative, offering an"
   },
   {
     "id": "opportunities-for-youth-99edf19d57ec",
@@ -725,7 +712,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Amnesty International is offering free online courses through its Human Rights Academy, a dedicated digital learning platform designed to strengthen"
+    "summary": "Amnesty International Free Online Human ..."
   },
   {
     "id": "opportunities-for-youth-5d5ebd3bee57",
@@ -751,20 +738,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "How to Prepare your UK Chevening Scholar..."
-  },
-  {
-    "id": "opportunities-for-youth-65e1ce05f4e3",
-    "title": "Introduction to Sports for Climate Actio...",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/free-un-training-make-sports-more-sustainable/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Introduction to Sports for Climate Actio..."
+    "summary": "Follow these steps between now and applications opening on 4 August, and you’ll be ready to ace the Chevening application process."
   },
   {
     "id": "opportunities-for-youth-9d62a83e89e5",
@@ -777,7 +751,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "DAFI Scholarship Programme 2026/2027 in Rwanda: Fully Funded Undergraduate Scholarships for Refugees and Asylum Seekers"
+    "summary": "Are you a refugee or asylum seeker in Rwanda looking to pursue a university education? Applications are now open for the UNHCR Albert Einstein German Academic"
   },
   {
     "id": "opportunities-for-youth-d0fccb433480",
@@ -803,7 +777,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "Slovakia Scholarships for Talented International Students 2026/27: Study in Europe and Receive Up to €15,000"
+    "summary": "Applications are available for the Slovakia Scholarships for Talented Students from All Over the World for the 2026/2027 academic year, an international..."
   },
   {
     "id": "opportunities-for-youth-c79f88db50e4",
@@ -868,7 +842,20 @@
       "scholarship",
       "youth"
     ],
-    "summary": "France-South Africa Scholarship Programme 2027: Fully Funded Master’s and PhD Scholarships to Study in France for Students from South Africa, Lesotho, and Malawi"
+    "summary": "The 2027 France-South Africa Scholarship Programme is officially open for applications, offering an exceptional opportunity for eligible students from South"
+  },
+  {
+    "id": "opportunities-for-youth-c72d323328ce",
+    "title": "Fully Funded PhD in Political Science at UCLouvain 2026 in Belgium: Study Inclusive Political Representation Through the WEAVE Research Project",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/fully-funded-phd-in-political-science-at-uclouvain-2026-in-belgium-study-inclusive-political-representation-through-the-weave-research-project/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Political representation is one of the most debated and pressing issues in modern democracies. As societies become increasingly diverse, ensuring that all"
   },
   {
     "id": "opportunities-for-youth-6028d104bc03",
@@ -894,7 +881,7 @@
       "fellowship",
       "youth"
     ],
-    "summary": "Kellogg Institute Postdoctoral Visiting Fellowships 2027-2028 in the USA | $75,000 Annual Stipend"
+    "summary": "Applications are now open for the Kellogg Institute Postdoctoral Visiting Fellowships 2027-2028 at the University of Notre Dame, USA. This prestigious"
   },
   {
     "id": "opportunities-for-youth-448fe7f9e727",
@@ -908,19 +895,6 @@
       "youth"
     ],
     "summary": "Applications are now open for the prestigious Newnham College Research Fellowships 2027 at the University of Cambridge, offering exceptional early-career"
-  },
-  {
-    "id": "opportunities-for-youth-eb9ee07b71fc",
-    "title": "DLGS Call for Applications 2027: Fully Funded International PhD Scholarship in Sustainable Urban Mobility Transformations in Germany",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/30/dlgs-call-for-applications-2027-fully-funded-international-phd-scholarship-in-sustainable-urban-mobility-transformations-in-germany/",
-    "type": "scholarship",
-    "deadline": "Open",
-    "tags": [
-      "scholarship",
-      "youth"
-    ],
-    "summary": "DLGS Call for Applications 2027: Fully Funded International PhD Scholarship in Sustainable Urban Mobility Transformations in Germany"
   },
   {
     "id": "opportunities-for-youth-b142efbda646",
@@ -960,6 +934,19 @@
       "youth"
     ],
     "summary": "The Climate Vulnerable Forum and Vulnerable Twenty Group (CVF-V20) Secretariat has announced an exciting opportunity for experienced climate and environmental"
+  },
+  {
+    "id": "opportunities-for-youth-f41df13b4afe",
+    "title": "Youth-ID Network of Multipliers 2026: Join the Erasmus+ Programme Empowering Youth Workers to Build Inclusive Communities Across Europe",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/youth-id-network-of-multipliers-2026-join-the-erasmus-programme-empowering-youth-workers-to-build-inclusive-communities-across-europe/",
+    "type": "program",
+    "deadline": "Open",
+    "tags": [
+      "program",
+      "youth"
+    ],
+    "summary": "Discover opportunities in the Erasmus+ programme to build inclusive communities through the Youth-ID Network of Multipliers 2026."
   },
   {
     "id": "opportunities-for-youth-3ac696ac7780",
@@ -1012,19 +999,6 @@
       "youth"
     ],
     "summary": "To encourage informed public dialogue and nurture the next generation of thinkers in this important field, the AI Societal Impact Lab has officially launched"
-  },
-  {
-    "id": "opportunities-for-youth-da1e8d533d20",
-    "title": "Middlesex University Visiting Fellows Programme 2026 – Academic Collaboration and Research Opportunities",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/visiting-fellows-programme/",
-    "type": "program",
-    "deadline": "Open",
-    "tags": [
-      "program",
-      "youth"
-    ],
-    "summary": "Middlesex University Visiting Fellows Programme 2026 – Academic Collaboration and Research Opportunities"
   },
   {
     "id": "still-hiring-44739946ab32",
