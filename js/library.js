@@ -12,6 +12,16 @@ import {
   triggerScrape,
   migrateBrowserSourcesToServer,
 } from "./shared.js";
+import {
+  currentUser,
+  onUserChange,
+  persistNotionToFirestore,
+} from "./auth.js";
+import {
+  loadUserSources,
+  addUserSource,
+  removeUserSource,
+} from "./firebase.js";
 
 wirePdfButton();
 
@@ -94,8 +104,29 @@ function scrapeSummary(report, sourceId) {
 }
 
 async function renderLibrary() {
-  const sources = await loadAllSources();
-  const customIds = new Set((await loadFileCustomSources()).map((s) => s.id));
+  const [sources, fileCustom] = await Promise.all([
+    loadAllSources(),
+    loadFileCustomSources(),
+  ]);
+
+  // Merge in any Firestore user-specific sources when signed in
+  let userSources = [];
+  if (currentUser) {
+    userSources = await loadUserSources(currentUser.uid);
+    const knownIds = new Set(sources.map((s) => s.id));
+    for (const us of userSources) {
+      const merged = { ...us, custom: true };
+      if (!knownIds.has(merged.id)) {
+        sources.push(merged);
+        knownIds.add(merged.id);
+      }
+    }
+  }
+
+  const customIds = new Set([
+    ...(fileCustom.map((s) => s.id)),
+    ...(userSources.map((s) => s.id)),
+  ]);
 
   list.innerHTML = sources
     .map((source) => {
@@ -146,6 +177,13 @@ async function renderLibrary() {
       if (!window.confirm(`Remove ${id} from library?`)) return;
       button.disabled = true;
       try {
+        // Remove from Firestore if user is signed in and it's their source
+        if (currentUser) {
+          const us = userSources.find((s) => s.id === id);
+          if (us?._docId) {
+            await removeUserSource(currentUser.uid, us._docId);
+          }
+        }
         await removeLibrarySource(id);
         setSyncStatus(`Removed ${id}.`);
         await renderLibrary();
@@ -207,6 +245,11 @@ notionForm.addEventListener("submit", async (event) => {
   notionSaveBtn.textContent = "Testing…";
   refreshNotionStatus("Saved locally. Testing Notion access…");
 
+  // Persist to Firestore so it's available on any device when signed in
+  if (currentUser) {
+    persistNotionToFirestore(currentUser.uid, { token, databaseId }).catch(() => {});
+  }
+
   try {
     const response = await fetch("/api/test-notion", {
       method: "POST",
@@ -246,6 +289,17 @@ form.addEventListener("submit", async (event) => {
   try {
     const result = await addLibrarySource(url, { scrape: true });
     const source = result.source;
+    // Also save to Firestore so it persists across devices when signed in
+    if (currentUser && source) {
+      await addUserSource(currentUser.uid, {
+        id: source.id,
+        url: source.url,
+        name: source.name || url,
+        focus: source.focus || "custom",
+        blurb: source.blurb || url,
+        custom: true,
+      });
+    }
     setSyncStatus(
       `${source.name} saved. ${scrapeSummary(result.scrape, source.id)}`
     );
@@ -262,6 +316,9 @@ form.addEventListener("submit", async (event) => {
     saveResourceBtn.textContent = "Save & scrape";
   }
 });
+
+// Re-render when user signs in or out so their sources appear/disappear
+onUserChange(() => renderLibrary().catch(() => {}));
 
 fillNotionForm();
 refreshNotionStatus();
