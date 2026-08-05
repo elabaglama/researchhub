@@ -543,9 +543,219 @@ def scrape_html_listings(source: dict) -> list[dict]:
     return items[:80]
 
 
-def scrape_generic(source: dict) -> list[dict]:
-    """Best-effort scraper for any library URL (WP API → RSS → HTML)."""
+def _github_headers() -> dict:
+    import os
+    token = os.environ.get("GITHUB_TOKEN", "")
+    h = {"User-Agent": UA, "Accept": "application/vnd.github.v3+json"}
+    if token:
+        h["Authorization"] = f"Bearer {token}"
+    return h
+
+
+def _github_api(url: str) -> dict | list:
+    req = urllib.request.Request(url, headers=_github_headers())
+    with urllib.request.urlopen(req, timeout=20, context=SSL_CTX) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
+def _github_raw(raw_url: str) -> str:
+    req = urllib.request.Request(raw_url, headers={"User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=20, context=SSL_CTX) as resp:
+        return resp.read().decode("utf-8", "ignore")
+
+
+def _parse_github_file(source: dict, path: str, content: str) -> list[dict]:
+    """Extract opportunity entries from a single file's content."""
+    items: list[dict] = []
+
+    # ── JSON: look for array of {title, url, ...} objects ──────────────────
+    if path.lower().endswith(".json"):
+        try:
+            data = json.loads(content)
+            entries = data if isinstance(data, list) else (data.get("items") or data.get("opportunities") or [])
+            for entry in entries:
+                if not isinstance(entry, dict):
+                    continue
+                title = clean_text(str(entry.get("title") or entry.get("name") or ""))
+                href = str(entry.get("url") or entry.get("link") or entry.get("href") or "").strip()
+                if len(title) < 6 or not href.startswith("http"):
+                    continue
+                summary = clean_text(str(entry.get("summary") or entry.get("description") or ""))
+                deadline = str(entry.get("deadline") or entry.get("deadline_date") or "Open")
+                items.append({
+                    "id": make_id(source["id"], title, href),
+                    "title": title[:180],
+                    "sourceId": source["id"],
+                    "url": href,
+                    "type": guess_type(title + " " + summary),
+                    "deadline": deadline,
+                    "tags": [guess_type(title), "github"],
+                    "summary": (summary or title)[:280],
+                })
+        except Exception:
+            pass
+        return items
+
+    # ── Markdown / text: extract [label](url) links ─────────────────────────
+    link_re = re.compile(r"\[([^\]]{4,200})\]\((https?://[^)\s]{10,})\)")
+    lines = content.split("\n")
+    current_section = ""
+
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+
+        # Track section headings for type hints
+        if stripped.startswith("#"):
+            current_section = re.sub(r"^#+\s*", "", stripped).strip()
+            continue
+
+        for m in link_re.finditer(stripped):
+            title = clean_text(m.group(1))
+            href = m.group(2).strip().rstrip(")")
+            if not href.startswith("http") or len(title) < 6:
+                continue
+            # Skip GitHub meta-links (issues, pulls, commits, file browser)
+            if "github.com" in href and any(
+                seg in href for seg in ("/blob/", "/tree/", "/commit/", "/issues", "/pulls", "/actions")
+            ):
+                continue
+            # Skip badge/shield image links
+            if any(badge in href for badge in ("shields.io", "img.shields", "badge", "travis-ci", "coveralls")):
+                continue
+
+            context = stripped.replace(m.group(0), "").strip(" -·|:>")
+            context = clean_text(context)
+            next_line = clean_text(lines[i + 1]) if i + 1 < len(lines) else ""
+            summary = (context or next_line or title)[:280]
+            deadline = extract_deadline(stripped + " " + next_line)
+
+            items.append({
+                "id": make_id(source["id"], title, href),
+                "title": title[:180],
+                "sourceId": source["id"],
+                "url": href,
+                "type": guess_type(title + " " + current_section),
+                "deadline": deadline,
+                "tags": [guess_type(title), "github"],
+                "summary": summary,
+            })
+
+    # De-duplicate by id within this file
+    seen: set[str] = set()
+    unique: list[dict] = []
+    for item in items:
+        if item["id"] not in seen:
+            seen.add(item["id"])
+            unique.append(item)
+    return unique[:80]
+
+
+def scrape_github_repo(source: dict) -> list[dict]:
+    """Read README + markdown/JSON files from a public GitHub repo."""
+    from urllib.parse import urlparse
+
     url = source["url"]
+    parsed = urlparse(url)
+    parts = parsed.path.strip("/").split("/")
+    if len(parts) < 2:
+        return []
+
+    owner, repo = parts[0], parts[1]
+    repo = repo.rstrip(".git")
+
+    # ── Direct raw file ────────────────────────────────────────────────────
+    if len(parts) >= 4 and parts[2] in ("blob", "raw"):
+        branch, *rest = parts[3], parts[4:]
+        file_path = "/".join(rest) if rest else ""
+        raw_url = f"https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{file_path}"
+        try:
+            content = _github_raw(raw_url)
+            return _parse_github_file(source, file_path, content)
+        except Exception:
+            return []
+
+    # ── Discover default branch ─────────────────────────────────────────────
+    try:
+        repo_info = _github_api(f"https://api.github.com/repos/{owner}/{repo}")
+        branch = repo_info.get("default_branch", "main")
+    except Exception:
+        branch = "main"
+
+    # ── Get repo file tree ──────────────────────────────────────────────────
+    try:
+        tree_data = _github_api(
+            f"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=1"
+        )
+        all_files = [f["path"] for f in tree_data.get("tree", []) if f.get("type") == "blob"]
+    except Exception:
+        all_files = ["README.md"]
+
+    # ── Rank files by relevance ─────────────────────────────────────────────
+    priority_names = {
+        "readme.md", "readme.rst", "readme.txt",
+        "opportunities.md", "opportunities.json",
+        "resources.md", "resources.json",
+        "grants.md", "fellowships.md", "jobs.md",
+        "programs.md", "calls.md", "awards.md",
+    }
+
+    def _rank(path: str) -> int:
+        name = path.lower().split("/")[-1]
+        depth = path.count("/")
+        if name in priority_names:
+            return depth
+        ext = name.rsplit(".", 1)[-1] if "." in name else ""
+        if ext in ("md", "rst"):
+            return 10 + depth
+        if ext == "json":
+            return 20 + depth
+        if ext in ("txt", "yaml", "yml"):
+            return 30 + depth
+        return 99
+
+    relevant = [f for f in all_files if _rank(f) < 99 and f.count("/") <= 4]
+    relevant.sort(key=_rank)
+    relevant = relevant[:20]
+
+    # ── Fetch and parse each file ───────────────────────────────────────────
+    all_items: list[dict] = []
+    seen_ids: set[str] = set()
+
+    for file_path in relevant:
+        raw_url = f"https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{file_path}"
+        try:
+            content = _github_raw(raw_url)
+            for item in _parse_github_file(source, file_path, content):
+                if item["id"] not in seen_ids:
+                    seen_ids.add(item["id"])
+                    all_items.append(item)
+        except Exception:
+            continue
+
+    # Always include a portal entry linking back to the repo itself
+    portal_id = make_id(source["id"], f"{owner}/{repo}", url)
+    if portal_id not in seen_ids:
+        all_items.insert(0, {
+            "id": portal_id,
+            "title": f"{owner}/{repo} — GitHub repository",
+            "sourceId": source["id"],
+            "url": url,
+            "type": "opportunity",
+            "deadline": "Open",
+            "tags": ["github", "portal"],
+            "summary": f"Scraped from GitHub repository {owner}/{repo}. Contains {len(all_items)} linked opportunities.",
+        })
+
+    return all_items[:80]
+
+
+def scrape_generic(source: dict) -> list[dict]:
+    """Best-effort scraper for any library URL (GitHub → WP API → RSS → HTML)."""
+    url = source["url"]
+
+    if "github.com" in url:
+        return scrape_github_repo(source)
+
     if "airtable.com" in url:
         # Reuse Airtable shared-view logic by pointing airtableUrl at this URL.
         return scrape_still_hiring({**source, "airtableUrl": url})
