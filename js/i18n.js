@@ -12,7 +12,6 @@ const T = {
     // nav
     "nav.daily":   "Report Giornaliero",
     "nav.library": "Libreria",
-    "nav.pdf":     "PDF",
     "nav.guide":   "Guida",
     "nav.search":  "Cerca",
     // home
@@ -115,7 +114,6 @@ const T = {
   en: {
     "nav.daily":   "Daily Report",
     "nav.library": "Library",
-    "nav.pdf":     "PDF",
     "nav.guide":   "Guide",
     "nav.search":  "Search",
     "search.placeholder": "search",

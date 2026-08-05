@@ -169,6 +169,22 @@ export async function loadScrapeCaches(sourceIds) {
   }
 }
 
+/** Drop items that mention years 2025 or earlier in URL/title/summary/deadline. */
+const OLD_YEAR_RE = /(?<!\d)(?:20(?:0\d|1\d|2[0-5]))(?!\d)/;
+
+export function isCurrentYearItem(item) {
+  const blob = [
+    item?.url,
+    item?.title,
+    item?.summary,
+    item?.deadline,
+    ...(Array.isArray(item?.tags) ? item.tags : []),
+  ]
+    .filter(Boolean)
+    .join(" ");
+  return !OLD_YEAR_RE.test(blob);
+}
+
 /** Flatten scrapeCache items into an opportunities-like list. */
 export function opportunitiesFromCaches(caches, sourceIds) {
   const ids = sourceIds || Object.keys(caches || {});
@@ -177,10 +193,12 @@ export function opportunitiesFromCaches(caches, sourceIds) {
     const cache = caches?.[id];
     if (!cache || !Array.isArray(cache.items)) continue;
     for (const item of cache.items) {
-      out.push({
+      const row = {
         ...item,
         sourceId: item.sourceId || id,
-      });
+      };
+      if (!isCurrentYearItem(row)) continue;
+      out.push(row);
     }
   }
   return out;

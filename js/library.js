@@ -1,6 +1,6 @@
 import {
   escapeHtml,
-  wirePdfButton,
+  wireXlsButton,
   getNotionConfig,
   saveNotionConfig,
   clearNotionConfig,
@@ -30,8 +30,20 @@ import {
 } from "./firebase.js";
 import { t, initI18n, toggleLang } from "./i18n.js";
 
-wirePdfButton();
 initI18n();
+
+wireXlsButton(() => ({
+  items: userSources.map((s) => ({
+    title: s.name || s.id,
+    type: "source",
+    deadline: "",
+    sourceId: s.id,
+    url: s.url,
+    summary: s.blurb || s.focus || "",
+  })),
+  sources: userSources,
+  filenamePrefix: "libreria-research-hub",
+}));
 
 document.getElementById("lang-toggle-btn")?.addEventListener("click", () => {
   toggleLang();

@@ -4,7 +4,7 @@ import {
   saveOpportunityToNotion,
   classifyItem,
   CATEGORY_DEFS,
-  wirePdfButton,
+  wireXlsButton,
   loadLibraryCache,
   loadRemovedSourceIds,
   mergePersonalSources,
@@ -19,7 +19,6 @@ import {
 } from "./firebase.js";
 import { t, initI18n, toggleLang, getLang } from "./i18n.js";
 
-wirePdfButton();
 initI18n();
 
 document.getElementById("lang-toggle-btn")?.addEventListener("click", () => {
@@ -131,6 +130,17 @@ document.addEventListener("keydown", (e) => {
 
 let sources = [];
 let byCategory = Object.fromEntries(CATEGORY_DEFS.map((c) => [c.key, []]));
+
+wireXlsButton(() => {
+  const items = CATEGORY_DEFS.flatMap((cat) =>
+    enabledKeys.has(cat.key) ? byCategory[cat.key] || [] : []
+  );
+  return {
+    items,
+    sources,
+    filenamePrefix: "report-giornaliero-research-hub",
+  };
+});
 
 async function loadPersonalSources() {
   if (!currentUser) return [];

@@ -2,11 +2,10 @@ import {
   matchesQuery,
   matchesFilters,
   renderResultCards,
-  wirePdfButton,
+  wireXlsButton,
   loadLibraryCache,
   loadRemovedSourceIds,
   mergePersonalSources,
-  exportXls,
 } from "./shared.js";
 import { currentUser, onUserChange } from "./auth.js";
 import {
@@ -16,10 +15,8 @@ import {
 } from "./firebase.js";
 import { t, initI18n, toggleLang } from "./i18n.js";
 
-wirePdfButton();
 initI18n();
 
-// Language toggle
 document.getElementById("lang-toggle-btn")?.addEventListener("click", () => {
   toggleLang();
   runSearch(input.value);
@@ -34,7 +31,6 @@ const resultsSection = document.getElementById("home-results");
 const resultsMeta = document.getElementById("results-meta");
 const resultsList = document.getElementById("results-list");
 const filtersEl = document.getElementById("search-filters");
-const xlsBtn = document.getElementById("xls-export-btn");
 const body = document.body;
 
 const filterType = document.getElementById("filter-type");
@@ -45,6 +41,12 @@ const countNumber = document.getElementById("count-number");
 let sources = [];
 let opportunities = [];
 let lastResults = [];
+
+wireXlsButton(() => ({
+  items: lastResults.length ? lastResults : opportunities,
+  sources,
+  filenamePrefix: "risultati-research-hub",
+}));
 
 async function loadPersonalSources() {
   if (!currentUser) return [];
@@ -128,15 +130,11 @@ function runSearch(query) {
 
   markActiveFilters(filters);
 
-  const pdfLink = document.getElementById("pdf-link");
-
   if (!q && !filtersOn) {
     body.classList.remove("is-searching");
     resultsSection.hidden = true;
     resultsList.innerHTML = "";
     resultsMeta.textContent = "";
-    if (xlsBtn) xlsBtn.hidden = true;
-    if (pdfLink) pdfLink.hidden = false;
     lastResults = [];
     url.searchParams.delete("q");
     window.history.replaceState({}, "", url);
@@ -151,8 +149,6 @@ function runSearch(query) {
 
   body.classList.add("is-searching");
   resultsSection.hidden = false;
-  if (xlsBtn) xlsBtn.hidden = results.length === 0;
-  if (pdfLink) pdfLink.hidden = true;
 
   const filterLabel = buildFilterLabel(filters);
   const queryLabel = q ? `"${q}"` : "";
@@ -170,11 +166,6 @@ function runSearch(query) {
   window.history.replaceState({}, "", url);
   document.title = q ? `${q} — Research Hub` : "Research Hub";
 }
-
-// XLS export
-xlsBtn?.addEventListener("click", () => {
-  exportXls(lastResults, sources, "risultati-research-hub.xls");
-});
 
 input.addEventListener("focus", showFilters);
 input.addEventListener("input", () => {

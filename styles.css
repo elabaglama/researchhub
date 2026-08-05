@@ -63,6 +63,13 @@ body {
   gap: 0.65rem;
 }
 
+.top-right-bar-light .pill-lang-light {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  text-shadow: none;
+}
+
 .count-badge {
   color: #fff;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
@@ -163,6 +170,10 @@ body {
   letter-spacing: 0.01em;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
   transition: background 0.2s ease, transform 0.2s ease;
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .pill:hover {
