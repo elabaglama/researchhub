@@ -514,11 +514,14 @@ notionForm.addEventListener("submit", async (event) => {
   }
 
   try {
-    const response = await fetch("/api/test-notion", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token, databaseId }),
-    });
+    const response = await fetch(
+      `${window.__APP_BASE__ || ""}/api/test-notion`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, databaseId }),
+      }
+    );
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) {
       throw new Error(payload.error || payload.message || "Notion test failed");

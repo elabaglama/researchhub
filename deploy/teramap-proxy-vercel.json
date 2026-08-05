@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "_comment": "Paste these rewrite rules into the TERAMAP.co Vercel project's vercel.json (merge with existing rules). Order matters: /researchhub rules must come BEFORE any catch-all /:path* rule. Do NOT add a trailingSlash redirect that strips /researchhub/ without also rewriting /researchhub.",
+  "rewrites": [
+    {
+      "source": "/researchhub",
+      "destination": "https://hubforopportunities-six.vercel.app/researchhub"
+    },
+    {
+      "source": "/researchhub/",
+      "destination": "https://hubforopportunities-six.vercel.app/researchhub"
+    },
+    {
+      "source": "/researchhub/:path*",
+      "destination": "https://hubforopportunities-six.vercel.app/researchhub/:path*"
+    }
+  ]
+}
