@@ -17,8 +17,8 @@ const STEPS = [
     emojiImg: "images/ob-flag.png",
     emojiAlt: "EU flag",
     animated: true,
-    title: "Welcome here, my friend.",
-    body: "Start adding your EU open call websites, resources, news library links or even public Facebook groups you follow to the Library page.",
+    title: "Welcome here",
+    body: "Are you searching in different links to find opportunities?<br>Start adding your saved links of open call websites, resources and even public Facebook groups you follow to the <strong>Library</strong> page.",
   },
   {
     type: "standard",
