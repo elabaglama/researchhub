@@ -19437,19 +19437,6 @@
     "summary": "Live board with 0 companies currently hiring."
   },
   {
-    "id": "custom-creativesunite-eu-ac761f07bf20",
-    "title": "creativesunite.eu — browse source",
-    "sourceId": "custom-creativesunite-eu",
-    "url": "https://creativesunite.eu/synm/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "custom",
-      "portal"
-    ],
-    "summary": "No structured listings detected yet. Open the original site: https://creativesunite.eu/synm/"
-  },
-  {
     "id": "custom-creativetechnologist-xyz-858d1f02f9ab",
     "title": "creativetechnologist.xyz — browse source",
     "sourceId": "custom-creativetechnologist-xyz",
@@ -22412,5 +22399,18 @@
       "custom"
     ],
     "summary": "Programın Temel Olanakları Nelerdir? Haziran, Temmuz veya Ağustos aylarından uygun olan staj dönemini seçebilme imkanı 20, 25 veya 30 iş günü olarak staj süresini belirleyebilme imkanı Haftada 5 gün çalışma karşılığı asgari ücretin %30’u kadar ücret Geniş ring ve servis imkanı Ka"
+  },
+  {
+    "id": "custom-creativesunite-eu-ac761f07bf20",
+    "title": "creativesunite.eu — browse source",
+    "sourceId": "custom-creativesunite-eu",
+    "url": "https://creativesunite.eu/synm/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "custom",
+      "portal"
+    ],
+    "summary": "No structured listings detected yet. Open the original site: https://creativesunite.eu/synm/"
   }
 ]
