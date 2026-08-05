@@ -1,5 +1,5 @@
 {
-  "scrapedAt": "2026-08-05T10:14:04.604376+00:00",
+  "scrapedAt": "2026-08-05T11:33:17.919633+00:00",
   "sources": {
     "opportunities-for-youth": {
       "ok": true,
@@ -12,8 +12,13 @@
     "artinfoland": {
       "ok": true,
       "count": 200
+    },
+    "custom-creativesunite-eu": {
+      "ok": true,
+      "count": 1,
+      "mode": "generic"
     }
   },
   "mode": "partial",
-  "total": 1410
+  "total": 1411
 }
