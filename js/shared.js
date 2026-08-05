@@ -1,3 +1,5 @@
+import { t } from "./i18n.js";
+
 const SOURCES_KEY = "research-hub-sources";
 const NOTION_KEY = "research-hub-notion";
 
@@ -419,7 +421,7 @@ async function saveOpportunityToNotion(item, sourceName = "") {
 
 function renderResultCards(container, items, sources, { carded = false } = {}) {
   if (!items.length) {
-    container.innerHTML = `<p class="empty-note">No matches found.</p>`;
+    container.innerHTML = `<p class="empty-note">${t("results.noMatch")}</p>`;
     return;
   }
 
@@ -447,8 +449,8 @@ function renderResultCards(container, items, sources, { carded = false } = {}) {
             <p class="simple-summary">${escapeHtml(item.summary)}</p>
           </a>
           <div class="result-actions">
-            <a class="result-open" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">Open original →</a>
-            <button type="button" class="notion-save-btn" data-index="${index}">Save to Notion</button>
+            <a class="result-open" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${t("results.open")}</a>
+            <button type="button" class="notion-save-btn" data-index="${index}">${t("results.save")}</button>
           </div>
         </article>`;
     })
@@ -464,17 +466,14 @@ function renderResultCards(container, items, sources, { carded = false } = {}) {
       const source = sourceById(sources, item.sourceId);
       const original = button.textContent;
       button.disabled = true;
-      button.textContent = "Saving…";
+      button.textContent = t("results.saving");
       try {
         await saveOpportunityToNotion(item, source?.name || "");
-        button.textContent = "Saved";
+        button.textContent = t("results.saved");
       } catch (error) {
         console.error(error);
-        button.textContent = "Failed";
-        window.alert(
-          "Could not save to Notion.\n\nConnect once under Library → Connect Notion.\nThen each Save uses those saved details.\n\n" +
-            (error?.message || "")
-        );
+        button.textContent = t("results.failed");
+        window.alert(error?.message || "Notion save failed");
         setTimeout(() => {
           button.textContent = original;
           button.disabled = false;
@@ -496,6 +495,57 @@ function wirePdfButton() {
     event.preventDefault();
     window.print();
   });
+}
+
+/** Build a SpreadsheetML .xls file clientside and trigger download. */
+function exportXls(items, sources, filename = "research-hub.xls") {
+  const rows = (items || []).map((item) => {
+    const source = sourceById(sources || [], item.sourceId);
+    return [
+      item.title || "",
+      item.type || "",
+      item.deadline || "",
+      source?.name || item.sourceId || "",
+      item.url || "",
+      item.summary || "",
+    ];
+  });
+
+  const header = ["Title", "Type", "Deadline", "Source", "URL", "Summary"];
+  const escapeCell = (v) =>
+    String(v ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+
+  const xmlRows = [header, ...rows]
+    .map(
+      (row) =>
+        `<Row>${row
+          .map((c) => `<Cell><Data ss:Type="String">${escapeCell(c)}</Data></Cell>`)
+          .join("")}</Row>`
+    )
+    .join("");
+
+  const xml = `<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+ <Worksheet ss:Name="Results">
+  <Table>${xmlRows}</Table>
+ </Worksheet>
+</Workbook>`;
+
+  const blob = new Blob([xml], { type: "application/vnd.ms-excel" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
 }
 
 export {
@@ -535,4 +585,5 @@ export {
   saveOpportunityToNotion,
   renderResultCards,
   wirePdfButton,
+  exportXls,
 };

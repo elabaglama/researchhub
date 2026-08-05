@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Research Hub</title>
-    <meta name="description" content="Research Hub — your personal feed of opportunities, grants, jobs, and open calls." />
+    <meta name="description" content="Research Hub — il tuo feed personale di opportunità, borse, lavoro e bandi aperti." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Research Hub" />
     <meta property="og:title" content="Research Hub" />
-    <meta property="og:description" content="Your personal feed of opportunities, grants, jobs, and open calls." />
+    <meta property="og:description" content="Il tuo feed personale di opportunità, borse, lavoro e bandi aperti." />
     <meta property="og:url" content="https://hubforopportunities-six.vercel.app/" />
     <meta property="og:image" content="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
     <meta property="og:image:secure_url" content="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
@@ -18,7 +18,7 @@
     <meta property="og:image:alt" content="Research Hub" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Research Hub" />
-    <meta name="twitter:description" content="Your personal feed of opportunities, grants, jobs, and open calls." />
+    <meta name="twitter:description" content="Il tuo feed personale di opportunità, borse, lavoro e bandi aperti." />
     <meta name="twitter:image" content="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
     <meta name="twitter:image:alt" content="Research Hub" />
     <link rel="image_src" href="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
@@ -35,52 +35,56 @@
     <div class="hero-bg" aria-hidden="true"></div>
 
     <nav class="top-pills" aria-label="Primary">
-      <a class="pill" href="daily.html">Daily Report</a>
-      <a class="pill" href="library.html">Library</a>
-      <a class="pill" href="#" id="pdf-link">PDF</a>
-      <a class="pill" href="#" id="guide-btn">Guide</a>
+      <a class="pill" href="daily.html" data-i18n="nav.daily">Report Giornaliero</a>
+      <a class="pill" href="library.html" data-i18n="nav.library">Libreria</a>
+      <a class="pill" href="#" id="pdf-link" data-i18n="nav.pdf">PDF</a>
+      <a class="pill" href="#" id="guide-btn" data-i18n="nav.guide">Guida</a>
     </nav>
 
-    <div class="count-badge" id="count-badge" aria-live="polite">
-      <span class="count-number" id="count-number">—</span>
+    <div class="top-right-bar">
+      <button type="button" class="lang-toggle-btn pill pill-lang" id="lang-toggle-btn" aria-label="Cambia lingua">EN</button>
+      <div class="count-badge" id="count-badge" aria-live="polite">
+        <span class="count-number" id="count-number">—</span>
+      </div>
     </div>
 
     <div id="auth-root" class="auth-root-home"></div>
 
     <main class="home-main">
       <form class="hero-search" id="search-form" role="search">
-        <label class="sr-only" for="query">Search</label>
+        <label class="sr-only" for="query" data-i18n="nav.search">Cerca</label>
         <input
           id="query"
           name="q"
           type="search"
-          placeholder="search"
+          data-i18n-ph="search.placeholder"
+          placeholder="cerca"
           autocomplete="off"
           autofocus
         />
       </form>
 
-      <div class="search-filters search-filters--hidden" id="search-filters" aria-label="Filters">
+      <div class="search-filters search-filters--hidden" id="search-filters" aria-label="Filtri">
         <div class="filter-group">
-          <select id="filter-type" class="filter-select" aria-label="Filter by type">
-            <option value="">All types</option>
-            <option value="jobs">Jobs &amp; Internships</option>
-            <option value="programs">Programs &amp; Scholarships</option>
-            <option value="awards">Grants &amp; Awards</option>
-            <option value="calls">Partnership Calls</option>
-            <option value="events">Events &amp; Classes</option>
-            <option value="other">Opportunities</option>
+          <select id="filter-type" class="filter-select" aria-label="Filtra per tipo">
+            <option value="" data-i18n="filter.allTypes">Tutti i tipi</option>
+            <option value="jobs" data-i18n="filter.jobs">Lavoro e Tirocini</option>
+            <option value="programs" data-i18n="filter.programs">Programmi e Borse di Studio</option>
+            <option value="awards" data-i18n="filter.awards">Sovvenzioni e Premi</option>
+            <option value="calls" data-i18n="filter.calls">Bandi di Partnership</option>
+            <option value="events" data-i18n="filter.events">Eventi e Corsi</option>
+            <option value="other" data-i18n="filter.other">Opportunità</option>
           </select>
         </div>
         <div class="filter-group">
-          <select id="filter-continent" class="filter-select" aria-label="Filter by region">
-            <option value="">Any region</option>
-            <option value="africa">Africa</option>
-            <option value="asia">Asia</option>
-            <option value="europe">Europe</option>
-            <option value="americas">Americas</option>
-            <option value="middle-east">Middle East</option>
-            <option value="oceania">Oceania</option>
+          <select id="filter-continent" class="filter-select" aria-label="Filtra per regione">
+            <option value="" data-i18n="filter.anyRegion">Qualsiasi regione</option>
+            <option value="africa" data-i18n="filter.africa">Africa</option>
+            <option value="asia" data-i18n="filter.asia">Asia</option>
+            <option value="europe" data-i18n="filter.europe">Europa</option>
+            <option value="americas" data-i18n="filter.americas">Americhe</option>
+            <option value="middle-east" data-i18n="filter.middleeast">Medio Oriente</option>
+            <option value="oceania" data-i18n="filter.oceania">Oceania</option>
           </select>
         </div>
         <div class="filter-group">
@@ -88,15 +92,19 @@
             type="text"
             id="filter-country"
             class="filter-input"
-            placeholder="Country…"
+            data-i18n-ph="filter.country"
+            placeholder="Paese…"
             autocomplete="off"
-            aria-label="Filter by country"
+            aria-label="Filtra per paese"
           />
         </div>
       </div>
 
       <section class="home-results" id="home-results" hidden>
-        <p id="results-meta" class="results-meta"></p>
+        <div class="results-top-bar">
+          <p id="results-meta" class="results-meta"></p>
+          <button type="button" class="ghost-btn xls-btn" id="xls-export-btn" data-i18n="results.export">Esporta XLS</button>
+        </div>
         <div id="results-list" class="results-cards"></div>
       </section>
     </main>

@@ -167,12 +167,12 @@ def scrape_opportunities_for_youth(source: dict) -> list[dict]:
     # Enrich deadlines from detail pages (parallel, capped)
     enriched: list[dict] = []
     with ThreadPoolExecutor(max_workers=8) as pool:
-        futures = [pool.submit(enrich_ofy_deadline, item) for item in items[:80]]
+        futures = [pool.submit(enrich_ofy_deadline, item) for item in items]
         for fut in as_completed(futures):
             enriched.append(fut.result())
     # Keep stable order by original list
     by_id = {item["id"]: item for item in enriched}
-    return [by_id[item["id"]] for item in items[:80] if item["id"] in by_id]
+    return [by_id[item["id"]] for item in items if item["id"] in by_id]
 
 
 def scrape_still_hiring(source: dict) -> list[dict]:
@@ -356,7 +356,7 @@ def scrape_artinfoland(source: dict) -> list[dict]:
             break
         page += 1
 
-    return items[:200]
+    return items
 
 
 def origin_of(url: str) -> str:
@@ -452,7 +452,7 @@ def scrape_rss(source: dict, origin: str) -> list[dict]:
             xml,
             flags=re.I | re.S,
         )
-        for entry in entries[:80]:
+        for entry in entries:
             title_m = re.search(r"<title[^>]*>(.*?)</title>", entry, flags=re.I | re.S)
             link_m = re.search(r"<link[^>]*>(.*?)</link>", entry, flags=re.I | re.S)
             if not link_m:
@@ -540,7 +540,7 @@ def scrape_html_listings(source: dict) -> list[dict]:
             )
         if len(items) >= 12:
             break
-    return items[:80]
+    return items
 
 
 def _github_headers() -> dict:
@@ -647,7 +647,7 @@ def _parse_github_file(source: dict, path: str, content: str) -> list[dict]:
         if item["id"] not in seen:
             seen.add(item["id"])
             unique.append(item)
-    return unique[:80]
+    return unique
 
 
 def scrape_github_repo(source: dict) -> list[dict]:
@@ -746,7 +746,7 @@ def scrape_github_repo(source: dict) -> list[dict]:
             "summary": f"Scraped from GitHub repository {owner}/{repo}. Contains {len(all_items)} linked opportunities.",
         })
 
-    return all_items[:80]
+    return all_items
 
 
 def scrape_generic(source: dict) -> list[dict]:

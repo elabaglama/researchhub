@@ -191,3 +191,50 @@ export async function getIdToken() {
   if (!user) throw new Error("Not signed in");
   return user.getIdToken();
 }
+
+/** Short share codes like hub-a7k2m9 */
+function makeShareCode() {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz23456789";
+  let out = "";
+  const bytes = crypto.getRandomValues(new Uint8Array(6));
+  for (const b of bytes) out += alphabet[b % alphabet.length];
+  return `hub-${out}`;
+}
+
+/**
+ * Publish a snapshot of the user's library under sharedLibraries/{code}.
+ * Returns { ok, code, url } or { ok:false, error }.
+ */
+export async function createSharedLibrary(uid, sources, { name = "" } = {}) {
+  try {
+    const code = makeShareCode();
+    const payload = {
+      code,
+      ownerUid: uid,
+      name: name || "Research Hub library",
+      sources: (sources || []).map((s) => ({
+        id: s.id,
+        url: s.url,
+        name: s.name || "",
+        focus: s.focus || "",
+        blurb: s.blurb || "",
+      })),
+      createdAt: serverTimestamp(),
+    };
+    await withTimeout(setDoc(doc(db, "sharedLibraries", code), payload));
+    const url = `${location.origin}/library?import=${encodeURIComponent(code)}`;
+    return { ok: true, code, url };
+  } catch (err) {
+    return { ok: false, error: firestoreErrorMessage(err) };
+  }
+}
+
+export async function loadSharedLibrary(code) {
+  try {
+    const snap = await withTimeout(getDoc(doc(db, "sharedLibraries", code)));
+    if (!snap.exists()) return { ok: false, error: "Share code not found.", library: null };
+    return { ok: true, library: snap.data() };
+  } catch (err) {
+    return { ok: false, error: firestoreErrorMessage(err), library: null };
+  }
+}

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Library — Research Hub</title>
-    <meta name="description" content="Manage your personal opportunity sources in Research Hub." />
+    <title>Libreria — Research Hub</title>
+    <meta name="description" content="Gestisci le tue fonti di opportunità personali in Research Hub." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Research Hub" />
-    <meta property="og:title" content="Library — Research Hub" />
-    <meta property="og:description" content="Manage your personal opportunity sources in Research Hub." />
+    <meta property="og:title" content="Libreria — Research Hub" />
+    <meta property="og:description" content="Gestisci le tue fonti di opportunità personali in Research Hub." />
     <meta property="og:url" content="https://hubforopportunities-six.vercel.app/library" />
     <meta property="og:image" content="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
     <meta property="og:image:secure_url" content="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
@@ -17,8 +17,8 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Research Hub" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Library — Research Hub" />
-    <meta name="twitter:description" content="Manage your personal opportunity sources in Research Hub." />
+    <meta name="twitter:title" content="Libreria — Research Hub" />
+    <meta name="twitter:description" content="Gestisci le tue fonti di opportunità personali in Research Hub." />
     <meta name="twitter:image" content="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
     <link rel="image_src" href="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,66 +32,115 @@
   </head>
   <body class="page-white">
     <nav class="top-pills top-pills-light" aria-label="Primary">
-      <a class="pill" href="daily.html">Daily Report</a>
-      <a class="pill" href="library.html" aria-current="page">Library</a>
-      <a class="pill" href="#" id="pdf-link">PDF</a>
-      <a class="pill" href="#" id="guide-btn">Guide</a>
+      <a class="pill" href="daily.html" data-i18n="nav.daily">Report Giornaliero</a>
+      <a class="pill" href="library.html" aria-current="page" data-i18n="nav.library">Libreria</a>
+      <a class="pill" href="#" id="pdf-link" data-i18n="nav.pdf">PDF</a>
+      <a class="pill" href="#" id="guide-btn" data-i18n="nav.guide">Guida</a>
+      <button type="button" class="lang-toggle-btn pill pill-lang pill-lang-light" id="lang-toggle-btn" aria-label="Cambia lingua">EN</button>
     </nav>
     <div id="auth-root" class="auth-root-light" data-theme="light"></div>
 
     <main class="white-main library-main">
       <div class="library-head">
         <div>
-          <h1>Library</h1>
-          <p class="lede">Add a link, then click sync to refresh your feed.</p>
+          <h1 data-i18n="lib.title">Libreria</h1>
+          <p class="lede" data-i18n="lib.lede">Aggiungi un link, poi clicca sincronizza per aggiornare il tuo feed.</p>
         </div>
         <div class="library-actions">
-          <button type="button" class="ghost-btn" id="sync-all-btn">Sync all</button>
-          <button type="button" class="ghost-btn" id="notion-toggle-btn">Connect Notion</button>
+          <button type="button" class="ghost-btn" id="sync-all-btn" data-i18n="lib.syncAll">Sincronizza tutto</button>
+          <button type="button" class="ghost-btn" id="share-library-btn" data-i18n="lib.share">Condividi</button>
+          <button type="button" class="ghost-btn" id="notion-toggle-btn">Connetti Notion</button>
         </div>
       </div>
 
       <p id="sync-status" class="notion-status" aria-live="polite"></p>
 
+      <!-- Single URL form -->
       <form class="add-resource-form" id="add-resource-form">
         <label>
-          Website link
-          <input name="url" type="url" required placeholder="https://example.com" />
+          <span data-i18n="lib.urlLabel">Link al sito web</span>
+          <input name="url" type="url" required data-i18n-ph="lib.urlPlaceholder" placeholder="https://esempio.com" />
         </label>
         <div class="form-actions">
-          <button type="submit" class="add-resource-btn" id="save-resource-btn">
-            Save &amp; scrape
+          <button type="submit" class="add-resource-btn" id="save-resource-btn" data-i18n="lib.saveBtn">
+            Salva e indicizza
           </button>
-          <button type="button" class="cancel-btn" id="cancel-add-btn" hidden>Cancel</button>
+          <button type="button" class="cancel-btn" id="cancel-add-btn" hidden data-i18n="lib.cancel">Annulla</button>
         </div>
       </form>
+
+      <!-- Bulk import form -->
+      <details class="bulk-import-details" id="bulk-import-details">
+        <summary class="ghost-btn bulk-import-toggle" data-i18n="lib.bulkImport">Importa in blocco</summary>
+        <form class="bulk-import-form" id="bulk-import-form">
+          <textarea
+            id="bulk-urls"
+            class="bulk-textarea"
+            rows="6"
+            data-i18n-ph="lib.bulkPlaceholder"
+            placeholder="Un link per riga…"
+          ></textarea>
+          <div class="form-actions">
+            <button type="submit" class="add-resource-btn" id="bulk-add-btn" data-i18n="lib.bulkAdd">Aggiungi tutti</button>
+          </div>
+        </form>
+      </details>
 
       <div id="library-list" class="simple-list"></div>
     </main>
 
-    <!-- Notion popup — lives outside <main> so auth-gated blur cannot trap it -->
+    <!-- Share library popup -->
+    <div class="notion-overlay" id="share-overlay" hidden>
+      <div class="notion-popup" role="dialog" aria-labelledby="share-heading" aria-modal="true">
+        <div class="notion-popup-head">
+          <h2 id="share-heading" data-i18n="lib.shareTitle">Libreria condivisa</h2>
+          <button type="button" class="notion-close-btn" id="share-close-btn" aria-label="Chiudi">✕</button>
+        </div>
+        <p class="notion-status" id="share-status"></p>
+        <input type="text" id="share-url-input" class="share-url-input" readonly />
+        <div class="form-actions" style="margin-top:1rem">
+          <button type="button" class="add-resource-btn" id="share-copy-btn">Copia link</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Import library popup -->
+    <div class="notion-overlay" id="import-overlay" hidden>
+      <div class="notion-popup" role="dialog" aria-labelledby="import-heading" aria-modal="true">
+        <div class="notion-popup-head">
+          <h2 id="import-heading" data-i18n="lib.importTitle">Importa Libreria</h2>
+          <button type="button" class="notion-close-btn" id="import-close-btn" aria-label="Chiudi">✕</button>
+        </div>
+        <p class="notion-status" id="import-status"></p>
+        <div class="form-actions" style="margin-top:1rem">
+          <button type="button" class="add-resource-btn" id="import-confirm-btn" data-i18n="lib.importBtn">Importa</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notion popup -->
     <div class="notion-overlay" id="notion-overlay" hidden>
       <div class="notion-popup" role="dialog" aria-labelledby="notion-heading" aria-modal="true">
         <div class="notion-popup-head">
-          <h2 id="notion-heading">Connect Notion</h2>
-          <button type="button" class="notion-close-btn" id="notion-close-btn" aria-label="Close">✕</button>
+          <h2 id="notion-heading" data-i18n="notion.heading">Connetti Notion</h2>
+          <button type="button" class="notion-close-btn" id="notion-close-btn" aria-label="Chiudi">✕</button>
         </div>
         <p id="notion-status" class="notion-status" aria-live="polite"></p>
         <form id="notion-form">
-          <p class="form-note">
-            Connect once. After this, every Save to Notion is one click.
+          <p class="form-note" data-i18n="notion.connectOnce">
+            Connetti una volta. Dopo questo, ogni Salva su Notion è un clic.
           </p>
           <label>
-            Integration secret
+            <span data-i18n="notion.secret">Segreto di integrazione</span>
             <input name="token" type="password" required autocomplete="off" placeholder="ntn_… or secret_…" />
           </label>
           <label>
-            Database ID
+            <span data-i18n="notion.dbId">ID Database</span>
             <input name="databaseId" type="text" required autocomplete="off" value="c4e56b17d92d40b59aeb00878c6066eb" placeholder="32-character ID from the Notion URL" />
           </label>
           <div class="form-actions">
-            <button type="submit" class="add-resource-btn" id="notion-save-btn">Save &amp; test connection</button>
-            <button type="button" class="cancel-btn" id="notion-disconnect-btn">Disconnect</button>
+            <button type="submit" class="add-resource-btn" id="notion-save-btn" data-i18n="notion.saveTest">Salva e testa connessione</button>
+            <button type="button" class="cancel-btn" id="notion-disconnect-btn" data-i18n="notion.disconnect">Disconnetti</button>
           </div>
         </form>
       </div>

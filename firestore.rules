@@ -16,10 +16,20 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // Pending scrape jobs — created by Admin SDK (Vercel) or blocked for clients
+    // Pending scrape jobs — Admin SDK only
     match /scrapeQueue/{sourceId} {
       allow read: if request.auth != null;
       allow write: if false;
+    }
+
+    // Library share packs — owner creates; any signed-in user can import (read)
+    match /sharedLibraries/{code} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.keys().hasAll(['code', 'ownerUid', 'sources']);
+      allow update, delete: if request.auth != null
+        && resource.data.ownerUid == request.auth.uid;
     }
   }
 }
