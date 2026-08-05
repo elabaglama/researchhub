@@ -5,8 +5,8 @@ import {
   saveNotionConfig,
   clearNotionConfig,
   isNotionConnected,
-  addLibrarySource,
   triggerScrape,
+  buildSourceFromUrl,
   loadLibraryCache,
   saveLibraryCache,
   loadRemovedSourceIds,
@@ -23,6 +23,8 @@ import {
   loadUserSources,
   addUserSource,
   removeUserSource,
+  getIdToken,
+  loadScrapeCaches,
 } from "./firebase.js";
 
 wirePdfButton();
@@ -44,6 +46,7 @@ const notionCloseBtn = document.getElementById("notion-close-btn");
 
 /** In-memory list for the signed-in user's library. */
 let userSources = [];
+let cacheStatusById = {};
 
 function openNotionPopup() {
   notionOverlay.hidden = false;
@@ -91,21 +94,23 @@ function setSyncStatus(message) {
   syncStatus.textContent = message || "";
 }
 
-function scrapeSummary(report, sourceId) {
+function scrapeSummary(report) {
   if (!report) return "No scrape ran.";
   if (report.pending) {
     return (
       report.message ||
-      "Scrape started now. Search updates in a few minutes when GitHub Actions finishes."
+      "Scraping… your feed updates when the cloud worker finishes."
     );
   }
-  const entry = report.sources?.[sourceId];
-  if (entry?.ok) return `Scraped ${entry.count} items (${entry.mode || "auto"}).`;
-  if (entry && !entry.ok) return `Scrape failed: ${entry.error || "unknown error"}`;
-  if (typeof report.total === "number") {
-    return `Hub now has ${report.total} opportunities.`;
-  }
   return report.message || "Scrape finished.";
+}
+
+function statusLabel(sourceId) {
+  const status = cacheStatusById[sourceId];
+  if (status === "pending") return ` <span class="saved-tag">Scraping…</span>`;
+  if (status === "error") return ` <span class="saved-tag">Scrape failed</span>`;
+  if (status === "ready") return ` <span class="saved-tag">Ready</span>`;
+  return ` <span class="saved-tag">Library</span>`;
 }
 
 function paintList(sources) {
@@ -113,7 +118,7 @@ function paintList(sources) {
     list.innerHTML = `
       <p class="empty-note">
         Your library is empty. Add a resource to start building your personal feed —
-        Sync will scrape whatever you add here.
+        Sync scrapes only what you added.
       </p>`;
     return;
   }
@@ -123,7 +128,7 @@ function paintList(sources) {
       return `
         <article class="simple-item" data-id="${escapeHtml(source.id)}">
           <a class="result-link" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">
-            <h2 class="simple-title">${escapeHtml(source.name)} <span class="saved-tag">Library</span></h2>
+            <h2 class="simple-title">${escapeHtml(source.name)}${statusLabel(source.id)}</h2>
             <p class="simple-meta">${escapeHtml(source.focus || "Resource")}</p>
             <p class="simple-summary">${escapeHtml(source.blurb || source.url)}</p>
           </a>
@@ -138,12 +143,21 @@ function paintList(sources) {
   list.querySelectorAll(".resync-btn").forEach((button) => {
     button.addEventListener("click", async () => {
       const id = button.dataset.id;
+      const source = userSources.find((s) => s.id === id);
       button.disabled = true;
       button.textContent = "Scraping…";
-      setSyncStatus(`Scraping ${id}…`);
+      setSyncStatus(`Scraping ${source?.name || id}…`);
       try {
-        const data = await triggerScrape({ sourceId: id });
-        setSyncStatus(scrapeSummary(data.report, id));
+        const idToken = await getIdToken();
+        const data = await triggerScrape({
+          sourceId: id,
+          url: source?.url,
+          name: source?.name,
+          idToken,
+        });
+        cacheStatusById[id] = "pending";
+        paintList(userSources);
+        setSyncStatus(scrapeSummary(data.report || data.scrape));
       } catch (error) {
         setSyncStatus(error.message || "Scrape failed");
       } finally {
@@ -163,7 +177,6 @@ function paintList(sources) {
       const card = button.closest("article");
       button.disabled = true;
 
-      // Persist removal locally FIRST so navigation never resurrects the card
       markRemovedSourceId(currentUser.uid, id);
       userSources = userSources.filter((s) => s.id !== id);
       saveLibraryCache(currentUser.uid, userSources);
@@ -172,10 +185,11 @@ function paintList(sources) {
       setSyncStatus("Removing…");
 
       if (us?._docId) {
-        const ok = await removeUserSource(currentUser.uid, us._docId);
-        if (!ok) {
+        const result = await removeUserSource(currentUser.uid, us._docId);
+        if (!result.ok) {
           setSyncStatus(
-            "Removed from this device. Cloud delete couldn't confirm — it stays hidden here."
+            result.error ||
+              "Removed on this device. Cloud delete failed — check Firestore rules."
           );
           return;
         }
@@ -185,9 +199,27 @@ function paintList(sources) {
   });
 }
 
+async function refreshCacheStatuses(sources) {
+  const ids = sources.map((s) => s.id);
+  const { ok, caches, error } = await loadScrapeCaches(ids);
+  cacheStatusById = {};
+  if (!ok) {
+    return error || null;
+  }
+  let pending = 0;
+  for (const id of ids) {
+    const status = caches[id]?.status || (caches[id]?.items?.length ? "ready" : "");
+    if (status) cacheStatusById[id] = status;
+    if (status === "pending") pending += 1;
+  }
+  if (pending) {
+    return `${pending} source${pending === 1 ? "" : "s"} still scraping…`;
+  }
+  return null;
+}
+
 /**
  * Signed-in library = THIS user's Firestore sources only (empty for new accounts).
- * Local removed-ids + cache keep removals sticky across page navigations.
  */
 async function renderLibrary() {
   if (!currentUser) {
@@ -197,18 +229,32 @@ async function renderLibrary() {
   }
 
   const uid = currentUser.uid;
-  const [firestoreSources, cached] = await Promise.all([
+  const [loadResult, cached] = await Promise.all([
     loadUserSources(uid),
     Promise.resolve(loadLibraryCache(uid)),
   ]);
 
+  if (!loadResult.ok && !(cached && cached.length)) {
+    list.innerHTML = `<p class="empty-note">${escapeHtml(
+      loadResult.error ||
+        "Could not load your library from Firestore. Deploy firestore.rules and try again."
+    )}</p>`;
+    setSyncStatus(loadResult.error || "Firestore read failed.");
+    userSources = [];
+    return;
+  }
+
   userSources = mergePersonalSources(
-    firestoreSources,
+    loadResult.sources || [],
     cached,
     loadRemovedSourceIds(uid)
   );
   saveLibraryCache(uid, userSources);
+
+  const pendingNote = await refreshCacheStatuses(userSources);
   paintList(userSources);
+  if (pendingNote) setSyncStatus(pendingNote);
+  else if (loadResult.error) setSyncStatus(loadResult.error);
 }
 
 addBtn.addEventListener("click", () => {
@@ -233,27 +279,26 @@ syncAllBtn.addEventListener("click", async () => {
 
   syncAllBtn.disabled = true;
   syncAllBtn.textContent = "Syncing…";
-  setSyncStatus(`Scraping your ${userSources.length} source${userSources.length === 1 ? "" : "s"}…`);
+  setSyncStatus(`Queuing scrape for your ${userSources.length} source${userSources.length === 1 ? "" : "s"}…`);
 
   try {
-    let lastReport = null;
+    const idToken = await getIdToken();
     for (const source of userSources) {
-      setSyncStatus(`Scraping ${source.name || source.id}…`);
-      const data = await triggerScrape({ sourceId: source.id });
-      lastReport = data.report || lastReport;
+      setSyncStatus(`Queuing ${source.name || source.id}…`);
+      await triggerScrape({
+        sourceId: source.id,
+        url: source.url,
+        name: source.name,
+        idToken,
+      });
+      cacheStatusById[source.id] = "pending";
     }
-    const total =
-      typeof lastReport?.total === "number" ? lastReport.total : null;
+    paintList(userSources);
     setSyncStatus(
-      total != null
-        ? `Synced your library. Search uses only sources you added — updates land when the scrape finishes.`
-        : "Synced your library. Search updates in a few minutes when the scrape finishes."
+      "Synced — scrapes are running in the cloud. Home and Daily update when each source finishes."
     );
   } catch (error) {
-    setSyncStatus(
-      error.message ||
-        "Sync failed. On the live site, set GITHUB_TOKEN in Vercel. Locally, npm start still works."
-    );
+    setSyncStatus(error.message || "Sync failed.");
   } finally {
     syncAllBtn.disabled = false;
     syncAllBtn.textContent = "Sync all";
@@ -324,36 +369,32 @@ form.addEventListener("submit", async (event) => {
 
   saveResourceBtn.disabled = true;
   saveResourceBtn.textContent = "Saving & scraping…";
-  setSyncStatus("Adding source and scraping listings…");
+  setSyncStatus("Saving to your library…");
 
   try {
-    // 1) Register in the shared scrape queue so GitHub Actions can index it
-    const result = await addLibrarySource(url, { scrape: true });
-    const source = result.source;
-    if (!source) throw new Error("Could not create source");
+    const source = buildSourceFromUrl(url);
+    if (!source) throw new Error("Enter a valid URL.");
 
     unmarkRemovedSourceId(currentUser.uid, source.id);
 
-    // 2) Save to THIS user's personal library (Firestore + local cache)
-    const docId = await addUserSource(currentUser.uid, {
+    // 1) Personal library — Firestore only (no GitHub commit)
+    const saved = await addUserSource(currentUser.uid, {
       id: source.id,
       url: source.url,
-      name: source.name || url,
-      focus: source.focus || "custom",
-      blurb: source.blurb || url,
+      name: source.name,
+      focus: source.focus,
+      blurb: source.blurb,
       custom: true,
     });
 
-    const entry = {
-      id: source.id,
-      url: source.url,
-      name: source.name || url,
-      focus: source.focus || "custom",
-      blurb: source.blurb || url,
-      custom: true,
-      _docId: docId || undefined,
-    };
+    if (!saved.ok) {
+      throw new Error(
+        saved.error ||
+          "Could not save to Firestore. Deploy firestore.rules for users/{uid}/sources."
+      );
+    }
 
+    const entry = { ...source, _docId: saved.id };
     if (!userSources.some((s) => s.id === entry.id)) {
       userSources.push(entry);
     } else {
@@ -361,24 +402,37 @@ form.addEventListener("submit", async (event) => {
     }
     saveLibraryCache(currentUser.uid, userSources);
 
-    setSyncStatus(
-      `${source.name} saved to your library. ${scrapeSummary(result.scrape, source.id)}`
-    );
+    // 2) Enqueue cloud scrape (Firestore queue + Actions worker)
+    setSyncStatus("Saved. Queuing scrape…");
+    let scrapeNote = "";
+    try {
+      const idToken = await getIdToken();
+      const scrapeResult = await triggerScrape({
+        sourceId: source.id,
+        url: source.url,
+        name: source.name,
+        idToken,
+      });
+      cacheStatusById[source.id] = "pending";
+      scrapeNote = scrapeSummary(scrapeResult.report || scrapeResult.scrape);
+    } catch (scrapeErr) {
+      scrapeNote =
+        scrapeErr.message ||
+        "Saved to your library, but scrape queue failed. Try Sync all.";
+    }
+
+    setSyncStatus(`${source.name} saved. ${scrapeNote}`);
     form.reset();
     form.hidden = true;
     paintList(userSources);
   } catch (error) {
-    setSyncStatus(
-      error.message ||
-        "Could not add source. On the live site this uses cloud sync; locally use npm start."
-    );
+    setSyncStatus(error.message || "Could not add source.");
   } finally {
     saveResourceBtn.disabled = false;
     saveResourceBtn.textContent = "Save & scrape";
   }
 });
 
-// Re-render when user signs in or out
 onUserChange(() => renderLibrary().catch(() => {}));
 
 fillNotionForm();

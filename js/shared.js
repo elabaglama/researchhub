@@ -154,47 +154,78 @@ async function loadAllSources() {
   return merged;
 }
 
-async function addLibrarySource(url, { scrape = true } = {}) {
+async function addLibrarySource(url, { scrape = true, idToken } = {}) {
+  const headers = { "Content-Type": "application/json" };
+  if (idToken) headers.Authorization = `Bearer ${idToken}`;
   const response = await fetch("/api/sources", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: JSON.stringify({ url, scrape }),
   });
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
     throw new Error(data.error || "Could not add source");
   }
-
-  // Keep a browser mirror for offline display, synced to server file.
-  const fileCustom = await loadFileCustomSources();
-  saveCustomSources(fileCustom);
   return data;
 }
 
-async function removeLibrarySource(sourceId) {
+async function removeLibrarySource(sourceId, { idToken } = {}) {
+  const headers = {};
+  if (idToken) headers.Authorization = `Bearer ${idToken}`;
   const response = await fetch(`/api/sources?id=${encodeURIComponent(sourceId)}`, {
     method: "DELETE",
+    headers,
   });
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
     throw new Error(data.error || "Could not remove source");
   }
-  const fileCustom = await loadFileCustomSources();
-  saveCustomSources(fileCustom);
   return data;
 }
 
-async function triggerScrape({ sourceId } = {}) {
+async function triggerScrape({ sourceId, url, name, idToken } = {}) {
+  const headers = { "Content-Type": "application/json" };
+  if (idToken) headers.Authorization = `Bearer ${idToken}`;
   const response = await fetch("/api/scrape", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(sourceId ? { sourceId } : {}),
+    headers,
+    body: JSON.stringify({
+      ...(sourceId ? { sourceId } : {}),
+      ...(url ? { url } : {}),
+      ...(name ? { name } : {}),
+    }),
   });
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
     throw new Error(data.error || "Scrape failed");
   }
   return data;
+}
+
+function buildSourceFromUrl(url, extras = {}) {
+  let normalized = String(url || "").trim();
+  if (!normalized) return null;
+  if (!/^https?:\/\//i.test(normalized)) normalized = `https://${normalized}`;
+  let host = normalized;
+  try {
+    host = new URL(normalized).hostname.replace(/^www\./, "");
+  } catch {
+    /* keep */
+  }
+  const name = String(extras.name || "").trim() || host;
+  const id =
+    String(extras.id || "").trim() || `custom-${slugify(name) || slugify(host) || "source"}`;
+  const source = {
+    id,
+    name,
+    url: normalized,
+    focus: extras.focus || "Saved link",
+    blurb: extras.blurb || normalized,
+    searchUrl: `${normalized.replace(/\/$/, "")}/?s={query}`,
+    custom: true,
+  };
+  if (normalized.includes("airtable.com")) source.airtableUrl = normalized;
+  return source;
 }
 
 async function migrateBrowserSourcesToServer() {
@@ -486,6 +517,7 @@ export {
   addLibrarySource,
   removeLibrarySource,
   triggerScrape,
+  buildSourceFromUrl,
   migrateBrowserSourcesToServer,
   filterOpportunitiesBySources,
   loadLibraryCache,

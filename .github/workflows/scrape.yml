@@ -1,34 +1,36 @@
 name: Scrape opportunities
 
+# Firestore-first worker: scrapes URLs from workflow inputs / scrapeQueue / scrapeCache
+# and writes results to Firestore. No git commits for user scrapes.
+
 on:
-  # Immediate: any library add/remove that updates this file
-  push:
-    paths:
-      - "data/custom-sources.json"
-  # Backup refresh for built-in + custom sources
   schedule:
     - cron: "0 */6 * * *"
-  # Manual / Sync all / re-scrape one source
   workflow_dispatch:
     inputs:
       url:
-        description: "Optional new source URL to add before scraping"
+        description: "Source URL to scrape"
         required: false
         type: string
         default: ""
       source_id:
-        description: "Optional source id to scrape only"
+        description: "Source id to scrape / publish"
         required: false
         type: string
         default: ""
-      remove_source_id:
-        description: "Optional custom source id to remove"
+      name:
+        description: "Optional display name"
         required: false
         type: string
         default: ""
+      mode:
+        description: "one | queue | cache"
+        required: false
+        type: string
+        default: "one"
 
 permissions:
-  contents: write
+  contents: read
   actions: write
 
 concurrency:
@@ -37,11 +39,6 @@ concurrency:
 
 jobs:
   scrape:
-    # Avoid loop: bot commits from scrape must not re-trigger this workflow.
-    if: >
-      github.event_name != 'push' ||
-      (github.event.head_commit != null &&
-       !startsWith(github.event.head_commit.message, 'chore: refresh scraped'))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -52,49 +49,182 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Apply library changes
-        if: ${{ github.event_name == 'workflow_dispatch' && (inputs.url != '' || inputs.remove_source_id != '') }}
-        run: |
-          python scripts/manage_sources.py \
-            --url "${{ inputs.url }}" \
-            --remove "${{ inputs.remove_source_id }}"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-      - name: Scrape sources
-        run: |
-          EVENT="${{ github.event_name }}"
-          SOURCE_ID="${{ inputs.source_id }}"
-          REMOVE_ID="${{ inputs.remove_source_id }}"
+      - name: Install firebase-admin
+        run: npm install firebase-admin@12 --no-save
 
-          if [ "$EVENT" = "push" ]; then
-            echo "Library file changed — scraping all sources now."
-            python scripts/scrape_opportunities.py
-          elif [ -n "$SOURCE_ID" ]; then
-            echo "Scraping one source: $SOURCE_ID"
-            python scripts/scrape_opportunities.py "$SOURCE_ID"
-          elif [ -n "$REMOVE_ID" ]; then
-            echo "Source removed; cleaning without full scrape."
-          else
-            echo "Full scrape."
-            python scripts/scrape_opportunities.py
+      - name: Resolve scrape targets
+        id: targets
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_MODE: ${{ inputs.mode }}
+          INPUT_SOURCE_ID: ${{ inputs.source_id }}
+          INPUT_URL: ${{ inputs.url }}
+          INPUT_NAME: ${{ inputs.name }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/scrape-jobs
+
+          MODE="$INPUT_MODE"
+          SOURCE_ID="$INPUT_SOURCE_ID"
+          URL="$INPUT_URL"
+          NAME="$INPUT_NAME"
+
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            MODE="cache"
+          elif [ -z "$MODE" ] || [ "$MODE" = "one" ]; then
+            if [ -n "$SOURCE_ID" ] || [ -n "$URL" ]; then
+              MODE="one"
+            else
+              MODE="queue"
+            fi
           fi
 
-      - name: Commit updated data
-        run: |
-          git config user.name "elabaglama"
-          git config user.email "elaba@users.noreply.github.com"
-          git add data/opportunities.json data/scrape-meta.json data/custom-sources.json
-          if git diff --staged --quiet; then
-            echo "No opportunity changes."
+          echo "Resolved mode=$MODE"
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT:-}" ]; then
+            echo "FIREBASE_SERVICE_ACCOUNT secret is missing."
+            if [ "$MODE" = "one" ] && [ -n "$SOURCE_ID" ] && [ -n "$URL" ]; then
+              echo "Continuing one-off scrape without Firestore lookup (publish will fail)."
+            else
+              echo "count=0" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+
+          if [ "$MODE" = "one" ]; then
+            if [ -z "$SOURCE_ID" ] && [ -z "$URL" ]; then
+              echo "No source_id or url provided."
+              echo "count=0" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            if [ -z "$URL" ] && [ -n "$SOURCE_ID" ] && [ -n "${FIREBASE_SERVICE_ACCOUNT:-}" ]; then
+              INPUT_SOURCE_ID="$SOURCE_ID" node -e '
+                const { initializeApp, cert, getApps } = require("firebase-admin/app");
+                const { getFirestore } = require("firebase-admin/firestore");
+                const sa = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+                if (sa.private_key) sa.private_key = String(sa.private_key).replace(/\\n/g, "\n");
+                if (!getApps().length) initializeApp({ credential: cert(sa), projectId: sa.project_id });
+                const db = getFirestore();
+                const id = process.env.INPUT_SOURCE_ID;
+                (async () => {
+                  let url = "", name = "";
+                  const q = await db.collection("scrapeQueue").doc(id).get();
+                  const c = await db.collection("scrapeCache").doc(id).get();
+                  if (q.exists) { url = q.data().url || ""; name = q.data().name || ""; }
+                  if (!url && c.exists) { url = c.data().url || ""; name = name || c.data().name || ""; }
+                  console.log(JSON.stringify({ id, url, name }));
+                })().catch((e) => { console.error(e); process.exit(1); });
+              ' > /tmp/scrape-jobs/one.json
+              URL=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("/tmp/scrape-jobs/one.json","utf8")).url||"")')
+              LOOKUP_NAME=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("/tmp/scrape-jobs/one.json","utf8")).name||"")')
+              NAME="${NAME:-$LOOKUP_NAME}"
+              SOURCE_ID=$(node -e 'const d=JSON.parse(require("fs").readFileSync("/tmp/scrape-jobs/one.json","utf8")); console.log(d.id||"")')
+              SOURCE_ID="${SOURCE_ID:-$INPUT_SOURCE_ID}"
+            fi
+
+            if [ -z "$SOURCE_ID" ] || [ -z "$URL" ]; then
+              echo "Incomplete one-off target id=$SOURCE_ID url=$URL"
+              echo "count=0" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            TID="$SOURCE_ID" TURL="$URL" TNAME="$NAME" node -e '
+              console.log(JSON.stringify([{
+                id: process.env.TID,
+                url: process.env.TURL,
+                name: process.env.TNAME || ""
+              }], null, 2));
+            ' > /tmp/scrape-jobs/targets.json
+            echo "count=1" >> "$GITHUB_OUTPUT"
+
+          elif [ "$MODE" = "queue" ]; then
+            node scripts/publish_scrape_cache.mjs --list-queue > /tmp/scrape-jobs/targets.json
+            COUNT=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("/tmp/scrape-jobs/targets.json","utf8")).length)')
+            echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+
           else
-            git commit -m "chore: refresh scraped opportunities"
-            for i in 1 2 3 4 5; do
-              if git pull --rebase origin main && git push origin HEAD:main; then
-                echo "Push succeeded."
-                exit 0
-              fi
-              echo "Push race, retry $i..."
-              sleep $((i * 2))
-            done
-            echo "Failed to push after retries."
+            node scripts/publish_scrape_cache.mjs --list-cache > /tmp/scrape-jobs/targets.json
+            COUNT=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("/tmp/scrape-jobs/targets.json","utf8")).length)')
+            echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Scrape and publish to Firestore
+        if: ${{ steps.targets.outputs.count != '0' }}
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          set -euo pipefail
+          TARGETS=/tmp/scrape-jobs/targets.json
+
+          node -e '
+            const fs=require("fs");
+            let raw=JSON.parse(fs.readFileSync(process.argv[1],"utf8"));
+            if(!Array.isArray(raw)) raw=[raw];
+            raw=raw.map(t=>({
+              id: t.id || t.sourceId || "",
+              url: t.url || "",
+              name: t.name || ""
+            })).filter(t=>t.id && t.url);
+            fs.writeFileSync(process.argv[1], JSON.stringify(raw,null,2));
+            console.log("targets", raw.length);
+          ' "$TARGETS"
+
+          COUNT=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("/tmp/scrape-jobs/targets.json","utf8")).length)')
+          if [ "$COUNT" = "0" ]; then
+            echo "No valid targets after normalize."
+            exit 0
+          fi
+
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT:-}" ]; then
+            echo "FIREBASE_SERVICE_ACCOUNT secret is required to publish."
             exit 1
           fi
+
+          for i in $(seq 0 $((COUNT-1))); do
+            IDX="$i" node -e '
+              const t = JSON.parse(require("fs").readFileSync("/tmp/scrape-jobs/targets.json","utf8"))[Number(process.env.IDX)];
+              require("fs").writeFileSync("/tmp/scrape-jobs/current.json", JSON.stringify(t));
+            '
+            ID=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("/tmp/scrape-jobs/current.json","utf8")).id)')
+            URL=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("/tmp/scrape-jobs/current.json","utf8")).url)')
+            NAME=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("/tmp/scrape-jobs/current.json","utf8")).name||"")')
+
+            echo "=== Scraping $ID ($URL) ==="
+            REPORT="/tmp/scrape-jobs/report-$ID.json"
+            python scripts/scrape_opportunities.py \
+              --source-id "$ID" \
+              --url "$URL" \
+              --name "$NAME" \
+              --no-write \
+              --emit-json "$REPORT" \
+              "$ID"
+
+            TID="$ID" TURL="$URL" TNAME="$NAME" node -e '
+              const { initializeApp, cert, getApps } = require("firebase-admin/app");
+              const { getFirestore, FieldValue } = require("firebase-admin/firestore");
+              const sa = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+              if (sa.private_key) sa.private_key = String(sa.private_key).replace(/\\n/g, "\n");
+              if (!getApps().length) initializeApp({ credential: cert(sa), projectId: sa.project_id });
+              const db = getFirestore();
+              const id = process.env.TID;
+              const url = process.env.TURL;
+              const name = process.env.TNAME || url;
+              db.collection("scrapeCache").doc(id).set({
+                sourceId: id,
+                url,
+                name,
+                status: "pending",
+                updatedAt: FieldValue.serverTimestamp(),
+              }, { merge: true }).then(() => process.exit(0)).catch((e) => { console.error(e); process.exit(1); });
+            '
+
+            node scripts/publish_scrape_cache.mjs --report "$REPORT"
+          done

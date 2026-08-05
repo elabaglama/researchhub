@@ -97,6 +97,8 @@ export async function triggerScrapeWorkflow({
   url = "",
   sourceId = "",
   removeSourceId = "",
+  name = "",
+  mode = "one",
 } = {}) {
   const { owner, repo } = repoParts();
   const ref = process.env.GITHUB_BRANCH || DEFAULT_BRANCH;
@@ -107,21 +109,26 @@ export async function triggerScrapeWorkflow({
       inputs: {
         url: url || "",
         source_id: sourceId || "",
-        remove_source_id: removeSourceId || "",
+        name: name || "",
+        mode: mode || "one",
+        // keep legacy input key empty (workflow no longer uses remove_source_id)
       },
     },
   });
   return {
     pending: true,
     message:
-      "Scrape started immediately. Search updates in a few minutes after GitHub Actions finishes.",
+      "Scrape queued. Your feed updates when the cloud worker finishes writing Firestore.",
   };
 }
 
 export function cors(res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
 }
 
 export function slugify(value) {
