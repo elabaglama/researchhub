@@ -10,8 +10,7 @@ const LOCAL_KEY = "hub-onboarded";
 const STEPS = [
   {
     type: "standard",
-    emojiImg: "images/ob-flag-eu.png",
-    emojiAlt: "EU",
+    emoji: "🇪🇺",
     animated: true,
     title: "Welcome here, my friend.",
     body: "Start adding your EU open call websites, resources, news library links or even public Facebook groups you follow to the Library page.",
@@ -100,13 +99,15 @@ function _showGuide(user) {
 
     if (s.type === "wishlist") {
       popup.innerHTML = `
-        <a class="ob-wishlist-badge" href="${WISHLIST_URL}" target="_blank" rel="noopener noreferrer" aria-label="Ela's wishlist on Amazon">
-          <span class="ob-wishlist-label">Wishlist of Ela</span>
-          <div class="ob-wishlist-items">
-            <img src="images/ob-wishlist-lipstick.png" alt="Lipstick" class="ob-wishlist-img" />
-            <img src="images/ob-wishlist-macbook.png"  alt="MacBook"  class="ob-wishlist-img ob-wishlist-img--mac" />
-          </div>
-        </a>
+        <div class="ob-wishlist-row">
+          <a class="ob-wishlist-badge" href="${WISHLIST_URL}" target="_blank" rel="noopener noreferrer" aria-label="Ela's wishlist on Amazon">
+            <span class="ob-wishlist-label">Wishlist of Ela</span>
+            <div class="ob-wishlist-items">
+              <img src="images/ob-wishlist-lipstick.png" alt="Lipstick" class="ob-wishlist-img" />
+              <img src="images/ob-wishlist-macbook.png"  alt="MacBook"  class="ob-wishlist-img ob-wishlist-img--mac" />
+            </div>
+          </a>
+        </div>
         <h2 class="ob-title">${s.title}</h2>
         <p class="ob-body">${s.body}</p>
         ${dotsHTML()}

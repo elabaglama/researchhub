@@ -27,31 +27,18 @@ function ensureAudio() {
 function savedState() {
   try {
     const raw = sessionStorage.getItem(KEY);
-    if (!raw) return { playing: true, time: 0 };
-    return JSON.parse(raw);
+    if (!raw) return { playing: true };
+    const parsed = JSON.parse(raw);
+    // Always start from 0 — drop any saved time position
+    return { playing: parsed.playing };
   } catch {
-    return { playing: true, time: 0 };
+    return { playing: true };
   }
 }
 
 function persist(audio, playing) {
-  sessionStorage.setItem(
-    KEY,
-    JSON.stringify({ playing, time: audio.currentTime || 0 })
-  );
-}
-
-// Seek to saved time as soon as the audio is ready to accept it.
-function restoreTime(audio, time) {
-  if (time <= 0) return;
-  const doSeek = () => {
-    try { audio.currentTime = time; } catch { /* ignore */ }
-  };
-  if (audio.readyState >= 1) {
-    doSeek();
-  } else {
-    audio.addEventListener("loadedmetadata", doSeek, { once: true });
-  }
+  // Only persist the play/pause state, not the position
+  sessionStorage.setItem(KEY, JSON.stringify({ playing }));
 }
 
 function mountPlayer() {
@@ -70,8 +57,7 @@ function mountPlayer() {
 
   const button = root.querySelector(".music-player");
 
-  // Restore playback position
-  restoreTime(audio, state.time);
+  // Always start from position 0
 
   const setVisual = (playing) => {
     button.classList.toggle("is-playing", playing);
@@ -132,10 +118,6 @@ function mountPlayer() {
       setPlaying(false);
       return;
     }
-
-    // Re-seek if needed before resuming
-    const s = savedState();
-    if (s.time > 0 && audio.currentTime < 0.5) restoreTime(audio, s.time);
 
     await tryPlay();
   });

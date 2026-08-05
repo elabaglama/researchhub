@@ -1332,9 +1332,10 @@ body {
 
 /* Standard step — emoji text */
 .ob-emoji {
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   line-height: 1;
   display: block;
+  user-select: none;
 }
 .ob-emoji--bounce {
   animation: ob-bounce 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -1381,10 +1382,15 @@ body {
 }
 
 /* ── Wishlist step ── */
+
+/* Full-width row that holds the badge, left-aligned */
+.ob-wishlist-row {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .ob-wishlist-badge {
-  position: absolute;
-  top: 1.25rem;
-  left: 1.75rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1404,7 +1410,7 @@ body {
 .ob-wishlist-items {
   display: flex;
   align-items: flex-end;
-  gap: 0.25rem;
+  gap: 0.35rem;
 }
 .ob-wishlist-img {
   object-fit: contain;
