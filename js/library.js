@@ -1,17 +1,18 @@
 import {
   escapeHtml,
-  loadBaseSources,
-  loadAllSources,
-  loadFileCustomSources,
   wirePdfButton,
   getNotionConfig,
   saveNotionConfig,
   clearNotionConfig,
   isNotionConnected,
   addLibrarySource,
-  removeLibrarySource,
   triggerScrape,
-  migrateBrowserSourcesToServer,
+  loadLibraryCache,
+  saveLibraryCache,
+  loadRemovedSourceIds,
+  markRemovedSourceId,
+  unmarkRemovedSourceId,
+  mergePersonalSources,
 } from "./shared.js";
 import {
   currentUser,
@@ -22,8 +23,6 @@ import {
   loadUserSources,
   addUserSource,
   removeUserSource,
-  loadUserPrefs,
-  saveUserPrefs,
 } from "./firebase.js";
 
 wirePdfButton();
@@ -42,6 +41,9 @@ const notionSaveBtn = document.getElementById("notion-save-btn");
 const notionOverlay = document.getElementById("notion-overlay");
 const notionToggleBtn = document.getElementById("notion-toggle-btn");
 const notionCloseBtn = document.getElementById("notion-close-btn");
+
+/** In-memory list for the signed-in user's library. */
+let userSources = [];
 
 function openNotionPopup() {
   notionOverlay.hidden = false;
@@ -106,53 +108,28 @@ function scrapeSummary(report, sourceId) {
   return report.message || "Scrape finished.";
 }
 
-async function renderLibrary() {
-  let sources;
-  let userSources = [];
-  let hiddenIds = new Set();
-  let firestoreIds = new Set();
-
-  if (currentUser) {
-    // Signed in: base sources + THIS user's own Firestore sources only.
-    const [base, firestoreSources, prefs] = await Promise.all([
-      loadBaseSources(),
-      loadUserSources(currentUser.uid),
-      loadUserPrefs(currentUser.uid),
-    ]);
-    userSources = firestoreSources;
-    hiddenIds = new Set(Array.isArray(prefs.hiddenSources) ? prefs.hiddenSources : []);
-    firestoreIds = new Set(userSources.map((s) => s.id));
-
-    sources = [...base];
-    const knownIds = new Set(base.map((s) => s.id));
-    for (const us of userSources) {
-      if (!knownIds.has(us.id)) {
-        sources.push({ ...us, custom: true });
-        knownIds.add(us.id);
-      }
-    }
-    // Filter out sources the user has hidden
-    sources = sources.filter((s) => !hiddenIds.has(s.id));
-  } else {
-    // Signed out: all sources (base + file custom)
-    const [allSources] = await Promise.all([loadAllSources()]);
-    sources = allSources;
+function paintList(sources) {
+  if (!sources.length) {
+    list.innerHTML = `
+      <p class="empty-note">
+        Your library is empty. Add a resource to start building your personal feed —
+        Sync will scrape whatever you add here.
+      </p>`;
+    return;
   }
 
   list.innerHTML = sources
     .map((source) => {
-      const isUserOwned = firestoreIds.has(source.id) || source.custom;
-      const tag = isUserOwned ? ` <span class="saved-tag">Library</span>` : "";
       return `
-        <article class="simple-item">
+        <article class="simple-item" data-id="${escapeHtml(source.id)}">
           <a class="result-link" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">
-            <h2 class="simple-title">${escapeHtml(source.name)}${tag}</h2>
+            <h2 class="simple-title">${escapeHtml(source.name)} <span class="saved-tag">Library</span></h2>
             <p class="simple-meta">${escapeHtml(source.focus || "Resource")}</p>
             <p class="simple-summary">${escapeHtml(source.blurb || source.url)}</p>
           </a>
           <div class="result-actions">
             <button type="button" class="notion-save-btn resync-btn" data-id="${escapeHtml(source.id)}">Re-scrape</button>
-            <button type="button" class="notion-save-btn remove-btn" data-id="${escapeHtml(source.id)}" data-owned="${isUserOwned}">Remove</button>
+            <button type="button" class="notion-save-btn remove-btn" data-id="${escapeHtml(source.id)}">Remove</button>
           </div>
         </article>`;
     })
@@ -179,33 +156,59 @@ async function renderLibrary() {
   list.querySelectorAll(".remove-btn").forEach((button) => {
     button.addEventListener("click", async () => {
       const id = button.dataset.id;
-      const isOwned = button.dataset.owned === "true";
       if (!window.confirm("Remove this source from your library?")) return;
+      if (!currentUser) return;
 
-      // Optimistic: remove the card from the DOM immediately so the user sees
-      // instant feedback regardless of how long Firestore takes.
+      const us = userSources.find((s) => s.id === id);
       const card = button.closest("article");
-      if (card) card.remove();
-      setSyncStatus("Removed from your library.");
+      button.disabled = true;
 
-      // Persist removal in background — errors are silent (card is already gone).
-      if (currentUser) {
-        if (isOwned) {
-          const us = userSources.find((s) => s.id === id);
-          if (us?._docId) {
-            removeUserSource(currentUser.uid, us._docId).catch(() => {});
-          }
-        } else {
-          // Base source — record it as hidden in user prefs.
-          const updatedHidden = [...hiddenIds, id];
-          hiddenIds.add(id); // keep local state in sync for multi-removes
-          saveUserPrefs(currentUser.uid, { hiddenSources: updatedHidden }).catch(() => {});
+      // Persist removal locally FIRST so navigation never resurrects the card
+      markRemovedSourceId(currentUser.uid, id);
+      userSources = userSources.filter((s) => s.id !== id);
+      saveLibraryCache(currentUser.uid, userSources);
+      if (card) card.remove();
+      if (!userSources.length) paintList([]);
+      setSyncStatus("Removing…");
+
+      if (us?._docId) {
+        const ok = await removeUserSource(currentUser.uid, us._docId);
+        if (!ok) {
+          setSyncStatus(
+            "Removed from this device. Cloud delete couldn't confirm — it stays hidden here."
+          );
+          return;
         }
-      } else {
-        removeLibrarySource(id).catch(() => {});
       }
+      setSyncStatus("Removed from your library.");
     });
   });
+}
+
+/**
+ * Signed-in library = THIS user's Firestore sources only (empty for new accounts).
+ * Local removed-ids + cache keep removals sticky across page navigations.
+ */
+async function renderLibrary() {
+  if (!currentUser) {
+    list.innerHTML = `<p class="empty-note">Sign in to manage your personal library.</p>`;
+    userSources = [];
+    return;
+  }
+
+  const uid = currentUser.uid;
+  const [firestoreSources, cached] = await Promise.all([
+    loadUserSources(uid),
+    Promise.resolve(loadLibraryCache(uid)),
+  ]);
+
+  userSources = mergePersonalSources(
+    firestoreSources,
+    cached,
+    loadRemovedSourceIds(uid)
+  );
+  saveLibraryCache(uid, userSources);
+  paintList(userSources);
 }
 
 addBtn.addEventListener("click", () => {
@@ -219,12 +222,33 @@ cancelBtn.addEventListener("click", () => {
 });
 
 syncAllBtn.addEventListener("click", async () => {
+  if (!currentUser) {
+    setSyncStatus("Sign in to sync your library.");
+    return;
+  }
+  if (!userSources.length) {
+    setSyncStatus("Your library is empty — add a resource first, then Sync.");
+    return;
+  }
+
   syncAllBtn.disabled = true;
   syncAllBtn.textContent = "Syncing…";
-  setSyncStatus("Scraping every source… this can take a minute.");
+  setSyncStatus(`Scraping your ${userSources.length} source${userSources.length === 1 ? "" : "s"}…`);
+
   try {
-    const data = await triggerScrape();
-    setSyncStatus(`Synced. ${data.report?.total ?? 0} opportunities indexed.`);
+    let lastReport = null;
+    for (const source of userSources) {
+      setSyncStatus(`Scraping ${source.name || source.id}…`);
+      const data = await triggerScrape({ sourceId: source.id });
+      lastReport = data.report || lastReport;
+    }
+    const total =
+      typeof lastReport?.total === "number" ? lastReport.total : null;
+    setSyncStatus(
+      total != null
+        ? `Synced your library. Search uses only sources you added — updates land when the scrape finishes.`
+        : "Synced your library. Search updates in a few minutes when the scrape finishes."
+    );
   } catch (error) {
     setSyncStatus(
       error.message ||
@@ -258,7 +282,6 @@ notionForm.addEventListener("submit", async (event) => {
   notionSaveBtn.textContent = "Testing…";
   refreshNotionStatus("Saved locally. Testing Notion access…");
 
-  // Persist to Firestore so it's available on any device when signed in
   if (currentUser) {
     persistNotionToFirestore(currentUser.uid, { token, databaseId }).catch(() => {});
   }
@@ -294,31 +317,56 @@ form.addEventListener("submit", async (event) => {
   const data = new FormData(form);
   const url = String(data.get("url") || "").trim();
   if (!url) return;
+  if (!currentUser) {
+    setSyncStatus("Sign in to add resources to your library.");
+    return;
+  }
 
   saveResourceBtn.disabled = true;
   saveResourceBtn.textContent = "Saving & scraping…";
   setSyncStatus("Adding source and scraping listings…");
 
   try {
+    // 1) Register in the shared scrape queue so GitHub Actions can index it
     const result = await addLibrarySource(url, { scrape: true });
     const source = result.source;
-    // Also save to Firestore so it persists across devices when signed in
-    if (currentUser && source) {
-      await addUserSource(currentUser.uid, {
-        id: source.id,
-        url: source.url,
-        name: source.name || url,
-        focus: source.focus || "custom",
-        blurb: source.blurb || url,
-        custom: true,
-      });
+    if (!source) throw new Error("Could not create source");
+
+    unmarkRemovedSourceId(currentUser.uid, source.id);
+
+    // 2) Save to THIS user's personal library (Firestore + local cache)
+    const docId = await addUserSource(currentUser.uid, {
+      id: source.id,
+      url: source.url,
+      name: source.name || url,
+      focus: source.focus || "custom",
+      blurb: source.blurb || url,
+      custom: true,
+    });
+
+    const entry = {
+      id: source.id,
+      url: source.url,
+      name: source.name || url,
+      focus: source.focus || "custom",
+      blurb: source.blurb || url,
+      custom: true,
+      _docId: docId || undefined,
+    };
+
+    if (!userSources.some((s) => s.id === entry.id)) {
+      userSources.push(entry);
+    } else {
+      userSources = userSources.map((s) => (s.id === entry.id ? { ...s, ...entry } : s));
     }
+    saveLibraryCache(currentUser.uid, userSources);
+
     setSyncStatus(
-      `${source.name} saved. ${scrapeSummary(result.scrape, source.id)}`
+      `${source.name} saved to your library. ${scrapeSummary(result.scrape, source.id)}`
     );
     form.reset();
     form.hidden = true;
-    await renderLibrary();
+    paintList(userSources);
   } catch (error) {
     setSyncStatus(
       error.message ||
@@ -330,23 +378,12 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
-// Re-render when user signs in or out so their sources appear/disappear
+// Re-render when user signs in or out
 onUserChange(() => renderLibrary().catch(() => {}));
 
 fillNotionForm();
 refreshNotionStatus();
-setSyncStatus("Checking library sync…");
-
-try {
-  const migrated = await migrateBrowserSourcesToServer();
-  if (migrated.migrated) {
-    setSyncStatus(`Migrated ${migrated.migrated} older library link(s) and scraped them.`);
-  } else {
-    setSyncStatus("Library ready. New links sync in the cloud automatically.");
-  }
-} catch {
-  setSyncStatus("Library ready. New links sync via the live site cloud APIs.");
-}
+setSyncStatus("Library ready. Add links here — Sync scrapes only what you added.");
 
 await renderLibrary();
 

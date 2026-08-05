@@ -98,8 +98,9 @@ export async function loadUserPrefs(uid) {
 export async function saveUserPrefs(uid, data) {
   try {
     await withTimeout(setDoc(prefsRef(uid), data, { merge: true }));
+    return true;
   } catch {
-    /* Firestore not yet enabled or timed out — ignore */
+    return false;
   }
 }
 
@@ -126,7 +127,8 @@ export async function addUserSource(uid, source) {
 export async function removeUserSource(uid, docId) {
   try {
     await withTimeout(deleteDoc(doc(db, "users", uid, "sources", docId)));
+    return true;
   } catch {
-    /* ignore */
+    return false;
   }
 }

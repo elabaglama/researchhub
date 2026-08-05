@@ -2,9 +2,14 @@ import {
   matchesQuery,
   matchesFilters,
   renderResultCards,
-  loadAllSources,
   wirePdfButton,
+  filterOpportunitiesBySources,
+  loadLibraryCache,
+  loadRemovedSourceIds,
+  mergePersonalSources,
 } from "./shared.js";
+import { currentUser, onUserChange } from "./auth.js";
+import { loadUserSources } from "./firebase.js";
 
 wirePdfButton();
 
@@ -19,15 +24,39 @@ const body = document.body;
 const filterType = document.getElementById("filter-type");
 const filterContinent = document.getElementById("filter-continent");
 const filterCountry = document.getElementById("filter-country");
-
-const [sources, opportunities] = await Promise.all([
-  loadAllSources(),
-  fetch("data/opportunities.json").then((r) => r.json()),
-]);
-
 const countNumber = document.getElementById("count-number");
-if (countNumber) {
-  countNumber.textContent = String(opportunities.length);
+
+const allOpportunities = await fetch("data/opportunities.json").then((r) => r.json());
+
+let sources = [];
+let opportunities = [];
+
+/** Personal library sources for the signed-in user (empty → empty feed). */
+async function loadPersonalSources() {
+  if (!currentUser) return [];
+  const uid = currentUser.uid;
+  const [firestoreSources, cached] = await Promise.all([
+    loadUserSources(uid),
+    Promise.resolve(loadLibraryCache(uid)),
+  ]);
+  return mergePersonalSources(
+    firestoreSources,
+    cached,
+    loadRemovedSourceIds(uid)
+  );
+}
+
+function updateCount() {
+  if (countNumber) {
+    countNumber.textContent = String(opportunities.length);
+  }
+}
+
+async function refreshFeed() {
+  sources = await loadPersonalSources();
+  opportunities = filterOpportunitiesBySources(allOpportunities, sources);
+  updateCount();
+  runSearch(input.value);
 }
 
 function showFilters() {
@@ -102,7 +131,6 @@ function runSearch(query) {
   document.title = q ? `${q} — Research Hub` : "Research Hub";
 }
 
-// Show filters on first interaction with the search
 input.addEventListener("focus", showFilters);
 input.addEventListener("input", () => {
   showFilters();
@@ -118,10 +146,15 @@ filterType?.addEventListener("change", () => runSearch(input.value));
 filterContinent?.addEventListener("change", () => runSearch(input.value));
 filterCountry?.addEventListener("input", () => runSearch(input.value));
 
-// Also show filters when any filter is changed
 filterType?.addEventListener("focus", showFilters);
 filterContinent?.addEventListener("focus", showFilters);
 filterCountry?.addEventListener("focus", showFilters);
+
+await refreshFeed();
+
+onUserChange(() => {
+  refreshFeed().catch(() => {});
+});
 
 const initial = new URLSearchParams(window.location.search).get("q") || "";
 if (initial) {

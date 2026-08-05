@@ -216,6 +216,92 @@ async function migrateBrowserSourcesToServer() {
   return { migrated };
 }
 
+/** Opportunities belonging to the given library source list. Empty library → []. */
+function filterOpportunitiesBySources(opportunities, sources) {
+  const ids = new Set((sources || []).map((s) => s.id).filter(Boolean));
+  if (!ids.size) return [];
+  return (opportunities || []).filter((item) => ids.has(item.sourceId));
+}
+
+/**
+ * Local mirror of a signed-in user's library.
+ * Survives navigation even if a Firestore write is slow or briefly fails.
+ */
+function libraryCacheKey(uid) {
+  return `hub-library-${uid}`;
+}
+
+function removedSourcesKey(uid) {
+  return `hub-removed-${uid}`;
+}
+
+function loadLibraryCache(uid) {
+  if (!uid) return null;
+  try {
+    const raw = localStorage.getItem(libraryCacheKey(uid));
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveLibraryCache(uid, sources) {
+  if (!uid) return;
+  const clean = (sources || []).map(({ _docId, createdAt, ...rest }) => rest);
+  localStorage.setItem(libraryCacheKey(uid), JSON.stringify(clean));
+}
+
+function clearLibraryCache(uid) {
+  if (!uid) return;
+  localStorage.removeItem(libraryCacheKey(uid));
+}
+
+function loadRemovedSourceIds(uid) {
+  if (!uid) return new Set();
+  try {
+    const raw = localStorage.getItem(removedSourcesKey(uid));
+    const parsed = raw ? JSON.parse(raw) : [];
+    return new Set(Array.isArray(parsed) ? parsed : []);
+  } catch {
+    return new Set();
+  }
+}
+
+function saveRemovedSourceIds(uid, set) {
+  if (!uid) return;
+  localStorage.setItem(removedSourcesKey(uid), JSON.stringify([...set]));
+}
+
+function markRemovedSourceId(uid, id) {
+  const set = loadRemovedSourceIds(uid);
+  set.add(id);
+  saveRemovedSourceIds(uid, set);
+}
+
+function unmarkRemovedSourceId(uid, id) {
+  const set = loadRemovedSourceIds(uid);
+  set.delete(id);
+  saveRemovedSourceIds(uid, set);
+}
+
+/** Merge Firestore + local cache, minus locally-removed ids. */
+function mergePersonalSources(firestoreSources, cached, removedIds) {
+  const removed =
+    removedIds instanceof Set ? removedIds : new Set(removedIds || []);
+  const byId = new Map();
+  for (const s of firestoreSources || []) {
+    if (!s?.id || removed.has(s.id)) continue;
+    byId.set(s.id, { ...s, custom: true });
+  }
+  for (const c of cached || []) {
+    if (!c?.id || removed.has(c.id) || byId.has(c.id)) continue;
+    byId.set(c.id, { ...c, custom: true });
+  }
+  return [...byId.values()];
+}
+
 function slugify(value) {
   return normalize(value)
     .replace(/[^a-z0-9]+/g, "-")
@@ -401,6 +487,14 @@ export {
   removeLibrarySource,
   triggerScrape,
   migrateBrowserSourcesToServer,
+  filterOpportunitiesBySources,
+  loadLibraryCache,
+  saveLibraryCache,
+  clearLibraryCache,
+  loadRemovedSourceIds,
+  markRemovedSourceId,
+  unmarkRemovedSourceId,
+  mergePersonalSources,
   slugify,
   getNotionConfig,
   saveNotionConfig,

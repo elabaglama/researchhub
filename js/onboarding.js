@@ -3,10 +3,13 @@ import { loadUserPrefs, saveUserPrefs } from "./firebase.js";
 const WISHLIST_URL =
   "https://www.amazon.it/hz/wishlist/ls/6CV4RB9T1Y5S?ref_=wl_share";
 
-// SESSION_KEY — cleared when the tab closes (prevents re-show while navigating pages)
-const SESSION_KEY = "hub-ob-session";
+// Per-user session key — prevents re-show while navigating pages for THIS user,
+// without blocking a different account that signs up in the same tab.
+const sessionKey = (uid) => `hub-ob-session-${uid}`;
 // Per-user local key — persists across sessions so returning users skip the guide
 const localKey = (uid) => `hub-ob-${uid}`;
+// Set by auth.js right after a brand-new account is created
+const PENDING_GUIDE_KEY = "hub-ob-pending";
 
 const STEPS = [
   {
@@ -45,31 +48,76 @@ const STEPS = [
   },
 ];
 
+/** Call right after createUserWithEmailAndPassword / first Google sign-in. */
+export function markPendingGuide(uid) {
+  if (!uid) return;
+  sessionStorage.setItem(PENDING_GUIDE_KEY, uid);
+  sessionStorage.removeItem(sessionKey(uid));
+  localStorage.removeItem(localKey(uid));
+}
+
+function isPendingGuide(uid) {
+  return sessionStorage.getItem(PENDING_GUIDE_KEY) === uid;
+}
+
+function clearPendingGuide(uid) {
+  if (sessionStorage.getItem(PENDING_GUIDE_KEY) === uid) {
+    sessionStorage.removeItem(PENDING_GUIDE_KEY);
+  }
+}
+
+function isNewAccount(user) {
+  try {
+    const created = new Date(user.metadata.creationTime).getTime();
+    const lastSignIn = new Date(user.metadata.lastSignInTime).getTime();
+    const ageMs = Date.now() - created;
+    // Created in the last 10 minutes and this is essentially the first sign-in
+    return ageMs < 10 * 60 * 1000 && Math.abs(created - lastSignIn) < 120 * 1000;
+  } catch {
+    return false;
+  }
+}
+
 // Called by the "Guide" nav button — always shows the guide, ignoring all guards.
 export function forceShowGuide(user) {
   if (!user) return;
-  sessionStorage.removeItem(SESSION_KEY);
+  sessionStorage.removeItem(sessionKey(user.uid));
   localStorage.removeItem(localKey(user.uid));
+  clearPendingGuide(user.uid);
+  // Remove any existing overlay so replay always starts clean
+  document.querySelector(".ob-overlay")?.remove();
   _showGuide(user);
 }
 
 export async function showOnboardingIfNeeded(user) {
   if (!user) return;
 
-  // Fast synchronous checks — no network needed
-  if (sessionStorage.getItem(SESSION_KEY)) return;
+  // Already dismissed for this user in this tab — don't re-show on navigation
+  if (sessionStorage.getItem(sessionKey(user.uid))) return;
+
+  // Don't stack multiple overlays
+  if (document.querySelector(".ob-overlay")) return;
+
+  const pending = isPendingGuide(user.uid);
+  const brandNew = isNewAccount(user);
+
+  // Brand-new signups always get the full guide (all steps), regardless of
+  // any leftover flags from testing or another account in this browser.
+  if (pending || brandNew) {
+    localStorage.removeItem(localKey(user.uid));
+    _showGuide(user);
+    return;
+  }
+
   if (localStorage.getItem(localKey(user.uid))) return;
 
   // Firestore check with a 2-second safety timeout.
-  // If Firestore hangs (permission error, network issue, unconfigured DB),
-  // we fall through after 2 s and show the guide anyway.
   try {
     const prefs = await Promise.race([
       loadUserPrefs(user.uid),
       new Promise((resolve) => setTimeout(() => resolve({}), 2000)),
     ]);
     if (prefs.hasSeenOnboarding) {
-      // Cache locally so we skip the network round-trip next time
       localStorage.setItem(localKey(user.uid), "1");
       return;
     }
@@ -158,12 +206,12 @@ function _showGuide(user) {
   }
 
   function dismiss() {
-    // Mark as seen in every storage layer immediately
-    sessionStorage.setItem(SESSION_KEY, "1");
+    // Mark as seen for THIS user only
+    sessionStorage.setItem(sessionKey(user.uid), "1");
     localStorage.setItem(localKey(user.uid), "1");
+    clearPendingGuide(user.uid);
     overlay.classList.add("ob-overlay--out");
     setTimeout(() => overlay.remove(), 320);
-    // Also write to Firestore for cross-device persistence
     saveUserPrefs(user.uid, { hasSeenOnboarding: true }).catch(() => {});
   }
 

@@ -1,14 +1,17 @@
 import {
   escapeHtml,
-  loadAllSources,
   sourceById,
   saveOpportunityToNotion,
   classifyItem,
   CATEGORY_DEFS,
   wirePdfButton,
+  filterOpportunitiesBySources,
+  loadLibraryCache,
+  loadRemovedSourceIds,
+  mergePersonalSources,
 } from "./shared.js";
 import { currentUser, onUserChange } from "./auth.js";
-import { loadUserPrefs, saveUserPrefs } from "./firebase.js";
+import { loadUserPrefs, saveUserPrefs, loadUserSources } from "./firebase.js";
 
 wirePdfButton();
 
@@ -31,6 +34,8 @@ async function loadPrefs() {
     const prefs = await loadUserPrefs(currentUser.uid);
     if (Array.isArray(prefs.dailyColumns) && prefs.dailyColumns.length) {
       enabledKeys = new Set(prefs.dailyColumns);
+    } else {
+      enabledKeys = new Set(ALL_KEYS);
     }
   } catch {
     // keep defaults
@@ -52,7 +57,6 @@ async function savePrefs() {
 
 const customizeBtn = document.getElementById("customize-btn");
 const prefsOverlay = document.getElementById("prefs-overlay");
-const prefsPanel = document.getElementById("prefs-panel");
 const prefsCloseBtn = document.getElementById("prefs-close-btn");
 const prefsToggles = document.getElementById("prefs-toggles");
 const prefsSaveBtn = document.getElementById("prefs-save-btn");
@@ -88,7 +92,6 @@ function renderToggles() {
       if (cb.checked) {
         enabledKeys.add(cb.dataset.key);
       } else {
-        // Always keep at least one category on
         if (enabledKeys.size > 1) enabledKeys.delete(cb.dataset.key);
         else cb.checked = true;
       }
@@ -110,15 +113,33 @@ document.addEventListener("keydown", (e) => {
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
-const [sources, opportunities] = await Promise.all([
-  loadAllSources(),
-  fetch("data/opportunities.json").then((r) => r.json()),
-]);
+const allOpportunities = await fetch("data/opportunities.json").then((r) =>
+  r.json()
+);
 
-const byCategory = Object.fromEntries(CATEGORY_DEFS.map((c) => [c.key, []]));
-for (const item of opportunities) {
-  const key = classifyItem(item);
-  if (byCategory[key]) byCategory[key].push(item);
+let sources = [];
+let byCategory = Object.fromEntries(CATEGORY_DEFS.map((c) => [c.key, []]));
+
+async function loadPersonalSources() {
+  if (!currentUser) return [];
+  const uid = currentUser.uid;
+  const [firestoreSources, cached] = await Promise.all([
+    loadUserSources(uid),
+    Promise.resolve(loadLibraryCache(uid)),
+  ]);
+  return mergePersonalSources(
+    firestoreSources,
+    cached,
+    loadRemovedSourceIds(uid)
+  );
+}
+
+function rebuildCategories(opportunities) {
+  byCategory = Object.fromEntries(CATEGORY_DEFS.map((c) => [c.key, []]));
+  for (const item of opportunities) {
+    const key = classifyItem(item);
+    if (byCategory[key]) byCategory[key].push(item);
+  }
 }
 
 function sortItems(items) {
@@ -141,7 +162,11 @@ function renderReport() {
   );
 
   if (!activeCategories.length) {
-    root.innerHTML = `<p class="empty-note">No opportunities available for the selected categories yet.</p>`;
+    root.innerHTML = `<p class="empty-note">${
+      sources.length
+        ? "No opportunities available for the selected categories yet."
+        : "Your library is empty. Add resources on the Library page, then Sync to fill your daily report."
+    }</p>`;
     return;
   }
 
@@ -196,7 +221,6 @@ function renderReport() {
     root.appendChild(section);
   }
 
-  // Wire Notion save buttons
   root.querySelectorAll(".notion-save-btn").forEach((button) => {
     button.addEventListener("click", async (event) => {
       event.preventDefault();
@@ -232,13 +256,19 @@ function renderReport() {
   });
 }
 
+async function refreshFeed() {
+  sources = await loadPersonalSources();
+  const opportunities = filterOpportunitiesBySources(allOpportunities, sources);
+  rebuildCategories(opportunities);
+  renderReport();
+}
+
 // ── Boot ─────────────────────────────────────────────────────────────────────
 
 await loadPrefs();
-renderReport();
+await refreshFeed();
 
-// Re-render if user signs in/out (different preferences per user)
 onUserChange(async () => {
   await loadPrefs();
-  renderReport();
+  await refreshFeed();
 });

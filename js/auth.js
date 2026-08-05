@@ -14,7 +14,11 @@ import {
   setDoc,
 } from "./firebase.js";
 import { saveNotionConfig } from "./shared.js";
-import { showOnboardingIfNeeded, forceShowGuide } from "./onboarding.js";
+import {
+  showOnboardingIfNeeded,
+  forceShowGuide,
+  markPendingGuide,
+} from "./onboarding.js";
 
 // ── Public state ─────────────────────────────────────────────────────────────
 export let currentUser = null;
@@ -175,9 +179,27 @@ onAuthStateChanged(auth, (user) => {
 });
 
 // ── Auth actions ─────────────────────────────────────────────────────────────
+function _maybeMarkNewAccountGuide(user) {
+  if (!user) return;
+  // Google sign-in: treat as new if the account was just created
+  try {
+    const created = new Date(user.metadata.creationTime).getTime();
+    const lastSignIn = new Date(user.metadata.lastSignInTime).getTime();
+    if (
+      Date.now() - created < 10 * 60 * 1000 &&
+      Math.abs(created - lastSignIn) < 120 * 1000
+    ) {
+      markPendingGuide(user.uid);
+    }
+  } catch {
+    /* ignore */
+  }
+}
+
 async function signInGoogle() {
   const provider = new GoogleAuthProvider();
-  await signInWithPopup(auth, provider);
+  const cred = await signInWithPopup(auth, provider);
+  _maybeMarkNewAccountGuide(cred.user);
 }
 
 async function signInEmail(email, password) {
@@ -187,6 +209,8 @@ async function signInEmail(email, password) {
 async function signUpEmail(email, password, name) {
   const cred = await createUserWithEmailAndPassword(auth, email, password);
   if (name) await updateProfile(cred.user, { displayName: name });
+  // Always show the full guide for brand-new email accounts
+  markPendingGuide(cred.user.uid);
 }
 
 async function resetPassword(email) {
