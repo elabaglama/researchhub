@@ -8,7 +8,7 @@ const SESSION_KEY = "hub-onboarded-session";
 const STEPS = [
   {
     type: "standard",
-    emojiImg: "images/ob-flag-eu.png",
+    emojiImg: "images/ob-flag.png",
     emojiAlt: "EU flag",
     animated: true,
     title: "Welcome here, my friend.",
@@ -44,12 +44,15 @@ const STEPS = [
 
 export async function showOnboardingIfNeeded(user) {
   if (!user) return;
+  // If "Let's go" was already clicked in this tab session, don't re-show.
   if (sessionStorage.getItem(SESSION_KEY)) return;
+  // Only skip if Firestore explicitly says the user has completed the guide.
+  // On any Firestore error we fall through and show it — better once more than never.
   try {
     const prefs = await loadUserPrefs(user.uid);
     if (prefs.hasSeenOnboarding) return;
   } catch {
-    return;
+    // Firestore unavailable — show the guide anyway
   }
   _showGuide(user);
 }

@@ -84,6 +84,9 @@ function _renderGate() {
       </button>
       <div class="auth-divider"><span>or</span></div>
       <form class="auth-form" id="gate-form">
+        <div id="gate-name-wrap" hidden>
+          <input class="auth-input" name="name" type="text" placeholder="Your name" autocomplete="name" />
+        </div>
         <input class="auth-input" name="email" type="email" placeholder="Email" required autocomplete="email" />
         <input class="auth-input" name="password" type="password" placeholder="Password" required minlength="6" autocomplete="current-password" />
         <button class="auth-submit-btn" type="submit" id="gate-submit-btn">Sign in</button>
@@ -103,6 +106,7 @@ function _renderGate() {
   const submitBtn = gate.querySelector("#gate-submit-btn");
   const toggleBtn = gate.querySelector("#gate-toggle-btn");
   const forgotBtn = gate.querySelector("#gate-forgot-btn");
+  const nameWrap = gate.querySelector("#gate-name-wrap");
 
   function showErr(msg) { errorEl.textContent = msg; errorEl.hidden = false; }
   function clearErr() { errorEl.hidden = true; }
@@ -117,6 +121,7 @@ function _renderGate() {
     mode = mode === "signin" ? "signup" : "signin";
     submitBtn.textContent = mode === "signup" ? "Create account" : "Sign in";
     toggleBtn.textContent = mode === "signup" ? "Have an account? Sign in" : "No account? Sign up";
+    nameWrap.hidden = mode !== "signup";
     clearErr();
   });
 
@@ -131,11 +136,12 @@ function _renderGate() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault(); clearErr();
     const fd = new FormData(form);
+    const name = String(fd.get("name") || "").trim();
     const email = String(fd.get("email") || "").trim();
     const password = String(fd.get("password") || "");
     submitBtn.disabled = true;
     try {
-      if (mode === "signup") await signUpEmail(email, password, "");
+      if (mode === "signup") await signUpEmail(email, password, name);
       else await signInEmail(email, password);
     } catch (err) {
       showErr(friendlyError(err));
