@@ -35,5 +35,14 @@
     "blurb": "https://github.com/weecology/ogrants",
     "searchUrl": "https://github.com/weecology/ogrants/?s={query}",
     "custom": true
+  },
+  {
+    "id": "custom-artinthefind-com",
+    "name": "artinthefind.com",
+    "url": "https://www.artinthefind.com/",
+    "focus": "Saved link",
+    "blurb": "https://www.artinthefind.com/",
+    "searchUrl": "https://www.artinthefind.com/?s={query}",
+    "custom": true
   }
 ]
