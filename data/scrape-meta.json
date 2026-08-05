@@ -1,5 +1,5 @@
 {
-  "scrapedAt": "2026-08-05T15:08:00.504543+00:00",
+  "scrapedAt": "2026-08-05T15:09:33.652913+00:00",
   "sources": {
     "opportunities-for-youth": {
       "ok": true,
@@ -40,8 +40,13 @@
       "ok": true,
       "count": 1,
       "mode": "generic"
+    },
+    "custom-erasmusgram-com": {
+      "ok": true,
+      "count": 200,
+      "mode": "generic"
     }
   },
   "mode": "partial",
-  "total": 1437
+  "total": 1637
 }
