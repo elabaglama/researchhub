@@ -8,5 +8,14 @@
     "searchUrl": "https://airtable.com/appif4yp7nbZywohc/shrRQF62mNl2Nj8Sj/tbl6rThPPSLuBUdM0/?s={query}",
     "custom": true,
     "airtableUrl": "https://airtable.com/appif4yp7nbZywohc/shrRQF62mNl2Nj8Sj/tbl6rThPPSLuBUdM0"
+  },
+  {
+    "id": "custom-creativesunite-eu",
+    "name": "creativesunite.eu",
+    "url": "https://creativesunite.eu/synm/",
+    "focus": "Saved link",
+    "blurb": "https://creativesunite.eu/synm/",
+    "searchUrl": "https://creativesunite.eu/synm/?s={query}",
+    "custom": true
   }
 ]
