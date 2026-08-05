@@ -17,16 +17,33 @@ import {
   loadScrapeCaches,
   opportunitiesFromCaches,
 } from "./firebase.js";
+import { t, initI18n, toggleLang, getLang } from "./i18n.js";
 
 wirePdfButton();
+initI18n();
 
-const today = new Date().toLocaleDateString("en-US", {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
+document.getElementById("lang-toggle-btn")?.addEventListener("click", () => {
+  toggleLang();
+  refreshDate();
+  renderReport();
 });
-document.getElementById("daily-meta").textContent = today;
+window.addEventListener("langchange", () => {
+  refreshDate();
+  renderReport();
+});
+
+function refreshDate() {
+  const locale = getLang() === "it" ? "it-IT" : "en-US";
+  const today = new Date().toLocaleDateString(locale, {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const el = document.getElementById("daily-meta");
+  if (el) el.textContent = today;
+}
+refreshDate();
 
 const ALL_KEYS = CATEGORY_DEFS.map((c) => c.key);
 let enabledKeys = new Set(ALL_KEYS);
@@ -156,9 +173,7 @@ function renderReport() {
 
   if (!activeCategories.length) {
     root.innerHTML = `<p class="empty-note">${
-      sources.length
-        ? "No opportunities available for the selected categories yet. Try Sync on the Library page."
-        : "Your library is empty. Add resources on the Library page, then Sync to fill your daily report."
+      sources.length ? t("daily.noOpp") : t("daily.emptyLib")
     }</p>`;
     return;
   }

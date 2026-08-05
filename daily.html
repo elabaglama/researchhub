@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daily Report — Research Hub</title>
-    <meta name="description" content="Your daily opportunity report from Research Hub." />
+    <title>Report Giornaliero — Research Hub</title>
+    <meta name="description" content="Il tuo report giornaliero di opportunità da Research Hub." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Research Hub" />
-    <meta property="og:title" content="Daily Report — Research Hub" />
-    <meta property="og:description" content="Your daily opportunity report from Research Hub." />
+    <meta property="og:title" content="Report Giornaliero — Research Hub" />
+    <meta property="og:description" content="Il tuo report giornaliero di opportunità da Research Hub." />
     <meta property="og:url" content="https://hubforopportunities-six.vercel.app/daily" />
     <meta property="og:image" content="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
     <meta property="og:image:secure_url" content="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
@@ -17,8 +17,8 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Research Hub" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Daily Report — Research Hub" />
-    <meta name="twitter:description" content="Your daily opportunity report from Research Hub." />
+    <meta name="twitter:title" content="Report Giornaliero — Research Hub" />
+    <meta name="twitter:description" content="Il tuo report giornaliero di opportunità da Research Hub." />
     <meta name="twitter:image" content="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
     <link rel="image_src" href="https://hubforopportunities-six.vercel.app/images/og-meta.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,38 +32,39 @@
   </head>
   <body class="page-white">
     <nav class="top-pills top-pills-light" aria-label="Primary">
-      <a class="pill" href="daily.html" aria-current="page">Daily Report</a>
-      <a class="pill" href="library.html">Library</a>
-      <a class="pill" href="#" id="pdf-link">PDF</a>
-      <a class="pill" href="#" id="guide-btn">Guide</a>
+      <a class="pill" href="daily.html" aria-current="page" data-i18n="nav.daily">Report Giornaliero</a>
+      <a class="pill" href="library.html" data-i18n="nav.library">Libreria</a>
+      <a class="pill" href="#" id="pdf-link" data-i18n="nav.pdf">PDF</a>
+      <a class="pill" href="#" id="guide-btn" data-i18n="nav.guide">Guida</a>
+      <button type="button" class="lang-toggle-btn pill pill-lang pill-lang-light" id="lang-toggle-btn" aria-label="Cambia lingua">EN</button>
     </nav>
     <div id="auth-root" class="auth-root-light" data-theme="light"></div>
 
     <main class="white-main daily-wide">
       <div class="daily-header-row">
         <div>
-          <h1>Daily Report</h1>
-          <p id="daily-greeting" class="daily-greeting">Here is your daily report.</p>
+          <h1 data-i18n="daily.title">Report Giornaliero</h1>
+          <p id="daily-greeting" class="daily-greeting" data-i18n="daily.greeting">Ecco il tuo rapporto quotidiano.</p>
           <p id="daily-meta" class="lede"></p>
         </div>
-        <button type="button" class="ghost-btn" id="customize-btn" aria-expanded="false" aria-controls="prefs-panel">
-          ⚙ Customize
+        <button type="button" class="ghost-btn" id="customize-btn" aria-expanded="false" aria-controls="prefs-panel" data-i18n="daily.customize">
+          ⚙ Personalizza
         </button>
       </div>
       <div id="daily-columns" class="daily-columns"></div>
     </main>
 
-    <!-- Preferences popup — outside <main> so auth-gated blur cannot trap it -->
+    <!-- Preferences popup -->
     <div class="prefs-overlay" id="prefs-overlay" hidden>
       <div class="prefs-popup" id="prefs-panel" role="dialog" aria-modal="true" aria-labelledby="prefs-heading">
         <div class="prefs-popup-head">
-          <h2 id="prefs-heading">Customize Report</h2>
-          <button type="button" class="notion-close-btn" id="prefs-close-btn" aria-label="Close">✕</button>
+          <h2 id="prefs-heading" data-i18n="daily.prefsTitle">Personalizza Report</h2>
+          <button type="button" class="notion-close-btn" id="prefs-close-btn" aria-label="Chiudi">✕</button>
         </div>
-        <p class="prefs-hint">Toggle the sections you want to see in your daily report.</p>
+        <p class="prefs-hint" data-i18n="daily.prefsHint">Attiva le sezioni da visualizzare nel tuo report giornaliero.</p>
         <div id="prefs-toggles" class="prefs-toggles"></div>
         <div class="prefs-footer">
-          <button type="button" class="add-resource-btn" id="prefs-save-btn">Done</button>
+          <button type="button" class="add-resource-btn" id="prefs-save-btn" data-i18n="daily.done">Fatto</button>
         </div>
       </div>
     </div>

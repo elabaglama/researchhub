@@ -20,7 +20,7 @@ Or with the Firebase CLI:
 firebase deploy --only firestore:rules
 ```
 
-Until rules allow `users/{uid}/**` for the signed-in user, the app cannot create collections (the Data tab stays empty).
+Until rules allow `users/{uid}/**` for the signed-in user (and `sharedLibraries/{code}` for sharing), the app cannot create collections (the Data tab stays empty). Re-publish rules after pulling updates that add `sharedLibraries`.
 
 ### 2. Service account (optional but recommended)
 

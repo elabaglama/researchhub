@@ -25,12 +25,25 @@ import {
   removeUserSource,
   getIdToken,
   loadScrapeCaches,
+  createSharedLibrary,
+  loadSharedLibrary,
 } from "./firebase.js";
+import { t, initI18n, toggleLang } from "./i18n.js";
 
 wirePdfButton();
+initI18n();
+
+document.getElementById("lang-toggle-btn")?.addEventListener("click", () => {
+  toggleLang();
+  paintList(userSources);
+  refreshNotionStatus();
+});
+window.addEventListener("langchange", () => {
+  paintList(userSources);
+  refreshNotionStatus();
+});
 
 const list = document.getElementById("library-list");
-const addBtn = document.getElementById("add-resource-btn");
 const form = document.getElementById("add-resource-form");
 const cancelBtn = document.getElementById("cancel-add-btn");
 const saveResourceBtn = document.getElementById("save-resource-btn");
@@ -44,28 +57,63 @@ const notionOverlay = document.getElementById("notion-overlay");
 const notionToggleBtn = document.getElementById("notion-toggle-btn");
 const notionCloseBtn = document.getElementById("notion-close-btn");
 
-/** In-memory list for the signed-in user's library. */
+const shareBtn = document.getElementById("share-library-btn");
+const shareOverlay = document.getElementById("share-overlay");
+const shareCloseBtn = document.getElementById("share-close-btn");
+const shareUrlInput = document.getElementById("share-url-input");
+const shareStatus = document.getElementById("share-status");
+const shareCopyBtn = document.getElementById("share-copy-btn");
+
+const importOverlay = document.getElementById("import-overlay");
+const importCloseBtn = document.getElementById("import-close-btn");
+const importStatus = document.getElementById("import-status");
+const importConfirmBtn = document.getElementById("import-confirm-btn");
+
+const bulkForm = document.getElementById("bulk-import-form");
+const bulkUrls = document.getElementById("bulk-urls");
+const bulkAddBtn = document.getElementById("bulk-add-btn");
+
 let userSources = [];
 let cacheStatusById = {};
+let pendingImport = null;
 
-function openNotionPopup() {
-  notionOverlay.hidden = false;
+function openOverlay(el) {
+  if (!el) return;
+  el.hidden = false;
   document.body.style.overflow = "hidden";
-  notionForm.querySelector("input[name='token']").focus();
 }
-
-function closeNotionPopup() {
-  notionOverlay.hidden = true;
+function closeOverlay(el) {
+  if (!el) return;
+  el.hidden = true;
   document.body.style.overflow = "";
 }
 
-notionToggleBtn.addEventListener("click", openNotionPopup);
-notionCloseBtn.addEventListener("click", closeNotionPopup);
-notionOverlay.addEventListener("click", (e) => {
+function openNotionPopup() {
+  openOverlay(notionOverlay);
+  notionForm.querySelector("input[name='token']").focus();
+}
+function closeNotionPopup() {
+  closeOverlay(notionOverlay);
+}
+
+notionToggleBtn?.addEventListener("click", openNotionPopup);
+notionCloseBtn?.addEventListener("click", closeNotionPopup);
+notionOverlay?.addEventListener("click", (e) => {
   if (e.target === notionOverlay) closeNotionPopup();
 });
+shareCloseBtn?.addEventListener("click", () => closeOverlay(shareOverlay));
+shareOverlay?.addEventListener("click", (e) => {
+  if (e.target === shareOverlay) closeOverlay(shareOverlay);
+});
+importCloseBtn?.addEventListener("click", () => closeOverlay(importOverlay));
+importOverlay?.addEventListener("click", (e) => {
+  if (e.target === importOverlay) closeOverlay(importOverlay);
+});
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && !notionOverlay.hidden) closeNotionPopup();
+  if (e.key !== "Escape") return;
+  if (!notionOverlay?.hidden) closeNotionPopup();
+  if (!shareOverlay?.hidden) closeOverlay(shareOverlay);
+  if (!importOverlay?.hidden) closeOverlay(importOverlay);
 });
 
 function fillNotionForm() {
@@ -78,15 +126,11 @@ function fillNotionForm() {
 function refreshNotionStatus(extra = "") {
   const connected = isNotionConnected();
   if (connected) {
-    notionStatus.textContent =
-      extra || "Notion connected — Save to Notion is one click on any opportunity.";
-    notionToggleBtn.textContent = "Notion";
-    notionToggleBtn.title = "Notion connected";
+    notionStatus.textContent = extra || "Notion ✓";
+    notionToggleBtn.textContent = t("notion.connected");
   } else {
-    notionStatus.textContent =
-      extra || "Paste your integration secret once below, then save.";
-    notionToggleBtn.textContent = "Connect Notion";
-    notionToggleBtn.title = "Connect Notion";
+    notionStatus.textContent = extra || "";
+    notionToggleBtn.textContent = t("notion.connect");
   }
 }
 
@@ -95,31 +139,24 @@ function setSyncStatus(message) {
 }
 
 function scrapeSummary(report) {
-  if (!report) return "No scrape ran.";
+  if (!report) return "";
   if (report.pending) {
-    return (
-      report.message ||
-      "Scraping… your feed updates when the cloud worker finishes."
-    );
+    return report.message || "…";
   }
-  return report.message || "Scrape finished.";
+  return report.message || "";
 }
 
 function statusLabel(sourceId) {
   const status = cacheStatusById[sourceId];
-  if (status === "pending") return ` <span class="saved-tag">Scraping…</span>`;
-  if (status === "error") return ` <span class="saved-tag">Scrape failed</span>`;
-  if (status === "ready") return ` <span class="saved-tag">Ready</span>`;
-  return ` <span class="saved-tag">Library</span>`;
+  if (status === "pending") return ` <span class="saved-tag">${t("lib.statusScraping")}</span>`;
+  if (status === "error") return ` <span class="saved-tag">${t("lib.statusFailed")}</span>`;
+  if (status === "ready") return ` <span class="saved-tag">${t("lib.statusReady")}</span>`;
+  return ` <span class="saved-tag">${t("lib.statusLibrary")}</span>`;
 }
 
 function paintList(sources) {
   if (!sources.length) {
-    list.innerHTML = `
-      <p class="empty-note">
-        Your library is empty. Add a resource to start building your personal feed —
-        Sync scrapes only what you added.
-      </p>`;
+    list.innerHTML = `<p class="empty-note">${t("lib.empty")}</p>`;
     return;
   }
 
@@ -133,8 +170,8 @@ function paintList(sources) {
             <p class="simple-summary">${escapeHtml(source.blurb || source.url)}</p>
           </a>
           <div class="result-actions">
-            <button type="button" class="notion-save-btn resync-btn" data-id="${escapeHtml(source.id)}">Re-scrape</button>
-            <button type="button" class="notion-save-btn remove-btn" data-id="${escapeHtml(source.id)}">Remove</button>
+            <button type="button" class="notion-save-btn resync-btn" data-id="${escapeHtml(source.id)}">${t("lib.rescrape")}</button>
+            <button type="button" class="notion-save-btn remove-btn" data-id="${escapeHtml(source.id)}">${t("lib.remove")}</button>
           </div>
         </article>`;
     })
@@ -145,8 +182,8 @@ function paintList(sources) {
       const id = button.dataset.id;
       const source = userSources.find((s) => s.id === id);
       button.disabled = true;
-      button.textContent = "Scraping…";
-      setSyncStatus(`Scraping ${source?.name || id}…`);
+      button.textContent = t("lib.statusScraping");
+      setSyncStatus(`${source?.name || id}…`);
       try {
         const idToken = await getIdToken();
         const data = await triggerScrape({
@@ -159,10 +196,10 @@ function paintList(sources) {
         paintList(userSources);
         setSyncStatus(scrapeSummary(data.report || data.scrape));
       } catch (error) {
-        setSyncStatus(error.message || "Scrape failed");
+        setSyncStatus(error.message || t("lib.statusFailed"));
       } finally {
         button.disabled = false;
-        button.textContent = "Re-scrape";
+        button.textContent = t("lib.rescrape");
       }
     });
   });
@@ -170,7 +207,7 @@ function paintList(sources) {
   list.querySelectorAll(".remove-btn").forEach((button) => {
     button.addEventListener("click", async () => {
       const id = button.dataset.id;
-      if (!window.confirm("Remove this source from your library?")) return;
+      if (!window.confirm(t("lib.confirmRemove"))) return;
       if (!currentUser) return;
 
       const us = userSources.find((s) => s.id === id);
@@ -182,19 +219,16 @@ function paintList(sources) {
       saveLibraryCache(currentUser.uid, userSources);
       if (card) card.remove();
       if (!userSources.length) paintList([]);
-      setSyncStatus("Removing…");
+      setSyncStatus(t("lib.removing"));
 
       if (us?._docId) {
         const result = await removeUserSource(currentUser.uid, us._docId);
         if (!result.ok) {
-          setSyncStatus(
-            result.error ||
-              "Removed on this device. Cloud delete failed — check Firestore rules."
-          );
+          setSyncStatus(result.error || "Cloud delete failed.");
           return;
         }
       }
-      setSyncStatus("Removed from your library.");
+      setSyncStatus(t("lib.removed"));
     });
   });
 }
@@ -203,27 +237,20 @@ async function refreshCacheStatuses(sources) {
   const ids = sources.map((s) => s.id);
   const { ok, caches, error } = await loadScrapeCaches(ids);
   cacheStatusById = {};
-  if (!ok) {
-    return error || null;
-  }
+  if (!ok) return error || null;
   let pending = 0;
   for (const id of ids) {
     const status = caches[id]?.status || (caches[id]?.items?.length ? "ready" : "");
     if (status) cacheStatusById[id] = status;
     if (status === "pending") pending += 1;
   }
-  if (pending) {
-    return `${pending} source${pending === 1 ? "" : "s"} still scraping…`;
-  }
+  if (pending) return `${pending}…`;
   return null;
 }
 
-/**
- * Signed-in library = THIS user's Firestore sources only (empty for new accounts).
- */
 async function renderLibrary() {
   if (!currentUser) {
-    list.innerHTML = `<p class="empty-note">Sign in to manage your personal library.</p>`;
+    list.innerHTML = `<p class="empty-note">${t("lib.signIn")}</p>`;
     userSources = [];
     return;
   }
@@ -236,8 +263,7 @@ async function renderLibrary() {
 
   if (!loadResult.ok && !(cached && cached.length)) {
     list.innerHTML = `<p class="empty-note">${escapeHtml(
-      loadResult.error ||
-        "Could not load your library from Firestore. Deploy firestore.rules and try again."
+      loadResult.error || "Firestore error."
     )}</p>`;
     setSyncStatus(loadResult.error || "Firestore read failed.");
     userSources = [];
@@ -257,10 +283,45 @@ async function renderLibrary() {
   else if (loadResult.error) setSyncStatus(loadResult.error);
 }
 
-addBtn?.addEventListener("click", () => {
-  form.hidden = false;
-  form.querySelector("input[name='url']").focus();
-});
+async function addOneSource(url, { scrape = true } = {}) {
+  const source = buildSourceFromUrl(url);
+  if (!source) throw new Error("URL non valido.");
+  unmarkRemovedSourceId(currentUser.uid, source.id);
+
+  const saved = await addUserSource(currentUser.uid, {
+    id: source.id,
+    url: source.url,
+    name: source.name,
+    focus: source.focus,
+    blurb: source.blurb,
+    custom: true,
+  });
+  if (!saved.ok) throw new Error(saved.error || "Firestore save failed.");
+
+  const entry = { ...source, _docId: saved.id };
+  if (!userSources.some((s) => s.id === entry.id)) {
+    userSources.push(entry);
+  } else {
+    userSources = userSources.map((s) => (s.id === entry.id ? { ...s, ...entry } : s));
+  }
+  saveLibraryCache(currentUser.uid, userSources);
+
+  if (scrape) {
+    try {
+      const idToken = await getIdToken();
+      await triggerScrape({
+        sourceId: source.id,
+        url: source.url,
+        name: source.name,
+        idToken,
+      });
+      cacheStatusById[source.id] = "pending";
+    } catch {
+      /* keep going */
+    }
+  }
+  return source;
+}
 
 cancelBtn?.addEventListener("click", () => {
   form.reset();
@@ -268,22 +329,22 @@ cancelBtn?.addEventListener("click", () => {
 
 syncAllBtn.addEventListener("click", async () => {
   if (!currentUser) {
-    setSyncStatus("Sign in to sync your library.");
+    setSyncStatus(t("lib.signIn"));
     return;
   }
   if (!userSources.length) {
-    setSyncStatus("Your library is empty — add a resource first, then Sync.");
+    setSyncStatus(t("lib.empty"));
     return;
   }
 
   syncAllBtn.disabled = true;
-  syncAllBtn.textContent = "Syncing…";
-  setSyncStatus(`Queuing scrape for your ${userSources.length} source${userSources.length === 1 ? "" : "s"}…`);
+  syncAllBtn.textContent = "…";
+  setSyncStatus(`… ${userSources.length}`);
 
   try {
     const idToken = await getIdToken();
     for (const source of userSources) {
-      setSyncStatus(`Queuing ${source.name || source.id}…`);
+      setSyncStatus(`${source.name || source.id}…`);
       await triggerScrape({
         sourceId: source.id,
         url: source.url,
@@ -293,15 +354,126 @@ syncAllBtn.addEventListener("click", async () => {
       cacheStatusById[source.id] = "pending";
     }
     paintList(userSources);
-    setSyncStatus(
-      "Synced — scrapes are running in the cloud. Home and Daily update when each source finishes."
-    );
+    setSyncStatus(t("lib.syncReady"));
   } catch (error) {
     setSyncStatus(error.message || "Sync failed.");
   } finally {
     syncAllBtn.disabled = false;
-    syncAllBtn.textContent = "Sync all";
+    syncAllBtn.textContent = t("lib.syncAll");
   }
+});
+
+// ── Share library ────────────────────────────────────────────────────────────
+shareBtn?.addEventListener("click", async () => {
+  if (!currentUser) {
+    setSyncStatus(t("lib.signIn"));
+    return;
+  }
+  if (!userSources.length) {
+    setSyncStatus(t("lib.empty"));
+    return;
+  }
+  shareBtn.disabled = true;
+  shareStatus.textContent = "…";
+  openOverlay(shareOverlay);
+  const result = await createSharedLibrary(currentUser.uid, userSources, {
+    name: currentUser.displayName || "Research Hub",
+  });
+  shareBtn.disabled = false;
+  if (!result.ok) {
+    shareStatus.textContent = result.error || "Share failed.";
+    return;
+  }
+  shareUrlInput.value = result.url;
+  shareStatus.textContent = t("lib.shareCopied");
+  try {
+    await navigator.clipboard.writeText(result.url);
+  } catch {
+    /* user can copy manually */
+  }
+});
+
+shareCopyBtn?.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(shareUrlInput.value);
+    shareStatus.textContent = t("lib.shareCopied");
+  } catch {
+    shareUrlInput.select();
+  }
+});
+
+// ── Import shared library via ?import=CODE ───────────────────────────────────
+async function maybeOfferImport() {
+  const code = new URLSearchParams(location.search).get("import");
+  if (!code) return;
+  const { ok, library, error } = await loadSharedLibrary(code);
+  if (!ok || !library) {
+    setSyncStatus(error || "Share code not found.");
+    return;
+  }
+  pendingImport = library;
+  importStatus.textContent = t("lib.importConfirm", {
+    n: (library.sources || []).length,
+  });
+  openOverlay(importOverlay);
+}
+
+importConfirmBtn?.addEventListener("click", async () => {
+  if (!pendingImport || !currentUser) {
+    setSyncStatus(t("lib.signIn"));
+    return;
+  }
+  importConfirmBtn.disabled = true;
+  const sources = pendingImport.sources || [];
+  let added = 0;
+  for (const s of sources) {
+    try {
+      if (userSources.some((u) => u.id === s.id || u.url === s.url)) continue;
+      await addOneSource(s.url, { scrape: true });
+      added += 1;
+    } catch {
+      /* continue */
+    }
+  }
+  importConfirmBtn.disabled = false;
+  closeOverlay(importOverlay);
+  paintList(userSources);
+  setSyncStatus(`${t("lib.importDone")} (+${added})`);
+  // Clean URL
+  const url = new URL(location.href);
+  url.searchParams.delete("import");
+  history.replaceState({}, "", url);
+  pendingImport = null;
+});
+
+// ── Bulk import ──────────────────────────────────────────────────────────────
+bulkForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!currentUser) {
+    setSyncStatus(t("lib.signIn"));
+    return;
+  }
+  const lines = String(bulkUrls.value || "")
+    .split(/\r?\n/)
+    .map((l) => l.trim())
+    .filter(Boolean);
+  if (!lines.length) return;
+
+  bulkAddBtn.disabled = true;
+  let added = 0;
+  for (const line of lines) {
+    try {
+      setSyncStatus(`${line}…`);
+      await addOneSource(line, { scrape: true });
+      added += 1;
+    } catch (err) {
+      setSyncStatus(err.message || line);
+    }
+  }
+  bulkAddBtn.disabled = false;
+  bulkUrls.value = "";
+  paintList(userSources);
+  setSyncStatus(`+${added}`);
 });
 
 notionDisconnect.addEventListener("click", () => {
@@ -323,8 +495,7 @@ notionForm.addEventListener("submit", async (event) => {
   saveNotionConfig({ token, databaseId });
   const original = notionSaveBtn.textContent;
   notionSaveBtn.disabled = true;
-  notionSaveBtn.textContent = "Testing…";
-  refreshNotionStatus("Saved locally. Testing Notion access…");
+  notionSaveBtn.textContent = "…";
 
   if (currentUser) {
     persistNotionToFirestore(currentUser.uid, { token, databaseId }).catch(() => {});
@@ -338,18 +509,11 @@ notionForm.addEventListener("submit", async (event) => {
     });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) {
-      throw new Error(
-        payload.error ||
-          payload.message ||
-          "Could not reach Notion. Share the database with your integration."
-      );
+      throw new Error(payload.error || payload.message || "Notion test failed");
     }
-    const props = (payload.properties || []).join(", ") || "ok";
-    refreshNotionStatus(`Connected. Database properties: ${props}`);
+    refreshNotionStatus("Notion ✓");
   } catch (error) {
-    refreshNotionStatus(
-      `Saved in this browser, but test failed: ${error.message || error}. Check the integration is invited to the database.`
-    );
+    refreshNotionStatus(error.message || "Notion test failed");
   } finally {
     notionSaveBtn.disabled = false;
     notionSaveBtn.textContent = original;
@@ -362,72 +526,24 @@ form.addEventListener("submit", async (event) => {
   const url = String(data.get("url") || "").trim();
   if (!url) return;
   if (!currentUser) {
-    setSyncStatus("Sign in to add resources to your library.");
+    setSyncStatus(t("lib.signIn"));
     return;
   }
 
   saveResourceBtn.disabled = true;
-  saveResourceBtn.textContent = "Saving & scraping…";
-  setSyncStatus("Saving to your library…");
+  saveResourceBtn.textContent = t("lib.saving");
+  setSyncStatus(t("lib.saving"));
 
   try {
-    const source = buildSourceFromUrl(url);
-    if (!source) throw new Error("Enter a valid URL.");
-
-    unmarkRemovedSourceId(currentUser.uid, source.id);
-
-    // 1) Personal library — Firestore only (no GitHub commit)
-    const saved = await addUserSource(currentUser.uid, {
-      id: source.id,
-      url: source.url,
-      name: source.name,
-      focus: source.focus,
-      blurb: source.blurb,
-      custom: true,
-    });
-
-    if (!saved.ok) {
-      throw new Error(
-        saved.error ||
-          "Could not save to Firestore. Deploy firestore.rules for users/{uid}/sources."
-      );
-    }
-
-    const entry = { ...source, _docId: saved.id };
-    if (!userSources.some((s) => s.id === entry.id)) {
-      userSources.push(entry);
-    } else {
-      userSources = userSources.map((s) => (s.id === entry.id ? { ...s, ...entry } : s));
-    }
-    saveLibraryCache(currentUser.uid, userSources);
-
-    // 2) Enqueue cloud scrape (Firestore queue + Actions worker)
-    setSyncStatus("Saved. Queuing scrape…");
-    let scrapeNote = "";
-    try {
-      const idToken = await getIdToken();
-      const scrapeResult = await triggerScrape({
-        sourceId: source.id,
-        url: source.url,
-        name: source.name,
-        idToken,
-      });
-      cacheStatusById[source.id] = "pending";
-      scrapeNote = scrapeSummary(scrapeResult.report || scrapeResult.scrape);
-    } catch (scrapeErr) {
-      scrapeNote =
-        scrapeErr.message ||
-        "Saved to your library, but scrape queue failed. Try Sync all.";
-    }
-
-    setSyncStatus(`${source.name} saved. ${scrapeNote}`);
+    const source = await addOneSource(url, { scrape: true });
+    setSyncStatus(`${source.name} ${t("lib.saved")}`);
     form.reset();
     paintList(userSources);
   } catch (error) {
-    setSyncStatus(error.message || "Could not add source.");
+    setSyncStatus(error.message || "Error");
   } finally {
     saveResourceBtn.disabled = false;
-    saveResourceBtn.textContent = "Save & scrape";
+    saveResourceBtn.textContent = t("lib.saveBtn");
   }
 });
 
@@ -435,9 +551,9 @@ onUserChange(() => renderLibrary().catch(() => {}));
 
 fillNotionForm();
 refreshNotionStatus();
-setSyncStatus("Library ready. Add links here — Sync scrapes only what you added.");
 
 await renderLibrary();
+await maybeOfferImport();
 
 if (new URLSearchParams(window.location.search).get("print") === "1") {
   window.addEventListener("load", () => window.print());

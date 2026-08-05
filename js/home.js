@@ -6,6 +6,7 @@ import {
   loadLibraryCache,
   loadRemovedSourceIds,
   mergePersonalSources,
+  exportXls,
 } from "./shared.js";
 import { currentUser, onUserChange } from "./auth.js";
 import {
@@ -13,8 +14,19 @@ import {
   loadScrapeCaches,
   opportunitiesFromCaches,
 } from "./firebase.js";
+import { t, initI18n, toggleLang } from "./i18n.js";
 
 wirePdfButton();
+initI18n();
+
+// Language toggle
+document.getElementById("lang-toggle-btn")?.addEventListener("click", () => {
+  toggleLang();
+  runSearch(input.value);
+});
+window.addEventListener("langchange", () => {
+  runSearch(input.value);
+});
 
 const form = document.getElementById("search-form");
 const input = document.getElementById("query");
@@ -22,6 +34,7 @@ const resultsSection = document.getElementById("home-results");
 const resultsMeta = document.getElementById("results-meta");
 const resultsList = document.getElementById("results-list");
 const filtersEl = document.getElementById("search-filters");
+const xlsBtn = document.getElementById("xls-export-btn");
 const body = document.body;
 
 const filterType = document.getElementById("filter-type");
@@ -31,6 +44,7 @@ const countNumber = document.getElementById("count-number");
 
 let sources = [];
 let opportunities = [];
+let lastResults = [];
 
 async function loadPersonalSources() {
   if (!currentUser) return [];
@@ -58,7 +72,6 @@ async function refreshFeed() {
   const { caches } = await loadScrapeCaches(ids);
   opportunities = opportunitiesFromCaches(caches, ids);
 
-  // Migration fallback: if cache is empty but the shared JSON still has rows, use them.
   if (!opportunities.length && ids.length) {
     try {
       const all = await fetch("data/opportunities.json", { cache: "no-store" }).then((r) =>
@@ -115,11 +128,16 @@ function runSearch(query) {
 
   markActiveFilters(filters);
 
+  const pdfLink = document.getElementById("pdf-link");
+
   if (!q && !filtersOn) {
     body.classList.remove("is-searching");
     resultsSection.hidden = true;
     resultsList.innerHTML = "";
     resultsMeta.textContent = "";
+    if (xlsBtn) xlsBtn.hidden = true;
+    if (pdfLink) pdfLink.hidden = false;
+    lastResults = [];
     url.searchParams.delete("q");
     window.history.replaceState({}, "", url);
     document.title = "Research Hub";
@@ -129,14 +147,18 @@ function runSearch(query) {
   const results = opportunities.filter(
     (item) => matchesQuery(item, q) && matchesFilters(item, filters)
   );
+  lastResults = results;
 
   body.classList.add("is-searching");
   resultsSection.hidden = false;
+  if (xlsBtn) xlsBtn.hidden = results.length === 0;
+  if (pdfLink) pdfLink.hidden = true;
 
   const filterLabel = buildFilterLabel(filters);
   const queryLabel = q ? `"${q}"` : "";
   const forLabel = [queryLabel, filterLabel].filter(Boolean).join(" · ");
-  resultsMeta.textContent = `${results.length} result${results.length === 1 ? "" : "s"}${forLabel ? ` for ${forLabel}` : ""}`;
+  const countLabel = results.length === 1 ? t("results.count1") : t("results.countN");
+  resultsMeta.textContent = `${results.length} ${countLabel}${forLabel ? ` ${t("results.for")} ${forLabel}` : ""}`;
 
   renderResultCards(resultsList, results, sources, { carded: true });
 
@@ -148,6 +170,11 @@ function runSearch(query) {
   window.history.replaceState({}, "", url);
   document.title = q ? `${q} — Research Hub` : "Research Hub";
 }
+
+// XLS export
+xlsBtn?.addEventListener("click", () => {
+  exportXls(lastResults, sources, "risultati-research-hub.xls");
+});
 
 input.addEventListener("focus", showFilters);
 input.addEventListener("input", () => {
