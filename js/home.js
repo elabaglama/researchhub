@@ -128,12 +128,15 @@ function runSearch(query) {
 
   markActiveFilters(filters);
 
+  const pdfLink = document.getElementById("pdf-link");
+
   if (!q && !filtersOn) {
     body.classList.remove("is-searching");
     resultsSection.hidden = true;
     resultsList.innerHTML = "";
     resultsMeta.textContent = "";
     if (xlsBtn) xlsBtn.hidden = true;
+    if (pdfLink) pdfLink.hidden = false;
     lastResults = [];
     url.searchParams.delete("q");
     window.history.replaceState({}, "", url);
@@ -149,6 +152,7 @@ function runSearch(query) {
   body.classList.add("is-searching");
   resultsSection.hidden = false;
   if (xlsBtn) xlsBtn.hidden = results.length === 0;
+  if (pdfLink) pdfLink.hidden = true;
 
   const filterLabel = buildFilterLabel(filters);
   const queryLabel = q ? `"${q}"` : "";
