@@ -3,6 +3,11 @@ import { t } from "./i18n.js";
 const SOURCES_KEY = "research-hub-sources";
 const NOTION_KEY = "research-hub-notion";
 
+function apiPath(path) {
+  const base = typeof window !== "undefined" ? window.__APP_BASE__ || "" : "";
+  return `${base}${path}`;
+}
+
 function normalize(value) {
   return String(value || "")
     .toLowerCase()
@@ -159,7 +164,7 @@ async function loadAllSources() {
 async function addLibrarySource(url, { scrape = true, idToken } = {}) {
   const headers = { "Content-Type": "application/json" };
   if (idToken) headers.Authorization = `Bearer ${idToken}`;
-  const response = await fetch("/api/sources", {
+  const response = await fetch(apiPath("/api/sources"), {
     method: "POST",
     headers,
     body: JSON.stringify({ url, scrape }),
@@ -174,10 +179,13 @@ async function addLibrarySource(url, { scrape = true, idToken } = {}) {
 async function removeLibrarySource(sourceId, { idToken } = {}) {
   const headers = {};
   if (idToken) headers.Authorization = `Bearer ${idToken}`;
-  const response = await fetch(`/api/sources?id=${encodeURIComponent(sourceId)}`, {
-    method: "DELETE",
-    headers,
-  });
+  const response = await fetch(
+    apiPath(`/api/sources?id=${encodeURIComponent(sourceId)}`),
+    {
+      method: "DELETE",
+      headers,
+    }
+  );
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
     throw new Error(data.error || "Could not remove source");
@@ -188,7 +196,7 @@ async function removeLibrarySource(sourceId, { idToken } = {}) {
 async function triggerScrape({ sourceId, url, name, idToken } = {}) {
   const headers = { "Content-Type": "application/json" };
   if (idToken) headers.Authorization = `Bearer ${idToken}`;
-  const response = await fetch("/api/scrape", {
+  const response = await fetch(apiPath("/api/scrape"), {
     method: "POST",
     headers,
     body: JSON.stringify({
@@ -392,7 +400,7 @@ async function saveOpportunityToNotion(item, sourceName = "") {
     type: item.type || "opportunity",
   };
 
-  const response = await fetch("/api/save-to-notion", {
+  const response = await fetch(apiPath("/api/save-to-notion"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...payload, ...latest }),

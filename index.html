@@ -2,6 +2,23 @@
 <html lang="it">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var p = location.pathname || "/";
+        var under =
+          p === "/researchhub" ||
+          p === "/researchhub/" ||
+          p.indexOf("/researchhub/") === 0;
+        if (!under) return;
+        if (!document.querySelector("base")) {
+          var b = document.createElement("base");
+          b.href = "/researchhub/";
+          document.head.insertBefore(b, document.head.firstChild);
+        }
+        window.__APP_BASE__ = "/researchhub";
+      })();
+    </script>
+    <script src="js/base.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Research Hub</title>
     <meta name="description" content="Research Hub — il tuo feed personale di opportunità, borse, lavoro e bandi aperti." />
@@ -9,7 +26,15 @@
     <meta property="og:site_name" content="Research Hub" />
     <meta property="og:title" content="Research Hub" />
     <meta property="og:description" content="Il tuo feed personale di opportunità, borse, lavoro e bandi aperti." />
-    <meta property="og:url" content="https://hubforopportunities-six.vercel.app/" />
+    <meta property="og:url" content="https://www.teramap.co/researchhub" />
+    <meta property="og:image" content="https://www.teramap.co/researchhub/images/OG-meta-researchhub.png" />
+    <meta property="og:image:secure_url" content="https://www.teramap.co/researchhub/images/OG-meta-researchhub.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Research Hub" />
+    <meta name="twitter:image" content="https://www.teramap.co/researchhub/images/OG-meta-researchhub.png" />
+    <link rel="image_src" href="https://www.teramap.co/researchhub/images/OG-meta-researchhub.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Research Hub" />
     <meta name="twitter:description" content="Il tuo feed personale di opportunità, borse, lavoro e bandi aperti." />

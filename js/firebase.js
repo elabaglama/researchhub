@@ -240,7 +240,8 @@ export async function createSharedLibrary(uid, sources, { name = "" } = {}) {
       createdAt: serverTimestamp(),
     };
     await withTimeout(setDoc(doc(db, "sharedLibraries", code), payload));
-    const url = `${location.origin}/library?import=${encodeURIComponent(code)}`;
+    const base = window.__APP_BASE__ || "";
+    const url = `${location.origin}${base}/library?import=${encodeURIComponent(code)}`;
     return { ok: true, code, url };
   } catch (err) {
     return { ok: false, error: firestoreErrorMessage(err) };
