@@ -3,6 +3,10 @@ import { loadUserPrefs, saveUserPrefs } from "./firebase.js";
 const WISHLIST_URL =
   "https://www.amazon.it/hz/wishlist/ls/6CV4RB9T1Y5S?ref_=wl_share";
 
+// Immediate local flag — prevents re-show when navigating between pages
+// before the Firestore write has a chance to persist.
+const LOCAL_KEY = "hub-onboarded";
+
 const STEPS = [
   {
     type: "standard",
@@ -33,8 +37,7 @@ const STEPS = [
   },
   {
     type: "standard",
-    emojiImg: "images/ob-lock.png",
-    emojiAlt: "Security",
+    emoji: "🔒",
     title: "No security issues.",
     body: "Nothing is controlled by META, Google or Apple. Made for FELCOS privately.",
   },
@@ -42,12 +45,20 @@ const STEPS = [
 
 export async function showOnboardingIfNeeded(user) {
   if (!user) return;
+
+  // Local check first — survives page navigations without waiting for Firestore
+  if (localStorage.getItem(LOCAL_KEY)) return;
+
   try {
     const prefs = await loadUserPrefs(user.uid);
-    if (prefs.hasSeenOnboarding) return;
+    if (prefs.hasSeenOnboarding) {
+      localStorage.setItem(LOCAL_KEY, "1"); // sync the local flag
+      return;
+    }
   } catch {
     return;
   }
+
   _showGuide(user);
 }
 
@@ -123,9 +134,12 @@ function _showGuide(user) {
     }
   }
 
-  async function dismiss() {
+  function dismiss() {
+    // Set local flag IMMEDIATELY — any page navigation from now on won't show the guide
+    localStorage.setItem(LOCAL_KEY, "1");
     overlay.classList.add("ob-overlay--out");
     setTimeout(() => overlay.remove(), 320);
+    // Also persist to Firestore so it survives fresh browser sessions
     saveUserPrefs(user.uid, { hasSeenOnboarding: true }).catch(() => {});
   }
 
