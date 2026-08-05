@@ -26,5 +26,14 @@
     "blurb": "https://creativetechnologist.xyz/resources",
     "searchUrl": "https://creativetechnologist.xyz/resources/?s={query}",
     "custom": true
+  },
+  {
+    "id": "custom-github-com",
+    "name": "github.com",
+    "url": "https://github.com/weecology/ogrants",
+    "focus": "Saved link",
+    "blurb": "https://github.com/weecology/ogrants",
+    "searchUrl": "https://github.com/weecology/ogrants/?s={query}",
+    "custom": true
   }
 ]
