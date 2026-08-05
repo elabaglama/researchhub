@@ -891,8 +891,8 @@ def run(
         "freshBySource": {},
     }
 
-    # Preserve prior meta for sources not scraped this run.
-    if META_PATH.exists() and source_ids:
+    # Preserve prior meta for sources not scraped this run (git write mode only).
+    if write_files and META_PATH.exists() and source_ids:
         try:
             prev = json.loads(META_PATH.read_text(encoding="utf-8"))
             report["sources"] = dict(prev.get("sources") or {})

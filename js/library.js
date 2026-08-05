@@ -80,7 +80,7 @@ function refreshNotionStatus(extra = "") {
   if (connected) {
     notionStatus.textContent =
       extra || "Notion connected — Save to Notion is one click on any opportunity.";
-    notionToggleBtn.textContent = "Notion ●";
+    notionToggleBtn.textContent = "Notion";
     notionToggleBtn.title = "Notion connected";
   } else {
     notionStatus.textContent =
@@ -257,13 +257,12 @@ async function renderLibrary() {
   else if (loadResult.error) setSyncStatus(loadResult.error);
 }
 
-addBtn.addEventListener("click", () => {
+addBtn?.addEventListener("click", () => {
   form.hidden = false;
   form.querySelector("input[name='url']").focus();
 });
 
-cancelBtn.addEventListener("click", () => {
-  form.hidden = true;
+cancelBtn?.addEventListener("click", () => {
   form.reset();
 });
 
@@ -423,7 +422,6 @@ form.addEventListener("submit", async (event) => {
 
     setSyncStatus(`${source.name} saved. ${scrapeNote}`);
     form.reset();
-    form.hidden = true;
     paintList(userSources);
   } catch (error) {
     setSyncStatus(error.message || "Could not add source.");

@@ -26,20 +26,17 @@
       <div class="library-head">
         <div>
           <h1>Library</h1>
-          <p class="lede">Your personal sources only. Add a site, then Sync to refresh your feed.</p>
+          <p class="lede">Add a link, then click sync to refresh your feed.</p>
         </div>
         <div class="library-actions">
           <button type="button" class="ghost-btn" id="sync-all-btn">Sync all</button>
           <button type="button" class="ghost-btn" id="notion-toggle-btn">Connect Notion</button>
-          <button type="button" class="add-resource-btn" id="add-resource-btn">
-            Add resource
-          </button>
         </div>
       </div>
 
       <p id="sync-status" class="notion-status" aria-live="polite"></p>
 
-      <form class="add-resource-form" id="add-resource-form" hidden>
+      <form class="add-resource-form" id="add-resource-form">
         <label>
           Website link
           <input name="url" type="url" required placeholder="https://example.com" />
@@ -48,11 +45,8 @@
           <button type="submit" class="add-resource-btn" id="save-resource-btn">
             Save &amp; scrape
           </button>
-          <button type="button" class="cancel-btn" id="cancel-add-btn">Cancel</button>
+          <button type="button" class="cancel-btn" id="cancel-add-btn" hidden>Cancel</button>
         </div>
-        <p class="form-note">
-          Saving starts a cloud scrape right away. Results appear in search once the Action finishes (usually a few minutes). A backup scrape also runs every 6 hours.
-        </p>
       </form>
 
       <div id="library-list" class="simple-list"></div>
