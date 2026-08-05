@@ -51,6 +51,99 @@ export async function persistNotionToFirestore(uid, config) {
   });
 }
 
+// ── Auth gate ────────────────────────────────────────────────────────────────
+function _applyGate(user) {
+  const body = document.body;
+  if (!user) {
+    body.classList.add("auth-gated");
+    _renderGate();
+  } else {
+    body.classList.remove("auth-gated");
+    const gate = document.getElementById("auth-gate");
+    if (gate) {
+      gate.classList.add("auth-gate--leaving");
+      setTimeout(() => gate.remove(), 350);
+    }
+  }
+}
+
+function _renderGate() {
+  if (document.getElementById("auth-gate")) return;
+  const gate = document.createElement("div");
+  gate.id = "auth-gate";
+  gate.className = "auth-gate";
+  gate.innerHTML = `
+    <div class="auth-gate-card">
+      <p class="auth-gate-brand">Research<br/>Hub</p>
+      <h1 class="auth-gate-title">Your personal opportunity feed</h1>
+      <p class="auth-gate-sub">Sign in to access your daily report, search, and library.</p>
+      <p class="auth-gate-error" id="gate-error" hidden></p>
+      <button class="auth-google-btn auth-gate-google" id="gate-google-btn" type="button">
+        <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.1 18.9 12 24 12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.2 26.8 36 24 36c-5.3 0-9.7-3.3-11.3-7.9l-6.5 5C9.6 39.6 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.3 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+        Continue with Google
+      </button>
+      <div class="auth-divider"><span>or</span></div>
+      <form class="auth-form" id="gate-form">
+        <input class="auth-input" name="email" type="email" placeholder="Email" required autocomplete="email" />
+        <input class="auth-input" name="password" type="password" placeholder="Password" required minlength="6" autocomplete="current-password" />
+        <button class="auth-submit-btn" type="submit" id="gate-submit-btn">Sign in</button>
+      </form>
+      <div class="auth-footer" style="margin-top:.25rem">
+        <button class="auth-link-btn" id="gate-toggle-btn">No account? Sign up</button>
+        <button class="auth-link-btn" id="gate-forgot-btn">Forgot password?</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(gate);
+
+  let mode = "signin";
+  const errorEl = gate.querySelector("#gate-error");
+  const googleBtn = gate.querySelector("#gate-google-btn");
+  const form = gate.querySelector("#gate-form");
+  const submitBtn = gate.querySelector("#gate-submit-btn");
+  const toggleBtn = gate.querySelector("#gate-toggle-btn");
+  const forgotBtn = gate.querySelector("#gate-forgot-btn");
+
+  function showErr(msg) { errorEl.textContent = msg; errorEl.hidden = false; }
+  function clearErr() { errorEl.hidden = true; }
+
+  googleBtn.addEventListener("click", async () => {
+    clearErr(); googleBtn.disabled = true;
+    try { await signInGoogle(); }
+    catch (err) { showErr(friendlyError(err)); googleBtn.disabled = false; }
+  });
+
+  toggleBtn.addEventListener("click", () => {
+    mode = mode === "signin" ? "signup" : "signin";
+    submitBtn.textContent = mode === "signup" ? "Create account" : "Sign in";
+    toggleBtn.textContent = mode === "signup" ? "Have an account? Sign in" : "No account? Sign up";
+    clearErr();
+  });
+
+  forgotBtn.addEventListener("click", async () => {
+    clearErr();
+    const email = form.querySelector("[name='email']").value.trim();
+    if (!email) { showErr("Enter your email first."); return; }
+    try { await resetPassword(email); showErr("Reset link sent — check your inbox."); }
+    catch (err) { showErr(friendlyError(err)); }
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); clearErr();
+    const fd = new FormData(form);
+    const email = String(fd.get("email") || "").trim();
+    const password = String(fd.get("password") || "");
+    submitBtn.disabled = true;
+    try {
+      if (mode === "signup") await signUpEmail(email, password, "");
+      else await signInEmail(email, password);
+    } catch (err) {
+      showErr(friendlyError(err));
+      submitBtn.disabled = false;
+    }
+  });
+}
+
 // ── Auth state observer ──────────────────────────────────────────────────────
 onAuthStateChanged(auth, async (user) => {
   currentUser = user;
@@ -67,6 +160,7 @@ onAuthStateChanged(auth, async (user) => {
     await syncNotionFromFirestore(user.uid);
   }
   _notify();
+  _applyGate(user);
   _renderAllAuthRoots();
 });
 
