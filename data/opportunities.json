@@ -1,42 +1,55 @@
 [
   {
-    "id": "opportunities-for-youth-a7a0931d8c09",
-    "title": "Jefferson Scholars Foundation Scholarships 2026: Fully Funded Undergraduate Scholarships at the University of Virginia Worth Up to $405,000 for Outstanding Students",
+    "id": "opportunities-for-youth-3ac696ac7780",
+    "title": "A.S. Hornby Educational Trust Scholarship 2027/28 at the University of Exeter | Fully Funded MEd TESOL Scholarship for English Language Teachers from Developing Countries",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/2026-jefferson-fellowships/",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/a-s-hornby-educational-trust-scholarship-2027-28-at-the-university-of-exeter-fully-funded-med-tesol-scholarship-for-english-language-teachers-from-developing-countries/",
     "type": "scholarship",
     "deadline": "Open",
     "tags": [
       "scholarship",
       "youth"
     ],
-    "summary": "The Jefferson Scholars Foundation Scholarships are among the most prestigious undergraduate scholarship opportunities in the United States. Designed to"
+    "summary": "The A.S. Hornby Educational Trust Scholarship 2027/28 offers an outstanding opportunity for experienced English language teachers and TESOL professionals from"
   },
   {
-    "id": "opportunities-for-youth-fb7449a0adf3",
-    "title": "Skoll Scholarship 2027 at the University of Oxford: Fully Funded Oxford MBA Scholarship for Social Entrepreneurs Driving Systemic Change",
+    "id": "opportunities-for-youth-6028d104bc03",
+    "title": "Fully Funded DKFZ PhD Position 2026 in Translational Cancer Biology at LMU Munich",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/the-skoll-scholarship-empowering-social-entrepreneurs-to-lead-change-at-oxford/",
-    "type": "scholarship",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/funded-dkfz-phd/",
+    "type": "opportunity",
     "deadline": "Open",
     "tags": [
-      "scholarship",
+      "opportunity",
       "youth"
     ],
-    "summary": "Social entrepreneurs seeking to expand their leadership capacity, strengthen their ventures, and create greater social impact now have an exceptional"
+    "summary": "The German Cancer Research Center is accepting applications for a fully funded PhD position in Translational Cancer Biology at the German Cancer Consortium"
   },
   {
-    "id": "opportunities-for-youth-ec9c97ad10ed",
-    "title": "How to Prepare your UK Chevening Scholarship Application: 10 Top Tips to get You Selected",
+    "id": "opportunities-for-youth-f11d32f5a17b",
+    "title": "Oppenheimer Memorial Trust Postgraduate Scholarships 2027 in South Africa: Fully Supported Master's, Doctoral and Postdoctoral Funding for Outstanding Researchers",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/how-to-prepare-your-uk-chevening-scholarship-application-10-top-tips-to-get-you-selected/",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/oppenheimer-memorial-trust-postgraduate-scholarships-2027-in-south-africa-fully-supported-masters-doctoral-and-postdoctoral-funding-for-outstanding-researchers/",
     "type": "scholarship",
     "deadline": "Open",
     "tags": [
       "scholarship",
       "youth"
     ],
-    "summary": "Follow these steps between now and applications opening on 4 August, and you’ll be ready to ace the Chevening application process."
+    "summary": "The Oppenheimer Memorial Trust (OMT) has officially opened applications for its prestigious Postgraduate Scholarships for students planning to begin their"
+  },
+  {
+    "id": "opportunities-for-youth-ee633b59f1fb",
+    "title": "TNE Exploratory Grants 2026 | Up to £25,000 for Higher Education Partnerships",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/tne-exploratory-grants-2026-up-to-25000-for-higher-education-partnerships/",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "youth"
+    ],
+    "summary": "Higher education institutions seeking to strengthen international collaboration can now apply for the TNE Exploratory Grants 2026 under the Going Global"
   },
   {
     "id": "opportunities-for-youth-2896bc2142e2",
@@ -49,7 +62,7 @@
       "grant",
       "youth"
     ],
-    "summary": "Women around the world continue to drive innovation, lead communities, create groundbreaking solutions, and transform lives despite facing financial,"
+    "summary": "Strong Women Grant Programs 2026: Apply for Up to $90,000 in Funding, Mentorship, and Global Network Opportunities"
   },
   {
     "id": "opportunities-for-youth-64efc3bb727d",
@@ -63,19 +76,6 @@
       "youth"
     ],
     "summary": "Explore the Bayreuth Humboldt Centre Research Grants 2026–2027 at the University of Bayreuth — offering Starter and Short Term funding for international researchers. Apply by September 15, 2026 to advance your academic career through collaboration, innovation, and global research"
-  },
-  {
-    "id": "opportunities-for-youth-2d78b2f7b8b7",
-    "title": "Canadian Red Cross Resilience Fund 2026 in Canada | Up to $5,000 for Youth-Led Community Projects",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/canadian-red-cross-resilience-fund-2026-in-canada-up-to-5000-for-youth-led-community-projects/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Young changemakers in Canada now have an exciting opportunity to transform their ideas into meaningful action through the Canadian Red Cross Resilience Fund"
   },
   {
     "id": "opportunities-for-youth-b142efbda646",
@@ -117,6 +117,32 @@
     "summary": "The Climate Vulnerable Forum and Vulnerable Twenty Group (CVF-V20) Secretariat has announced an exciting opportunity for experienced climate and environmental"
   },
   {
+    "id": "opportunities-for-youth-d8c22d310a4d",
+    "title": "Kenneth Myer Innovation Fellowships 2027 in Australia: Receive Up to AUD 180,000 to Scale Innovative Social and Environmental Solution",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/kenneth-myer-innovation-fellowships-2027-in-australia-receive-up-to-aud-180000-to-scale-innovative-social-and-environmental-solution/",
+    "type": "fellowship",
+    "deadline": "Open",
+    "tags": [
+      "fellowship",
+      "youth"
+    ],
+    "summary": "The 2027 Kenneth Myer Innovation Fellowships are now accepting Expressions of Interest from exceptional Australian innovators who are developing"
+  },
+  {
+    "id": "opportunities-for-youth-2f7f87bd947f",
+    "title": "CDC Research Participation Opportunities Through ORISE: Explore Current Openings for Students, Graduates and Faculty",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/cdc-research-opportunities/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "The Centers for Disease Control and Prevention Research Participation Program offers current students, recent graduates and eligible university faculty an"
+  },
+  {
     "id": "opportunities-for-youth-e1513ca8e2c3",
     "title": "Autumn 2026 AI Societal Impact Lab Fellowship: Fully Funded Remote Opportunity for Emerging Researchers and Professionals Exploring the Societal Impact of Artificial Intelligence",
     "sourceId": "opportunities-for-youth",
@@ -128,32 +154,6 @@
       "youth"
     ],
     "summary": "To encourage informed public dialogue and nurture the next generation of thinkers in this important field, the AI Societal Impact Lab has officially launched"
-  },
-  {
-    "id": "opportunities-for-youth-da1e8d533d20",
-    "title": "Middlesex University Visiting Fellows Programme 2026 – Academic Collaboration and Research Opportunities",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/visiting-fellows-programme/",
-    "type": "program",
-    "deadline": "Open",
-    "tags": [
-      "program",
-      "youth"
-    ],
-    "summary": "Middlesex University Visiting Fellows Programme 2026 – Academic Collaboration and Research Opportunities"
-  },
-  {
-    "id": "opportunities-for-youth-d13f9239c94f",
-    "title": "AI Societal Impact Lab Autumn 2026 Fellowship: Fully Remote Fellowship for Emerging Researchers and Graduates Interested in the Social Impact of Artificial Intelligence",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/ai-societal-impact-lab-autumn-2026-fellowship-fully-remote-fellowship-for-emerging-researchers-and-graduates-interested-in-the-social-impact-of-artificial-intelligence/",
-    "type": "fellowship",
-    "deadline": "Open",
-    "tags": [
-      "fellowship",
-      "youth"
-    ],
-    "summary": "To support this growing need, the AI Societal Impact Lab has launched its inaugural Autumn 2026 Fellowship, a fully remote fellowship program designed to"
   },
   {
     "id": "opportunities-for-youth-c4a54519f7d0",
@@ -231,7 +231,7 @@
       "grant",
       "youth"
     ],
-    "summary": "The Norec Grant for Work Exchange Cooperation is now accepting applications for its Phase 1: Concept Development funding opportunity, offering organizations"
+    "summary": "Norec Grant for Work Exchange Cooperation 2026–202..."
   },
   {
     "id": "opportunities-for-youth-800f61017100",
@@ -413,7 +413,7 @@
       "grant",
       "youth"
     ],
-    "summary": "Organizations working in rural development, policy research, and agricultural investment now have an exciting opportunity to secure funding through the"
+    "summary": "IFAD Announces US$1.2 Million Grant Call for Propo..."
   },
   {
     "id": "opportunities-for-youth-54d8b4c20456",
@@ -465,7 +465,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "The African Union International Centre for Girls’ and Women’s Education in Africa (AU CIEFFA), in partnership with ImpactHER, has officially opened"
+    "summary": "African Union CIEFFA Online Capacity Building Trai..."
   },
   {
     "id": "opportunities-for-youth-525f345c51bc",
@@ -517,33 +517,46 @@
       "opportunity",
       "youth"
     ],
-    "summary": "The United Nations Convention to Combat Desertification (UNCCD) has officially opened the Expression of Interest (EOI) for organizations and individuals"
+    "summary": "Expression of Interest for UNCCD COP17 Children & Youth Resilience Hub Sessions: Submit Your Session Proposal for the Global Youth Platform."
   },
   {
-    "id": "opportunities-for-youth-6028d104bc03",
-    "title": "Fully Funded DKFZ PhD Position 2026 in Translational Cancer Biology at LMU Munich",
+    "id": "opportunities-for-youth-73799f272500",
+    "title": "Coca-Cola Scholars Program Scholarship 2027: Win a $20,000 College Scholarship for Outstanding High School Seniors in the United States",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/funded-dkfz-phd/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Fully Funded DKFZ PhD Position 2026 in Translational Cancer Biology at LMU Munich"
-  },
-  {
-    "id": "opportunities-for-youth-72d7f2ddde51",
-    "title": "Oppenheimer Memorial Trust Postgraduate Scholarships 2027 in South Africa: Fully Supported Master’s, Doctoral and Postdoctoral Funding for Outstanding Researchers",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/oppenheimer-memorial-trust-postgraduate-scholarships-2027-in-south-africa-fully-supported-masters-doctoral-and-postdoctoral-funding-for-outstanding-researchers/",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/coca-cola-scholars-program/",
     "type": "scholarship",
     "deadline": "Open",
     "tags": [
       "scholarship",
       "youth"
     ],
-    "summary": "Oppenheimer Memorial Trust Postgraduate Scholarships 2027 in South Africa: Fully Supported Master’s, Doctoral and Postdoctoral Funding for Outstanding Researchers"
+    "summary": "Coca-Cola Scholars Program Scholarship 2027: Win a $20,000 College Scholarship for Outstanding High School Seniors in the United States"
+  },
+  {
+    "id": "opportunities-for-youth-c72d323328ce",
+    "title": "Fully Funded PhD in Political Science at UCLouvain 2026 in Belgium: Study Inclusive Political Representation Through the WEAVE Research Project",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/fully-funded-phd-in-political-science-at-uclouvain-2026-in-belgium-study-inclusive-political-representation-through-the-weave-research-project/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Fully Funded PhD in Political Science at UCLouvain 2026 in Belgium: Study Inclusive Political Representation Through the WEAVE Research Project"
+  },
+  {
+    "id": "opportunities-for-youth-59ae51fd5209",
+    "title": "UpTide Accelerator 2026: Receive a $5,000 Grant, Up to $25,000 in Additional Funding, and Expert Support to Scale Your U.S. Nonprofit",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/apply-for-uptide-2025-2026-nonprofit-accelerator-by-92ny-offering-funding-strategy-growth-support/",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "youth"
+    ],
+    "summary": "UpTide Accelerator 2026: Receive a $5,000 Grant, Up to $25,000 in Additional Funding, and Expert Support to Scale Your U.S. Nonprofit"
   },
   {
     "id": "opportunities-for-youth-63eb26c41ccf",
@@ -559,17 +572,43 @@
     "summary": "NEH Collaborative Research Grants 2026 in the USA | Up to $250,000 for Humanities Research Projects"
   },
   {
-    "id": "opportunities-for-youth-ee633b59f1fb",
-    "title": "TNE Exploratory Grants 2026 | Up to £25,000 for Higher Education Partnerships",
+    "id": "opportunities-for-youth-8e137e20d6b1",
+    "title": "Amnesty International Free Online Human ...",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/tne-exploratory-grants-2026-up-to-25000-for-higher-education-partnerships/",
-    "type": "grant",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/amnesty-international-free-online-human-rights-courses-learn-in-30-languages-and-earn-certificates/",
+    "type": "opportunity",
     "deadline": "Open",
     "tags": [
-      "grant",
+      "opportunity",
       "youth"
     ],
-    "summary": "TNE Exploratory Grants 2026 | Up to £25,000 for Higher Education Partnerships"
+    "summary": "Amnesty International is offering free online courses through its Human Rights Academy, a dedicated digital learning platform designed to strengthen"
+  },
+  {
+    "id": "opportunities-for-youth-f5bff379de86",
+    "title": "FAO Fellows Programme 2026: Global Resea...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/fao-fellows-programme-2026-global-research-assignments-at-fao-offices-worldwide/",
+    "type": "program",
+    "deadline": "Open",
+    "tags": [
+      "program",
+      "youth"
+    ],
+    "summary": "FAO Fellows Programme 2026: Global Resea..."
+  },
+  {
+    "id": "opportunities-for-youth-1ed9b153ff89",
+    "title": "Africa Matters Future Pathways Fellowshi...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/africa-matters-future-pathways-fellowship-2026-fully-funded-leadership-and-career-development-fellowship-for-young-leaders-from-egypt-and-morocco/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Africa Matters Future Pathways Fellowshi..."
   },
   {
     "id": "opportunities-for-youth-50e020a96104",
@@ -585,56 +624,17 @@
     "summary": "UNITAR Digital Upskilling and Reskilling..."
   },
   {
-    "id": "opportunities-for-youth-15729ac01aeb",
-    "title": "Kenneth Myer Innovation Fellowships 2027...",
+    "id": "opportunities-for-youth-2d78b2f7b8b7",
+    "title": "Canadian Red Cross Resilience Fund 2026 in Canada | Up to $5,000 for Youth-Led Community Projects",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/kenneth-myer-innovation-fellowships-2027-in-australia-receive-up-to-aud-180000-to-scale-innovative-social-and-environmental-solution/",
-    "type": "fellowship",
-    "deadline": "Open",
-    "tags": [
-      "fellowship",
-      "youth"
-    ],
-    "summary": "Kenneth Myer Innovation Fellowships 2027..."
-  },
-  {
-    "id": "opportunities-for-youth-d22441c338fa",
-    "title": "CDC Research Participation Opportunities...",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/cdc-research-opportunities/",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/canadian-red-cross-resilience-fund-2026-in-canada-up-to-5000-for-youth-led-community-projects/",
     "type": "opportunity",
     "deadline": "Open",
     "tags": [
       "opportunity",
       "youth"
     ],
-    "summary": "CDC Research Participation Opportunities..."
-  },
-  {
-    "id": "opportunities-for-youth-8fdc58e4f373",
-    "title": "Initiative Coordinator at forNature in P...",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/initiative-coordinator-at-fornature-in-panama-full-time-opportunity-to-support-the-united-nations-universal-declaration-of-the-rights-of-nature/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "The global movement to recognize and protect the Rights of Nature continues to gain momentum, and forNature is seeking an experienced professional to play a"
-  },
-  {
-    "id": "opportunities-for-youth-f54b00102a9a",
-    "title": "National Geographic Society & The N...",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/paid-marine-conservation-externship-2026-remote-global-national-geographic-society-the-nature-conservancy/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Applications are now open for the National Geographic Society & The Nature Conservancy Community Conservation, Data Visualization, and Mapping Externship"
+    "summary": "Canadian Red Cross Resilience Fund 2026 in Canada | Up to $5,000 for Youth-Led Community Projects"
   },
   {
     "id": "opportunities-for-youth-dee29f2dd150",
@@ -647,7 +647,7 @@
       "grant",
       "youth"
     ],
-    "summary": "The British Council has officially launched the highly anticipated TNE Grants with India 2026–27 under the Going Global Partnerships initiative, offering an"
+    "summary": "British Council TNE Grants with India 2026–27: £30,000 Funding for UK–India Higher Education Partnerships in Emerging Technologies"
   },
   {
     "id": "opportunities-for-youth-8a40ce27330e",
@@ -661,19 +661,6 @@
       "youth"
     ],
     "summary": "The African Water Facility (AWF) has officially launched its 2026 Call for Proposals (CfP) under the AWF 2026–2030 Strategy, providing an exciting funding"
-  },
-  {
-    "id": "opportunities-for-youth-c11257fc4f5d",
-    "title": "SFU Climate Innovation Seed Funds 2026: Up to $100,000 Available to Advance Community-Centred Climate Research and Innovation",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/sfu-climate-innovation-seed-funds-2026-up-to-100000-available-to-advance-community-centred-climate-research-and-innovation/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Simon Fraser University (SFU) has officially launched the 2026 SFU Climate Innovation Seed Funds, providing $100,000 in total funding to accelerate innovative"
   },
   {
     "id": "opportunities-for-youth-99edf19d57ec",
@@ -715,6 +702,32 @@
     "summary": "The United Nations Development Programme (UNDP), in partnership with the Institute for Security Studies (ISS), has officially launched the Call for Papers:"
   },
   {
+    "id": "opportunities-for-youth-5d5ebd3bee57",
+    "title": "Skoll Scholarship 2027 at the University...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/the-skoll-scholarship-empowering-social-entrepreneurs-to-lead-change-at-oxford/",
+    "type": "scholarship",
+    "deadline": "Open",
+    "tags": [
+      "scholarship",
+      "youth"
+    ],
+    "summary": "Social entrepreneurs seeking to expand their leadership capacity, strengthen their ventures, and create greater social impact now have an exceptional"
+  },
+  {
+    "id": "opportunities-for-youth-960066ff25ad",
+    "title": "How to Prepare your UK Chevening Scholar...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/how-to-prepare-your-uk-chevening-scholarship-application-10-top-tips-to-get-you-selected/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "How to Prepare your UK Chevening Scholar..."
+  },
+  {
     "id": "opportunities-for-youth-65e1ce05f4e3",
     "title": "Introduction to Sports for Climate Actio...",
     "sourceId": "opportunities-for-youth",
@@ -725,11 +738,11 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Climate change is reshaping every sector of society, and the world of sports is no exception. From extreme weather disrupting major sporting events to the"
+    "summary": "Introduction to Sports for Climate Actio..."
   },
   {
-    "id": "opportunities-for-youth-2342b2c8c8e8",
-    "title": "DAFI Scholarship Programme 2026/2027 in ...",
+    "id": "opportunities-for-youth-9d62a83e89e5",
+    "title": "DAFI Scholarship Programme 2026/2027 in Rwanda: Fully Funded Undergraduate Scholarships for Refugees and Asylum Seekers",
     "sourceId": "opportunities-for-youth",
     "url": "https://opportunitiesforyouth.org/2026/08/01/dafi-scholarship-programme-2026-2027-in-rwanda-fully-funded-undergraduate-scholarships-for-refugees-and-asylum-seekers/",
     "type": "scholarship",
@@ -738,20 +751,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "Are you a refugee or asylum seeker in Rwanda looking to pursue a university education? Applications are now open for the UNHCR Albert Einstein German Academic"
-  },
-  {
-    "id": "opportunities-for-youth-101ba578b14c",
-    "title": "University of Manchester Equity and Meri...",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/01/equity-and-merit-scholarships-for-international-masters-students/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Are you an outstanding graduate from Ethiopia, Malawi, Rwanda, Tanzania, Uganda, or Zimbabwe looking to pursue a fully funded master's degree in the UK? The"
+    "summary": "DAFI Scholarship Programme 2026/2027 in Rwanda: Fully Funded Undergraduate Scholarships for Refugees and Asylum Seekers"
   },
   {
     "id": "opportunities-for-youth-d0fccb433480",
@@ -777,7 +777,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "Applications are available for the Slovakia Scholarships for Talented Students from All Over the World for the 2026/2027 academic year, an international..."
+    "summary": "Slovakia Scholarships for Talented International Students 2026/27: Study in Europe and Receive Up to €15,000"
   },
   {
     "id": "opportunities-for-youth-c79f88db50e4",
@@ -793,17 +793,17 @@
     "summary": "The International Conference on Theory and Practice of Electronic Governance (ICEGOV) 2026 has officially opened applications for its scholarship programme,"
   },
   {
-    "id": "opportunities-for-youth-12e668171548",
-    "title": "AmaliTech Immersive Internship Programme 2026 in Ghana (Paid): Gain Real World Software Engineering Experience with Mentorship and a Stipend",
+    "id": "opportunities-for-youth-bb005718ada1",
+    "title": "University of Manchester Equity and Merit Scholarships 2027–2028 in the UK (Fully Funded Master’s Scholarships for African Students)",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/09/amalitech-immersive-internship-programme-2026-in-ghana-paid-gain-real-world-software-engineering-experience-with-mentorship-and-a-stipend/",
-    "type": "internship",
+    "url": "https://opportunitiesforyouth.org/2026/08/01/equity-and-merit-scholarships-for-international-masters-students/",
+    "type": "scholarship",
     "deadline": "Open",
     "tags": [
-      "internship",
+      "scholarship",
       "youth"
     ],
-    "summary": "AmaliTech Immersive Internship Programme 2026 in Ghana (Paid): Gain Real World Software Engineering Experience with Mentorship and a Stipend"
+    "summary": "Are you an outstanding graduate from Ethiopia, Malawi, Rwanda, Tanzania, Uganda, or Zimbabwe looking to pursue a fully funded master's degree in the UK? The"
   },
   {
     "id": "opportunities-for-youth-6eb1987ad8a3",
@@ -829,7 +829,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "The 2027 KAS-SAIIA Scholarships are now open for applications, offering an exceptional opportunity for outstanding young graduates who aspire to pursue"
+    "summary": "Applications Open for the 2027 KAS-SAIIA Scholarships in South Africa: Fully Funded Master’s Scholarship and Internship Programme for Future Leaders"
   },
   {
     "id": "opportunities-for-youth-d6a5d8c825eb",
@@ -842,20 +842,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "The 2027 France-South Africa Scholarship Programme is officially open for applications, offering an exceptional opportunity for eligible students from South"
-  },
-  {
-    "id": "opportunities-for-youth-7ab04353f5ca",
-    "title": "University of Rwanda Mastercard Foundation Scholarship 2026–2027: 30 Fully Funded Master’s Scholarships for African Students",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/28/apply-now-university-of-rwanda-mastercard-foundation-scholarship-program-2025-2026-for-young-africans-fully-funded/",
-    "type": "scholarship",
-    "deadline": "Open",
-    "tags": [
-      "scholarship",
-      "youth"
-    ],
-    "summary": "Through this competitive opportunity, the University of Rwanda will recruit 30 scholars for eligible two-year master’s degree programmes. The scholarship is"
+    "summary": "France-South Africa Scholarship Programme 2027: Fully Funded Master’s and PhD Scholarships to Study in France for Students from South Africa, Lesotho, and Malawi"
   },
   {
     "id": "opportunities-for-youth-448fe7f9e727",
@@ -894,7 +881,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Are you passionate about migration studies, sociology, digital platforms, labor research, or social sciences? The University of Helsinki is inviting"
+    "summary": "Doctoral Researcher in the Social Sciences at the University of Helsinki 2026: Fully Funded PhD Opportunity on Migration, Platform Work and Digital Labor in Finland"
   },
   {
     "id": "opportunities-for-youth-6b5482085221",
@@ -910,6 +897,32 @@
     "summary": "Applications are now open for the 42nd Cycle of the National PhD Programme in Sustainable Development and Climate Change for the 2026–2027 academic year."
   },
   {
+    "id": "opportunities-for-youth-8fdc58e4f373",
+    "title": "Initiative Coordinator at forNature in P...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/initiative-coordinator-at-fornature-in-panama-full-time-opportunity-to-support-the-united-nations-universal-declaration-of-the-rights-of-nature/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Initiative Coordinator at forNature in P..."
+  },
+  {
+    "id": "opportunities-for-youth-f54b00102a9a",
+    "title": "National Geographic Society & The N...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/paid-marine-conservation-externship-2026-remote-global-national-geographic-society-the-nature-conservancy/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "National Geographic Society & The N..."
+  },
+  {
     "id": "opportunities-for-youth-43ea046755db",
     "title": "NDU Student Trainee Internship 2026: Paid National Security Research Opportunity in Washington, DC",
     "sourceId": "opportunities-for-youth",
@@ -920,7 +933,7 @@
       "internship",
       "youth"
     ],
-    "summary": "Applications are open for the National Defense University Student Trainee Internship 2026, a paid federal Pathways Internship Program opportunity based at"
+    "summary": "NDU Student Trainee Internship 2026: Paid National Security Research Opportunity in Washington, DC"
   },
   {
     "id": "opportunities-for-youth-543e4a84102d",
@@ -946,7 +959,7 @@
       "internship",
       "youth"
     ],
-    "summary": "Women’s World Banking Fall 2026 Internships | Remote Opportunities in Research and Policy Advocacy"
+    "summary": "Women’s World Banking is now accepting applications for its Fall 2026 internship opportunities. Graduate students interested in international development,"
   },
   {
     "id": "opportunities-for-youth-b203259612e5",
@@ -962,17 +975,43 @@
     "summary": "Protecting children from exploitation remains one of the world's most urgent development priorities. As technology advances, migration patterns evolve, and"
   },
   {
-    "id": "opportunities-for-youth-aa1ca64dbee1",
-    "title": "30 African Founders to Receive Startup Support as Applications Open for a Transformational Entrepreneurship Program – Apply Before 28 August 2026",
+    "id": "opportunities-for-youth-a7a0931d8c09",
+    "title": "Jefferson Scholars Foundation Scholarships 2026: Fully Funded Undergraduate Scholarships at the University of Virginia Worth Up to $405,000 for Outstanding Students",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/30-african-founders-to-receive-startup-support-as-applications-open-for-a-transformational-entrepreneurship-program-apply-before-28-august-2026/",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/2026-jefferson-fellowships/",
+    "type": "scholarship",
+    "deadline": "Open",
+    "tags": [
+      "scholarship",
+      "youth"
+    ],
+    "summary": "Jefferson Scholars Foundation Scholarships 2026: Fully Funded Undergraduate Scholarships at the University of Virginia Worth Up to $405,000 for Outstanding Students"
+  },
+  {
+    "id": "opportunities-for-youth-da1e8d533d20",
+    "title": "Middlesex University Visiting Fellows Programme 2026 – Academic Collaboration and Research Opportunities",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/visiting-fellows-programme/",
     "type": "program",
     "deadline": "Open",
     "tags": [
       "program",
       "youth"
     ],
-    "summary": "30 African Founders to Receive Startup Support as Applications Open for a Transformational Entrepreneurship Program – Apply Before 28 August 2026"
+    "summary": "Middlesex University Visiting Fellows Programme 2026 – Academic Collaboration and Research Opportunities"
+  },
+  {
+    "id": "opportunities-for-youth-d13f9239c94f",
+    "title": "AI Societal Impact Lab Autumn 2026 Fellowship: Fully Remote Fellowship for Emerging Researchers and Graduates Interested in the Social Impact of Artificial Intelligence",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/ai-societal-impact-lab-autumn-2026-fellowship-fully-remote-fellowship-for-emerging-researchers-and-graduates-interested-in-the-social-impact-of-artificial-intelligence/",
+    "type": "fellowship",
+    "deadline": "Open",
+    "tags": [
+      "fellowship",
+      "youth"
+    ],
+    "summary": "AI Societal Impact Lab Autumn 2026 Fellowship: Fully Remote Fellowship for Emerging Researchers and Graduates Interested in the Social Impact of Artificial Intelligence"
   },
   {
     "id": "opportunities-for-youth-b7edbec74d6f",
@@ -985,7 +1024,7 @@
       "jobs",
       "youth"
     ],
-    "summary": "Digital marketing is no longer a niche skill—it is the backbone of modern business growth. In today’s interconnected world, companies across industries rely"
+    "summary": "Digital Marketing Bootcamp 2026 – Free Training in Ghana and Nigeria for Career Launch"
   },
   {
     "id": "opportunities-for-youth-e869e169a96c",
@@ -998,33 +1037,7 @@
       "fellowship",
       "youth"
     ],
-    "summary": "The Commonwealth Scholarship Commission (CSC) in the UK has opened applications for the Commonwealth Startup Fellowships 2026, a prestigious six-month"
-  },
-  {
-    "id": "opportunities-for-youth-80685b0bf0e5",
-    "title": "Become a Churchill Fellow 2026–2027: Applications Open Soon for Changemakers Seeking Global Solutions to Local Challenges",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/become-a-churchill-fellow-2026-2027-applications-open-soon-for-changemakers-seeking-global-solutions-to-local-challenges/",
-    "type": "competition",
-    "deadline": "Open",
-    "tags": [
-      "competition",
-      "youth"
-    ],
-    "summary": "Individuals who are passionate about creating meaningful change in the issues they care about will soon have an opportunity to join one of the world's most"
-  },
-  {
-    "id": "opportunities-for-youth-81ba3abe8af7",
-    "title": "Eric and Wendy Schmidt AI in Science Postdoctoral Fellowship at the University of Oxford 2026: Fully Funded Opportunity for Early-Career Researchers Applying Artificial Intelligenc",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/eric-and-wendy-schmidt-ai-in-science-postdoctoral-fellowship-at-the-university-of-oxford-2026-fully-funded-opportunity-for-early-career-researchers-applying-artificial-intelligence-to-stem-research/",
-    "type": "fellowship",
-    "deadline": "Open",
-    "tags": [
-      "fellowship",
-      "youth"
-    ],
-    "summary": "The Eric and Wendy Schmidt AI in Science Postdoctoral Fellowship at the University of Oxford is now accepting applications for its fifth round of funding,"
+    "summary": "Commonwealth Startup Fellowships 2026: Fully Funded Six-Month Entrepreneurship Programme for Startups from Low and Middle Income Commonwealth Countries"
   },
   {
     "id": "still-hiring-44739946ab32",
@@ -16848,6 +16861,84 @@
     "summary": "Transportation brokerage connecting shippers with extensive carrier network solutions. · Columbus, US · 326 employees"
   },
   {
+    "id": "artinfoland-7fd98e1ecca8",
+    "title": "Boston Lyric Opera: Studio Manager, Opera + Community Studios Job Opportunity",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/opportunities/studio-manager-boston-lyric-opera-job/",
+    "type": "jobs",
+    "deadline": "12 August 2026",
+    "tags": [
+      "jobs",
+      "arts"
+    ],
+    "summary": "Organizer Information Boston Lyric Opera (BLO) is New England’s oldest and largest opera company, celebrating its 50th anniversary in 2026. Historically without a permanent home, BLO staged productions across a range of Boston venues, including the Emerson Colonial Theatre, the C"
+  },
+  {
+    "id": "artinfoland-7225e21e01e2",
+    "title": "EnzymKultur Video Art 2027 Open Call",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/opportunities/enzymkultur-video-art-2027-open-call/",
+    "type": "jobs",
+    "deadline": "30 September 2026",
+    "tags": [
+      "open-call",
+      "arts"
+    ],
+    "summary": "Organizer Information EnzymKultur e.V. is a small, nonprofit art association founded in Essen in late 2022 by a group of friends working across visual art, music, and cultural organizing in the Ruhr region of Germany. The association describes itself as a “laboratory for art proj"
+  },
+  {
+    "id": "artinfoland-5bcfae1a54d7",
+    "title": "SANS! New Worlds 2028 Open Call for Artists",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/opportunities/sans-new-worlds-2028-open-call/",
+    "type": "grant",
+    "deadline": "21 September 2026",
+    "tags": [
+      "call",
+      "arts"
+    ],
+    "summary": "Organizer Information Sorø Art Museum was founded in 1943 and is housed in a listed building from 1832 on Sorø’s main street, expanded in 2011 with an award-winning extension by Danish architects Lundgaard & Tranberg. Its collection spans roughly 300 years of Danish art, from the"
+  },
+  {
+    "id": "artinfoland-7f3843c92cbc",
+    "title": "Poster for Tomorrow Dignity Competition 2026 Open Call",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/opportunities/poster-for-tomorrow-dignity-competition-2026/",
+    "type": "grant",
+    "deadline": "20 September 2026",
+    "tags": [
+      "competition",
+      "arts"
+    ],
+    "summary": "Organizer Information Poster for Tomorrow is the flagship project of 4Tomorrow (4Tomorrow Association), an independent, non-profit organization based in Paris. Founded in 2009 by a group of designers originally focused on drawing attention to censorship and freedom of expression,"
+  },
+  {
+    "id": "artinfoland-387c07892dfa",
+    "title": "wpZimmer Open Call 2027 Residency in Belgium",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/opportunities/wpzimmer-open-call-2027-belgium-residency/",
+    "type": "residency",
+    "deadline": "20 September 2026",
+    "tags": [
+      "residency",
+      "arts"
+    ],
+    "summary": "Organizer Information wpZimmer is an international workspace for the arts based in Antwerp’s Seefhoek district, with a focus on performance, dance, and hybrid artistic practices. The organization hosts roughly 25 to 30 residencies a year, ranging from 2 to 5 weeks, for individual"
+  },
+  {
+    "id": "artinfoland-706d990d9712",
+    "title": "Geneva Artistic Research Residency & Grant 2027",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/opportunities/geneva-artistic-research-residency-grant-2027/",
+    "type": "residency",
+    "deadline": "15 September 2026",
+    "tags": [
+      "residency",
+      "arts"
+    ],
+    "summary": "Organizer Information The Embassy of Foreign Artists (EOFA) is a Geneva-based residency program founded in 2012 by an associative structure bringing together practitioners in art, architecture, and urban planning. Administered by the Laps Association, EOFA offers logistical and f"
+  },
+  {
     "id": "artinfoland-43bda7f57ea2",
     "title": "Curatorial Photography Fellowship at Notre Dame",
     "sourceId": "artinfoland",
@@ -19368,83 +19459,5 @@
       "arts"
     ],
     "summary": "Organizer Information weissraum. Atelier für Fotografie is a photography studio and exhibition space in Eltville am Rhein, Germany, founded by photographer Petra van Husen. Van Husen studied at the Prager Fotoschule in Austria with a focus on narrative and conceptual photography,"
-  },
-  {
-    "id": "artinfoland-ce64af6e2378",
-    "title": "Paul & Daisy Soros Fellowship 2027 for New Americans",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/paul-daisy-soros-fellowship-2027-new-americans/",
-    "type": "fellowship",
-    "deadline": "29 October 2026",
-    "tags": [
-      "fellowship",
-      "arts"
-    ],
-    "summary": "Organizer Information The Paul & Daisy Soros Fellowships for New Americans is a US postgraduate fellowship program founded in 1997 by Hungarian immigrants and philanthropists Paul and Daisy Soros, established with an initial charitable trust and later expanded through additional "
-  },
-  {
-    "id": "artinfoland-60ac29b03b92",
-    "title": "Labó Bosa Art Residency 2027 Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/labo-bosa-art-residency-2027/",
-    "type": "residency",
-    "deadline": "10 August 2026",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information Labó Bosa is a contemporary art gallery, artist residency, and printmaking studio based in a historic tannery on the river Temo in Bosa, Sardinia. The organisation is led by founder and director Marco Sebastianelli, and its programming combines exhibitions, "
-  },
-  {
-    "id": "artinfoland-05d0d6ae1f52",
-    "title": "DRIFT Mid-Career Choreographers Programme 2026",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/drift-mid-career-choreographers-programme-2026/",
-    "type": "residency",
-    "deadline": "31 August 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information DRIFT (Dance & Research in the Future Time) is a four-year European cooperation project (2026–2029) coordinated by the Théâtre de Liège in Belgium, together with nine partner organisations spanning Belgium, France, Germany, Italy, Spain, Greece, Norway, Port"
-  },
-  {
-    "id": "artinfoland-5886b43f0c32",
-    "title": "SYNO Annual Open Call 2026: Grants for Cypriot & Diaspora Artists",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/syno-annual-open-call-2026/",
-    "type": "grant",
-    "deadline": "August 31 2026",
-    "tags": [
-      "grant",
-      "arts"
-    ],
-    "summary": "Organizer Information SYNO is a contemporary cultural organization and art initiative dedicated to supporting, documenting, and archiving innovative contemporary artistic practices connected to Cyprus. By launching structured platforms like its annual open call and specialized pu"
-  },
-  {
-    "id": "artinfoland-e60f4b8fc0c1",
-    "title": "Exhibit in Paris 2027: galerie marie-robin Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/galerie-marie-robin-paris-exhibition/",
-    "type": "jobs",
-    "deadline": "July 31 2026",
-    "tags": [
-      "open-call",
-      "arts"
-    ],
-    "summary": "Organizer Information Established in Paris 42 years ago, galerie marie-robin has carved out a unique, sophisticated niche within the contemporary landscape, focusing on the dynamic intersection of geometry, architecture, color, and functional design. The gallery is celebrated for"
-  },
-  {
-    "id": "artinfoland-c56d68698d0f",
-    "title": "Education & Programs Director Job at PCNW",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/education-programs-director-pcnw-2026/",
-    "type": "jobs",
-    "deadline": "28 July 2026",
-    "tags": [
-      "jobs",
-      "arts"
-    ],
-    "summary": "Organizer Information Photographic Center Northwest (PCNW) is a 501(c)(3) non-profit photography education organization based in Seattle, Washington. It was founded in the early 1980s as the Exposure School of Photography, later renamed the Northwest Center for Photography, befor"
   }
 ]
