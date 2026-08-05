@@ -14,6 +14,7 @@ import {
   setDoc,
 } from "./firebase.js";
 import { saveNotionConfig } from "./shared.js";
+import { showOnboardingIfNeeded } from "./onboarding.js";
 
 // ── Public state ─────────────────────────────────────────────────────────────
 export let currentUser = null;
@@ -161,6 +162,9 @@ onAuthStateChanged(auth, (user) => {
     ).catch(() => {});
 
     syncNotionFromFirestore(user.uid).catch(() => {});
+
+    // Show onboarding guide to first-time users (silently skips if already seen)
+    showOnboardingIfNeeded(user).catch(() => {});
   }
 });
 

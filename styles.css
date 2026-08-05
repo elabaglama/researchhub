@@ -1287,6 +1287,125 @@ body {
   color: var(--ink);
 }
 
+/* ——— Onboarding guide ——— */
+
+.ob-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+.ob-overlay--in  { opacity: 1; }
+.ob-overlay--out { opacity: 0; transition-duration: 0.32s; }
+
+.ob-popup {
+  width: min(480px, 100%);
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 22px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0,0,0,0.04);
+  padding: 2.75rem 2.25rem 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  animation: ob-slide-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes ob-slide-up {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)     scale(1); }
+}
+
+.ob-skip {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 0.78rem;
+  color: #aaa;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+.ob-skip:hover { color: var(--ink); background: rgba(0,0,0,0.05); }
+
+.ob-emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+  display: block;
+}
+.ob-emoji--bounce {
+  animation: ob-bounce 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes ob-bounce {
+  0%   { opacity: 0; transform: scale(0.4) rotate(-20deg); }
+  60%  { transform: scale(1.18) rotate(8deg); }
+  100% { opacity: 1; transform: scale(1)    rotate(0deg); }
+}
+
+.ob-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.25;
+}
+/* Typewriter-style reveal for step 1 */
+.ob-title--typewriter {
+  animation: ob-reveal 0.75s 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes ob-reveal {
+  from { opacity: 0; letter-spacing: 0.08em; transform: translateY(8px); }
+  to   { opacity: 1; letter-spacing: normal;  transform: translateY(0); }
+}
+
+.ob-body {
+  font-size: 0.92rem;
+  color: #555;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 36ch;
+}
+
+.ob-dots {
+  display: flex;
+  gap: 0.45rem;
+  padding: 0.35rem 0;
+}
+.ob-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ddd;
+  transition: background 0.22s, transform 0.22s;
+}
+.ob-dot--active {
+  background: var(--accent, #2563eb);
+  transform: scale(1.35);
+}
+
+.ob-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding-top: 0.25rem;
+}
+
 /* ——— Notion popup ——— */
 
 .notion-overlay {
