@@ -53,5 +53,14 @@
     "blurb": "https://www.erasmusgram.com/",
     "searchUrl": "https://www.erasmusgram.com/?s={query}",
     "custom": true
+  },
+  {
+    "id": "custom-artinfoland-com",
+    "name": "artinfoland.com",
+    "url": "https://artinfoland.com/",
+    "focus": "Saved link",
+    "blurb": "https://artinfoland.com/",
+    "searchUrl": "https://artinfoland.com/?s={query}",
+    "custom": true
   }
 ]
