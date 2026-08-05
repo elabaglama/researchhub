@@ -1,5 +1,5 @@
 {
-  "scrapedAt": "2026-08-05T12:27:47.225225+00:00",
+  "scrapedAt": "2026-08-05T13:54:20.611640+00:00",
   "sources": {
     "opportunities-for-youth": {
       "ok": true,
@@ -33,10 +33,10 @@
     },
     "custom-github-com": {
       "ok": true,
-      "count": 1,
+      "count": 26,
       "mode": "generic"
     }
   },
   "mode": "full",
-  "total": 1414
+  "total": 1439
 }
