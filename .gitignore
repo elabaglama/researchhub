@@ -1,13 +1,8 @@
-.DS_Store
-Thumbs.db
-*.log
-node_modules/
-.vscode/
-.idea/
+__pycache__/
+*.pyc
 .vercel/
+node_modules/
 data/_*.html
 data/_*.json
+data/_*.csv
 data/_*.txt
-scripts/_probe*.py
-scripts/extract_still.py
-.vercel

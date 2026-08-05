@@ -52,18 +52,94 @@ function saveCustomSources(sources) {
   localStorage.setItem(SOURCES_KEY, JSON.stringify(sources));
 }
 
+async function loadFileCustomSources() {
+  try {
+    const res = await fetch("data/custom-sources.json", { cache: "no-store" });
+    if (!res.ok) return [];
+    const parsed = await res.json();
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
 async function loadAllSources() {
-  const base = await fetch("data/sources.json").then((r) => r.json());
-  const custom = loadCustomSources();
+  const [base, fileCustom] = await Promise.all([
+    fetch("data/sources.json", { cache: "no-store" }).then((r) => r.json()),
+    loadFileCustomSources(),
+  ]);
+  const browserCustom = loadCustomSources();
   const seen = new Set(base.map((s) => s.id));
   const merged = [...base];
-  for (const source of custom) {
-    if (!seen.has(source.id)) {
-      merged.push(source);
-      seen.add(source.id);
-    }
+
+  for (const source of [...fileCustom, ...browserCustom]) {
+    if (!source?.id || seen.has(source.id)) continue;
+    merged.push(source);
+    seen.add(source.id);
   }
   return merged;
+}
+
+async function addLibrarySource(url, { scrape = true } = {}) {
+  const response = await fetch("/api/sources", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url, scrape }),
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data.error || "Could not add source");
+  }
+
+  // Keep a browser mirror for offline display, synced to server file.
+  const fileCustom = await loadFileCustomSources();
+  saveCustomSources(fileCustom);
+  return data;
+}
+
+async function removeLibrarySource(sourceId) {
+  const response = await fetch(`/api/sources?id=${encodeURIComponent(sourceId)}`, {
+    method: "DELETE",
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data.error || "Could not remove source");
+  }
+  const fileCustom = await loadFileCustomSources();
+  saveCustomSources(fileCustom);
+  return data;
+}
+
+async function triggerScrape({ sourceId } = {}) {
+  const response = await fetch("/api/scrape", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(sourceId ? { sourceId } : {}),
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data.error || "Scrape failed");
+  }
+  return data;
+}
+
+async function migrateBrowserSourcesToServer() {
+  const browser = loadCustomSources();
+  if (!browser.length) return { migrated: 0 };
+  const fileCustom = await loadFileCustomSources();
+  const known = new Set(fileCustom.map((s) => s.url));
+  let migrated = 0;
+  for (const source of browser) {
+    if (!source?.url || known.has(source.url)) continue;
+    try {
+      await addLibrarySource(source.url, { scrape: true });
+      known.add(source.url);
+      migrated += 1;
+    } catch {
+      /* keep going */
+    }
+  }
+  return { migrated };
 }
 
 function slugify(value) {
@@ -240,7 +316,12 @@ export {
   matchesQuery,
   loadCustomSources,
   saveCustomSources,
+  loadFileCustomSources,
   loadAllSources,
+  addLibrarySource,
+  removeLibrarySource,
+  triggerScrape,
+  migrateBrowserSourcesToServer,
   slugify,
   getNotionConfig,
   saveNotionConfig,

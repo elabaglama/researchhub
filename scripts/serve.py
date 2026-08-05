@@ -1,18 +1,61 @@
 #!/usr/bin/env python3
-"""Local static server with a Notion save proxy (avoids browser CORS)."""
+"""Local hub server: static files + Notion proxy + library sync + scrape."""
 
 from __future__ import annotations
 
+import importlib.util
 import json
 import mimetypes
+import re
+import threading
 import urllib.error
 import urllib.request
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 PORT = 5173
 NOTION_VERSION = "2022-06-28"
+CUSTOM_SOURCES_PATH = ROOT / "data" / "custom-sources.json"
+SCRAPE_LOCK = threading.Lock()
+
+
+def load_scrape_module():
+    path = ROOT / "scripts" / "scrape_opportunities.py"
+    spec = importlib.util.spec_from_file_location("scrape_opportunities", path)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def read_json_list(path: Path) -> list:
+    if not path.exists():
+        return []
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        return raw if isinstance(raw, list) else []
+    except Exception:
+        return []
+
+
+def write_json(path: Path, payload) -> None:
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def slugify(value: str) -> str:
+    value = value.lower()
+    value = re.sub(r"[^a-z0-9]+", "-", value)
+    return value.strip("-")[:48]
+
+
+def name_from_url(url: str) -> str:
+    try:
+        host = urlparse(url).hostname or url
+        return host.replace("www.", "")
+    except Exception:
+        return url
 
 
 def notion_request(token: str, method: str, path: str, payload: dict | None = None) -> tuple[int, dict]:
@@ -67,13 +110,12 @@ def build_notion_properties(schema: dict, body: dict) -> dict:
         out[url_name] = {"url": body.get("url") or None}
 
     deadline_name = resolve("Deadline", "Due", "Date")
-    if deadline_name:
-        dtype = props_meta[deadline_name].get("type")
-        value = str(body.get("deadline") or "Open")[:200]
-        if dtype == "rich_text":
-            out[deadline_name] = {"rich_text": [{"text": {"content": value}}]}
-        elif dtype == "date":
-            out[deadline_name] = {"date": None}
+    if deadline_name and props_meta[deadline_name].get("type") == "rich_text":
+        out[deadline_name] = {
+            "rich_text": [
+                {"text": {"content": str(body.get("deadline") or "Open")[:200]}}
+            ]
+        }
 
     source_name = resolve("Source", "Website", "Site")
     if source_name and props_meta[source_name].get("type") == "rich_text":
@@ -99,31 +141,158 @@ class HubHandler(SimpleHTTPRequestHandler):
     def end_headers(self):
         if self.path.startswith("/api/"):
             self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
+            self.send_header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
             self.send_header("Access-Control-Allow-Headers", "Content-Type")
         super().end_headers()
 
     def do_OPTIONS(self):
-        if self.path.rstrip("/") in {"/api/save-to-notion", "/api/test-notion"}:
+        if self.path.startswith("/api/"):
             self.send_response(204)
             self.end_headers()
             return
         self.send_error(404)
 
-    def do_POST(self):
-        path = self.path.rstrip("/")
-        if path not in {"/api/save-to-notion", "/api/test-notion"}:
+    def do_GET(self):
+        path = self.path.split("?", 1)[0].rstrip("/")
+        if path == "/api/sources":
+            custom = read_json_list(CUSTOM_SOURCES_PATH)
+            self._json(200, {"sources": custom})
+            return
+        if path == "/api/scrape-meta":
+            meta_path = ROOT / "data" / "scrape-meta.json"
+            if meta_path.exists():
+                try:
+                    self._json(200, json.loads(meta_path.read_text(encoding="utf-8")))
+                    return
+                except Exception:
+                    pass
+            self._json(200, {"sources": {}, "total": 0})
+            return
+        return super().do_GET()
+
+    def do_DELETE(self):
+        from urllib.parse import parse_qs, urlparse
+
+        parsed = urlparse(self.path)
+        path = parsed.path.rstrip("/")
+        qs = parse_qs(parsed.query)
+        source_id = ""
+        if path.startswith("/api/sources/"):
+            source_id = path[len("/api/sources/") :]
+        elif path == "/api/sources":
+            source_id = (qs.get("id") or [""])[0]
+
+        if not source_id:
             self.send_error(404)
             return
 
+        custom = read_json_list(CUSTOM_SOURCES_PATH)
+        next_list = [s for s in custom if s.get("id") != source_id]
+        write_json(CUSTOM_SOURCES_PATH, next_list)
+
+        opp_path = ROOT / "data" / "opportunities.json"
+        opps = read_json_list(opp_path)
+        write_json(opp_path, [o for o in opps if o.get("sourceId") != source_id])
+        self._json(200, {"ok": True, "removed": source_id, "remaining": len(next_list)})
+
+    def do_POST(self):
+        path = self.path.split("?", 1)[0].rstrip("/")
         length = int(self.headers.get("Content-Length", "0"))
         raw = self.rfile.read(length) if length else b"{}"
         try:
-            body = json.loads(raw.decode("utf-8"))
+            body = json.loads(raw.decode("utf-8") or "{}")
         except json.JSONDecodeError:
             self._json(400, {"error": "Invalid JSON"})
             return
 
+        if path == "/api/sources":
+            self._add_source(body)
+            return
+        if path == "/api/scrape":
+            self._run_scrape(body)
+            return
+        if path in {"/api/save-to-notion", "/api/test-notion"}:
+            self._notion(path, body)
+            return
+        self.send_error(404)
+
+    def _add_source(self, body: dict):
+        url = str(body.get("url") or "").strip()
+        if not url:
+            self._json(400, {"error": "url required"})
+            return
+        if not url.startswith(("http://", "https://")):
+            url = "https://" + url
+
+        name = str(body.get("name") or "").strip() or name_from_url(url)
+        source_id = str(body.get("id") or f"custom-{slugify(name) or 'source'}").strip()
+        custom = read_json_list(CUSTOM_SOURCES_PATH)
+
+        if any(s.get("url") == url for s in custom):
+            existing = next(s for s in custom if s.get("url") == url)
+            scrape = bool(body.get("scrape", True))
+            report = None
+            if scrape:
+                report = self._scrape_locked([existing["id"]])
+            self._json(
+                200,
+                {
+                    "ok": True,
+                    "source": existing,
+                    "created": False,
+                    "scrape": report,
+                },
+            )
+            return
+
+        # Avoid colliding with built-in ids.
+        base_ids = {s.get("id") for s in read_json_list(ROOT / "data" / "sources.json")}
+        if source_id in base_ids or any(s.get("id") == source_id for s in custom):
+            source_id = f"{source_id}-{len(custom) + 1}"
+
+        source = {
+            "id": source_id,
+            "name": name,
+            "url": url,
+            "focus": str(body.get("focus") or "Saved link"),
+            "blurb": str(body.get("blurb") or url),
+            "searchUrl": f"{url.rstrip('/')}/?s={{query}}",
+            "custom": True,
+        }
+        if "airtable.com" in url:
+            source["airtableUrl"] = url
+
+        custom.append(source)
+        write_json(CUSTOM_SOURCES_PATH, custom)
+
+        report = None
+        if body.get("scrape", True):
+            report = self._scrape_locked([source_id])
+
+        self._json(
+            201,
+            {
+                "ok": True,
+                "source": source,
+                "created": True,
+                "scrape": report,
+            },
+        )
+
+    def _run_scrape(self, body: dict):
+        source_id = body.get("sourceId")
+        ids = [source_id] if source_id else None
+        if body.get("sourceIds"):
+            ids = list(body["sourceIds"])
+        report = self._scrape_locked(ids)
+        self._json(200, {"ok": True, "report": report})
+
+    def _scrape_locked(self, source_ids: list[str] | None):
+        with SCRAPE_LOCK:
+            scrape = load_scrape_module()
+            return scrape.run(source_ids)
+
+    def _notion(self, path: str, body: dict):
         token = (body.get("token") or "").strip()
         database_id = (body.get("databaseId") or "").strip().replace("-", "")
         if not token or not database_id:
@@ -202,6 +371,8 @@ class HubHandler(SimpleHTTPRequestHandler):
 def main():
     mimetypes.add_type("audio/mp4", ".m4a")
     mimetypes.add_type("image/x-icon", ".ico")
+    if not CUSTOM_SOURCES_PATH.exists():
+        write_json(CUSTOM_SOURCES_PATH, [])
     server = ThreadingHTTPServer(("127.0.0.1", PORT), HubHandler)
     print(f"Research Hub -> http://127.0.0.1:{PORT}")
     try:

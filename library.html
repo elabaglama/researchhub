@@ -24,12 +24,17 @@
       <div class="library-head">
         <div>
           <h1>Library</h1>
-          <p class="lede">All source sites in one place.</p>
+          <p class="lede">Add a site — it syncs in the cloud. No local server needed.</p>
         </div>
-        <button type="button" class="add-resource-btn" id="add-resource-btn">
-          Add resource
-        </button>
+        <div class="library-actions">
+          <button type="button" class="ghost-btn" id="sync-all-btn">Sync all</button>
+          <button type="button" class="add-resource-btn" id="add-resource-btn">
+            Add resource
+          </button>
+        </div>
       </div>
+
+      <p id="sync-status" class="notion-status" aria-live="polite"></p>
 
       <section class="notion-panel" aria-labelledby="notion-heading">
         <h2 id="notion-heading">Notion</h2>
@@ -74,10 +79,14 @@
           <input name="url" type="url" required placeholder="https://example.com" />
         </label>
         <div class="form-actions">
-          <button type="submit" class="add-resource-btn">Save resource</button>
+          <button type="submit" class="add-resource-btn" id="save-resource-btn">
+            Save &amp; scrape
+          </button>
           <button type="button" class="cancel-btn" id="cancel-add-btn">Cancel</button>
         </div>
-        <p class="form-note">Only the link is required. Saved resources stay in this browser.</p>
+        <p class="form-note">
+          Saved to the hub library, then scraped in the cloud (GitHub Actions). Search updates in a few minutes.
+        </p>
       </form>
 
       <div id="library-list" class="simple-list"></div>

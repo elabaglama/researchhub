@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES_PATH = ROOT / "data" / "sources.json"
+CUSTOM_SOURCES_PATH = ROOT / "data" / "custom-sources.json"
 OUT_PATH = ROOT / "data" / "opportunities.json"
 META_PATH = ROOT / "data" / "scrape-meta.json"
 
@@ -358,6 +359,225 @@ def scrape_artinfoland(source: dict) -> list[dict]:
     return items[:200]
 
 
+def origin_of(url: str) -> str:
+    from urllib.parse import urlparse
+
+    parsed = urlparse(url)
+    return f"{parsed.scheme}://{parsed.netloc}"
+
+
+def absolute_url(base: str, href: str) -> str:
+    from urllib.parse import urljoin
+
+    return urljoin(base, href)
+
+
+def scrape_wordpress_api(source: dict, origin: str) -> list[dict]:
+    items: list[dict] = []
+    endpoints = [
+        f"{origin}/wp-json/wp/v2/opportunities?per_page=50&page={{page}}&_fields=id,title,link,excerpt,content",
+        f"{origin}/wp-json/wp/v2/posts?per_page=50&page={{page}}&_fields=id,title,link,excerpt,content",
+    ]
+    for template in endpoints:
+        page = 1
+        found_here = 0
+        while page <= 4:
+            try:
+                raw = fetch(template.format(page=page), timeout=25)
+                data = json.loads(raw)
+            except Exception:
+                break
+            if not isinstance(data, list) or not data:
+                break
+            for entry in data:
+                title_obj = entry.get("title") or {}
+                title = clean_text(
+                    title_obj.get("rendered") if isinstance(title_obj, dict) else str(title_obj)
+                )
+                href = entry.get("link") or source["url"]
+                if len(title) < 6:
+                    continue
+                excerpt_obj = entry.get("excerpt") or {}
+                excerpt = clean_text(
+                    excerpt_obj.get("rendered") if isinstance(excerpt_obj, dict) else ""
+                )
+                content_obj = entry.get("content") or {}
+                content = clean_text(
+                    content_obj.get("rendered") if isinstance(content_obj, dict) else ""
+                )
+                blob = f"{title} {excerpt} {content}"
+                items.append(
+                    {
+                        "id": make_id(source["id"], title, href),
+                        "title": title[:180],
+                        "sourceId": source["id"],
+                        "url": href,
+                        "type": guess_type(blob),
+                        "deadline": extract_deadline(blob),
+                        "tags": [guess_type(title), "custom"],
+                        "summary": (excerpt or title)[:280],
+                    }
+                )
+                found_here += 1
+            if len(data) < 50:
+                break
+            page += 1
+        if found_here:
+            break
+    return items
+
+
+def scrape_rss(source: dict, origin: str) -> list[dict]:
+    candidates = [
+        f"{origin}/feed",
+        f"{origin}/rss",
+        f"{origin}/feed.xml",
+        f"{origin}/atom.xml",
+        f"{origin}/index.xml",
+        f"{origin}/?feed=rss2",
+        source.get("feedUrl") or "",
+    ]
+    items: list[dict] = []
+    for feed_url in candidates:
+        if not feed_url:
+            continue
+        try:
+            xml = fetch(feed_url, timeout=20)
+        except Exception:
+            continue
+        if "<rss" not in xml.lower() and "<feed" not in xml.lower():
+            continue
+        entries = re.findall(
+            r"<item\b.*?</item>|<entry\b.*?</entry>",
+            xml,
+            flags=re.I | re.S,
+        )
+        for entry in entries[:80]:
+            title_m = re.search(r"<title[^>]*>(.*?)</title>", entry, flags=re.I | re.S)
+            link_m = re.search(r"<link[^>]*>(.*?)</link>", entry, flags=re.I | re.S)
+            if not link_m:
+                link_m = re.search(r'<link[^>]+href=["\']([^"\']+)["\']', entry, flags=re.I)
+            desc_m = re.search(
+                r"<description[^>]*>(.*?)</description>|<summary[^>]*>(.*?)</summary>|<content[^>]*>(.*?)</content>",
+                entry,
+                flags=re.I | re.S,
+            )
+            title = clean_text(title_m.group(1) if title_m else "")
+            href = clean_text(link_m.group(1) if link_m else "")
+            summary = clean_text(
+                next((g for g in (desc_m.groups() if desc_m else ()) if g), "") if desc_m else ""
+            )
+            if len(title) < 6 or not href.startswith("http"):
+                continue
+            blob = f"{title} {summary}"
+            items.append(
+                {
+                    "id": make_id(source["id"], title, href),
+                    "title": title[:180],
+                    "sourceId": source["id"],
+                    "url": href,
+                    "type": guess_type(blob),
+                    "deadline": extract_deadline(blob),
+                    "tags": [guess_type(title), "custom"],
+                    "summary": (summary or title)[:280],
+                }
+            )
+        if items:
+            break
+    return items
+
+
+def scrape_html_listings(source: dict) -> list[dict]:
+    html = fetch(source["url"], timeout=30)
+    base = source["url"]
+    items: list[dict] = []
+    seen: set[str] = set()
+    patterns = [
+        r'<article[^>]*>.*?<a[^>]+href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
+        r'<h[123][^>]*>\s*<a[^>]+href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
+        r'<a[^>]+class=["\'][^"\']*(?:post|entry|card|title|opportunity)[^"\']*["\'][^>]+href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
+        r'<a[^>]+href=["\']([^"\']+)["\'][^>]*class=["\'][^"\']*(?:post|entry|card|title|opportunity)[^"\']*["\'][^>]*>(.*?)</a>',
+    ]
+    deny = (
+        "/tag/",
+        "/category/",
+        "/author/",
+        "/login",
+        "/signup",
+        "/cart",
+        "#",
+        "javascript:",
+        "/wp-admin",
+        "/privacy",
+        "/terms",
+    )
+    for pattern in patterns:
+        for href, label in re.findall(pattern, html, flags=re.I | re.S):
+            title = clean_text(label)
+            full = absolute_url(base, href)
+            if len(title) < 8 or len(title) > 180:
+                continue
+            low = full.lower()
+            if any(d in low for d in deny):
+                continue
+            if full in seen:
+                continue
+            # Prefer same-host links
+            if origin_of(full) != origin_of(base) and "airtable.com" not in low:
+                continue
+            seen.add(full)
+            items.append(
+                {
+                    "id": make_id(source["id"], title, full),
+                    "title": title[:180],
+                    "sourceId": source["id"],
+                    "url": full,
+                    "type": guess_type(title),
+                    "deadline": extract_deadline(title),
+                    "tags": [guess_type(title), "custom"],
+                    "summary": title[:280],
+                }
+            )
+        if len(items) >= 12:
+            break
+    return items[:80]
+
+
+def scrape_generic(source: dict) -> list[dict]:
+    """Best-effort scraper for any library URL (WP API → RSS → HTML)."""
+    url = source["url"]
+    if "airtable.com" in url:
+        # Reuse Airtable shared-view logic by pointing airtableUrl at this URL.
+        return scrape_still_hiring({**source, "airtableUrl": url})
+
+    origin = origin_of(url)
+    for scraper in (
+        lambda: scrape_wordpress_api(source, origin),
+        lambda: scrape_rss(source, origin),
+        lambda: scrape_html_listings(source),
+    ):
+        try:
+            items = scraper()
+        except Exception:
+            items = []
+        if items:
+            return items
+
+    # Always keep at least a portal entry so the source is searchable/linked.
+    return [
+        {
+            "id": make_id(source["id"], source.get("name") or origin, url),
+            "title": f"{source.get('name') or origin} — browse source",
+            "sourceId": source["id"],
+            "url": url,
+            "type": "opportunity",
+            "deadline": "Open",
+            "tags": ["custom", "portal"],
+            "summary": f"No structured listings detected yet. Open the original site: {url}",
+        }
+    ]
+
+
 SCRAPERS = {
     "opportunities-for-youth": scrape_opportunities_for_youth,
     "still-hiring": scrape_still_hiring,
@@ -366,7 +586,41 @@ SCRAPERS = {
 
 
 def load_sources() -> list[dict]:
-    return json.loads(SOURCES_PATH.read_text(encoding="utf-8"))
+    base = json.loads(SOURCES_PATH.read_text(encoding="utf-8"))
+    custom: list[dict] = []
+    if CUSTOM_SOURCES_PATH.exists():
+        try:
+            raw = json.loads(CUSTOM_SOURCES_PATH.read_text(encoding="utf-8"))
+            if isinstance(raw, list):
+                custom = raw
+        except Exception:
+            custom = []
+    seen = {s["id"] for s in base}
+    merged = list(base)
+    for source in custom:
+        sid = source.get("id")
+        if not sid or sid in seen:
+            continue
+        merged.append(source)
+        seen.add(sid)
+    return merged
+
+
+def save_custom_sources(sources: list[dict]) -> None:
+    CUSTOM_SOURCES_PATH.write_text(
+        json.dumps(sources, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+
+def load_custom_sources() -> list[dict]:
+    if not CUSTOM_SOURCES_PATH.exists():
+        return []
+    try:
+        raw = json.loads(CUSTOM_SOURCES_PATH.read_text(encoding="utf-8"))
+        return raw if isinstance(raw, list) else []
+    except Exception:
+        return []
 
 
 def merge_unique(items: list[dict]) -> list[dict]:
@@ -381,28 +635,62 @@ def merge_unique(items: list[dict]) -> list[dict]:
     return out
 
 
-def run() -> dict:
-    sources = load_sources()
-    all_items: list[dict] = []
+def run(source_ids: list[str] | None = None) -> dict:
+    all_sources = load_sources()
+    if source_ids:
+        wanted = set(source_ids)
+        sources = [s for s in all_sources if s["id"] in wanted]
+    else:
+        sources = all_sources
+
+    existing: list[dict] = []
+    if OUT_PATH.exists():
+        try:
+            existing = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+            if not isinstance(existing, list):
+                existing = []
+        except Exception:
+            existing = []
+
     report: dict[str, object] = {
         "scrapedAt": datetime.now(timezone.utc).isoformat(),
         "sources": {},
+        "mode": "partial" if source_ids else "full",
     }
 
+    # Preserve prior meta for sources not scraped this run.
+    if META_PATH.exists() and source_ids:
+        try:
+            prev = json.loads(META_PATH.read_text(encoding="utf-8"))
+            report["sources"] = dict(prev.get("sources") or {})
+        except Exception:
+            pass
+
+    fresh_by_source: dict[str, list[dict]] = {}
     for source in sources:
         source_id = source["id"]
-        scraper = SCRAPERS.get(source_id)
-        if not scraper:
-            report["sources"][source_id] = {"ok": False, "error": "no scraper", "count": 0}
-            continue
+        scraper = SCRAPERS.get(source_id, scrape_generic)
         try:
             items = scraper(source)
-            all_items.extend(items)
-            report["sources"][source_id] = {"ok": True, "count": len(items)}
+            fresh_by_source[source_id] = items
+            report["sources"][source_id] = {
+                "ok": True,
+                "count": len(items),
+                "mode": "dedicated" if source_id in SCRAPERS else "generic",
+            }
             print(f"[ok] {source_id}: {len(items)}")
         except Exception as exc:  # noqa: BLE001
             report["sources"][source_id] = {"ok": False, "error": str(exc), "count": 0}
             print(f"[fail] {source_id}: {exc}")
+
+    succeeded = set(fresh_by_source.keys())
+    if source_ids:
+        kept = [item for item in existing if item.get("sourceId") not in succeeded]
+    else:
+        attempted = {s["id"] for s in sources}
+        kept = [item for item in existing if item.get("sourceId") not in attempted]
+
+    all_items = kept + [item for rows in fresh_by_source.values() for item in rows]
 
     merged = merge_unique(all_items)
     OUT_PATH.write_text(json.dumps(merged, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -413,4 +701,7 @@ def run() -> dict:
 
 
 if __name__ == "__main__":
-    run()
+    import sys
+
+    ids = [arg for arg in sys.argv[1:] if arg and not arg.startswith("-")]
+    run(ids or None)

@@ -4,9 +4,26 @@ on:
   schedule:
     - cron: "0 */6 * * *"
   workflow_dispatch:
+    inputs:
+      url:
+        description: "Optional new source URL to add before scraping"
+        required: false
+        type: string
+        default: ""
+      source_id:
+        description: "Optional source id to scrape only"
+        required: false
+        type: string
+        default: ""
+      remove_source_id:
+        description: "Optional custom source id to remove"
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   scrape:
@@ -20,14 +37,28 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Apply library changes
+        if: ${{ inputs.url != '' || inputs.remove_source_id != '' }}
+        run: |
+          python scripts/manage_sources.py \
+            --url "${{ inputs.url }}" \
+            --remove "${{ inputs.remove_source_id }}"
+
       - name: Scrape sources
-        run: python scripts/scrape_opportunities.py
+        run: |
+          if [ -n "${{ inputs.source_id }}" ]; then
+            python scripts/scrape_opportunities.py "${{ inputs.source_id }}"
+          elif [ -n "${{ inputs.remove_source_id }}" ]; then
+            echo "Source removed; skipping full scrape."
+          else
+            python scripts/scrape_opportunities.py
+          fi
 
       - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/opportunities.json data/scrape-meta.json
+          git add data/opportunities.json data/scrape-meta.json data/custom-sources.json
           if git diff --staged --quiet; then
             echo "No opportunity changes."
           else

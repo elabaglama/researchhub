@@ -1,14 +1,16 @@
 import {
   escapeHtml,
   loadAllSources,
-  loadCustomSources,
-  saveCustomSources,
-  slugify,
+  loadFileCustomSources,
   wirePdfButton,
   getNotionConfig,
   saveNotionConfig,
   clearNotionConfig,
   isNotionConnected,
+  addLibrarySource,
+  removeLibrarySource,
+  triggerScrape,
+  migrateBrowserSourcesToServer,
 } from "./shared.js";
 
 wirePdfButton();
@@ -17,19 +19,13 @@ const list = document.getElementById("library-list");
 const addBtn = document.getElementById("add-resource-btn");
 const form = document.getElementById("add-resource-form");
 const cancelBtn = document.getElementById("cancel-add-btn");
+const saveResourceBtn = document.getElementById("save-resource-btn");
+const syncAllBtn = document.getElementById("sync-all-btn");
+const syncStatus = document.getElementById("sync-status");
 const notionForm = document.getElementById("notion-form");
 const notionDisconnect = document.getElementById("notion-disconnect-btn");
 const notionStatus = document.getElementById("notion-status");
 const notionSaveBtn = document.getElementById("notion-save-btn");
-
-function nameFromUrl(url) {
-  try {
-    const host = new URL(url).hostname.replace(/^www\./, "");
-    return host || url;
-  } catch {
-    return url;
-  }
-}
 
 function fillNotionForm() {
   const config = getNotionConfig();
@@ -48,23 +44,86 @@ function refreshNotionStatus(extra = "") {
   }
 }
 
+function setSyncStatus(message) {
+  syncStatus.textContent = message || "";
+}
+
+function scrapeSummary(report, sourceId) {
+  if (!report) return "No scrape ran.";
+  if (report.pending) {
+    return report.message || "Cloud scrape started — refresh search in a few minutes.";
+  }
+  const entry = report.sources?.[sourceId];
+  if (entry?.ok) return `Scraped ${entry.count} items (${entry.mode || "auto"}).`;
+  if (entry && !entry.ok) return `Scrape failed: ${entry.error || "unknown error"}`;
+  if (typeof report.total === "number") {
+    return `Hub now has ${report.total} opportunities.`;
+  }
+  return report.message || "Scrape finished.";
+}
+
 async function renderLibrary() {
   const sources = await loadAllSources();
-  const customIds = new Set(loadCustomSources().map((s) => s.id));
+  const customIds = new Set((await loadFileCustomSources()).map((s) => s.id));
 
   list.innerHTML = sources
     .map((source) => {
-      const saved = customIds.has(source.id)
-        ? `<span class="saved-tag">Saved</span>`
-        : "";
+      const isCustom = customIds.has(source.id) || source.custom;
+      const actions = isCustom
+        ? `<div class="result-actions">
+            <button type="button" class="notion-save-btn resync-btn" data-id="${escapeHtml(source.id)}">Re-scrape</button>
+            <button type="button" class="notion-save-btn remove-btn" data-id="${escapeHtml(source.id)}">Remove</button>
+          </div>`
+        : `<div class="result-actions">
+            <button type="button" class="notion-save-btn resync-btn" data-id="${escapeHtml(source.id)}">Re-scrape</button>
+          </div>`;
       return `
-        <a class="simple-item" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">
-          <h2 class="simple-title">${escapeHtml(source.name)} ${saved}</h2>
-          <p class="simple-meta">${escapeHtml(source.focus || "Resource")}</p>
-          <p class="simple-summary">${escapeHtml(source.blurb || source.url)}</p>
-        </a>`;
+        <article class="simple-item">
+          <a class="result-link" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">
+            <h2 class="simple-title">${escapeHtml(source.name)}${
+              isCustom ? ` <span class="saved-tag">Library</span>` : ""
+            }</h2>
+            <p class="simple-meta">${escapeHtml(source.focus || "Resource")}</p>
+            <p class="simple-summary">${escapeHtml(source.blurb || source.url)}</p>
+          </a>
+          ${actions}
+        </article>`;
     })
     .join("");
+
+  list.querySelectorAll(".resync-btn").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const id = button.dataset.id;
+      button.disabled = true;
+      button.textContent = "Scraping…";
+      setSyncStatus(`Scraping ${id}…`);
+      try {
+        const data = await triggerScrape({ sourceId: id });
+        setSyncStatus(scrapeSummary(data.report, id));
+      } catch (error) {
+        setSyncStatus(error.message || "Scrape failed");
+      } finally {
+        button.disabled = false;
+        button.textContent = "Re-scrape";
+      }
+    });
+  });
+
+  list.querySelectorAll(".remove-btn").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const id = button.dataset.id;
+      if (!window.confirm(`Remove ${id} from library?`)) return;
+      button.disabled = true;
+      try {
+        await removeLibrarySource(id);
+        setSyncStatus(`Removed ${id}.`);
+        await renderLibrary();
+      } catch (error) {
+        setSyncStatus(error.message || "Remove failed");
+        button.disabled = false;
+      }
+    });
+  });
 }
 
 addBtn.addEventListener("click", () => {
@@ -75,6 +134,24 @@ addBtn.addEventListener("click", () => {
 cancelBtn.addEventListener("click", () => {
   form.hidden = true;
   form.reset();
+});
+
+syncAllBtn.addEventListener("click", async () => {
+  syncAllBtn.disabled = true;
+  syncAllBtn.textContent = "Syncing…";
+  setSyncStatus("Scraping every source… this can take a minute.");
+  try {
+    const data = await triggerScrape();
+    setSyncStatus(`Synced. ${data.report?.total ?? 0} opportunities indexed.`);
+  } catch (error) {
+    setSyncStatus(
+      error.message ||
+        "Sync failed. On the live site, set GITHUB_TOKEN in Vercel. Locally, npm start still works."
+    );
+  } finally {
+    syncAllBtn.disabled = false;
+    syncAllBtn.textContent = "Sync all";
+  }
 });
 
 notionDisconnect.addEventListener("click", () => {
@@ -124,40 +201,51 @@ notionForm.addEventListener("submit", async (event) => {
   }
 });
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const data = new FormData(form);
   const url = String(data.get("url") || "").trim();
   if (!url) return;
 
-  const name = nameFromUrl(url);
-  const id = `custom-${slugify(name) || Date.now()}`;
-  const custom = loadCustomSources();
+  saveResourceBtn.disabled = true;
+  saveResourceBtn.textContent = "Saving & scraping…";
+  setSyncStatus("Adding source and scraping listings…");
 
-  if (custom.some((source) => source.url === url)) {
+  try {
+    const result = await addLibrarySource(url, { scrape: true });
+    const source = result.source;
+    setSyncStatus(
+      `${source.name} saved. ${scrapeSummary(result.scrape, source.id)}`
+    );
     form.reset();
     form.hidden = true;
-    renderLibrary();
-    return;
+    await renderLibrary();
+  } catch (error) {
+    setSyncStatus(
+      error.message ||
+        "Could not add source. On the live site this uses cloud sync; locally use npm start."
+    );
+  } finally {
+    saveResourceBtn.disabled = false;
+    saveResourceBtn.textContent = "Save & scrape";
   }
-
-  custom.push({
-    id,
-    name,
-    url,
-    focus: "Saved link",
-    blurb: url,
-    searchUrl: `${url.replace(/\/$/, "")}/?s={query}`,
-  });
-
-  saveCustomSources(custom);
-  form.reset();
-  form.hidden = true;
-  renderLibrary();
 });
 
 fillNotionForm();
 refreshNotionStatus();
+setSyncStatus("Checking library sync…");
+
+try {
+  const migrated = await migrateBrowserSourcesToServer();
+  if (migrated.migrated) {
+    setSyncStatus(`Migrated ${migrated.migrated} older library link(s) and scraped them.`);
+  } else {
+    setSyncStatus("Library ready. New links sync in the cloud automatically.");
+  }
+} catch {
+  setSyncStatus("Library ready. New links sync via the live site cloud APIs.");
+}
+
 await renderLibrary();
 
 if (new URLSearchParams(window.location.search).get("print") === "1") {

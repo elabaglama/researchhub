@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "python scripts/serve.py",
     "start": "python scripts/serve.py",
-    "scrape": "python scripts/scrape_opportunities.py"
+    "scrape": "python scripts/scrape_opportunities.py",
+    "scrape:one": "python scripts/scrape_opportunities.py"
   }
 }
