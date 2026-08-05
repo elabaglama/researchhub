@@ -5,7 +5,11 @@
   "rewrites": [
     {
       "source": "/researchhub",
-      "destination": "/index.html"
+      "destination": "/researchhub.html"
+    },
+    {
+      "source": "/researchhub/",
+      "destination": "/researchhub.html"
     },
     {
       "source": "/researchhub/:path*",

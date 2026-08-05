@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var p = location.pathname || "/";
+        var under =
+          p === "/researchhub" ||
+          p === "/researchhub/" ||
+          p.indexOf("/researchhub/") === 0;
+        if (!under) return;
+        if (!document.querySelector("base")) {
+          var b = document.createElement("base");
+          b.href = "/researchhub/";
+          document.head.insertBefore(b, document.head.firstChild);
+        }
+        window.__APP_BASE__ = "/researchhub";
+      })();
+    </script>
+    <script src="js/base.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Hub</title>
+    <meta name="description" content="Research Hub — il tuo feed personale di opportunità, borse, lavoro e bandi aperti." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Research Hub" />
+    <meta property="og:title" content="Research Hub" />
+    <meta property="og:description" content="Il tuo feed personale di opportunità, borse, lavoro e bandi aperti." />
+    <meta property="og:url" content="https://www.teramap.co/researchhub" />
+    <meta property="og:image" content="https://www.teramap.co/researchhub/images/OG-meta-researchhub.png" />
+    <meta property="og:image:secure_url" content="https://www.teramap.co/researchhub/images/OG-meta-researchhub.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Research Hub" />
+    <meta name="twitter:image" content="https://www.teramap.co/researchhub/images/OG-meta-researchhub.png" />
+    <link rel="image_src" href="https://www.teramap.co/researchhub/images/OG-meta-researchhub.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Research Hub" />
+    <meta name="twitter:description" content="Il tuo feed personale di opportunità, borse, lavoro e bandi aperti." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  </head>
+  <body class="page-home">
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <nav class="top-pills" aria-label="Primary">
+      <a class="pill" href="daily.html" data-i18n="nav.daily">Report Giornaliero</a>
+      <a class="pill" href="library.html" data-i18n="nav.library">Libreria</a>
+      <button type="button" class="pill" id="xls-export-btn" data-i18n="results.export">Esporta XLS</button>
+      <a class="pill" href="#" id="guide-btn" data-i18n="nav.guide">Guida</a>
+    </nav>
+
+    <div class="top-right-bar">
+      <button type="button" class="lang-toggle-btn pill pill-lang" id="lang-toggle-btn" aria-label="Cambia lingua">EN</button>
+      <div class="count-badge" id="count-badge" aria-live="polite">
+        <span class="count-number" id="count-number">—</span>
+      </div>
+    </div>
+
+    <div id="auth-root" class="auth-root-home"></div>
+
+    <main class="home-main">
+      <form class="hero-search" id="search-form" role="search">
+        <label class="sr-only" for="query" data-i18n="nav.search">Cerca</label>
+        <input
+          id="query"
+          name="q"
+          type="search"
+          data-i18n-ph="search.placeholder"
+          placeholder="cerca"
+          autocomplete="off"
+          autofocus
+        />
+      </form>
+
+      <div class="search-filters search-filters--hidden" id="search-filters" aria-label="Filtri">
+        <div class="filter-group">
+          <select id="filter-type" class="filter-select" aria-label="Filtra per tipo">
+            <option value="" data-i18n="filter.allTypes">Tutti i tipi</option>
+            <option value="jobs" data-i18n="filter.jobs">Lavoro e Tirocini</option>
+            <option value="programs" data-i18n="filter.programs">Programmi e Borse di Studio</option>
+            <option value="awards" data-i18n="filter.awards">Sovvenzioni e Premi</option>
+            <option value="calls" data-i18n="filter.calls">Bandi di Partnership</option>
+            <option value="events" data-i18n="filter.events">Eventi e Corsi</option>
+            <option value="other" data-i18n="filter.other">Opportunità</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select id="filter-continent" class="filter-select" aria-label="Filtra per regione">
+            <option value="" data-i18n="filter.anyRegion">Qualsiasi regione</option>
+            <option value="africa" data-i18n="filter.africa">Africa</option>
+            <option value="asia" data-i18n="filter.asia">Asia</option>
+            <option value="europe" data-i18n="filter.europe">Europa</option>
+            <option value="americas" data-i18n="filter.americas">Americhe</option>
+            <option value="middle-east" data-i18n="filter.middleeast">Medio Oriente</option>
+            <option value="oceania" data-i18n="filter.oceania">Oceania</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <input
+            type="text"
+            id="filter-country"
+            class="filter-input"
+            data-i18n-ph="filter.country"
+            placeholder="Paese…"
+            autocomplete="off"
+            aria-label="Filtra per paese"
+          />
+        </div>
+      </div>
+
+      <section class="home-results" id="home-results" hidden>
+        <p id="results-meta" class="results-meta"></p>
+        <div id="results-list" class="results-cards"></div>
+      </section>
+    </main>
+
+    <a class="brand-mark" href="index.html">Research<br />Hub</a>
+
+    <div id="music-player-root"></div>
+    <script type="module" src="js/home.js"></script>
+    <script type="module" src="js/player.js"></script>
+    <script type="module" src="js/auth.js"></script>
+  </body>
+</html>
