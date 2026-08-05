@@ -45,10 +45,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -80,21 +80,37 @@ jobs:
 
       - name: Commit updated data
         run: |
+          set -euo pipefail
           git config user.name "elabaglama"
           git config user.email "elaba@users.noreply.github.com"
-          git add data/opportunities.json data/scrape-meta.json data/custom-sources.json
-          if git diff --staged --quiet; then
-            echo "No opportunity changes."
-          else
+
+          mkdir -p /tmp/scrape-out
+          cp data/opportunities.json /tmp/scrape-out/opportunities.json
+          cp data/scrape-meta.json /tmp/scrape-out/scrape-meta.json
+          cp data/custom-sources.json /tmp/scrape-out/custom-sources.json
+
+          for i in 1 2 3 4 5; do
+            git rebase --abort 2>/dev/null || true
+            git fetch origin main
+            git checkout -B scrape-publish origin/main
+
+            cp /tmp/scrape-out/opportunities.json data/opportunities.json
+            cp /tmp/scrape-out/scrape-meta.json data/scrape-meta.json
+            cp /tmp/scrape-out/custom-sources.json data/custom-sources.json
+
+            git add data/opportunities.json data/scrape-meta.json data/custom-sources.json
+            if git diff --staged --quiet; then
+              echo "No opportunity changes vs main."
+              exit 0
+            fi
             git commit -m "chore: refresh scraped opportunities"
-            for i in 1 2 3 4 5; do
-              if git pull --rebase origin main && git push origin HEAD:main; then
-                echo "Push succeeded."
-                exit 0
-              fi
-              echo "Push race, retry $i..."
-              sleep $((i * 2))
-            done
-            echo "Failed to push after retries."
-            exit 1
-          fi
+
+            if git push origin HEAD:main; then
+              echo "Push succeeded."
+              exit 0
+            fi
+            echo "Push race, retry $i..."
+            sleep $((i * 2))
+          done
+          echo "Failed to push after retries."
+          exit 1
