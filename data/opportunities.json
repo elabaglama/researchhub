@@ -39,6 +39,19 @@
     "summary": "The German Cancer Research Center is accepting applications for a fully funded PhD position in Translational Cancer Biology at the German Cancer Consortium"
   },
   {
+    "id": "opportunities-for-youth-63eb26c41ccf",
+    "title": "NEH Collaborative Research Grants 2026 in the USA | Up to $250,000 for Humanities Research Projects",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/neh-collaborative-research-grants-2026-in-the-usa-up-to-250000-for-humanities-research-projects/",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "youth"
+    ],
+    "summary": "The National Endowment for the Humanities (NEH) is inviting applications for its Collaborative Research Grants 2026, a prestigious funding opportunity"
+  },
+  {
     "id": "opportunities-for-youth-ee633b59f1fb",
     "title": "TNE Exploratory Grants 2026 | Up to £25,000 for Higher Education Partnerships",
     "sourceId": "opportunities-for-youth",
@@ -65,17 +78,17 @@
     "summary": "Women around the world continue to drive innovation, lead communities, create groundbreaking solutions, and transform lives despite facing financial,"
   },
   {
-    "id": "opportunities-for-youth-64efc3bb727d",
-    "title": "Bayreuth Humboldt Centre Research Grants 2026–2027 ; Starter and Short Term Funding Opportunities",
+    "id": "opportunities-for-youth-6ed5b6a54c9f",
+    "title": "Initiative Coordinator at forNature in Panama: Full-Time Opportunity to Support the United Nations Universal Declaration of the Rights of Nature",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/research-grants-2026-2027/",
-    "type": "grant",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/initiative-coordinator-at-fornature-in-panama-full-time-opportunity-to-support-the-united-nations-universal-declaration-of-the-rights-of-nature/",
+    "type": "opportunity",
     "deadline": "Open",
     "tags": [
-      "grant",
+      "opportunity",
       "youth"
     ],
-    "summary": "Explore the Bayreuth Humboldt Centre Research Grants 2026–2027 at the University of Bayreuth — offering Starter and Short Term funding for international researchers. Apply by September 15, 2026 to advance your academic career through collaboration, innovation, and global research"
+    "summary": "The global movement to recognize and protect the Rights of Nature continues to gain momentum, and forNature is seeking an experienced professional to play a"
   },
   {
     "id": "opportunities-for-youth-af7f376edd73",
@@ -104,17 +117,17 @@
     "summary": "The United Nations Children's Fund (UNICEF), through the United Nations Volunteers (UNV) programme, is inviting qualified professionals to apply for the"
   },
   {
-    "id": "opportunities-for-youth-bf8e44630e0e",
-    "title": "PhD in Contextual (Dis)advantage and Educational Inequality at Utrecht University, Netherlands (Fully Funded PhD Position) – Apply by August 12, 2026",
+    "id": "opportunities-for-youth-f10a6f59dc02",
+    "title": "Girls Who Invest Scholars Program 2027 Applications Open: Apply for Tuition-Free Investment Management Training and Career Development",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/03/phd-in-contextual-disadvantage-and-educational-inequality-at-utrecht-university-netherlands-fully-funded-phd-position-apply-by-august-12-2026/",
-    "type": "opportunity",
-    "deadline": "August 12 2026",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/girls-who-invest/",
+    "type": "jobs",
+    "deadline": "Open",
     "tags": [
-      "opportunity",
+      "jobs",
       "youth"
     ],
-    "summary": "Are you passionate about understanding how social inequality shapes educational opportunities and life outcomes? Do you have a strong academic background in"
+    "summary": "Girls Who Invest Scholars Program 2027 Applications Open: Apply for Tuition-Free Investment Management Training and Career Development"
   },
   {
     "id": "opportunities-for-youth-e79e3ffcba14",
@@ -127,7 +140,7 @@
       "program",
       "youth"
     ],
-    "summary": "The Food and Agriculture Organization of the United Nations has opened applications for its 2026 Call for Expression of Interest for the Fellows Programme."
+    "summary": "FAO Fellows Programme 2026: Global Research Assignments at FAO Offices Worldwide"
   },
   {
     "id": "opportunities-for-youth-d92f7bce9a31",
@@ -140,20 +153,7 @@
       "fellowship",
       "youth"
     ],
-    "summary": "The Africa Matters Future Pathways Fellowship 2026 is now accepting applications from eligible young leaders in Egypt and Morocco who are eager to accelerate"
-  },
-  {
-    "id": "opportunities-for-youth-d8c22d310a4d",
-    "title": "Kenneth Myer Innovation Fellowships 2027 in Australia: Receive Up to AUD 180,000 to Scale Innovative Social and Environmental Solution",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/kenneth-myer-innovation-fellowships-2027-in-australia-receive-up-to-aud-180000-to-scale-innovative-social-and-environmental-solution/",
-    "type": "fellowship",
-    "deadline": "Open",
-    "tags": [
-      "fellowship",
-      "youth"
-    ],
-    "summary": "The 2027 Kenneth Myer Innovation Fellowships are now accepting Expressions of Interest from exceptional Australian innovators who are developing"
+    "summary": "Africa Matters Future Pathways Fellowship 2026: Fully Funded Leadership and Career Development Fellowship for Young Leaders from Egypt and Morocco"
   },
   {
     "id": "opportunities-for-youth-c4a54519f7d0",
@@ -465,7 +465,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "The African Union International Centre for Girls’ and Women’s Education in Africa (AU CIEFFA), in partnership with ImpactHER, has officially opened"
+    "summary": "African Union CIEFFA Online Capacity Building Trai..."
   },
   {
     "id": "opportunities-for-youth-525f345c51bc",
@@ -517,7 +517,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "The United Nations Convention to Combat Desertification (UNCCD) has officially opened the Expression of Interest (EOI) for organizations and individuals"
+    "summary": "Expression of Interest for UNCCD COP17 Children & Youth Resilience Hub Sessions: Submit Your Session Proposal for the Global Youth Platform."
   },
   {
     "id": "opportunities-for-youth-4b6cb194ed15",
@@ -543,7 +543,20 @@
       "scholarship",
       "youth"
     ],
-    "summary": "Coca-Cola Scholars Program Scholarship 2027: Win a $20,000 College Scholarship for Outstanding High School Seniors in the United States"
+    "summary": "The Coca-Cola Scholars Program Scholarship 2027 is now accepting applications from eligible high school seniors across the United States. Recognized as one of"
+  },
+  {
+    "id": "opportunities-for-youth-2eb163122574",
+    "title": "UNEP Mountains ADAPT Small Grants 2026: Apply for Up to USD 30,000 to Strengthen Climate Resilience in East African Mountain Communities.",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/unep-mountains-adapt-small-grants-2026-apply-for-up-to-usd-30000-to-strengthen-climate-resilience-in-east-african-mountain-communities/",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "youth"
+    ],
+    "summary": "UNEP Mountains ADAPT Small Grants 2026: Apply for Up to USD 30,000 to Strengthen Climate Resilience in East African Mountain Communities."
   },
   {
     "id": "opportunities-for-youth-59ae51fd5209",
@@ -559,17 +572,30 @@
     "summary": "UpTide Accelerator 2026: Receive a $5,000 Grant, Up to $25,000 in Additional Funding, and Expert Support to Scale Your U.S. Nonprofit"
   },
   {
-    "id": "opportunities-for-youth-63eb26c41ccf",
-    "title": "NEH Collaborative Research Grants 2026 in the USA | Up to $250,000 for Humanities Research Projects",
+    "id": "opportunities-for-youth-35539ddee2c9",
+    "title": "MIT School Access and Quality Fellowship...",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/neh-collaborative-research-grants-2026-in-the-usa-up-to-250000-for-humanities-research-projects/",
-    "type": "grant",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/mit-school-access-and-quality-fellowship-2026-2027-one-year-fellowship-for-education-leaders-advancing-equitable-school-access-and-ai-driven-education-policy/",
+    "type": "fellowship",
     "deadline": "Open",
     "tags": [
-      "grant",
+      "fellowship",
       "youth"
     ],
-    "summary": "The National Endowment for the Humanities (NEH) is inviting applications for its Collaborative Research Grants 2026, a prestigious funding opportunity"
+    "summary": "MIT School Access and Quality Fellowship..."
+  },
+  {
+    "id": "opportunities-for-youth-2f15b4fecbb7",
+    "title": "Research Assistant – U.S. Immigration Po...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/research-assistant-u-s-immigration-policy-program-at-the-migration-policy-institute-mpi-apply-for-a-policy-research-career-in-washington-d-c/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Research Assistant – U.S. Immigration Po..."
   },
   {
     "id": "opportunities-for-youth-2ef732973372",
@@ -595,7 +621,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Public health communication plays a critical role in helping communities make informed decisions that improve health outcomes. The Centers for Disease Control"
+    "summary": "CDC Campaign and Audience Research Team ..."
   },
   {
     "id": "opportunities-for-youth-9f339e80f843",
@@ -621,33 +647,20 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Discover opportunities in the Erasmus+ programme to build inclusive communities through the Youth-ID Network of Multipliers 2026."
+    "summary": "Youth-ID Network of Multipliers 2026: Jo..."
   },
   {
-    "id": "opportunities-for-youth-fbab8c692819",
-    "title": "Girls Who Invest Scholars Program 2027 A...",
+    "id": "opportunities-for-youth-64efc3bb727d",
+    "title": "Bayreuth Humboldt Centre Research Grants 2026–2027 ; Starter and Short Term Funding Opportunities",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/05/girls-who-invest/",
-    "type": "program",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/research-grants-2026-2027/",
+    "type": "grant",
     "deadline": "Open",
     "tags": [
-      "program",
+      "grant",
       "youth"
     ],
-    "summary": "Applications are now open for the 2027 Girls Who Invest (GWI) Scholars Program, an exceptional tuition-free opportunity designed to equip undergraduate"
-  },
-  {
-    "id": "opportunities-for-youth-8e137e20d6b1",
-    "title": "Amnesty International Free Online Human ...",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/05/amnesty-international-free-online-human-rights-courses-learn-in-30-languages-and-earn-certificates/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Amnesty International Free Online Human ..."
+    "summary": "Explore the Bayreuth Humboldt Centre Research Grants 2026–2027 at the University of Bayreuth — offering Starter and Short Term funding for international researchers. Apply by September 15, 2026 to advance your academic career through collaboration, innovation, and global research"
   },
   {
     "id": "opportunities-for-youth-2d78b2f7b8b7",
@@ -660,7 +673,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Young changemakers in Canada now have an exciting opportunity to transform their ideas into meaningful action through the Canadian Red Cross Resilience Fund"
+    "summary": "Canadian Red Cross Resilience Fund 2026 in Canada | Up to $5,000 for Youth-Led Community Projects"
   },
   {
     "id": "opportunities-for-youth-dee29f2dd150",
@@ -673,20 +686,7 @@
       "grant",
       "youth"
     ],
-    "summary": "The British Council has officially launched the highly anticipated TNE Grants with India 2026–27 under the Going Global Partnerships initiative, offering an"
-  },
-  {
-    "id": "opportunities-for-youth-48ba25d471b4",
-    "title": "Kellogg Institute Postdoctoral Visiting Fellowships 2027-2028 in the USA | $75,000 Annual Stipend",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/kellogg-institute-postdoctoral-research-fellowships-2025-26-at-university-of-notre-dame/",
-    "type": "fellowship",
-    "deadline": "Open",
-    "tags": [
-      "fellowship",
-      "youth"
-    ],
-    "summary": "Applications are now open for the Kellogg Institute Postdoctoral Visiting Fellowships 2027-2028 at the University of Notre Dame, USA. This prestigious"
+    "summary": "British Council TNE Grants with India 2026–27: £30,000 Funding for UK–India Higher Education Partnerships in Emerging Technologies"
   },
   {
     "id": "opportunities-for-youth-99edf19d57ec",
@@ -728,6 +728,19 @@
     "summary": "The United Nations Development Programme (UNDP), in partnership with the Institute for Security Studies (ISS), has officially launched the Call for Papers:"
   },
   {
+    "id": "opportunities-for-youth-8e137e20d6b1",
+    "title": "Amnesty International Free Online Human ...",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/amnesty-international-free-online-human-rights-courses-learn-in-30-languages-and-earn-certificates/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Amnesty International is offering free online courses through its Human Rights Academy, a dedicated digital learning platform designed to strengthen"
+  },
+  {
     "id": "opportunities-for-youth-5d5ebd3bee57",
     "title": "Skoll Scholarship 2027 at the University...",
     "sourceId": "opportunities-for-youth",
@@ -751,7 +764,7 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Follow these steps between now and applications opening on 4 August, and you’ll be ready to ace the Chevening application process."
+    "summary": "How to Prepare your UK Chevening Scholar..."
   },
   {
     "id": "opportunities-for-youth-65e1ce05f4e3",
@@ -777,7 +790,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "Are you a refugee or asylum seeker in Rwanda looking to pursue a university education? Applications are now open for the UNHCR Albert Einstein German Academic"
+    "summary": "DAFI Scholarship Programme 2026/2027 in Rwanda: Fully Funded Undergraduate Scholarships for Refugees and Asylum Seekers"
   },
   {
     "id": "opportunities-for-youth-d0fccb433480",
@@ -803,7 +816,7 @@
       "scholarship",
       "youth"
     ],
-    "summary": "Applications are available for the Slovakia Scholarships for Talented Students from All Over the World for the 2026/2027 academic year, an international..."
+    "summary": "Slovakia Scholarships for Talented International Students 2026/27: Study in Europe and Receive Up to €15,000"
   },
   {
     "id": "opportunities-for-youth-c79f88db50e4",
@@ -868,7 +881,20 @@
       "scholarship",
       "youth"
     ],
-    "summary": "The 2027 France-South Africa Scholarship Programme is officially open for applications, offering an exceptional opportunity for eligible students from South"
+    "summary": "France-South Africa Scholarship Programme 2027: Fully Funded Master’s and PhD Scholarships to Study in France for Students from South Africa, Lesotho, and Malawi"
+  },
+  {
+    "id": "opportunities-for-youth-48ba25d471b4",
+    "title": "Kellogg Institute Postdoctoral Visiting Fellowships 2027-2028 in the USA | $75,000 Annual Stipend",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/kellogg-institute-postdoctoral-research-fellowships-2025-26-at-university-of-notre-dame/",
+    "type": "fellowship",
+    "deadline": "Open",
+    "tags": [
+      "fellowship",
+      "youth"
+    ],
+    "summary": "Kellogg Institute Postdoctoral Visiting Fellowships 2027-2028 in the USA | $75,000 Annual Stipend"
   },
   {
     "id": "opportunities-for-youth-448fe7f9e727",
@@ -907,33 +933,20 @@
       "opportunity",
       "youth"
     ],
-    "summary": "Are you passionate about migration studies, sociology, digital platforms, labor research, or social sciences? The University of Helsinki is inviting"
+    "summary": "Doctoral Researcher in the Social Sciences at the University of Helsinki 2026: Fully Funded PhD Opportunity on Migration, Platform Work and Digital Labor in Finland"
   },
   {
-    "id": "opportunities-for-youth-6b5482085221",
-    "title": "Fully Funded PhD in Sustainable Development and Climate Change 2026–2027 in Italy: 35 Scholarships Available Through IUSS Pavia",
+    "id": "opportunities-for-youth-bf8e44630e0e",
+    "title": "PhD in Contextual (Dis)advantage and Educational Inequality at Utrecht University, Netherlands (Fully Funded PhD Position) – Apply by August 12, 2026",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/27/phd-in-sustainable-development-and-climate-change/",
-    "type": "scholarship",
-    "deadline": "Open",
-    "tags": [
-      "scholarship",
-      "youth"
-    ],
-    "summary": "Applications are now open for the 42nd Cycle of the National PhD Programme in Sustainable Development and Climate Change for the 2026–2027 academic year."
-  },
-  {
-    "id": "opportunities-for-youth-8fdc58e4f373",
-    "title": "Initiative Coordinator at forNature in P...",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/initiative-coordinator-at-fornature-in-panama-full-time-opportunity-to-support-the-united-nations-universal-declaration-of-the-rights-of-nature/",
+    "url": "https://opportunitiesforyouth.org/2026/08/03/phd-in-contextual-disadvantage-and-educational-inequality-at-utrecht-university-netherlands-fully-funded-phd-position-apply-by-august-12-2026/",
     "type": "opportunity",
-    "deadline": "Open",
+    "deadline": "August 12 2026",
     "tags": [
       "opportunity",
       "youth"
     ],
-    "summary": "The global movement to recognize and protect the Rights of Nature continues to gain momentum, and forNature is seeking an experienced professional to play a"
+    "summary": "Are you passionate about understanding how social inequality shapes educational opportunities and life outcomes? Do you have a strong academic background in"
   },
   {
     "id": "opportunities-for-youth-5d4bb98fcb4e",
@@ -959,20 +972,7 @@
       "internship",
       "youth"
     ],
-    "summary": "Applications are open for the National Defense University Student Trainee Internship 2026, a paid federal Pathways Internship Program opportunity based at"
-  },
-  {
-    "id": "opportunities-for-youth-543e4a84102d",
-    "title": "Court of Justice of the European Union Paid Traineeships 2026 for Young Graduates (Up to €2,400/Month)",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/02/paid-internship-opportunities-at-the-court-of-justice-of-the-european-union-e1493-net-monthly-salary-and-more/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "The Court of Justice of the European Union offers paid traineeship programmes for young graduates. Approximately 200 places are available each year in both"
+    "summary": "NDU Student Trainee Internship 2026: Paid National Security Research Opportunity in Washington, DC"
   },
   {
     "id": "opportunities-for-youth-90d892f45a93",
@@ -985,7 +985,20 @@
       "program",
       "youth"
     ],
-    "summary": "The United Nations Institute for Training and Research (UNITAR), with generous funding from the Government and People of Japan, has officially opened"
+    "summary": "UNITAR Digital Upskilling and Reskilling Programme 2026 for Ukrainian Women Refugees and Internally Displaced Women in Ukraine | Fully Funded AI, GIS and Python Training"
+  },
+  {
+    "id": "opportunities-for-youth-d8c22d310a4d",
+    "title": "Kenneth Myer Innovation Fellowships 2027 in Australia: Receive Up to AUD 180,000 to Scale Innovative Social and Environmental Solution",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/kenneth-myer-innovation-fellowships-2027-in-australia-receive-up-to-aud-180000-to-scale-innovative-social-and-environmental-solution/",
+    "type": "fellowship",
+    "deadline": "Open",
+    "tags": [
+      "fellowship",
+      "youth"
+    ],
+    "summary": "The 2027 Kenneth Myer Innovation Fellowships are now accepting Expressions of Interest from exceptional Australian innovators who are developing"
   },
   {
     "id": "opportunities-for-youth-2f7f87bd947f",
@@ -1024,20 +1037,7 @@
       "program",
       "youth"
     ],
-    "summary": "The Middlesex University Visiting Fellows Programme is a prestigious initiative designed to foster academic collaboration, knowledge exchange, and"
-  },
-  {
-    "id": "opportunities-for-youth-d13f9239c94f",
-    "title": "AI Societal Impact Lab Autumn 2026 Fellowship: Fully Remote Fellowship for Emerging Researchers and Graduates Interested in the Social Impact of Artificial Intelligence",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/ai-societal-impact-lab-autumn-2026-fellowship-fully-remote-fellowship-for-emerging-researchers-and-graduates-interested-in-the-social-impact-of-artificial-intelligence/",
-    "type": "fellowship",
-    "deadline": "Open",
-    "tags": [
-      "fellowship",
-      "youth"
-    ],
-    "summary": "To support this growing need, the AI Societal Impact Lab has launched its inaugural Autumn 2026 Fellowship, a fully remote fellowship program designed to"
+    "summary": "Middlesex University Visiting Fellows Programme 2026 – Academic Collaboration and Research Opportunities"
   },
   {
     "id": "still-hiring-44739946ab32",
@@ -16861,6 +16861,19 @@
     "summary": "Transportation brokerage connecting shippers with extensive carrier network solutions. · Columbus, US · 326 employees"
   },
   {
+    "id": "artinfoland-85e9f97a17bc",
+    "title": "Narture CIC Open Call for Exhibition 2026 – Ayr: Past, Present, Future",
+    "sourceId": "artinfoland",
+    "url": "https://artinfoland.com/opportunities/narture-cic-ayr-past-present-future-open-call-2026/",
+    "type": "call",
+    "deadline": "Ongoing",
+    "tags": [
+      "call",
+      "arts"
+    ],
+    "summary": "Organizer Information Founded in June 2020 by father-and-daughter artist team Robert and Saskia Singer, Narture CIC is a social enterprise based in Ayr, Scotland. The organization repurposes empty town center spaces for creative and cultural uses under the core ethos that “everyo"
+  },
+  {
     "id": "artinfoland-0f3ff9bd5516",
     "title": "New to the Neighborhood 2026: Brooklyn Playwright Residency",
     "sourceId": "artinfoland",
@@ -19448,19 +19461,6 @@
     "summary": "Organizer Information The National Gallery of Iceland is Iceland’s leading public museum dedicated to collecting, preserving, researching, and exhibiting Icelandic and international visual art. Through exhibitions, research initiatives, educational programs, and international par"
   },
   {
-    "id": "artinfoland-d3073cf81ed9",
-    "title": "La Storta Residency Open Call",
-    "sourceId": "artinfoland",
-    "url": "https://artinfoland.com/opportunities/la-storta-residency-venice-italy/",
-    "type": "residency",
-    "deadline": "Open",
-    "tags": [
-      "residency",
-      "arts"
-    ],
-    "summary": "Organizer Information La Storta Residency is an artist residency program operated by Venezia Contemporanea, an independent cultural platform based in Venice, Italy, dedicated to supporting contemporary artistic practice and fostering international cultural exchange. Located withi"
-  },
-  {
     "id": "custom-airtable-com-b2f30bf6b47f",
     "title": "Still Hiring Today — full Airtable board",
     "sourceId": "custom-airtable-com",
@@ -19502,16 +19502,341 @@
     "summary": "No structured listings detected yet. Open the original site: https://creativetechnologist.xyz/resources"
   },
   {
-    "id": "custom-github-com-b3b6c40d044a",
-    "title": "github.com — browse source",
+    "id": "custom-github-com-0cd708b558cb",
+    "title": "weecology/ogrants — GitHub repository",
     "sourceId": "custom-github-com",
     "url": "https://github.com/weecology/ogrants",
     "type": "opportunity",
     "deadline": "Open",
     "tags": [
-      "custom",
+      "github",
       "portal"
     ],
-    "summary": "No structured listings detected yet. Open the original site: https://github.com/weecology/ogrants"
+    "summary": "Scraped from GitHub repository weecology/ogrants. Contains 25 linked opportunities."
+  },
+  {
+    "id": "custom-github-com-a6746fd6ba1a",
+    "title": "Zenodo",
+    "sourceId": "custom-github-com",
+    "url": "https://zenodo.org/",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "We recommend and [Figshare](https://figshare.com/) as good options for posting grants because they are archival and so shouldn't result in broken links anytime in the near future."
+  },
+  {
+    "id": "custom-github-com-1369a9257659",
+    "title": "Figshare",
+    "sourceId": "custom-github-com",
+    "url": "https://figshare.com/",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "We recommend [Zenodo](https://zenodo.org/) and as good options for posting grants because they are archival and so shouldn't result in broken links anytime in the near future."
+  },
+  {
+    "id": "custom-github-com-23cd9b85a940",
+    "title": "Gordon and Betty Moore Foundation",
+    "sourceId": "custom-github-com",
+    "url": "https://www.moore.org/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "1. 's [Data-Driven Discovery Initiation](https://www.moore.org/initiative-strategy-detail?initiativeId=data-driven-discovery) through [Grant GBMF4563](https://www.moore.org/grant-detail?grantId=GBMF4563) to Ethan White."
+  },
+  {
+    "id": "custom-github-com-e1da93af31fa",
+    "title": "Data-Driven Discovery Initiation",
+    "sourceId": "custom-github-com",
+    "url": "https://www.moore.org/initiative-strategy-detail?initiativeId=data-driven-discovery",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "1. [Gordon and Betty Moore Foundation](https://www.moore.org/)'s through [Grant GBMF4563](https://www.moore.org/grant-detail?grantId=GBMF4563) to Ethan White."
+  },
+  {
+    "id": "custom-github-com-404560492fec",
+    "title": "Grant GBMF4563",
+    "sourceId": "custom-github-com",
+    "url": "https://www.moore.org/grant-detail?grantId=GBMF4563",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "github"
+    ],
+    "summary": "1. [Gordon and Betty Moore Foundation](https://www.moore.org/)'s [Data-Driven Discovery Initiation](https://www.moore.org/initiative-strategy-detail?initiativeId=data-driven-discovery) through to Ethan White."
+  },
+  {
+    "id": "custom-github-com-c27a240cfb1c",
+    "title": "Institute of Museum and Library Services",
+    "sourceId": "custom-github-com",
+    "url": "https://www.imls.gov/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "2. 's [National Leadership Grants for Libraries](https://www.imls.gov/grants/available/national-leadership-grants-libraries) through [Award # LG-250067-OLS-21](https://www.imls.gov/grants/awarded/lg-250067-ols-21) to Hao Ye and Perry Collins."
+  },
+  {
+    "id": "custom-github-com-62576d85c01a",
+    "title": "National Leadership Grants for Libraries",
+    "sourceId": "custom-github-com",
+    "url": "https://www.imls.gov/grants/available/national-leadership-grants-libraries",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "github"
+    ],
+    "summary": "2. [Institute of Museum and Library Services](https://www.imls.gov/)'s through [Award # LG-250067-OLS-21](https://www.imls.gov/grants/awarded/lg-250067-ols-21) to Hao Ye and Perry Collins."
+  },
+  {
+    "id": "custom-github-com-e5024f3ac784",
+    "title": "Award # LG-250067-OLS-21",
+    "sourceId": "custom-github-com",
+    "url": "https://www.imls.gov/grants/awarded/lg-250067-ols-21",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "2. [Institute of Museum and Library Services](https://www.imls.gov/)'s [National Leadership Grants for Libraries](https://www.imls.gov/grants/available/national-leadership-grants-libraries) through to Hao Ye and Perry Collins."
+  },
+  {
+    "id": "custom-github-com-8cf1eaf79f7b",
+    "title": "University of FLorida Library Technology Services",
+    "sourceId": "custom-github-com",
+    "url": "https://lts.uflib.ufl.edu/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "3. ."
+  },
+  {
+    "id": "custom-github-com-86c63652e430",
+    "title": "2021 funding proposal",
+    "sourceId": "custom-github-com",
+    "url": "https://ufdc.ufl.edu/IR00011386/00001/pdf/0",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "The **** granted by the Institute of Museum and Library Services summarizes past OGrants work and future planning through 2023."
+  },
+  {
+    "id": "custom-github-com-2c4abec8faf4",
+    "title": "Netlify",
+    "sourceId": "custom-github-com",
+    "url": "https://www.netlify.com/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "It is developed on [GitHub]({{ site.github.repo }}) and hosted on ."
+  },
+  {
+    "id": "custom-github-com-e219efdd7216",
+    "title": "blog post",
+    "sourceId": "custom-github-com",
+    "url": "https://jabberwocky.weecology.org/2012/08/10/a-list-of-publicly-available-grant-proposals-in-the-biological-sciences/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "This site started in 2012 as a on [Jabberwocky Ecology](https://jabberwocky.weecology.org/). In 2017 [Ethan White](http://ethanwhite.org) built the original version of the current site to make it easier for others to contribute and submit grants."
+  },
+  {
+    "id": "custom-github-com-9390395b179e",
+    "title": "Jabberwocky Ecology",
+    "sourceId": "custom-github-com",
+    "url": "https://jabberwocky.weecology.org/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "This site started in 2012 as a [blog post](https://jabberwocky.weecology.org/2012/08/10/a-list-of-publicly-available-grant-proposals-in-the-biological-sciences/) on . In 2017 [Ethan White](http://ethanwhite.org) built the original version of the current site to make it easier for"
+  },
+  {
+    "id": "custom-github-com-61070ed6103b",
+    "title": "Ethan White",
+    "sourceId": "custom-github-com",
+    "url": "http://ethanwhite.org",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "This site started in 2012 as a [blog post](https://jabberwocky.weecology.org/2012/08/10/a-list-of-publicly-available-grant-proposals-in-the-biological-sciences/) on [Jabberwocky Ecology](https://jabberwocky.weecology.org/). In 2017 built the original version of the current site t"
+  },
+  {
+    "id": "custom-github-com-15d07b14387a",
+    "title": "ogrants Github organization",
+    "sourceId": "custom-github-com",
+    "url": "https://github.com/ogrants",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "github"
+    ],
+    "summary": "In 2021, the Institute of Museum and Library Services awarded the University of Florida a grant, under leadership of librarians Hao Ye and Perry Collins, to undertake planning for a long-term open grants repository, building from OGrants as well as efforts by Bess de Farber and L"
+  },
+  {
+    "id": "custom-github-com-7c3724063d43",
+    "title": "Data-Driven Discovery Initiative",
+    "sourceId": "custom-github-com",
+    "url": "https://www.moore.org/initiative-strategy-detail?initiativeId=data-driven-discovery",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "Development of this site is supported by the [Gordon and Betty Moore Foundation](https://www.moore.org/)'s through [Grant GBMF4563](https://www.moore.org/grant-detail?grantId=GBMF4563) to Ethan White."
+  },
+  {
+    "id": "custom-github-com-7de73c55216c",
+    "title": "Institute of Museum and Library Services Award # LG-250067-OLS-21",
+    "sourceId": "custom-github-com",
+    "url": "https://www.imls.gov/grants/awarded/lg-250067-ols-21",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "This project was made possible in part by the to Hao Ye and Perry Collins."
+  },
+  {
+    "id": "custom-github-com-e01d600d3c8d",
+    "title": "template",
+    "sourceId": "custom-github-com",
+    "url": "https://docs.google.com/presentation/d/1tz30gpPxkn1F2ooremhen6YHGpF42-nUVKCjNXBnsz0/edit?usp=sharing",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "template"
+  },
+  {
+    "id": "custom-github-com-fbc766d6939a",
+    "title": "https://redcap.link/grantproposals",
+    "sourceId": "custom-github-com",
+    "url": "https://redcap.link/grantproposals",
+    "type": "grant",
+    "deadline": "Open",
+    "tags": [
+      "grant",
+      "github"
+    ],
+    "summary": "Please submit your grant proposals at ."
+  },
+  {
+    "id": "custom-github-com-1ed7fb0f2053",
+    "title": "CC0 1.0 Universal",
+    "sourceId": "custom-github-com",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "Ogrants metadata is available under the public domain declaration."
+  },
+  {
+    "id": "custom-github-com-cbb10e59bd0a",
+    "title": "CC BY 4.0 license",
+    "sourceId": "custom-github-com",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "Proposal files stored in this repo (proposals/) are made available under the , and copyright is retained by the original authors."
+  },
+  {
+    "id": "custom-github-com-8720a1dee748",
+    "title": "MIT License",
+    "sourceId": "custom-github-com",
+    "url": "https://mit-license.org/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "The Ogrants website is licensed under the open source ."
+  },
+  {
+    "id": "custom-github-com-923c1f1a07d1",
+    "title": "Register",
+    "sourceId": "custom-github-com",
+    "url": "https://ufl.zoom.us/meeting/register/tJEtfu-qqjktHNWpLp63zKfe18qmcRylfq7A",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "******"
+  },
+  {
+    "id": "custom-github-com-716212e15ef7",
+    "title": "Register",
+    "sourceId": "custom-github-com",
+    "url": "https://ufl.zoom.us/meeting/register/tJAodOGprzwuHtxEBsP35Kqdcuk3mBIslVtb",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "******"
+  },
+  {
+    "id": "custom-github-com-53335c02f31a",
+    "title": "Register",
+    "sourceId": "custom-github-com",
+    "url": "https://ufl.zoom.us/meeting/register/tJ0kcOiorD4jEtPM7MMliMkIqx9HoWTv61dp",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "github"
+    ],
+    "summary": "******"
   }
 ]
