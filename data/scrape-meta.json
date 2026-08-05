@@ -1,17 +1,25 @@
 {
-  "scrapedAt": "2026-08-05T11:33:17.919633+00:00",
+  "scrapedAt": "2026-08-05T11:33:42.015963+00:00",
   "sources": {
     "opportunities-for-youth": {
       "ok": true,
-      "count": 80
+      "count": 80,
+      "mode": "dedicated"
     },
     "still-hiring": {
       "ok": true,
-      "count": 1130
+      "count": 1130,
+      "mode": "dedicated"
     },
     "artinfoland": {
       "ok": true,
-      "count": 200
+      "count": 200,
+      "mode": "dedicated"
+    },
+    "custom-airtable-com": {
+      "ok": true,
+      "count": 1,
+      "mode": "generic"
     },
     "custom-creativesunite-eu": {
       "ok": true,
@@ -19,6 +27,6 @@
       "mode": "generic"
     }
   },
-  "mode": "partial",
-  "total": 1411
+  "mode": "full",
+  "total": 1412
 }
