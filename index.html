@@ -39,6 +39,48 @@
         />
       </form>
 
+      <div class="search-filters" id="search-filters" aria-label="Filters">
+        <div class="filter-group">
+          <select id="filter-type" class="filter-select" aria-label="Filter by type">
+            <option value="">All types</option>
+            <option value="jobs">Jobs &amp; Internships</option>
+            <option value="programs">Programs &amp; Scholarships</option>
+            <option value="awards">Grants &amp; Awards</option>
+            <option value="calls">Partnership Calls</option>
+            <option value="events">Events &amp; Classes</option>
+            <option value="other">Opportunities</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select id="filter-continent" class="filter-select" aria-label="Filter by region">
+            <option value="">Any region</option>
+            <option value="africa">Africa</option>
+            <option value="asia">Asia</option>
+            <option value="europe">Europe</option>
+            <option value="americas">Americas</option>
+            <option value="middle-east">Middle East</option>
+            <option value="oceania">Oceania</option>
+          </select>
+        </div>
+        <div class="filter-group" id="filter-country-group">
+          <input
+            type="text"
+            id="filter-country"
+            class="filter-input"
+            placeholder="Country…"
+            autocomplete="off"
+            aria-label="Filter by country"
+          />
+        </div>
+        <div class="filter-group">
+          <select id="filter-age" class="filter-select" aria-label="Filter by audience">
+            <option value="">Any audience</option>
+            <option value="youth">Youth &amp; Students</option>
+            <option value="early-career">Early Career</option>
+          </select>
+        </div>
+      </div>
+
       <section class="home-results" id="home-results" hidden>
         <p id="results-meta" class="results-meta"></p>
         <div id="results-list" class="results-cards"></div>

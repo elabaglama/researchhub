@@ -37,6 +37,69 @@ function matchesQuery(item, query) {
     .every((token) => haystack.includes(normalize(token)));
 }
 
+const CATEGORY_DEFS = [
+  { key: "jobs",     label: "Jobs",              types: ["jobs", "internship"] },
+  { key: "awards",   label: "Awards",             types: ["grant", "competition", "open-call"] },
+  { key: "programs", label: "Programs",           types: ["scholarship", "fellowship", "program", "residency"] },
+  { key: "calls",    label: "Partnership Calls",  types: ["call"] },
+  { key: "events",   label: "Events & Classes",   types: [] },
+  { key: "other",    label: "Opportunities",      types: ["opportunity"] },
+];
+
+const _typeToCategory = new Map();
+for (const cat of CATEGORY_DEFS) {
+  for (const t of cat.types) _typeToCategory.set(t, cat.key);
+}
+
+const _EVENT_KEYWORDS = ["conference", "workshop", "webinar", "summit", "seminar", "training", "bootcamp", "course", "event", "class"];
+
+function classifyItem(item) {
+  const mapped = _typeToCategory.get(item.type);
+  if (mapped) return mapped;
+  const text = normalize((item.title || "") + " " + (item.summary || ""));
+  if (_EVENT_KEYWORDS.some((kw) => text.includes(kw))) return "events";
+  return "other";
+}
+
+const CONTINENT_KEYWORDS = {
+  africa: ["africa", "african", "nigeria", "nigerian", "kenya", "kenyan", "ghana", "ghanaian", "ethiopia", "ethiopian", "south africa", "egypt", "egyptian", "morocco", "moroccan", "algeria", "algeria", "tunisia", "tunisian", "tanzania", "uganda", "ugandan", "zimbabwe", "senegal", "cameroon", "ivory coast", "cote d'ivoire", "rwanda", "zambia", "botswana", "mozambique", "mali", "mali", "burkina faso", "niger", "chad", "angola", "namibia", "madagascar", "malawi", "sierra leone", "liberia", "guinea", "benin", "togo", "gambia", "djibouti", "eritrea", "somalia", "south sudan", "sudan", "congo", "gabon", "mauritius", "seychelles", "sub-saharan", "sahel"],
+  asia: ["asia", "asian", "china", "chinese", "japan", "japanese", "india", "indian", "south korea", "korea", "korean", "indonesia", "indonesian", "thailand", "thai", "vietnam", "vietnamese", "philippines", "filipino", "malaysia", "malaysian", "singapore", "bangladesh", "bangladeshi", "pakistan", "pakistani", "sri lanka", "myanmar", "cambodia", "cambodian", "laos", "mongolia", "mongolian", "nepal", "nepali", "bhutan", "maldives", "timor-leste", "taiwan", "hong kong", "kazakhstan", "uzbekistan", "kyrgyzstan", "tajikistan", "turkmenistan"],
+  europe: ["europe", "european", "germany", "german", "france", "french", "uk", "united kingdom", "britain", "british", "england", "netherlands", "dutch", "sweden", "swedish", "norway", "norwegian", "denmark", "danish", "finland", "finnish", "switzerland", "swiss", "austria", "austrian", "belgium", "belgian", "italy", "italian", "spain", "spanish", "portugal", "portuguese", "poland", "polish", "czech", "hungary", "hungarian", "romania", "romanian", "bulgaria", "croatia", "estonia", "latvia", "lithuania", "slovakia", "slovenia", "luxembourg", "ireland", "irish", "greece", "greek", "serbia", "ukraine", "ukrainian", "russia", "russian", "eu ", "european union", "schengen", "scandinavia", "nordic"],
+  americas: ["americas", "usa", "united states", "america", "american", "canada", "canadian", "mexico", "mexican", "brazil", "brazilian", "argentina", "argentinian", "chile", "chilean", "colombia", "colombian", "peru", "peruvian", "venezuela", "ecuador", "bolivia", "paraguay", "uruguay", "cuba", "haiti", "haitian", "dominican republic", "jamaica", "trinidad", "guyana", "suriname", "central america", "caribbean", "latin america", "north america", "south america"],
+  "middle-east": ["middle east", "mena", "turkey", "turkish", "iran", "iranian", "iraq", "iraqi", "saudi arabia", "saudi", "uae", "united arab emirates", "emirati", "jordan", "jordanian", "lebanon", "lebanese", "israel", "israeli", "palestine", "palestinian", "oman", "omani", "qatar", "qatari", "kuwait", "kuwaiti", "bahrain", "bahraini", "yemen", "yemeni", "syria", "syrian", "gulf", "gcc"],
+  oceania: ["australia", "australian", "new zealand", "pacific", "oceania", "fiji", "fijian", "papua new guinea", "solomon islands", "vanuatu", "samoa", "tonga", "micronesia", "polynesia"],
+};
+
+function matchesFilters(item, { type = "", continent = "", country = "", age = "" } = {}) {
+  if (type && classifyItem(item) !== type) return false;
+
+  if (continent || country) {
+    const text = normalize(
+      (item.title || "") + " " + (item.summary || "") + " " + (item.tags || []).join(" ")
+    );
+    if (continent) {
+      const keywords = CONTINENT_KEYWORDS[continent] || [];
+      if (!keywords.some((kw) => text.includes(normalize(kw)))) return false;
+    }
+    if (country) {
+      if (!text.includes(normalize(country))) return false;
+    }
+  }
+
+  if (age) {
+    const text = normalize((item.title || "") + " " + (item.summary || ""));
+    if (age === "youth") {
+      const kws = ["youth", "student", "undergraduate", "young professional", "under 25", "under 30", "18-25", "18-30", "early stage"];
+      if (!kws.some((kw) => text.includes(normalize(kw)))) return false;
+    } else if (age === "early-career") {
+      const kws = ["early career", "early-career", "young professional", "under 35", "under 40", "junior researcher", "junior professional"];
+      if (!kws.some((kw) => text.includes(normalize(kw)))) return false;
+    }
+  }
+
+  return true;
+}
+
 function loadCustomSources() {
   try {
     const raw = localStorage.getItem(SOURCES_KEY);
@@ -310,10 +373,14 @@ function wirePdfButton() {
 export {
   SOURCES_KEY,
   NOTION_KEY,
+  CATEGORY_DEFS,
+  CONTINENT_KEYWORDS,
   normalize,
   escapeHtml,
   sourceById,
   matchesQuery,
+  classifyItem,
+  matchesFilters,
   loadCustomSources,
   saveCustomSources,
   loadFileCustomSources,
