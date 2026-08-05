@@ -5,13 +5,18 @@ import {
   classifyItem,
   CATEGORY_DEFS,
   wirePdfButton,
-  filterOpportunitiesBySources,
   loadLibraryCache,
   loadRemovedSourceIds,
   mergePersonalSources,
 } from "./shared.js";
 import { currentUser, onUserChange } from "./auth.js";
-import { loadUserPrefs, saveUserPrefs, loadUserSources } from "./firebase.js";
+import {
+  loadUserPrefs,
+  saveUserPrefs,
+  loadUserSources,
+  loadScrapeCaches,
+  opportunitiesFromCaches,
+} from "./firebase.js";
 
 wirePdfButton();
 
@@ -23,10 +28,8 @@ const today = new Date().toLocaleDateString("en-US", {
 });
 document.getElementById("daily-meta").textContent = today;
 
-// ── Preferences ─────────────────────────────────────────────────────────────
-
 const ALL_KEYS = CATEGORY_DEFS.map((c) => c.key);
-let enabledKeys = new Set(ALL_KEYS); // default: all on
+let enabledKeys = new Set(ALL_KEYS);
 
 async function loadPrefs() {
   if (!currentUser) return;
@@ -52,8 +55,6 @@ async function savePrefs() {
     // silent
   }
 }
-
-// ── Preferences panel wiring ─────────────────────────────────────────────────
 
 const customizeBtn = document.getElementById("customize-btn");
 const prefsOverlay = document.getElementById("prefs-overlay");
@@ -111,24 +112,18 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !prefsOverlay.hidden) closePrefsPanel();
 });
 
-// ── Data ─────────────────────────────────────────────────────────────────────
-
-const allOpportunities = await fetch("data/opportunities.json").then((r) =>
-  r.json()
-);
-
 let sources = [];
 let byCategory = Object.fromEntries(CATEGORY_DEFS.map((c) => [c.key, []]));
 
 async function loadPersonalSources() {
   if (!currentUser) return [];
   const uid = currentUser.uid;
-  const [firestoreSources, cached] = await Promise.all([
+  const [loadResult, cached] = await Promise.all([
     loadUserSources(uid),
     Promise.resolve(loadLibraryCache(uid)),
   ]);
   return mergePersonalSources(
-    firestoreSources,
+    loadResult.sources || [],
     cached,
     loadRemovedSourceIds(uid)
   );
@@ -150,8 +145,6 @@ function sortItems(items) {
   });
 }
 
-// ── Render ───────────────────────────────────────────────────────────────────
-
 const root = document.getElementById("daily-columns");
 
 function renderReport() {
@@ -164,7 +157,7 @@ function renderReport() {
   if (!activeCategories.length) {
     root.innerHTML = `<p class="empty-note">${
       sources.length
-        ? "No opportunities available for the selected categories yet."
+        ? "No opportunities available for the selected categories yet. Try Sync on the Library page."
         : "Your library is empty. Add resources on the Library page, then Sync to fill your daily report."
     }</p>`;
     return;
@@ -258,12 +251,27 @@ function renderReport() {
 
 async function refreshFeed() {
   sources = await loadPersonalSources();
-  const opportunities = filterOpportunitiesBySources(allOpportunities, sources);
+  const ids = sources.map((s) => s.id);
+  const { caches } = await loadScrapeCaches(ids);
+  let opportunities = opportunitiesFromCaches(caches, ids);
+
+  if (!opportunities.length && ids.length) {
+    try {
+      const all = await fetch("data/opportunities.json", { cache: "no-store" }).then((r) =>
+        r.json()
+      );
+      const idSet = new Set(ids);
+      opportunities = (Array.isArray(all) ? all : []).filter((item) =>
+        idSet.has(item.sourceId)
+      );
+    } catch {
+      /* ignore */
+    }
+  }
+
   rebuildCategories(opportunities);
   renderReport();
 }
-
-// ── Boot ─────────────────────────────────────────────────────────────────────
 
 await loadPrefs();
 await refreshFeed();

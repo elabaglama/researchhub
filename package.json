@@ -8,5 +8,8 @@
     "start": "python scripts/serve.py",
     "scrape": "python scripts/scrape_opportunities.py",
     "scrape:one": "python scripts/scrape_opportunities.py"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.7.0"
   }
 }

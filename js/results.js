@@ -1,4 +1,17 @@
-import { matchesQuery, renderResultCards, loadAllSources, wirePdfButton } from "./shared.js";
+import {
+  matchesQuery,
+  renderResultCards,
+  wirePdfButton,
+  loadLibraryCache,
+  loadRemovedSourceIds,
+  mergePersonalSources,
+} from "./shared.js";
+import { currentUser, onUserChange } from "./auth.js";
+import {
+  loadUserSources,
+  loadScrapeCaches,
+  opportunitiesFromCaches,
+} from "./firebase.js";
 
 wirePdfButton();
 
@@ -14,21 +27,42 @@ const els = {
 if (els.query) els.query.value = query;
 document.title = query ? `${query} — Research Hub` : "Results — Research Hub";
 
-const [sources, opportunities] = await Promise.all([
-  loadAllSources(),
-  fetch("data/opportunities.json").then((r) => r.json()),
-]);
-
-const results = query
-  ? opportunities.filter((item) => matchesQuery(item, query))
-  : [];
-
-if (els.meta) {
-  els.meta.textContent = query
-    ? `${results.length} result${results.length === 1 ? "" : "s"} for “${query}”`
-    : "Search from the home page.";
+async function loadPersonalSources() {
+  if (!currentUser) return [];
+  const uid = currentUser.uid;
+  const [loadResult, cached] = await Promise.all([
+    loadUserSources(uid),
+    Promise.resolve(loadLibraryCache(uid)),
+  ]);
+  return mergePersonalSources(
+    loadResult.sources || [],
+    cached,
+    loadRemovedSourceIds(uid)
+  );
 }
 
-if (els.list) {
-  renderResultCards(els.list, results, sources, { carded: true });
+async function render() {
+  const sources = await loadPersonalSources();
+  const ids = sources.map((s) => s.id);
+  const { caches } = await loadScrapeCaches(ids);
+  const opportunities = opportunitiesFromCaches(caches, ids);
+
+  const results = query
+    ? opportunities.filter((item) => matchesQuery(item, query))
+    : [];
+
+  if (els.meta) {
+    els.meta.textContent = query
+      ? `${results.length} result${results.length === 1 ? "" : "s"} for “${query}”`
+      : "Search from the home page.";
+  }
+
+  if (els.list) {
+    renderResultCards(els.list, results, sources, { carded: true });
+  }
 }
+
+await render();
+onUserChange(() => {
+  render().catch(() => {});
+});

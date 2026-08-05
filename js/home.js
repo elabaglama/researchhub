@@ -3,13 +3,16 @@ import {
   matchesFilters,
   renderResultCards,
   wirePdfButton,
-  filterOpportunitiesBySources,
   loadLibraryCache,
   loadRemovedSourceIds,
   mergePersonalSources,
 } from "./shared.js";
 import { currentUser, onUserChange } from "./auth.js";
-import { loadUserSources } from "./firebase.js";
+import {
+  loadUserSources,
+  loadScrapeCaches,
+  opportunitiesFromCaches,
+} from "./firebase.js";
 
 wirePdfButton();
 
@@ -26,21 +29,18 @@ const filterContinent = document.getElementById("filter-continent");
 const filterCountry = document.getElementById("filter-country");
 const countNumber = document.getElementById("count-number");
 
-const allOpportunities = await fetch("data/opportunities.json").then((r) => r.json());
-
 let sources = [];
 let opportunities = [];
 
-/** Personal library sources for the signed-in user (empty → empty feed). */
 async function loadPersonalSources() {
   if (!currentUser) return [];
   const uid = currentUser.uid;
-  const [firestoreSources, cached] = await Promise.all([
+  const [loadResult, cached] = await Promise.all([
     loadUserSources(uid),
     Promise.resolve(loadLibraryCache(uid)),
   ]);
   return mergePersonalSources(
-    firestoreSources,
+    loadResult.sources || [],
     cached,
     loadRemovedSourceIds(uid)
   );
@@ -54,7 +54,25 @@ function updateCount() {
 
 async function refreshFeed() {
   sources = await loadPersonalSources();
-  opportunities = filterOpportunitiesBySources(allOpportunities, sources);
+  const ids = sources.map((s) => s.id);
+  const { caches } = await loadScrapeCaches(ids);
+  opportunities = opportunitiesFromCaches(caches, ids);
+
+  // Migration fallback: if cache is empty but the shared JSON still has rows, use them.
+  if (!opportunities.length && ids.length) {
+    try {
+      const all = await fetch("data/opportunities.json", { cache: "no-store" }).then((r) =>
+        r.json()
+      );
+      const idSet = new Set(ids);
+      opportunities = (Array.isArray(all) ? all : []).filter((item) =>
+        idSet.has(item.sourceId)
+      );
+    } catch {
+      /* ignore */
+    }
+  }
+
   updateCount();
   runSearch(input.value);
 }

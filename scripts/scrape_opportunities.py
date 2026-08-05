@@ -845,11 +845,33 @@ def merge_unique(items: list[dict]) -> list[dict]:
     return out
 
 
-def run(source_ids: list[str] | None = None) -> dict:
+def run(
+    source_ids: list[str] | None = None,
+    extra_sources: list[dict] | None = None,
+    write_files: bool = True,
+) -> dict:
     all_sources = load_sources()
+    if extra_sources:
+        seen = {s["id"] for s in all_sources}
+        for source in extra_sources:
+            sid = source.get("id")
+            if not sid:
+                continue
+            if sid in seen:
+                # Prefer the explicit extra source (has the live URL)
+                all_sources = [s for s in all_sources if s["id"] != sid] + [source]
+            else:
+                all_sources.append(source)
+                seen.add(sid)
+
     if source_ids:
         wanted = set(source_ids)
         sources = [s for s in all_sources if s["id"] in wanted]
+        # If still missing, invent from extras only
+        have = {s["id"] for s in sources}
+        for source in extra_sources or []:
+            if source.get("id") in wanted and source["id"] not in have:
+                sources.append(source)
     else:
         sources = all_sources
 
@@ -866,10 +888,11 @@ def run(source_ids: list[str] | None = None) -> dict:
         "scrapedAt": datetime.now(timezone.utc).isoformat(),
         "sources": {},
         "mode": "partial" if source_ids else "full",
+        "freshBySource": {},
     }
 
-    # Preserve prior meta for sources not scraped this run.
-    if META_PATH.exists() and source_ids:
+    # Preserve prior meta for sources not scraped this run (git write mode only).
+    if write_files and META_PATH.exists() and source_ids:
         try:
             prev = json.loads(META_PATH.read_text(encoding="utf-8"))
             report["sources"] = dict(prev.get("sources") or {})
@@ -893,14 +916,16 @@ def run(source_ids: list[str] | None = None) -> dict:
             report["sources"][source_id] = {"ok": False, "error": str(exc), "count": 0}
             print(f"[fail] {source_id}: {exc}")
 
+    report["freshBySource"] = {
+        sid: items for sid, items in fresh_by_source.items()
+    }
+
     succeeded = set(fresh_by_source.keys())
     valid_ids = {s["id"] for s in all_sources}
 
     if source_ids:
-        # Partial: replace only sources that succeeded; keep others (including unrelated).
         kept = [item for item in existing if item.get("sourceId") not in succeeded]
     else:
-        # Full: keep only failed sources' old rows; drop removed/orphan sources.
         attempted = {s["id"] for s in sources}
         failed = attempted - succeeded
         kept = [
@@ -910,19 +935,65 @@ def run(source_ids: list[str] | None = None) -> dict:
         ]
 
     all_items = kept + [item for rows in fresh_by_source.values() for item in rows]
-    # Safety: never keep rows for sources that are no longer in the library.
     all_items = [item for item in all_items if item.get("sourceId") in valid_ids]
 
     merged = merge_unique(all_items)
-    OUT_PATH.write_text(json.dumps(merged, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     report["total"] = len(merged)
-    META_PATH.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(f"Stored {len(merged)} opportunities -> {OUT_PATH}")
+
+    if write_files:
+        OUT_PATH.write_text(json.dumps(merged, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        META_PATH.write_text(json.dumps(
+            {k: v for k, v in report.items() if k != "freshBySource"},
+            indent=2,
+        ) + "\n", encoding="utf-8")
+        print(f"Stored {len(merged)} opportunities -> {OUT_PATH}")
+
     return report
 
 
 if __name__ == "__main__":
+    import argparse
     import sys
 
-    ids = [arg for arg in sys.argv[1:] if arg and not arg.startswith("-")]
-    run(ids or None)
+    parser = argparse.ArgumentParser(description="Scrape opportunity sources")
+    parser.add_argument("ids", nargs="*", help="Optional source ids to scrape")
+    parser.add_argument("--url", default="", help="Inject a one-off URL to scrape")
+    parser.add_argument("--source-id", default="", help="Id for --url")
+    parser.add_argument("--name", default="", help="Display name for --url")
+    parser.add_argument(
+        "--emit-json",
+        default="",
+        help="Write scrape report (incl. freshBySource) to this path",
+    )
+    parser.add_argument(
+        "--no-write",
+        action="store_true",
+        help="Do not update data/opportunities.json (Firestore-only mode)",
+    )
+    args = parser.parse_args()
+
+    extras: list[dict] = []
+    if args.url:
+        sid = args.source_id or f"custom-{hashlib.sha1(args.url.encode()).hexdigest()[:10]}"
+        extras.append(
+            {
+                "id": sid,
+                "name": args.name or args.url,
+                "url": args.url,
+                "focus": "Saved link",
+                "blurb": args.url,
+                "custom": True,
+                **({"airtableUrl": args.url} if "airtable.com" in args.url else {}),
+            }
+        )
+        if sid not in args.ids:
+            args.ids.append(sid)
+
+    report = run(args.ids or None, extras or None, write_files=not args.no_write)
+    if args.emit_json:
+        Path(args.emit_json).write_text(
+            json.dumps(report, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        print(f"Wrote scrape report -> {args.emit_json}")
+

@@ -142,7 +142,7 @@ class HubHandler(SimpleHTTPRequestHandler):
         if self.path.startswith("/api/"):
             self.send_header("Access-Control-Allow-Origin", "*")
             self.send_header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
-            self.send_header("Access-Control-Allow-Headers", "Content-Type")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
         super().end_headers()
 
     def do_OPTIONS(self):
@@ -280,17 +280,36 @@ class HubHandler(SimpleHTTPRequestHandler):
         )
 
     def _run_scrape(self, body: dict):
-        source_id = body.get("sourceId")
+        source_id = str(body.get("sourceId") or "").strip()
+        url = str(body.get("url") or "").strip()
+        name = str(body.get("name") or "").strip()
         ids = [source_id] if source_id else None
         if body.get("sourceIds"):
             ids = list(body["sourceIds"])
-        report = self._scrape_locked(ids)
-        self._json(200, {"ok": True, "report": report})
 
-    def _scrape_locked(self, source_ids: list[str] | None):
+        extras = None
+        if url and source_id:
+            if not url.startswith(("http://", "https://")):
+                url = "https://" + url
+            extras = [
+                {
+                    "id": source_id,
+                    "name": name or name_from_url(url),
+                    "url": url,
+                    "focus": "Saved link",
+                    "blurb": url,
+                    "custom": True,
+                    **({"airtableUrl": url} if "airtable.com" in url else {}),
+                }
+            ]
+
+        report = self._scrape_locked(ids, extras)
+        self._json(200, {"ok": True, "report": report, "scrape": {"pending": False, "message": "Local scrape finished."}})
+
+    def _scrape_locked(self, source_ids: list[str] | None, extras: list | None = None):
         with SCRAPE_LOCK:
             scrape = load_scrape_module()
-            return scrape.run(source_ids)
+            return scrape.run(source_ids, extras, write_files=True)
 
     def _notion(self, path: str, body: dict):
         token = (body.get("token") or "").strip()

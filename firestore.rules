@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Personal data — only the signed-in owner
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      match /{document=**} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // Shared scrape results — any signed-in user can read; only Admin SDK writes
+    match /scrapeCache/{sourceId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Pending scrape jobs — created by Admin SDK (Vercel) or blocked for clients
+    match /scrapeQueue/{sourceId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+  }
+}

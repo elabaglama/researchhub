@@ -1,11 +1,11 @@
-import {
-  cors,
-  readJsonFile,
-  putFile,
-  triggerScrapeWorkflow,
-  slugify,
-  nameFromUrl,
-} from "./_github.js";
+/**
+ * Source metadata helper — no GitHub commits.
+ * Personal libraries live in Firestore (users/{uid}/sources).
+ * POST returns a normalized source object and can enqueue a scrape.
+ */
+
+import { cors, slugify, nameFromUrl, triggerScrapeWorkflow } from "./_github.js";
+import { verifyIdToken, adminDb, FieldValue } from "./_firebaseAdmin.js";
 
 function normalizeUrl(url) {
   let value = String(url || "").trim();
@@ -14,78 +14,87 @@ function normalizeUrl(url) {
   return value;
 }
 
+function buildSource(url, body = {}) {
+  const name = String(body.name || "").trim() || nameFromUrl(url);
+  let id = String(body.id || `custom-${slugify(name) || "source"}`).trim();
+  const source = {
+    id,
+    name,
+    url,
+    focus: body.focus || "Saved link",
+    blurb: body.blurb || url,
+    searchUrl: `${url.replace(/\/$/, "")}/?s={query}`,
+    custom: true,
+  };
+  if (url.includes("airtable.com")) source.airtableUrl = url;
+  return source;
+}
+
+async function enqueueScrape(user, source) {
+  const db = adminDb();
+  const cacheRef = db.collection("scrapeCache").doc(source.id);
+  const queueRef = db.collection("scrapeQueue").doc(source.id);
+
+  await cacheRef.set(
+    {
+      sourceId: source.id,
+      url: source.url,
+      name: source.name,
+      status: "pending",
+      updatedAt: FieldValue.serverTimestamp(),
+      requestedBy: user.uid,
+      items: [],
+      createdAt: FieldValue.serverTimestamp(),
+    },
+    { merge: true }
+  );
+
+  await queueRef.set({
+    sourceId: source.id,
+    url: source.url,
+    name: source.name,
+    requestedAt: FieldValue.serverTimestamp(),
+    requestedBy: user.uid,
+  });
+
+  try {
+    return await triggerScrapeWorkflow({
+      sourceId: source.id,
+      url: source.url,
+      name: source.name,
+      mode: "one",
+    });
+  } catch (error) {
+    return {
+      pending: true,
+      message:
+        "Queued in Firestore. Worker dispatch failed — next schedule will pick it up. " +
+        (error.message || ""),
+    };
+  }
+}
+
 export default async function handler(req, res) {
   cors(res);
   if (req.method === "OPTIONS") return res.status(204).end();
 
   try {
     if (req.method === "GET") {
-      const sources = await readJsonFile("data/custom-sources.json", []);
-      return res.status(200).json({ sources });
+      // Legacy endpoint — personal libraries are in Firestore, not a shared file.
+      return res.status(200).json({ sources: [], deprecated: true });
     }
 
     if (req.method === "POST") {
-      const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+      const user = await verifyIdToken(req);
+      const body =
+        typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
       const url = normalizeUrl(body.url);
       if (!url) return res.status(400).json({ error: "url required" });
 
-      const custom = await readJsonFile("data/custom-sources.json", []);
-      const existing = custom.find((s) => s.url === url);
-      if (existing) {
-        const scrape =
-          body.scrape === false
-            ? null
-            : await triggerScrapeWorkflow({ sourceId: existing.id });
-        return res.status(200).json({
-          ok: true,
-          created: false,
-          source: existing,
-          scrape,
-        });
-      }
-
-      const base = await readJsonFile("data/sources.json", []);
-      const name = String(body.name || "").trim() || nameFromUrl(url);
-      let id = String(body.id || `custom-${slugify(name) || "source"}`).trim();
-      const used = new Set([
-        ...base.map((s) => s.id),
-        ...custom.map((s) => s.id),
-      ]);
-      if (used.has(id)) id = `${id}-${custom.length + 1}`;
-
-      const source = {
-        id,
-        name,
-        url,
-        focus: body.focus || "Saved link",
-        blurb: body.blurb || url,
-        searchUrl: `${url.replace(/\/$/, "")}/?s={query}`,
-        custom: true,
-      };
-      if (url.includes("airtable.com")) source.airtableUrl = url;
-
-      const next = [...custom, source];
-      // Committing this file triggers the scrape workflow immediately via push paths.
-      await putFile(
-        "data/custom-sources.json",
-        `${JSON.stringify(next, null, 2)}\n`,
-        `chore: add library source ${source.name}`
-      );
-
-      // Belt-and-suspenders: also dispatch an explicit scrape for this source.
+      const source = buildSource(url, body);
       let scrape = null;
       if (body.scrape !== false) {
-        try {
-          scrape = await triggerScrapeWorkflow({ sourceId: id });
-        } catch (error) {
-          // Push-path trigger may still run even if Actions dispatch fails.
-          scrape = {
-            pending: true,
-            message:
-              "Source saved. Cloud scrape should start from the library file update. " +
-              (error.message || ""),
-          };
-        }
+        scrape = await enqueueScrape(user, source);
       }
 
       return res.status(201).json({
@@ -97,26 +106,15 @@ export default async function handler(req, res) {
     }
 
     if (req.method === "DELETE") {
-      // /api/sources?id=custom-foo  or body.id
-      const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
-      const queryId = req.query?.id;
-      const sourceId = String(queryId || body.id || "").trim();
-      if (!sourceId) return res.status(400).json({ error: "id required" });
-
-      const custom = await readJsonFile("data/custom-sources.json", []);
-      const next = custom.filter((s) => s.id !== sourceId);
-      await putFile(
-        "data/custom-sources.json",
-        `${JSON.stringify(next, null, 2)}\n`,
-        `chore: remove library source ${sourceId}`
-      );
-
-      const scrape = await triggerScrapeWorkflow({ removeSourceId: sourceId });
+      // Personal remove is handled in Firestore by the client. No shared-file delete.
+      await verifyIdToken(req);
+      const body =
+        typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+      const sourceId = String(req.query?.id || body.id || "").trim();
       return res.status(200).json({
         ok: true,
-        removed: sourceId,
-        remaining: next.length,
-        scrape,
+        removed: sourceId || null,
+        note: "Personal library entries are removed in Firestore only.",
       });
     }
 
