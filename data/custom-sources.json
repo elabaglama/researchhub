@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "custom-airtable-com",
+    "name": "airtable.com",
+    "url": "https://airtable.com/appif4yp7nbZywohc/shrRQF62mNl2Nj8Sj/tbl6rThPPSLuBUdM0",
+    "focus": "Saved link",
+    "blurb": "https://airtable.com/appif4yp7nbZywohc/shrRQF62mNl2Nj8Sj/tbl6rThPPSLuBUdM0",
+    "searchUrl": "https://airtable.com/appif4yp7nbZywohc/shrRQF62mNl2Nj8Sj/tbl6rThPPSLuBUdM0/?s={query}",
+    "custom": true,
+    "airtableUrl": "https://airtable.com/appif4yp7nbZywohc/shrRQF62mNl2Nj8Sj/tbl6rThPPSLuBUdM0"
+  }
+]
