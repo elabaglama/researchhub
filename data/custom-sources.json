@@ -17,5 +17,14 @@
     "blurb": "https://creativesunite.eu/synm/",
     "searchUrl": "https://creativesunite.eu/synm/?s={query}",
     "custom": true
+  },
+  {
+    "id": "custom-creativetechnologist-xyz",
+    "name": "creativetechnologist.xyz",
+    "url": "https://creativetechnologist.xyz/resources",
+    "focus": "Saved link",
+    "blurb": "https://creativetechnologist.xyz/resources",
+    "searchUrl": "https://creativetechnologist.xyz/resources/?s={query}",
+    "custom": true
   }
 ]
