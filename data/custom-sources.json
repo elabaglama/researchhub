@@ -62,5 +62,14 @@
     "blurb": "https://artinfoland.com/",
     "searchUrl": "https://artinfoland.com/?s={query}",
     "custom": true
+  },
+  {
+    "id": "custom-opportunitiesforyouth-org",
+    "name": "opportunitiesforyouth.org",
+    "url": "https://opportunitiesforyouth.org/",
+    "focus": "Saved link",
+    "blurb": "https://opportunitiesforyouth.org/",
+    "searchUrl": "https://opportunitiesforyouth.org/?s={query}",
+    "custom": true
   }
 ]
