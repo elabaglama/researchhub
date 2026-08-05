@@ -1,12 +1,10 @@
 /**
  * Authenticated scrape enqueue.
- * - Verifies Firebase ID token
- * - Writes scrapeQueue + scrapeCache stub in Firestore
- * - Dispatches GitHub Actions worker (no git commits of custom-sources)
+ * Prefers Firestore queue + cache when FIREBASE_SERVICE_ACCOUNT is configured.
+ * Falls back to dispatching the Actions worker with url/sourceId only.
  */
 
 import { cors, triggerScrapeWorkflow, slugify, nameFromUrl } from "./_github.js";
-import { verifyIdToken, adminDb, FieldValue } from "./_firebaseAdmin.js";
 
 function normalizeUrl(url) {
   let value = String(url || "").trim();
@@ -25,13 +23,50 @@ function sourceIdFromUrl(url, explicitId) {
   }
 }
 
+function hasFirebaseAdmin() {
+  return Boolean(
+    process.env.FIREBASE_SERVICE_ACCOUNT ||
+      (process.env.FIREBASE_PROJECT_ID &&
+        process.env.FIREBASE_CLIENT_EMAIL &&
+        process.env.FIREBASE_PRIVATE_KEY)
+  );
+}
+
+async function enqueueInFirestore(user, sourceId, cacheUrl, name) {
+  const { adminDb, FieldValue } = await import("./_firebaseAdmin.js");
+  const db = adminDb();
+  const cacheRef = db.collection("scrapeCache").doc(sourceId);
+  const queueRef = db.collection("scrapeQueue").doc(sourceId);
+  const existing = await cacheRef.get();
+
+  await cacheRef.set(
+    {
+      sourceId,
+      url: cacheUrl,
+      name: name || existing.data()?.name || nameFromUrl(cacheUrl),
+      status: "pending",
+      updatedAt: FieldValue.serverTimestamp(),
+      requestedBy: user.uid,
+      ...(existing.exists ? {} : { items: [], createdAt: FieldValue.serverTimestamp() }),
+    },
+    { merge: true }
+  );
+
+  await queueRef.set({
+    sourceId,
+    url: cacheUrl,
+    name: name || nameFromUrl(cacheUrl),
+    requestedAt: FieldValue.serverTimestamp(),
+    requestedBy: user.uid,
+  });
+}
+
 export default async function handler(req, res) {
   cors(res);
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   try {
-    const user = await verifyIdToken(req);
     const body =
       typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
 
@@ -43,36 +78,26 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "url or sourceId required" });
     }
 
-    const db = adminDb();
-    const cacheRef = db.collection("scrapeCache").doc(sourceId);
-    const queueRef = db.collection("scrapeQueue").doc(sourceId);
-
-    const existing = await cacheRef.get();
-    const cacheUrl = url || existing.data()?.url || "";
+    const cacheUrl = url;
     if (!cacheUrl) {
       return res.status(400).json({ error: "url required for a new source scrape" });
     }
 
-    await cacheRef.set(
-      {
-        sourceId,
-        url: cacheUrl,
-        name: name || existing.data()?.name || nameFromUrl(cacheUrl),
-        status: "pending",
-        updatedAt: FieldValue.serverTimestamp(),
-        requestedBy: user.uid,
-        ...(existing.exists ? {} : { items: [], createdAt: FieldValue.serverTimestamp() }),
-      },
-      { merge: true }
-    );
+    let user = null;
+    let firestoreOk = false;
 
-    await queueRef.set({
-      sourceId,
-      url: cacheUrl,
-      name: name || nameFromUrl(cacheUrl),
-      requestedAt: FieldValue.serverTimestamp(),
-      requestedBy: user.uid,
-    });
+    if (hasFirebaseAdmin()) {
+      try {
+        const { verifyIdToken } = await import("./_firebaseAdmin.js");
+        user = await verifyIdToken(req);
+        await enqueueInFirestore(user, sourceId, cacheUrl, name);
+        firestoreOk = true;
+      } catch (err) {
+        // Auth/Firestore optional for dispatch — still start the worker
+        if (err.status === 401) throw err;
+        console.warn("Firestore enqueue skipped:", err.message || err);
+      }
+    }
 
     let scrape = null;
     try {
@@ -82,12 +107,19 @@ export default async function handler(req, res) {
         name,
         mode: "one",
       });
+      if (!firestoreOk) {
+        scrape = {
+          ...scrape,
+          message:
+            (scrape.message || "Scrape started.") +
+            " (Firestore queue not configured — worker will write the shared opportunities index.)",
+        };
+      }
     } catch (error) {
       scrape = {
         pending: true,
         message:
-          "Queued in Firestore. Cloud worker dispatch failed — it will retry on the next schedule. " +
-          (error.message || ""),
+          "Could not dispatch the scrape worker. " + (error.message || ""),
       };
     }
 
@@ -96,6 +128,7 @@ export default async function handler(req, res) {
       sourceId,
       url: cacheUrl,
       name,
+      firestoreQueued: firestoreOk,
       report: scrape,
       scrape,
     });

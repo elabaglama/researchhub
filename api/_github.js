@@ -118,7 +118,7 @@ export async function triggerScrapeWorkflow({
   return {
     pending: true,
     message:
-      "Scrape queued. Your feed updates when the cloud worker finishes writing Firestore.",
+      "Scrape queued. Your feed updates when the cloud worker finishes.",
   };
 }
 

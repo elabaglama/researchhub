@@ -30,7 +30,7 @@ on:
         default: "one"
 
 permissions:
-  contents: read
+  contents: write
   actions: write
 
 concurrency:
@@ -89,10 +89,11 @@ jobs:
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
 
           if [ -z "${FIREBASE_SERVICE_ACCOUNT:-}" ]; then
-            echo "FIREBASE_SERVICE_ACCOUNT secret is missing."
+            echo "FIREBASE_SERVICE_ACCOUNT secret is missing — will use git opportunities.json fallback when possible."
             if [ "$MODE" = "one" ] && [ -n "$SOURCE_ID" ] && [ -n "$URL" ]; then
-              echo "Continuing one-off scrape without Firestore lookup (publish will fail)."
+              echo "Continuing one-off scrape without Firestore lookup."
             else
+              echo "Queue/cache modes need FIREBASE_SERVICE_ACCOUNT. Skipping."
               echo "count=0" >> "$GITHUB_OUTPUT"
               exit 0
             fi
@@ -156,7 +157,7 @@ jobs:
             echo "count=$COUNT" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Scrape and publish to Firestore
+      - name: Scrape and publish
         if: ${{ steps.targets.outputs.count != '0' }}
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
@@ -183,11 +184,19 @@ jobs:
             exit 0
           fi
 
-          if [ -z "${FIREBASE_SERVICE_ACCOUNT:-}" ]; then
-            echo "FIREBASE_SERVICE_ACCOUNT secret is required to publish."
-            exit 1
+          USE_FIRESTORE=0
+          if [ -n "${FIREBASE_SERVICE_ACCOUNT:-}" ]; then
+            if node -e 'const s=process.env.FIREBASE_SERVICE_ACCOUNT; const sa=JSON.parse(s); if(!sa.project_id||!sa.client_email||!sa.private_key) process.exit(2);' 2>/dev/null; then
+              USE_FIRESTORE=1
+              echo "Publishing mode: Firestore scrapeCache"
+            else
+              echo "FIREBASE_SERVICE_ACCOUNT is present but invalid JSON/fields — falling back to git."
+            fi
+          else
+            echo "FIREBASE_SERVICE_ACCOUNT not set — falling back to git opportunities.json"
           fi
 
+          GIT_WROTE=0
           for i in $(seq 0 $((COUNT-1))); do
             IDX="$i" node -e '
               const t = JSON.parse(require("fs").readFileSync("/tmp/scrape-jobs/targets.json","utf8"))[Number(process.env.IDX)];
@@ -199,32 +208,93 @@ jobs:
 
             echo "=== Scraping $ID ($URL) ==="
             REPORT="/tmp/scrape-jobs/report-$ID.json"
-            python scripts/scrape_opportunities.py \
-              --source-id "$ID" \
-              --url "$URL" \
-              --name "$NAME" \
-              --no-write \
-              --emit-json "$REPORT" \
-              "$ID"
 
-            TID="$ID" TURL="$URL" TNAME="$NAME" node -e '
-              const { initializeApp, cert, getApps } = require("firebase-admin/app");
-              const { getFirestore, FieldValue } = require("firebase-admin/firestore");
-              const sa = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-              if (sa.private_key) sa.private_key = String(sa.private_key).replace(/\\n/g, "\n");
-              if (!getApps().length) initializeApp({ credential: cert(sa), projectId: sa.project_id });
-              const db = getFirestore();
-              const id = process.env.TID;
-              const url = process.env.TURL;
-              const name = process.env.TNAME || url;
-              db.collection("scrapeCache").doc(id).set({
-                sourceId: id,
-                url,
-                name,
-                status: "pending",
-                updatedAt: FieldValue.serverTimestamp(),
-              }, { merge: true }).then(() => process.exit(0)).catch((e) => { console.error(e); process.exit(1); });
-            '
+            if [ "$USE_FIRESTORE" = "1" ]; then
+              if ! python scripts/scrape_opportunities.py \
+                --source-id "$ID" \
+                --url "$URL" \
+                --name "$NAME" \
+                --no-write \
+                --emit-json "$REPORT" \
+                "$ID"; then
+                echo "Scrape failed for $ID"
+                continue
+              fi
 
-            node scripts/publish_scrape_cache.mjs --report "$REPORT"
+              if TID="$ID" TURL="$URL" TNAME="$NAME" node -e '
+                const { initializeApp, cert, getApps } = require("firebase-admin/app");
+                const { getFirestore, FieldValue } = require("firebase-admin/firestore");
+                const sa = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+                if (sa.private_key) sa.private_key = String(sa.private_key).replace(/\\n/g, "\n");
+                if (!getApps().length) initializeApp({ credential: cert(sa), projectId: sa.project_id });
+                const db = getFirestore();
+                const id = process.env.TID;
+                const url = process.env.TURL;
+                const name = process.env.TNAME || url;
+                db.collection("scrapeCache").doc(id).set({
+                  sourceId: id,
+                  url,
+                  name,
+                  status: "pending",
+                  updatedAt: FieldValue.serverTimestamp(),
+                }, { merge: true }).then(() => process.exit(0)).catch((e) => { console.error(e); process.exit(1); });
+              ' && node scripts/publish_scrape_cache.mjs --report "$REPORT"; then
+                echo "Published $ID to Firestore."
+              else
+                echo "Firestore publish failed for $ID — writing to git opportunities.json instead."
+                USE_FIRESTORE=0
+                python scripts/scrape_opportunities.py \
+                  --source-id "$ID" \
+                  --url "$URL" \
+                  --name "$NAME" \
+                  --emit-json "$REPORT" \
+                  "$ID" || true
+                GIT_WROTE=1
+              fi
+            else
+              # Git fallback: update shared opportunities.json so Home/Daily fallback works
+              python scripts/scrape_opportunities.py \
+                --source-id "$ID" \
+                --url "$URL" \
+                --name "$NAME" \
+                --emit-json "$REPORT" \
+                "$ID"
+              GIT_WROTE=1
+            fi
           done
+
+          if [ "$USE_FIRESTORE" != "1" ] || [ "$GIT_WROTE" = "1" ]; then
+            echo "Committing scraped opportunities to git…"
+            git config user.name "elabaglama"
+            git config user.email "elaba@users.noreply.github.com"
+            mkdir -p /tmp/scrape-out
+            cp data/opportunities.json /tmp/scrape-out/opportunities.json
+            cp data/scrape-meta.json /tmp/scrape-out/scrape-meta.json
+            cp data/custom-sources.json /tmp/scrape-out/custom-sources.json 2>/dev/null || true
+
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git checkout -B scrape-publish origin/main
+              cp /tmp/scrape-out/opportunities.json data/opportunities.json
+              cp /tmp/scrape-out/scrape-meta.json data/scrape-meta.json
+              if [ -f /tmp/scrape-out/custom-sources.json ]; then
+                cp /tmp/scrape-out/custom-sources.json data/custom-sources.json
+                git add data/opportunities.json data/scrape-meta.json data/custom-sources.json
+              else
+                git add data/opportunities.json data/scrape-meta.json
+              fi
+              if git diff --staged --quiet; then
+                echo "No opportunity changes to commit."
+                exit 0
+              fi
+              git commit -m "chore: refresh scraped opportunities"
+              if git push origin HEAD:main; then
+                echo "Push succeeded."
+                exit 0
+              fi
+              echo "Push race, retry $attempt..."
+              sleep $((attempt * 2))
+            done
+            echo "Failed to push scraped data after retries."
+            exit 1
+          fi
