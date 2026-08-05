@@ -1,5 +1,31 @@
 [
   {
+    "id": "opportunities-for-youth-4b6cb194ed15",
+    "title": "PhD Opportunities in Community Ecology (Marine and Coastal Systems) at the University of Melbourne, Australia",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/phd-opportunities-in-community-ecology-marine-and-coastal-systems-at-the-university-of-melbourne-australia/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "Are you passionate about understanding how biodiversity is shaped across natural ecosystems? The University of Melbourne is inviting expressions of interest"
+  },
+  {
+    "id": "opportunities-for-youth-73799f272500",
+    "title": "Coca-Cola Scholars Program Scholarship 2027: Win a $20,000 College Scholarship for Outstanding High School Seniors in the United States",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/coca-cola-scholars-program/",
+    "type": "scholarship",
+    "deadline": "Open",
+    "tags": [
+      "scholarship",
+      "youth"
+    ],
+    "summary": "The Coca-Cola Scholars Program Scholarship 2027 is now accepting applications from eligible high school seniors across the United States. Recognized as one of"
+  },
+  {
     "id": "opportunities-for-youth-c72d323328ce",
     "title": "Fully Funded PhD in Political Science at UCLouvain 2026 in Belgium: Study Inclusive Political Representation Through the WEAVE Research Project",
     "sourceId": "opportunities-for-youth",
@@ -11,32 +37,6 @@
       "youth"
     ],
     "summary": "Political representation is one of the most debated and pressing issues in modern democracies. As societies become increasingly diverse, ensuring that all"
-  },
-  {
-    "id": "opportunities-for-youth-3ac696ac7780",
-    "title": "A.S. Hornby Educational Trust Scholarship 2027/28 at the University of Exeter | Fully Funded MEd TESOL Scholarship for English Language Teachers from Developing Countries",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/05/a-s-hornby-educational-trust-scholarship-2027-28-at-the-university-of-exeter-fully-funded-med-tesol-scholarship-for-english-language-teachers-from-developing-countries/",
-    "type": "scholarship",
-    "deadline": "Open",
-    "tags": [
-      "scholarship",
-      "youth"
-    ],
-    "summary": "The A.S. Hornby Educational Trust Scholarship 2027/28 offers an outstanding opportunity for experienced English language teachers and TESOL professionals from"
-  },
-  {
-    "id": "opportunities-for-youth-6028d104bc03",
-    "title": "Fully Funded DKFZ PhD Position 2026 in Translational Cancer Biology at LMU Munich",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/funded-dkfz-phd/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "The German Cancer Research Center is accepting applications for a fully funded PhD position in Translational Cancer Biology at the German Cancer Consortium"
   },
   {
     "id": "opportunities-for-youth-63eb26c41ccf",
@@ -78,6 +78,19 @@
     "summary": "Women around the world continue to drive innovation, lead communities, create groundbreaking solutions, and transform lives despite facing financial,"
   },
   {
+    "id": "opportunities-for-youth-03c0c233a8a4",
+    "title": "United Nations University Innovation and Education Programme Internship 2026–2027 in Japan: Paid UN Internship on AI, Sustainability, and Higher Education",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/united-nations-university-junior-research-consultant-jobs-2026-in-portugal-entry-level-un-careers-in-digital-governance-and-public-sector-innovation/",
+    "type": "internship",
+    "deadline": "Open",
+    "tags": [
+      "internship",
+      "youth"
+    ],
+    "summary": "Are you a student or recent graduate interested in artificial intelligence, education, sustainability, international development, or public policy? The United"
+  },
+  {
     "id": "opportunities-for-youth-6ed5b6a54c9f",
     "title": "Initiative Coordinator at forNature in Panama: Full-Time Opportunity to Support the United Nations Universal Declaration of the Rights of Nature",
     "sourceId": "opportunities-for-youth",
@@ -102,19 +115,6 @@
       "youth"
     ],
     "summary": "Applications are now open for the National Geographic Society & The Nature Conservancy Community Conservation, Data Visualization, and Mapping Externship"
-  },
-  {
-    "id": "opportunities-for-youth-b142efbda646",
-    "title": "Communications Officer (Digital & Multimedia) at UNICEF Fiji: Complete Guide to the 2026 National UN Volunteer Opportunity in Suva",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/communications-officer-digital-multimedia-at-unicef-fiji-complete-guide-to-the-2026-national-un-volunteer-opportunity-in-suva/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "The United Nations Children's Fund (UNICEF), through the United Nations Volunteers (UNV) programme, is inviting qualified professionals to apply for the"
   },
   {
     "id": "opportunities-for-youth-f10a6f59dc02",
@@ -153,7 +153,7 @@
       "fellowship",
       "youth"
     ],
-    "summary": "Africa Matters Future Pathways Fellowship 2026: Fully Funded Leadership and Career Development Fellowship for Young Leaders from Egypt and Morocco"
+    "summary": "The Africa Matters Future Pathways Fellowship 2026 is now accepting applications from eligible young leaders in Egypt and Morocco who are eager to accelerate"
   },
   {
     "id": "opportunities-for-youth-c4a54519f7d0",
@@ -520,30 +520,30 @@
     "summary": "Expression of Interest for UNCCD COP17 Children & Youth Resilience Hub Sessions: Submit Your Session Proposal for the Global Youth Platform."
   },
   {
-    "id": "opportunities-for-youth-4b6cb194ed15",
-    "title": "PhD Opportunities in Community Ecology (Marine and Coastal Systems) at the University of Melbourne, Australia",
+    "id": "opportunities-for-youth-4e586f5bc7ce",
+    "title": "PhD Position Urban Health Equity 2026: Heat Risks, Pediatric Respiratory Health, and Greenspace Interventions at the University of Amsterdam",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/05/phd-opportunities-in-community-ecology-marine-and-coastal-systems-at-the-university-of-melbourne-australia/",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/urban-health-jobs/",
     "type": "opportunity",
     "deadline": "Open",
     "tags": [
       "opportunity",
       "youth"
     ],
-    "summary": "PhD Opportunities in Community Ecology (Marine and Coastal Systems) at the University of Melbourne, Australia"
+    "summary": "PhD Position Urban Health Equity 2026: Heat Risks, Pediatric Respiratory Health, and Greenspace Interventions at the University of Amsterdam"
   },
   {
-    "id": "opportunities-for-youth-73799f272500",
-    "title": "Coca-Cola Scholars Program Scholarship 2027: Win a $20,000 College Scholarship for Outstanding High School Seniors in the United States",
+    "id": "opportunities-for-youth-180244d6177c",
+    "title": "David Sainsbury International MSc Scholarships 2026/27: Fully Funded and 50% Tuition Scholarships for the MSc in Global Plant Health at the University of East Anglia",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/05/coca-cola-scholars-program/",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/david-sainsbury-international-msc-scholarships-2026-27-fully-funded-and-50-tuition-scholarships-for-the-msc-in-global-plant-health-at-the-university-of-east-anglia/",
     "type": "scholarship",
     "deadline": "Open",
     "tags": [
       "scholarship",
       "youth"
     ],
-    "summary": "The Coca-Cola Scholars Program Scholarship 2027 is now accepting applications from eligible high school seniors across the United States. Recognized as one of"
+    "summary": "The David Sainsbury International MSc Scholarships 2026/27 provide an exceptional opportunity for talented students from around the world to pursue a"
   },
   {
     "id": "opportunities-for-youth-2eb163122574",
@@ -582,7 +582,7 @@
       "fellowship",
       "youth"
     ],
-    "summary": "MIT School Access and Quality Fellowship..."
+    "summary": "Applications are now open for the MIT School Access and Quality (SAQ) Fellowship 2026–2027, a prestigious one-year professional development programme designed"
   },
   {
     "id": "opportunities-for-youth-2f15b4fecbb7",
@@ -622,19 +622,6 @@
       "youth"
     ],
     "summary": "CDC Campaign and Audience Research Team ..."
-  },
-  {
-    "id": "opportunities-for-youth-9f339e80f843",
-    "title": "United Nations University Innovation and...",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/05/united-nations-university-junior-research-consultant-jobs-2026-in-portugal-entry-level-un-careers-in-digital-governance-and-public-sector-innovation/",
-    "type": "opportunity",
-    "deadline": "Open",
-    "tags": [
-      "opportunity",
-      "youth"
-    ],
-    "summary": "Are you a student or recent graduate interested in artificial intelligence, education, sustainability, international development, or public policy? The United"
   },
   {
     "id": "opportunities-for-youth-84462356fa65",
@@ -884,6 +871,19 @@
     "summary": "France-South Africa Scholarship Programme 2027: Fully Funded Master’s and PhD Scholarships to Study in France for Students from South Africa, Lesotho, and Malawi"
   },
   {
+    "id": "opportunities-for-youth-6028d104bc03",
+    "title": "Fully Funded DKFZ PhD Position 2026 in Translational Cancer Biology at LMU Munich",
+    "sourceId": "opportunities-for-youth",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/funded-dkfz-phd/",
+    "type": "opportunity",
+    "deadline": "Open",
+    "tags": [
+      "opportunity",
+      "youth"
+    ],
+    "summary": "The German Cancer Research Center is accepting applications for a fully funded PhD position in Translational Cancer Biology at the German Cancer Consortium"
+  },
+  {
     "id": "opportunities-for-youth-48ba25d471b4",
     "title": "Kellogg Institute Postdoctoral Visiting Fellowships 2027-2028 in the USA | $75,000 Annual Stipend",
     "sourceId": "opportunities-for-youth",
@@ -923,17 +923,17 @@
     "summary": "DLGS Call for Applications 2027: Fully Funded International PhD Scholarship in Sustainable Urban Mobility Transformations in Germany"
   },
   {
-    "id": "opportunities-for-youth-d630b362ac9a",
-    "title": "Doctoral Researcher in the Social Sciences at the University of Helsinki 2026: Fully Funded PhD Opportunity on Migration, Platform Work and Digital Labor in Finland",
+    "id": "opportunities-for-youth-b142efbda646",
+    "title": "Communications Officer (Digital & Multimedia) at UNICEF Fiji: Complete Guide to the 2026 National UN Volunteer Opportunity in Suva",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/07/29/doctoral-researcher-in-the-social-sciences-at-the-university-of-helsinki-2026-fully-funded-phd-opportunity-on-migration-platform-work-and-digital-labor-in-finland/",
+    "url": "https://opportunitiesforyouth.org/2026/08/04/communications-officer-digital-multimedia-at-unicef-fiji-complete-guide-to-the-2026-national-un-volunteer-opportunity-in-suva/",
     "type": "opportunity",
     "deadline": "Open",
     "tags": [
       "opportunity",
       "youth"
     ],
-    "summary": "Doctoral Researcher in the Social Sciences at the University of Helsinki 2026: Fully Funded PhD Opportunity on Migration, Platform Work and Digital Labor in Finland"
+    "summary": "The United Nations Children's Fund (UNICEF), through the United Nations Volunteers (UNV) programme, is inviting qualified professionals to apply for the"
   },
   {
     "id": "opportunities-for-youth-bf8e44630e0e",
@@ -962,30 +962,17 @@
     "summary": "The Climate Vulnerable Forum and Vulnerable Twenty Group (CVF-V20) Secretariat has announced an exciting opportunity for experienced climate and environmental"
   },
   {
-    "id": "opportunities-for-youth-43ea046755db",
-    "title": "NDU Student Trainee Internship 2026: Paid National Security Research Opportunity in Washington, DC",
+    "id": "opportunities-for-youth-3ac696ac7780",
+    "title": "A.S. Hornby Educational Trust Scholarship 2027/28 at the University of Exeter | Fully Funded MEd TESOL Scholarship for English Language Teachers from Developing Countries",
     "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/02/ndu-student-trainee/",
-    "type": "internship",
+    "url": "https://opportunitiesforyouth.org/2026/08/05/a-s-hornby-educational-trust-scholarship-2027-28-at-the-university-of-exeter-fully-funded-med-tesol-scholarship-for-english-language-teachers-from-developing-countries/",
+    "type": "scholarship",
     "deadline": "Open",
     "tags": [
-      "internship",
+      "scholarship",
       "youth"
     ],
-    "summary": "NDU Student Trainee Internship 2026: Paid National Security Research Opportunity in Washington, DC"
-  },
-  {
-    "id": "opportunities-for-youth-90d892f45a93",
-    "title": "UNITAR Digital Upskilling and Reskilling Programme 2026 for Ukrainian Women Refugees and Internally Displaced Women in Ukraine | Fully Funded AI, GIS and Python Training",
-    "sourceId": "opportunities-for-youth",
-    "url": "https://opportunitiesforyouth.org/2026/08/04/unitar-digital-upskilling-and-reskilling-programme-2026-for-ukrainian-women-refugees-and-internally-displaced-women-in-ukraine-fully-funded-ai-gis-and-python-training/",
-    "type": "program",
-    "deadline": "Open",
-    "tags": [
-      "program",
-      "youth"
-    ],
-    "summary": "UNITAR Digital Upskilling and Reskilling Programme 2026 for Ukrainian Women Refugees and Internally Displaced Women in Ukraine | Fully Funded AI, GIS and Python Training"
+    "summary": "The A.S. Hornby Educational Trust Scholarship 2027/28 offers an outstanding opportunity for experienced English language teachers and TESOL professionals from"
   },
   {
     "id": "opportunities-for-youth-d8c22d310a4d",
