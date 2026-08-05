@@ -1,5 +1,5 @@
 {
-  "scrapedAt": "2026-08-05T14:49:02.609497+00:00",
+  "scrapedAt": "2026-08-05T15:08:00.504543+00:00",
   "sources": {
     "opportunities-for-youth": {
       "ok": true,
@@ -35,8 +35,13 @@
       "ok": true,
       "count": 26,
       "mode": "generic"
+    },
+    "custom-artinthefind-com": {
+      "ok": true,
+      "count": 1,
+      "mode": "generic"
     }
   },
-  "mode": "full",
-  "total": 1436
+  "mode": "partial",
+  "total": 1437
 }
