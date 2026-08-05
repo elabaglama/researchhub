@@ -1,6 +1,5 @@
 import {
   auth,
-  db,
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
@@ -10,13 +9,11 @@ import {
   onAuthStateChanged,
   updateProfile,
   userRef,
-  prefsRef,
   loadUserPrefs,
   saveUserPrefs,
   setDoc,
-  serverTimestamp,
 } from "./firebase.js";
-import { saveNotionConfig, getNotionConfig } from "./shared.js";
+import { saveNotionConfig } from "./shared.js";
 
 // ── Public state ─────────────────────────────────────────────────────────────
 export let currentUser = null;

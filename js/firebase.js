@@ -1,9 +1,7 @@
-// Firebase CDN — no bundler needed for this static site.
-const FB_VER = "11.0.0";
-const CDN = `https://www.gstatic.com/firebasejs/${FB_VER}`;
-
-const { initializeApp } = await import(`${CDN}/firebase-app.js`);
-const {
+// Use static CDN imports — no bundler needed.
+// Pinned to 10.12.0, a long-term stable Firebase release on gstatic.
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
@@ -13,8 +11,8 @@ const {
   signOut,
   onAuthStateChanged,
   updateProfile,
-} = await import(`${CDN}/firebase-auth.js`);
-const {
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
   getFirestore,
   doc,
   getDoc,
@@ -25,7 +23,7 @@ const {
   getDocs,
   addDoc,
   serverTimestamp,
-} = await import(`${CDN}/firebase-firestore.js`);
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB4Yn3cU7QsFQ49Ax3v-iav625_3H3fgJU",
@@ -38,6 +36,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+
+// Firestore is optional — if the database hasn't been created in Firebase
+// console yet, all Firestore calls will simply fail gracefully.
 export const db = getFirestore(app);
 
 export {
@@ -60,24 +61,20 @@ export {
   serverTimestamp,
 };
 
-// ── Firestore helpers ────────────────────────────────────────────────────────
+// ── Firestore helpers (all wrapped — failures never break auth) ──────────────
 
-/** User profile doc ref */
 export function userRef(uid) {
   return doc(db, "users", uid);
 }
 
-/** User preferences doc ref */
 export function prefsRef(uid) {
   return doc(db, "users", uid, "data", "preferences");
 }
 
-/** User custom sources collection ref */
 export function sourcesRef(uid) {
   return collection(db, "users", uid, "sources");
 }
 
-/** Load a user's preferences (returns {} if missing) */
 export async function loadUserPrefs(uid) {
   try {
     const snap = await getDoc(prefsRef(uid));
@@ -87,12 +84,14 @@ export async function loadUserPrefs(uid) {
   }
 }
 
-/** Save (merge) preferences for a user */
 export async function saveUserPrefs(uid, data) {
-  await setDoc(prefsRef(uid), data, { merge: true });
+  try {
+    await setDoc(prefsRef(uid), data, { merge: true });
+  } catch {
+    /* Firestore not yet enabled — ignore */
+  }
 }
 
-/** Load all user-specific custom sources */
 export async function loadUserSources(uid) {
   try {
     const snap = await getDocs(sourcesRef(uid));
@@ -102,16 +101,22 @@ export async function loadUserSources(uid) {
   }
 }
 
-/** Add a custom source for a user */
 export async function addUserSource(uid, source) {
-  const ref = await addDoc(sourcesRef(uid), {
-    ...source,
-    createdAt: serverTimestamp(),
-  });
-  return ref.id;
+  try {
+    const ref = await addDoc(sourcesRef(uid), {
+      ...source,
+      createdAt: serverTimestamp(),
+    });
+    return ref.id;
+  } catch {
+    return null;
+  }
 }
 
-/** Remove a custom source for a user */
 export async function removeUserSource(uid, docId) {
-  await deleteDoc(doc(db, "users", uid, "sources", docId));
+  try {
+    await deleteDoc(doc(db, "users", uid, "sources", docId));
+  } catch {
+    /* ignore */
+  }
 }
