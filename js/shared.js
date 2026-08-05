@@ -488,17 +488,42 @@ function renderResultCards(container, items, sources, { carded = false } = {}) {
   });
 }
 
-function wirePdfButton() {
-  const link = document.getElementById("pdf-link");
-  if (!link) return;
-  link.addEventListener("click", (event) => {
+/** Today's date as YYYY-MM-DD for export filenames. */
+function exportDateStamp() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+/**
+ * Wire the nav "Esporta XLS" button.
+ * getPayload() → { items, sources?, filenamePrefix? }
+ */
+function wireXlsButton(getPayload) {
+  const btn = document.getElementById("xls-export-btn");
+  if (!btn) return;
+  btn.addEventListener("click", (event) => {
     event.preventDefault();
-    window.print();
+    const payload =
+      typeof getPayload === "function"
+        ? getPayload()
+        : { items: [], sources: [] };
+    const items = payload?.items || [];
+    if (!items.length) {
+      window.alert(t("results.noMatch"));
+      return;
+    }
+    const prefix = payload.filenamePrefix || "research-hub";
+    exportXls(items, payload.sources || [], `${prefix}-${exportDateStamp()}.xls`);
   });
 }
 
 /** Build a SpreadsheetML .xls file clientside and trigger download. */
-function exportXls(items, sources, filename = "research-hub.xls") {
+function exportXls(items, sources, filename) {
+  const stamp = exportDateStamp();
+  const finalName = filename || `research-hub-${stamp}.xls`;
   const rows = (items || []).map((item) => {
     const source = sourceById(sources || [], item.sourceId);
     return [
@@ -508,10 +533,11 @@ function exportXls(items, sources, filename = "research-hub.xls") {
       source?.name || item.sourceId || "",
       item.url || "",
       item.summary || "",
+      stamp,
     ];
   });
 
-  const header = ["Title", "Type", "Deadline", "Source", "URL", "Summary"];
+  const header = ["Title", "Type", "Deadline", "Source", "URL", "Summary", "ExportDate"];
   const escapeCell = (v) =>
     String(v ?? "")
       .replace(/&/g, "&amp;")
@@ -541,7 +567,7 @@ function exportXls(items, sources, filename = "research-hub.xls") {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = filename;
+  a.download = finalName;
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -584,6 +610,7 @@ export {
   isNotionConnected,
   saveOpportunityToNotion,
   renderResultCards,
-  wirePdfButton,
+  wireXlsButton,
   exportXls,
+  exportDateStamp,
 };

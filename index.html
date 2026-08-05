@@ -37,7 +37,7 @@
     <nav class="top-pills" aria-label="Primary">
       <a class="pill" href="daily.html" data-i18n="nav.daily">Report Giornaliero</a>
       <a class="pill" href="library.html" data-i18n="nav.library">Libreria</a>
-      <a class="pill" href="#" id="pdf-link" data-i18n="nav.pdf">PDF</a>
+      <button type="button" class="pill" id="xls-export-btn" data-i18n="results.export">Esporta XLS</button>
       <a class="pill" href="#" id="guide-btn" data-i18n="nav.guide">Guida</a>
     </nav>
 
@@ -101,10 +101,7 @@
       </div>
 
       <section class="home-results" id="home-results" hidden>
-        <div class="results-top-bar">
-          <p id="results-meta" class="results-meta"></p>
-          <button type="button" class="ghost-btn xls-btn" id="xls-export-btn" data-i18n="results.export">Esporta XLS</button>
-        </div>
+        <p id="results-meta" class="results-meta"></p>
         <div id="results-list" class="results-cards"></div>
       </section>
     </main>

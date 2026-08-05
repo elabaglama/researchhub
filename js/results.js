@@ -1,7 +1,7 @@
 import {
   matchesQuery,
   renderResultCards,
-  wirePdfButton,
+  wireXlsButton,
   loadLibraryCache,
   loadRemovedSourceIds,
   mergePersonalSources,
@@ -13,7 +13,8 @@ import {
   opportunitiesFromCaches,
 } from "./firebase.js";
 
-wirePdfButton();
+// results.html redirects to index — keep export helper available if needed
+void wireXlsButton;
 
 const params = new URLSearchParams(window.location.search);
 const query = (params.get("q") || "").trim();

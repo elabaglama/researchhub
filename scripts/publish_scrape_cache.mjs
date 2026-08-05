@@ -60,6 +60,21 @@ async function listCache() {
   return items;
 }
 
+const OLD_YEAR_RE = /(?<!\d)(?:20(?:0\d|1\d|2[0-5]))(?!\d)/;
+
+function isCurrentYearItem(item) {
+  const blob = [
+    item?.url,
+    item?.title,
+    item?.summary,
+    item?.deadline,
+    ...(Array.isArray(item?.tags) ? item.tags : []),
+  ]
+    .filter(Boolean)
+    .join(" ");
+  return !OLD_YEAR_RE.test(blob);
+}
+
 async function publishReport(reportPath) {
   const report = JSON.parse(readFileSync(reportPath, "utf8"));
   const fresh = report.freshBySource || {};
@@ -70,7 +85,7 @@ async function publishReport(reportPath) {
     : Object.keys(sourcesMeta);
 
   for (const sourceId of ids) {
-    const items = fresh[sourceId] || [];
+    const items = (fresh[sourceId] || []).filter(isCurrentYearItem);
     const meta = sourcesMeta[sourceId] || {};
     const status = meta.ok === false ? "error" : "ready";
     const ref = firestore.collection("scrapeCache").doc(sourceId);

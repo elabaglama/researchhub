@@ -44,6 +44,30 @@ def make_id(source_id: str, title: str, url: str) -> str:
     return f"{source_id}-{hashlib.sha1(raw).hexdigest()[:12]}"
 
 
+# Drop opportunities that mention years before the current focus year (2026).
+# Matches 2000–2025 as whole years in URL / title / summary / deadline.
+_OLD_YEAR_RE = re.compile(r"(?<!\d)(?:20(?:0\d|1\d|2[0-5]))(?!\d)")
+
+
+def is_current_year_item(item: dict) -> bool:
+    """Keep items that do not reference 2025 or earlier."""
+    blob = " ".join(
+        str(item.get(k) or "")
+        for k in ("url", "title", "summary", "deadline", "tags")
+    )
+    if isinstance(item.get("tags"), list):
+        blob += " " + " ".join(str(t) for t in item["tags"])
+    return _OLD_YEAR_RE.search(blob) is None
+
+
+def filter_current_year(items: list[dict]) -> list[dict]:
+    kept = [item for item in items if is_current_year_item(item)]
+    dropped = len(items) - len(kept)
+    if dropped:
+        print(f"[filter] dropped {dropped} pre-2026 item(s)")
+    return kept
+
+
 def guess_type(title: str) -> str:
     t = title.lower()
     mapping = [
@@ -904,7 +928,7 @@ def run(
         source_id = source["id"]
         scraper = SCRAPERS.get(source_id, scrape_generic)
         try:
-            items = scraper(source)
+            items = filter_current_year(scraper(source))
             fresh_by_source[source_id] = items
             report["sources"][source_id] = {
                 "ok": True,
@@ -936,6 +960,7 @@ def run(
 
     all_items = kept + [item for rows in fresh_by_source.values() for item in rows]
     all_items = [item for item in all_items if item.get("sourceId") in valid_ids]
+    all_items = filter_current_year(all_items)
 
     merged = merge_unique(all_items)
     report["total"] = len(merged)
