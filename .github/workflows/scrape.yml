@@ -25,6 +25,10 @@ permissions:
   contents: write
   actions: write
 
+concurrency:
+  group: scrape-opportunities
+  cancel-in-progress: false
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
@@ -63,5 +67,15 @@ jobs:
             echo "No opportunity changes."
           else
             git commit -m "chore: refresh scraped opportunities"
-            git push
+            # Other scrape runs may have pushed meanwhile — rebase then push.
+            for i in 1 2 3 4 5; do
+              if git pull --rebase origin main && git push origin HEAD:main; then
+                echo "Push succeeded."
+                exit 0
+              fi
+              echo "Push race, retry $i..."
+              sleep $((i * 2))
+            done
+            echo "Failed to push after retries."
+            exit 1
           fi
