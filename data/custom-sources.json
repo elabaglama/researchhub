@@ -44,5 +44,14 @@
     "blurb": "https://www.artinthefind.com/",
     "searchUrl": "https://www.artinthefind.com/?s={query}",
     "custom": true
+  },
+  {
+    "id": "custom-erasmusgram-com",
+    "name": "erasmusgram.com",
+    "url": "https://www.erasmusgram.com/",
+    "focus": "Saved link",
+    "blurb": "https://www.erasmusgram.com/",
+    "searchUrl": "https://www.erasmusgram.com/?s={query}",
+    "custom": true
   }
 ]
