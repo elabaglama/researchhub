@@ -3,7 +3,10 @@ import { loadUserPrefs, saveUserPrefs } from "./firebase.js";
 const WISHLIST_URL =
   "https://www.amazon.it/hz/wishlist/ls/6CV4RB9T1Y5S?ref_=wl_share";
 
-const SESSION_KEY = "hub-onboarded-session";
+// SESSION_KEY — cleared when the tab closes (prevents re-show while navigating pages)
+const SESSION_KEY = "hub-ob-session";
+// Per-user local key — persists across sessions so returning users skip the guide
+const localKey = (uid) => `hub-ob-${uid}`;
 
 const STEPS = [
   {
@@ -44,16 +47,28 @@ const STEPS = [
 
 export async function showOnboardingIfNeeded(user) {
   if (!user) return;
-  // If "Let's go" was already clicked in this tab session, don't re-show.
+
+  // Fast synchronous checks — no network needed
   if (sessionStorage.getItem(SESSION_KEY)) return;
-  // Only skip if Firestore explicitly says the user has completed the guide.
-  // On any Firestore error we fall through and show it — better once more than never.
+  if (localStorage.getItem(localKey(user.uid))) return;
+
+  // Firestore check with a 2-second safety timeout.
+  // If Firestore hangs (permission error, network issue, unconfigured DB),
+  // we fall through after 2 s and show the guide anyway.
   try {
-    const prefs = await loadUserPrefs(user.uid);
-    if (prefs.hasSeenOnboarding) return;
+    const prefs = await Promise.race([
+      loadUserPrefs(user.uid),
+      new Promise((resolve) => setTimeout(() => resolve({}), 2000)),
+    ]);
+    if (prefs.hasSeenOnboarding) {
+      // Cache locally so we skip the network round-trip next time
+      localStorage.setItem(localKey(user.uid), "1");
+      return;
+    }
   } catch {
-    // Firestore unavailable — show the guide anyway
+    // Firestore threw — show the guide regardless
   }
+
   _showGuide(user);
 }
 
@@ -71,24 +86,24 @@ function _showGuide(user) {
   overlay.appendChild(popup);
   document.body.appendChild(overlay);
 
-  requestAnimationFrame(() => overlay.classList.add("ob-overlay--in"));
+  // Double rAF guarantees the browser has computed the element's initial
+  // opacity:0 before we add the --in class, so the CSS transition always fires.
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => overlay.classList.add("ob-overlay--in"))
+  );
 
-  // The popup is split into two regions:
-  //   .ob-content  — grows to fill space, holds the visual + text (centered)
-  //   .ob-footer   — always sits at the bottom with dots + navigation
-  // This ensures dots appear at exactly the same Y on every step.
+  function dotsHTML() {
+    return STEPS.map((_, i) =>
+      `<span class="ob-dot${i === step ? " ob-dot--active" : ""}"></span>`
+    ).join("");
+  }
 
   function render() {
     const s = STEPS[step];
     const isLast = step === STEPS.length - 1;
     const isFirst = step === 0;
 
-    const dotsHTML = STEPS.map((_, i) =>
-      `<span class="ob-dot${i === step ? " ob-dot--active" : ""}"></span>`
-    ).join("");
-
     let contentHTML;
-
     if (s.type === "wishlist") {
       contentHTML = `
         <div class="ob-wishlist-row">
@@ -112,7 +127,7 @@ function _showGuide(user) {
     popup.innerHTML = `
       <div class="ob-content">${contentHTML}</div>
       <div class="ob-footer">
-        <div class="ob-dots">${dotsHTML}</div>
+        <div class="ob-dots">${dotsHTML()}</div>
         <div class="ob-actions">
           ${!isFirst
             ? `<button class="ghost-btn ob-prev" type="button">← Back</button>`
@@ -127,14 +142,20 @@ function _showGuide(user) {
       render();
     });
     if (!isFirst) {
-      popup.querySelector(".ob-prev").addEventListener("click", () => { step--; render(); });
+      popup.querySelector(".ob-prev").addEventListener("click", () => {
+        step--;
+        render();
+      });
     }
   }
 
   function dismiss() {
+    // Mark as seen in every storage layer immediately
     sessionStorage.setItem(SESSION_KEY, "1");
+    localStorage.setItem(localKey(user.uid), "1");
     overlay.classList.add("ob-overlay--out");
     setTimeout(() => overlay.remove(), 320);
+    // Also write to Firestore for cross-device persistence
     saveUserPrefs(user.uid, { hasSeenOnboarding: true }).catch(() => {});
   }
 
