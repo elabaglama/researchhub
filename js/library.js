@@ -22,6 +22,8 @@ import {
   loadUserSources,
   addUserSource,
   removeUserSource,
+  loadUserPrefs,
+  saveUserPrefs,
 } from "./firebase.js";
 
 wirePdfButton();
@@ -107,16 +109,20 @@ function scrapeSummary(report, sourceId) {
 async function renderLibrary() {
   let sources;
   let userSources = [];
-  let customIds;
+  let hiddenIds = new Set();
+  let firestoreIds = new Set();
 
   if (currentUser) {
-    // Signed in: show base sources + only THIS user's Firestore sources.
-    // Never mix in the shared custom-sources.json file (could be another user's data).
-    const [base, firestoreSources] = await Promise.all([
+    // Signed in: base sources + THIS user's own Firestore sources only.
+    const [base, firestoreSources, prefs] = await Promise.all([
       loadBaseSources(),
       loadUserSources(currentUser.uid),
+      loadUserPrefs(currentUser.uid),
     ]);
     userSources = firestoreSources;
+    hiddenIds = new Set(Array.isArray(prefs.hiddenSources) ? prefs.hiddenSources : []);
+    firestoreIds = new Set(userSources.map((s) => s.id));
+
     sources = [...base];
     const knownIds = new Set(base.map((s) => s.id));
     for (const us of userSources) {
@@ -125,38 +131,29 @@ async function renderLibrary() {
         knownIds.add(us.id);
       }
     }
-    customIds = new Set(userSources.map((s) => s.id));
+    // Filter out sources the user has hidden
+    sources = sources.filter((s) => !hiddenIds.has(s.id));
   } else {
-    // Signed out: fall back to all sources (base + file custom)
-    const [allSources, fileCustom] = await Promise.all([
-      loadAllSources(),
-      loadFileCustomSources(),
-    ]);
+    // Signed out: all sources (base + file custom)
+    const [allSources] = await Promise.all([loadAllSources()]);
     sources = allSources;
-    customIds = new Set(fileCustom.map((s) => s.id));
   }
 
   list.innerHTML = sources
     .map((source) => {
-      const isCustom = customIds.has(source.id) || source.custom;
-      const actions = isCustom
-        ? `<div class="result-actions">
-            <button type="button" class="notion-save-btn resync-btn" data-id="${escapeHtml(source.id)}">Re-scrape</button>
-            <button type="button" class="notion-save-btn remove-btn" data-id="${escapeHtml(source.id)}">Remove</button>
-          </div>`
-        : `<div class="result-actions">
-            <button type="button" class="notion-save-btn resync-btn" data-id="${escapeHtml(source.id)}">Re-scrape</button>
-          </div>`;
+      const isUserOwned = firestoreIds.has(source.id) || source.custom;
+      const tag = isUserOwned ? ` <span class="saved-tag">Library</span>` : "";
       return `
         <article class="simple-item">
           <a class="result-link" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">
-            <h2 class="simple-title">${escapeHtml(source.name)}${
-              isCustom ? ` <span class="saved-tag">Library</span>` : ""
-            }</h2>
+            <h2 class="simple-title">${escapeHtml(source.name)}${tag}</h2>
             <p class="simple-meta">${escapeHtml(source.focus || "Resource")}</p>
             <p class="simple-summary">${escapeHtml(source.blurb || source.url)}</p>
           </a>
-          ${actions}
+          <div class="result-actions">
+            <button type="button" class="notion-save-btn resync-btn" data-id="${escapeHtml(source.id)}">Re-scrape</button>
+            <button type="button" class="notion-save-btn remove-btn" data-id="${escapeHtml(source.id)}" data-owned="${isUserOwned}">Remove</button>
+          </div>
         </article>`;
     })
     .join("");
@@ -182,18 +179,25 @@ async function renderLibrary() {
   list.querySelectorAll(".remove-btn").forEach((button) => {
     button.addEventListener("click", async () => {
       const id = button.dataset.id;
-      if (!window.confirm(`Remove ${id} from library?`)) return;
+      const isOwned = button.dataset.owned === "true";
+      if (!window.confirm(`Remove this source from your library?`)) return;
       button.disabled = true;
       try {
-        // Remove from Firestore if user is signed in and it's their source
         if (currentUser) {
-          const us = userSources.find((s) => s.id === id);
-          if (us?._docId) {
-            await removeUserSource(currentUser.uid, us._docId);
+          if (isOwned) {
+            // User's own Firestore source — delete the document
+            const us = userSources.find((s) => s.id === id);
+            if (us?._docId) await removeUserSource(currentUser.uid, us._docId);
+          } else {
+            // Base source — hide it in user prefs so it disappears for this user
+            const updatedHidden = [...hiddenIds, id];
+            await saveUserPrefs(currentUser.uid, { hiddenSources: updatedHidden });
           }
+        } else {
+          // Fallback: server API (not signed in)
+          await removeLibrarySource(id);
         }
-        await removeLibrarySource(id);
-        setSyncStatus(`Removed ${id}.`);
+        setSyncStatus(`Removed from your library.`);
         await renderLibrary();
       } catch (error) {
         setSyncStatus(error.message || "Remove failed");
