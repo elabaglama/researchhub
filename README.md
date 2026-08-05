@@ -46,3 +46,4 @@ npm start
 ```
 
 Local `/api/scrape` runs the Python scraper on disk. Production uses Actions (+ Firestore when configured).
+
