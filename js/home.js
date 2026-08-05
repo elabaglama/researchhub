@@ -13,12 +13,12 @@ const input = document.getElementById("query");
 const resultsSection = document.getElementById("home-results");
 const resultsMeta = document.getElementById("results-meta");
 const resultsList = document.getElementById("results-list");
+const filtersEl = document.getElementById("search-filters");
 const body = document.body;
 
 const filterType = document.getElementById("filter-type");
 const filterContinent = document.getElementById("filter-continent");
 const filterCountry = document.getElementById("filter-country");
-const filterAge = document.getElementById("filter-age");
 
 const [sources, opportunities] = await Promise.all([
   loadAllSources(),
@@ -30,17 +30,20 @@ if (countNumber) {
   countNumber.textContent = String(opportunities.length);
 }
 
+function showFilters() {
+  filtersEl?.classList.remove("search-filters--hidden");
+}
+
 function getActiveFilters() {
   return {
     type: filterType?.value || "",
     continent: filterContinent?.value || "",
     country: filterCountry?.value?.trim() || "",
-    age: filterAge?.value || "",
   };
 }
 
 function hasActiveFilters(filters) {
-  return Boolean(filters.type || filters.continent || filters.country || filters.age);
+  return Boolean(filters.type || filters.continent || filters.country);
 }
 
 function buildFilterLabel(filters) {
@@ -48,7 +51,6 @@ function buildFilterLabel(filters) {
   if (filters.type) parts.push(filterType.options[filterType.selectedIndex]?.text || filters.type);
   if (filters.continent) parts.push(filterContinent.options[filterContinent.selectedIndex]?.text || filters.continent);
   if (filters.country) parts.push(filters.country);
-  if (filters.age) parts.push(filterAge.options[filterAge.selectedIndex]?.text || filters.age);
   return parts.join(", ");
 }
 
@@ -56,7 +58,6 @@ function markActiveFilters(filters) {
   filterType?.classList.toggle("filter-active", Boolean(filters.type));
   filterContinent?.classList.toggle("filter-active", Boolean(filters.continent));
   filterCountry?.classList.toggle("filter-active", Boolean(filters.country));
-  filterAge?.classList.toggle("filter-active", Boolean(filters.age));
 }
 
 function runSearch(query) {
@@ -101,22 +102,30 @@ function runSearch(query) {
   document.title = q ? `${q} — Research Hub` : "Research Hub";
 }
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+// Show filters on first interaction with the search
+input.addEventListener("focus", showFilters);
+input.addEventListener("input", () => {
+  showFilters();
   runSearch(input.value);
 });
 
-input.addEventListener("input", () => {
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
   runSearch(input.value);
 });
 
 filterType?.addEventListener("change", () => runSearch(input.value));
 filterContinent?.addEventListener("change", () => runSearch(input.value));
 filterCountry?.addEventListener("input", () => runSearch(input.value));
-filterAge?.addEventListener("change", () => runSearch(input.value));
+
+// Also show filters when any filter is changed
+filterType?.addEventListener("focus", showFilters);
+filterContinent?.addEventListener("focus", showFilters);
+filterCountry?.addEventListener("focus", showFilters);
 
 const initial = new URLSearchParams(window.location.search).get("q") || "";
 if (initial) {
   input.value = initial;
+  showFilters();
   runSearch(initial);
 }

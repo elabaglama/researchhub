@@ -56,14 +56,31 @@ function mountPlayer() {
   `;
 
   const button = root.querySelector(".music-player");
-  let unlocked = false;
 
-  const setPlaying = (playing) => {
+  // Restore position immediately so timeupdate works correctly.
+  try {
+    if (state.time > 0) audio.currentTime = state.time;
+  } catch {
+    /* ignore seek errors before metadata loads */
+  }
+
+  const setVisual = (playing) => {
     button.classList.toggle("is-playing", playing);
     button.setAttribute("aria-pressed", String(playing));
     button.setAttribute("aria-label", playing ? "Pause music" : "Play music");
+  };
+
+  const setPlaying = (playing) => {
+    setVisual(playing);
     persist(audio, playing);
   };
+
+  // Disc spins immediately — optimistic UI. Audio will catch up once unlocked.
+  if (state.playing !== false) {
+    setVisual(true);
+  } else {
+    setVisual(false);
+  }
 
   const tryPlay = async () => {
     try {
@@ -71,8 +88,18 @@ function mountPlayer() {
       setPlaying(true);
       return true;
     } catch {
-      setPlaying(false);
+      // Browser blocked autoplay — disc keeps spinning, audio will start on first interaction.
       return false;
+    }
+  };
+
+  let unlocked = false;
+
+  const unlockAndPlay = () => {
+    if (unlocked) return;
+    unlocked = true;
+    if (savedState().playing !== false) {
+      tryPlay();
     }
   };
 
@@ -87,12 +114,14 @@ function mountPlayer() {
       return;
     }
 
+    // Restore position if we haven't seeked yet (e.g. after page nav).
     try {
-      if (state.time > 0 && audio.currentTime < 0.2) {
-        audio.currentTime = state.time;
+      const s = savedState();
+      if (s.time > 0 && audio.currentTime < 0.5) {
+        audio.currentTime = s.time;
       }
     } catch {
-      /* ignore seek errors */
+      /* ignore */
     }
 
     await tryPlay();
@@ -102,30 +131,20 @@ function mountPlayer() {
     if (!audio.paused) persist(audio, true);
   });
 
-  // Auto-start whenever the page opens (unless user previously paused this session).
-  if (state.playing !== false) {
-    try {
-      if (state.time > 0) audio.currentTime = state.time;
-    } catch {
-      /* ignore */
-    }
+  // Save position right before the page is navigated away.
+  window.addEventListener("pagehide", () => persist(audio, !audio.paused));
+  window.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") persist(audio, !audio.paused);
+  });
 
+  if (state.playing !== false) {
     tryPlay().then((ok) => {
       if (ok) return;
-      const unlock = (event) => {
-        if (unlocked) return;
-        if (event.target.closest?.(".music-player")) return;
-        unlocked = true;
-        if (savedState().playing !== false) tryPlay();
-      };
-      window.addEventListener("pointerdown", unlock, {
-        once: true,
-        capture: true,
-      });
+      // Autoplay blocked: hook into any user gesture on the page to unlock.
+      const unlock = () => unlockAndPlay();
+      window.addEventListener("pointerdown", unlock, { once: true, capture: true });
       window.addEventListener("keydown", unlock, { once: true, capture: true });
     });
-  } else {
-    setPlaying(false);
   }
 }
 

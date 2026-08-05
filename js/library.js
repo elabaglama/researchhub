@@ -26,6 +26,29 @@ const notionForm = document.getElementById("notion-form");
 const notionDisconnect = document.getElementById("notion-disconnect-btn");
 const notionStatus = document.getElementById("notion-status");
 const notionSaveBtn = document.getElementById("notion-save-btn");
+const notionOverlay = document.getElementById("notion-overlay");
+const notionToggleBtn = document.getElementById("notion-toggle-btn");
+const notionCloseBtn = document.getElementById("notion-close-btn");
+
+function openNotionPopup() {
+  notionOverlay.hidden = false;
+  document.body.style.overflow = "hidden";
+  notionForm.querySelector("input[name='token']").focus();
+}
+
+function closeNotionPopup() {
+  notionOverlay.hidden = true;
+  document.body.style.overflow = "";
+}
+
+notionToggleBtn.addEventListener("click", openNotionPopup);
+notionCloseBtn.addEventListener("click", closeNotionPopup);
+notionOverlay.addEventListener("click", (e) => {
+  if (e.target === notionOverlay) closeNotionPopup();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !notionOverlay.hidden) closeNotionPopup();
+});
 
 function fillNotionForm() {
   const config = getNotionConfig();
@@ -35,12 +58,17 @@ function fillNotionForm() {
 }
 
 function refreshNotionStatus(extra = "") {
-  if (isNotionConnected()) {
+  const connected = isNotionConnected();
+  if (connected) {
     notionStatus.textContent =
       extra || "Notion connected — Save to Notion is one click on any opportunity.";
+    notionToggleBtn.textContent = "Notion ●";
+    notionToggleBtn.title = "Notion connected";
   } else {
     notionStatus.textContent =
       extra || "Paste your integration secret once below, then save.";
+    notionToggleBtn.textContent = "Notion";
+    notionToggleBtn.title = "Connect Notion";
   }
 }
 
@@ -161,6 +189,7 @@ notionDisconnect.addEventListener("click", () => {
   clearNotionConfig();
   fillNotionForm();
   refreshNotionStatus("Disconnected.");
+  closeNotionPopup();
 });
 
 notionForm.addEventListener("submit", async (event) => {

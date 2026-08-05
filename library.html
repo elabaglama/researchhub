@@ -28,6 +28,7 @@
         </div>
         <div class="library-actions">
           <button type="button" class="ghost-btn" id="sync-all-btn">Sync all</button>
+          <button type="button" class="ghost-btn" id="notion-toggle-btn">Notion</button>
           <button type="button" class="add-resource-btn" id="add-resource-btn">
             Add resource
           </button>
@@ -36,42 +37,48 @@
 
       <p id="sync-status" class="notion-status" aria-live="polite"></p>
 
-      <section class="notion-panel" aria-labelledby="notion-heading">
-        <h2 id="notion-heading">Notion</h2>
-        <p id="notion-status" class="notion-status" aria-live="polite"></p>
-        <form class="add-resource-form" id="notion-form">
-          <p class="form-note">
-            Connect once. After this, every Save to Notion is one click.
-          </p>
-          <label>
-            Integration secret
-            <input
-              name="token"
-              type="password"
-              required
-              autocomplete="off"
-              placeholder="ntn_… or secret_…"
-            />
-          </label>
-          <label>
-            Database ID
-            <input
-              name="databaseId"
-              type="text"
-              required
-              autocomplete="off"
-              value="c4e56b17d92d40b59aeb00878c6066eb"
-              placeholder="32-character ID from the Notion URL"
-            />
-          </label>
-          <div class="form-actions">
-            <button type="submit" class="add-resource-btn" id="notion-save-btn">
-              Save &amp; test connection
-            </button>
-            <button type="button" class="cancel-btn" id="notion-disconnect-btn">Disconnect</button>
+      <!-- Notion popup overlay -->
+      <div class="notion-overlay" id="notion-overlay" hidden>
+        <div class="notion-popup" role="dialog" aria-labelledby="notion-heading" aria-modal="true">
+          <div class="notion-popup-head">
+            <h2 id="notion-heading">Connect Notion</h2>
+            <button type="button" class="notion-close-btn" id="notion-close-btn" aria-label="Close">✕</button>
           </div>
-        </form>
-      </section>
+          <p id="notion-status" class="notion-status" aria-live="polite"></p>
+          <form id="notion-form">
+            <p class="form-note">
+              Connect once. After this, every Save to Notion is one click.
+            </p>
+            <label>
+              Integration secret
+              <input
+                name="token"
+                type="password"
+                required
+                autocomplete="off"
+                placeholder="ntn_… or secret_…"
+              />
+            </label>
+            <label>
+              Database ID
+              <input
+                name="databaseId"
+                type="text"
+                required
+                autocomplete="off"
+                value="c4e56b17d92d40b59aeb00878c6066eb"
+                placeholder="32-character ID from the Notion URL"
+              />
+            </label>
+            <div class="form-actions">
+              <button type="submit" class="add-resource-btn" id="notion-save-btn">
+                Save &amp; test connection
+              </button>
+              <button type="button" class="cancel-btn" id="notion-disconnect-btn">Disconnect</button>
+            </div>
+          </form>
+        </div>
+      </div>
 
       <form class="add-resource-form" id="add-resource-form" hidden>
         <label>
