@@ -27,18 +27,27 @@ function ensureAudio() {
 function savedState() {
   try {
     const raw = sessionStorage.getItem(KEY);
-    if (!raw) return { playing: true };
-    const parsed = JSON.parse(raw);
-    // Always start from 0 — drop any saved time position
-    return { playing: parsed.playing };
+    if (!raw) return { playing: true, time: 0 };
+    return JSON.parse(raw);
   } catch {
-    return { playing: true };
+    return { playing: true, time: 0 };
   }
 }
 
 function persist(audio, playing) {
-  // Only persist the play/pause state, not the position
-  sessionStorage.setItem(KEY, JSON.stringify({ playing }));
+  sessionStorage.setItem(
+    KEY,
+    JSON.stringify({ playing, time: audio.currentTime || 0 })
+  );
+}
+
+// Seek to the saved time as soon as the audio element is ready.
+function restoreTime(audio, time) {
+  if (!time || time <= 0) return;
+  const doSeek = () => { try { audio.currentTime = time; } catch { /* ignore */ } };
+  // readyState >= 1 means HAVE_METADATA — safe to seek
+  if (audio.readyState >= 1) doSeek();
+  else audio.addEventListener("loadedmetadata", doSeek, { once: true });
 }
 
 function mountPlayer() {
@@ -57,7 +66,8 @@ function mountPlayer() {
 
   const button = root.querySelector(".music-player");
 
-  // Always start from position 0
+  // Restore position from previous page (0 if this is a fresh session)
+  restoreTime(audio, state.time);
 
   const setVisual = (playing) => {
     button.classList.toggle("is-playing", playing);

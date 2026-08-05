@@ -3,9 +3,10 @@ import { loadUserPrefs, saveUserPrefs } from "./firebase.js";
 const WISHLIST_URL =
   "https://www.amazon.it/hz/wishlist/ls/6CV4RB9T1Y5S?ref_=wl_share";
 
-// Immediate local flag — prevents re-show when navigating between pages
-// before the Firestore write has a chance to persist.
-const LOCAL_KEY = "hub-onboarded";
+// Session-scoped guard set only when "Let's go" is clicked.
+// Using sessionStorage (not localStorage) so it never blocks a NEW user
+// who happens to be on a browser where a PREVIOUS user completed the guide.
+const SESSION_KEY = "hub-onboarded-session";
 
 const STEPS = [
   {
@@ -45,15 +46,14 @@ const STEPS = [
 export async function showOnboardingIfNeeded(user) {
   if (!user) return;
 
-  // Local check first — survives page navigations without waiting for Firestore
-  if (localStorage.getItem(LOCAL_KEY)) return;
+  // If the user already clicked "Let's go" during this tab session, skip.
+  if (sessionStorage.getItem(SESSION_KEY)) return;
 
+  // Always check Firestore — localStorage is never used so new users on
+  // a shared browser are never accidentally blocked.
   try {
     const prefs = await loadUserPrefs(user.uid);
-    if (prefs.hasSeenOnboarding) {
-      localStorage.setItem(LOCAL_KEY, "1"); // sync the local flag
-      return;
-    }
+    if (prefs.hasSeenOnboarding) return;
   } catch {
     return;
   }
@@ -136,11 +136,11 @@ function _showGuide(user) {
   }
 
   function dismiss() {
-    // Set local flag IMMEDIATELY — any page navigation from now on won't show the guide
-    localStorage.setItem(LOCAL_KEY, "1");
+    // Prevent re-show on page navigations within this tab session
+    sessionStorage.setItem(SESSION_KEY, "1");
     overlay.classList.add("ob-overlay--out");
     setTimeout(() => overlay.remove(), 320);
-    // Also persist to Firestore so it survives fresh browser sessions
+    // Persist to Firestore so future browser sessions also skip it
     saveUserPrefs(user.uid, { hasSeenOnboarding: true }).catch(() => {});
   }
 
