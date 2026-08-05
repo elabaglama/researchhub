@@ -140,10 +140,11 @@ function mountPlayer() {
   if (state.playing !== false) {
     tryPlay().then((ok) => {
       if (ok) return;
-      // Autoplay blocked: hook into any user gesture on the page to unlock.
+      // Autoplay blocked — unlock on any user gesture OR when sign-in completes.
       const unlock = () => unlockAndPlay();
       window.addEventListener("pointerdown", unlock, { once: true, capture: true });
       window.addEventListener("keydown", unlock, { once: true, capture: true });
+      window.addEventListener("hub:signed-in", unlock, { once: true });
     });
   }
 }

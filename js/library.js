@@ -1,5 +1,6 @@
 import {
   escapeHtml,
+  loadBaseSources,
   loadAllSources,
   loadFileCustomSources,
   wirePdfButton,
@@ -77,7 +78,7 @@ function refreshNotionStatus(extra = "") {
   } else {
     notionStatus.textContent =
       extra || "Paste your integration secret once below, then save.";
-    notionToggleBtn.textContent = "Notion";
+    notionToggleBtn.textContent = "Connect Notion";
     notionToggleBtn.title = "Connect Notion";
   }
 }
@@ -104,29 +105,36 @@ function scrapeSummary(report, sourceId) {
 }
 
 async function renderLibrary() {
-  const [sources, fileCustom] = await Promise.all([
-    loadAllSources(),
-    loadFileCustomSources(),
-  ]);
-
-  // Merge in any Firestore user-specific sources when signed in
+  let sources;
   let userSources = [];
+  let customIds;
+
   if (currentUser) {
-    userSources = await loadUserSources(currentUser.uid);
-    const knownIds = new Set(sources.map((s) => s.id));
+    // Signed in: show base sources + only THIS user's Firestore sources.
+    // Never mix in the shared custom-sources.json file (could be another user's data).
+    const [base, firestoreSources] = await Promise.all([
+      loadBaseSources(),
+      loadUserSources(currentUser.uid),
+    ]);
+    userSources = firestoreSources;
+    sources = [...base];
+    const knownIds = new Set(base.map((s) => s.id));
     for (const us of userSources) {
-      const merged = { ...us, custom: true };
-      if (!knownIds.has(merged.id)) {
-        sources.push(merged);
-        knownIds.add(merged.id);
+      if (!knownIds.has(us.id)) {
+        sources.push({ ...us, custom: true });
+        knownIds.add(us.id);
       }
     }
+    customIds = new Set(userSources.map((s) => s.id));
+  } else {
+    // Signed out: fall back to all sources (base + file custom)
+    const [allSources, fileCustom] = await Promise.all([
+      loadAllSources(),
+      loadFileCustomSources(),
+    ]);
+    sources = allSources;
+    customIds = new Set(fileCustom.map((s) => s.id));
   }
-
-  const customIds = new Set([
-    ...(fileCustom.map((s) => s.id)),
-    ...(userSources.map((s) => s.id)),
-  ]);
 
   list.innerHTML = sources
     .map((source) => {

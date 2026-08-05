@@ -115,6 +115,17 @@ function saveCustomSources(sources) {
   localStorage.setItem(SOURCES_KEY, JSON.stringify(sources));
 }
 
+async function loadBaseSources() {
+  try {
+    const res = await fetch("data/sources.json", { cache: "no-store" });
+    if (!res.ok) return [];
+    const parsed = await res.json();
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
 async function loadFileCustomSources() {
   try {
     const res = await fetch("data/custom-sources.json", { cache: "no-store" });
@@ -383,6 +394,7 @@ export {
   matchesFilters,
   loadCustomSources,
   saveCustomSources,
+  loadBaseSources,
   loadFileCustomSources,
   loadAllSources,
   addLibrarySource,

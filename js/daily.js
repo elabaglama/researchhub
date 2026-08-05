@@ -7,6 +7,8 @@ import {
   CATEGORY_DEFS,
   wirePdfButton,
 } from "./shared.js";
+import { currentUser, onUserChange } from "./auth.js";
+import { loadUserPrefs, saveUserPrefs } from "./firebase.js";
 
 wirePdfButton();
 
@@ -16,22 +18,109 @@ const today = new Date().toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
 });
-
 document.getElementById("daily-meta").textContent = today;
+
+// ── Preferences ─────────────────────────────────────────────────────────────
+
+const ALL_KEYS = CATEGORY_DEFS.map((c) => c.key);
+let enabledKeys = new Set(ALL_KEYS); // default: all on
+
+async function loadPrefs() {
+  if (!currentUser) return;
+  try {
+    const prefs = await loadUserPrefs(currentUser.uid);
+    if (Array.isArray(prefs.dailyColumns) && prefs.dailyColumns.length) {
+      enabledKeys = new Set(prefs.dailyColumns);
+    }
+  } catch {
+    // keep defaults
+  }
+}
+
+async function savePrefs() {
+  if (!currentUser) return;
+  try {
+    await saveUserPrefs(currentUser.uid, {
+      dailyColumns: [...enabledKeys],
+    });
+  } catch {
+    // silent
+  }
+}
+
+// ── Preferences panel wiring ─────────────────────────────────────────────────
+
+const customizeBtn = document.getElementById("customize-btn");
+const prefsOverlay = document.getElementById("prefs-overlay");
+const prefsPanel = document.getElementById("prefs-panel");
+const prefsCloseBtn = document.getElementById("prefs-close-btn");
+const prefsToggles = document.getElementById("prefs-toggles");
+const prefsSaveBtn = document.getElementById("prefs-save-btn");
+
+function openPrefsPanel() {
+  renderToggles();
+  prefsOverlay.hidden = false;
+  prefsPanel.hidden = false;
+  customizeBtn.setAttribute("aria-expanded", "true");
+  document.body.style.overflow = "hidden";
+}
+
+function closePrefsPanel() {
+  prefsOverlay.hidden = true;
+  prefsPanel.hidden = true;
+  customizeBtn.setAttribute("aria-expanded", "false");
+  document.body.style.overflow = "";
+}
+
+function renderToggles() {
+  prefsToggles.innerHTML = CATEGORY_DEFS.map((cat) => {
+    const checked = enabledKeys.has(cat.key) ? "checked" : "";
+    return `
+      <label class="prefs-toggle-row">
+        <span class="prefs-toggle-label">${escapeHtml(cat.label)}</span>
+        <span class="prefs-switch">
+          <input type="checkbox" class="prefs-checkbox" data-key="${cat.key}" ${checked} />
+          <span class="prefs-slider"></span>
+        </span>
+      </label>`;
+  }).join("");
+
+  prefsToggles.querySelectorAll(".prefs-checkbox").forEach((cb) => {
+    cb.addEventListener("change", async () => {
+      if (cb.checked) {
+        enabledKeys.add(cb.dataset.key);
+      } else {
+        // Always keep at least one category on
+        if (enabledKeys.size > 1) enabledKeys.delete(cb.dataset.key);
+        else cb.checked = true;
+      }
+      await savePrefs();
+      renderReport();
+    });
+  });
+}
+
+customizeBtn.addEventListener("click", openPrefsPanel);
+prefsCloseBtn.addEventListener("click", closePrefsPanel);
+prefsSaveBtn.addEventListener("click", closePrefsPanel);
+prefsOverlay.addEventListener("click", closePrefsPanel);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !prefsPanel.hidden) closePrefsPanel();
+});
+
+// ── Data ─────────────────────────────────────────────────────────────────────
 
 const [sources, opportunities] = await Promise.all([
   loadAllSources(),
   fetch("data/opportunities.json").then((r) => r.json()),
 ]);
 
-// Group items by category
 const byCategory = Object.fromEntries(CATEGORY_DEFS.map((c) => [c.key, []]));
 for (const item of opportunities) {
   const key = classifyItem(item);
   if (byCategory[key]) byCategory[key].push(item);
 }
 
-// Items with real deadlines come first within each category
 function sortItems(items) {
   return [...items].sort((a, b) => {
     const aOpen = !a.deadline || a.deadline.toLowerCase() === "open";
@@ -40,14 +129,22 @@ function sortItems(items) {
   });
 }
 
+// ── Render ───────────────────────────────────────────────────────────────────
+
 const root = document.getElementById("daily-columns");
-root.innerHTML = "";
 
-const activeCategories = CATEGORY_DEFS.filter((cat) => byCategory[cat.key].length > 0);
+function renderReport() {
+  root.innerHTML = "";
 
-if (!activeCategories.length) {
-  root.innerHTML = `<p class="empty-note">No opportunities available yet. Wait for the next automatic scrape.</p>`;
-} else {
+  const activeCategories = CATEGORY_DEFS.filter(
+    (cat) => enabledKeys.has(cat.key) && byCategory[cat.key].length > 0
+  );
+
+  if (!activeCategories.length) {
+    root.innerHTML = `<p class="empty-note">No opportunities available for the selected categories yet.</p>`;
+    return;
+  }
+
   const allItems = [];
 
   for (const cat of activeCategories) {
@@ -134,3 +231,14 @@ if (!activeCategories.length) {
     });
   });
 }
+
+// ── Boot ─────────────────────────────────────────────────────────────────────
+
+await loadPrefs();
+renderReport();
+
+// Re-render if user signs in/out (different preferences per user)
+onUserChange(async () => {
+  await loadPrefs();
+  renderReport();
+});

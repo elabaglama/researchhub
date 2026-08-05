@@ -61,6 +61,8 @@ function _applyGate(user) {
       gate.classList.add("auth-gate--leaving");
       setTimeout(() => gate.remove(), 350);
     }
+    // Sign-in counts as a user gesture — tell the player it can start audio.
+    window.dispatchEvent(new CustomEvent("hub:signed-in"));
   }
 }
 

@@ -22,11 +22,32 @@
     <div id="auth-root" class="auth-root-light" data-theme="light"></div>
 
     <main class="white-main daily-wide">
-      <h1>Daily Report</h1>
-      <p id="daily-greeting" class="daily-greeting">Here is your daily report.</p>
-      <p id="daily-meta" class="lede"></p>
+      <div class="daily-header-row">
+        <div>
+          <h1>Daily Report</h1>
+          <p id="daily-greeting" class="daily-greeting">Here is your daily report.</p>
+          <p id="daily-meta" class="lede"></p>
+        </div>
+        <button type="button" class="ghost-btn" id="customize-btn" aria-expanded="false" aria-controls="prefs-panel">
+          ⚙ Customize
+        </button>
+      </div>
       <div id="daily-columns" class="daily-columns"></div>
     </main>
+
+    <!-- Preferences drawer — outside <main> so it's never blurred by auth gate -->
+    <div class="prefs-overlay" id="prefs-overlay" hidden></div>
+    <aside class="prefs-panel" id="prefs-panel" hidden aria-label="Customize daily report">
+      <div class="prefs-panel-head">
+        <h2>Customize Report</h2>
+        <button type="button" class="notion-close-btn" id="prefs-close-btn" aria-label="Close">✕</button>
+      </div>
+      <p class="prefs-hint">Toggle the sections you want to see in your daily report.</p>
+      <div id="prefs-toggles" class="prefs-toggles"></div>
+      <div class="prefs-footer">
+        <button type="button" class="add-resource-btn" id="prefs-save-btn">Done</button>
+      </div>
+    </aside>
 
     <a class="brand-mark brand-mark-dark" href="index.html">Research<br />Hub</a>
     <div id="music-player-root"></div>
