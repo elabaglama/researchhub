@@ -1,8 +1,14 @@
 name: Scrape opportunities
 
 on:
+  # Immediate: any library add/remove that updates this file
+  push:
+    paths:
+      - "data/custom-sources.json"
+  # Backup refresh for built-in + custom sources
   schedule:
     - cron: "0 */6 * * *"
+  # Manual / Sync all / re-scrape one source
   workflow_dispatch:
     inputs:
       url:
@@ -31,6 +37,11 @@ concurrency:
 
 jobs:
   scrape:
+    # Avoid loop: bot commits from scrape must not re-trigger this workflow.
+    if: >
+      github.event_name != 'push' ||
+      (github.event.head_commit != null &&
+       !startsWith(github.event.head_commit.message, 'chore: refresh scraped'))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -42,7 +53,7 @@ jobs:
           python-version: "3.12"
 
       - name: Apply library changes
-        if: ${{ inputs.url != '' || inputs.remove_source_id != '' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && (inputs.url != '' || inputs.remove_source_id != '') }}
         run: |
           python scripts/manage_sources.py \
             --url "${{ inputs.url }}" \
@@ -50,11 +61,20 @@ jobs:
 
       - name: Scrape sources
         run: |
-          if [ -n "${{ inputs.source_id }}" ]; then
-            python scripts/scrape_opportunities.py "${{ inputs.source_id }}"
-          elif [ -n "${{ inputs.remove_source_id }}" ]; then
-            echo "Source removed; skipping full scrape."
+          EVENT="${{ github.event_name }}"
+          SOURCE_ID="${{ inputs.source_id }}"
+          REMOVE_ID="${{ inputs.remove_source_id }}"
+
+          if [ "$EVENT" = "push" ]; then
+            echo "Library file changed — scraping all sources now."
+            python scripts/scrape_opportunities.py
+          elif [ -n "$SOURCE_ID" ]; then
+            echo "Scraping one source: $SOURCE_ID"
+            python scripts/scrape_opportunities.py "$SOURCE_ID"
+          elif [ -n "$REMOVE_ID" ]; then
+            echo "Source removed; cleaning without full scrape."
           else
+            echo "Full scrape."
             python scripts/scrape_opportunities.py
           fi
 
@@ -67,7 +87,6 @@ jobs:
             echo "No opportunity changes."
           else
             git commit -m "chore: refresh scraped opportunities"
-            # Other scrape runs may have pushed meanwhile — rebase then push.
             for i in 1 2 3 4 5; do
               if git pull --rebase origin main && git push origin HEAD:main; then
                 echo "Push succeeded."

@@ -33,9 +33,9 @@ export default async function handler(req, res) {
       const existing = custom.find((s) => s.url === url);
       if (existing) {
         const scrape =
-        body.scrape === false
-          ? null
-          : await triggerScrapeWorkflow({ sourceId: existing.id, url });
+          body.scrape === false
+            ? null
+            : await triggerScrapeWorkflow({ sourceId: existing.id });
         return res.status(200).json({
           ok: true,
           created: false,
@@ -65,16 +65,28 @@ export default async function handler(req, res) {
       if (url.includes("airtable.com")) source.airtableUrl = url;
 
       const next = [...custom, source];
+      // Committing this file triggers the scrape workflow immediately via push paths.
       await putFile(
         "data/custom-sources.json",
         `${JSON.stringify(next, null, 2)}\n`,
         `chore: add library source ${source.name}`
       );
 
-      const scrape =
-        body.scrape === false
-          ? null
-          : await triggerScrapeWorkflow({ sourceId: id, url });
+      // Belt-and-suspenders: also dispatch an explicit scrape for this source.
+      let scrape = null;
+      if (body.scrape !== false) {
+        try {
+          scrape = await triggerScrapeWorkflow({ sourceId: id });
+        } catch (error) {
+          // Push-path trigger may still run even if Actions dispatch fails.
+          scrape = {
+            pending: true,
+            message:
+              "Source saved. Cloud scrape should start from the library file update. " +
+              (error.message || ""),
+          };
+        }
+      }
 
       return res.status(201).json({
         ok: true,

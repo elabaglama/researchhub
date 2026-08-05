@@ -684,13 +684,24 @@ def run(source_ids: list[str] | None = None) -> dict:
             print(f"[fail] {source_id}: {exc}")
 
     succeeded = set(fresh_by_source.keys())
+    valid_ids = {s["id"] for s in all_sources}
+
     if source_ids:
+        # Partial: replace only sources that succeeded; keep others (including unrelated).
         kept = [item for item in existing if item.get("sourceId") not in succeeded]
     else:
+        # Full: keep only failed sources' old rows; drop removed/orphan sources.
         attempted = {s["id"] for s in sources}
-        kept = [item for item in existing if item.get("sourceId") not in attempted]
+        failed = attempted - succeeded
+        kept = [
+            item
+            for item in existing
+            if item.get("sourceId") in failed and item.get("sourceId") in valid_ids
+        ]
 
     all_items = kept + [item for rows in fresh_by_source.values() for item in rows]
+    # Safety: never keep rows for sources that are no longer in the library.
+    all_items = [item for item in all_items if item.get("sourceId") in valid_ids]
 
     merged = merge_unique(all_items)
     OUT_PATH.write_text(json.dumps(merged, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

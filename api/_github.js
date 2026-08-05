@@ -114,7 +114,7 @@ export async function triggerScrapeWorkflow({
   return {
     pending: true,
     message:
-      "Cloud scrape started. Results appear in search a few minutes after GitHub Actions finishes.",
+      "Scrape started immediately. Search updates in a few minutes after GitHub Actions finishes.",
   };
 }
 

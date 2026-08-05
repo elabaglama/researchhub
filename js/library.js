@@ -51,7 +51,10 @@ function setSyncStatus(message) {
 function scrapeSummary(report, sourceId) {
   if (!report) return "No scrape ran.";
   if (report.pending) {
-    return report.message || "Cloud scrape started — refresh search in a few minutes.";
+    return (
+      report.message ||
+      "Scrape started now. Search updates in a few minutes when GitHub Actions finishes."
+    );
   }
   const entry = report.sources?.[sourceId];
   if (entry?.ok) return `Scraped ${entry.count} items (${entry.mode || "auto"}).`;
