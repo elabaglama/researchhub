@@ -1380,40 +1380,35 @@ body {
 /* ── Wishlist step ── */
 .ob-wishlist-badge {
   position: absolute;
-  top: 1.35rem;
-  right: 1.75rem;
+  top: 1.25rem;
+  left: 1.75rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 0.3rem;
-  pointer-events: none;
+  text-decoration: none;
+  transition: opacity 0.15s;
 }
+.ob-wishlist-badge:hover { opacity: 0.8; }
+
 .ob-wishlist-label {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: #999;
   font-weight: 500;
   letter-spacing: 0.02em;
+  font-family: inherit;
 }
 .ob-wishlist-items {
   display: flex;
   align-items: flex-end;
-  gap: -0.25rem;
+  gap: 0.25rem;
 }
 .ob-wishlist-img {
   object-fit: contain;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.14));
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.15));
 }
-.ob-wishlist-img:first-child { width: 52px; height: 52px; }
-.ob-wishlist-img--mac         { width: 78px; height: 58px; margin-left: -6px; }
-
-.ob-wishlist-link {
-  font-size: 0.85rem;
-  color: #2563eb;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  font-weight: 500;
-}
-.ob-wishlist-link:hover { color: #1d4ed8; }
+.ob-wishlist-img:first-child { width: 46px; height: 46px; }
+.ob-wishlist-img--mac         { width: 70px; height: 52px; }
 
 /* ── Progress dots ── */
 .ob-dots {

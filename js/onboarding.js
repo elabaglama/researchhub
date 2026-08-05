@@ -3,16 +3,14 @@ import { loadUserPrefs, saveUserPrefs } from "./firebase.js";
 const WISHLIST_URL =
   "https://www.amazon.it/hz/wishlist/ls/6CV4RB9T1Y5S?ref_=wl_share";
 
-// Each step describes what to render.
-// type "standard" = emoji/image + title + body
-// type "wishlist"  = special layout matching the provided design
 const STEPS = [
   {
     type: "standard",
-    emoji: "🇪🇺",
+    emojiImg: "images/ob-flag-eu.png",
+    emojiAlt: "EU",
     animated: true,
     title: "Welcome here, my friend.",
-    body: "Start adding your EU open call websites, resources, news library links — or even public Facebook groups you follow — to the Library page.",
+    body: "Start adding your EU open call websites, resources, news library links or even public Facebook groups you follow to the Library page.",
   },
   {
     type: "standard",
@@ -35,7 +33,8 @@ const STEPS = [
   },
   {
     type: "standard",
-    emoji: "🔒",
+    emojiImg: "images/ob-lock.png",
+    emojiAlt: "Security",
     title: "No security issues.",
     body: "Nothing is controlled by META, Google or Apple. Made for FELCOS privately.",
   },
@@ -78,8 +77,10 @@ function _showGuide(user) {
     const isLast = step === STEPS.length - 1;
     const isFirst = step === 0;
     return `<div class="ob-actions">
-      ${!isFirst ? `<button class="ghost-btn ob-prev" type="button">← Back</button>` : `<span></span>`}
-      <button class="add-resource-btn ob-next" type="button">${isLast ? "Let's go! 🚀" : "Next →"}</button>
+      ${!isFirst
+        ? `<button class="ghost-btn ob-prev" type="button">← Back</button>`
+        : `<span></span>`}
+      <button class="add-resource-btn ob-next" type="button">${isLast ? "Let's go!" : "Next →"}</button>
     </div>`;
   }
 
@@ -88,18 +89,15 @@ function _showGuide(user) {
 
     if (s.type === "wishlist") {
       popup.innerHTML = `
-        <div class="ob-wishlist-badge">
+        <a class="ob-wishlist-badge" href="${WISHLIST_URL}" target="_blank" rel="noopener noreferrer" aria-label="Ela's wishlist on Amazon">
           <span class="ob-wishlist-label">Wishlist of Ela</span>
           <div class="ob-wishlist-items">
             <img src="images/ob-wishlist-lipstick.png" alt="Lipstick" class="ob-wishlist-img" />
             <img src="images/ob-wishlist-macbook.png"  alt="MacBook"  class="ob-wishlist-img ob-wishlist-img--mac" />
           </div>
-        </div>
+        </a>
         <h2 class="ob-title">${s.title}</h2>
         <p class="ob-body">${s.body}</p>
-        <a class="ob-wishlist-link" href="${WISHLIST_URL}" target="_blank" rel="noopener noreferrer">
-          Ela's wishlist →
-        </a>
         ${dotsHTML()}
         ${actionsHTML()}`;
     } else {

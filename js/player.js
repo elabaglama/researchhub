@@ -41,6 +41,19 @@ function persist(audio, playing) {
   );
 }
 
+// Seek to saved time as soon as the audio is ready to accept it.
+function restoreTime(audio, time) {
+  if (time <= 0) return;
+  const doSeek = () => {
+    try { audio.currentTime = time; } catch { /* ignore */ }
+  };
+  if (audio.readyState >= 1) {
+    doSeek();
+  } else {
+    audio.addEventListener("loadedmetadata", doSeek, { once: true });
+  }
+}
+
 function mountPlayer() {
   const root = document.getElementById("music-player-root");
   if (!root || root.dataset.ready) return;
@@ -57,12 +70,8 @@ function mountPlayer() {
 
   const button = root.querySelector(".music-player");
 
-  // Restore position immediately so timeupdate works correctly.
-  try {
-    if (state.time > 0) audio.currentTime = state.time;
-  } catch {
-    /* ignore seek errors before metadata loads */
-  }
+  // Restore playback position
+  restoreTime(audio, state.time);
 
   const setVisual = (playing) => {
     button.classList.toggle("is-playing", playing);
@@ -75,20 +84,31 @@ function mountPlayer() {
     persist(audio, playing);
   };
 
-  // Disc spins immediately — optimistic UI. Audio will catch up once unlocked.
-  if (state.playing !== false) {
-    setVisual(true);
-  } else {
-    setVisual(false);
-  }
+  // Spin the disc immediately (optimistic — audio catches up once unlocked)
+  setVisual(state.playing !== false);
 
+  // ── Try to play. Falls back to muted play which browsers almost always allow.
   const tryPlay = async () => {
+    // Attempt 1: normal unmuted play
     try {
       await audio.play();
+      audio.muted = false; // in case it was muted from a prior attempt
       setPlaying(true);
       return true;
     } catch {
-      // Browser blocked autoplay — disc keeps spinning, audio will start on first interaction.
+      /* autoplay policy blocked it */
+    }
+
+    // Attempt 2: muted play (allowed by virtually every browser, even without gesture)
+    try {
+      audio.muted = true;
+      await audio.play();
+      setPlaying(true);
+      // Unmute after 250 ms — short enough to be imperceptible, long enough for
+      // the browser to register the playback as "user has engaged with the page".
+      setTimeout(() => { if (!audio.paused) audio.muted = false; }, 250);
+      return true;
+    } catch {
       return false;
     }
   };
@@ -98,11 +118,10 @@ function mountPlayer() {
   const unlockAndPlay = () => {
     if (unlocked) return;
     unlocked = true;
-    if (savedState().playing !== false) {
-      tryPlay();
-    }
+    if (savedState().playing !== false) tryPlay();
   };
 
+  // Manual play/pause toggle
   button.addEventListener("click", async (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -114,36 +133,32 @@ function mountPlayer() {
       return;
     }
 
-    // Restore position if we haven't seeked yet (e.g. after page nav).
-    try {
-      const s = savedState();
-      if (s.time > 0 && audio.currentTime < 0.5) {
-        audio.currentTime = s.time;
-      }
-    } catch {
-      /* ignore */
-    }
+    // Re-seek if needed before resuming
+    const s = savedState();
+    if (s.time > 0 && audio.currentTime < 0.5) restoreTime(audio, s.time);
 
     await tryPlay();
   });
 
+  // Persist position continuously
   audio.addEventListener("timeupdate", () => {
     if (!audio.paused) persist(audio, true);
   });
 
-  // Save position right before the page is navigated away.
+  // Save position before navigating away
   window.addEventListener("pagehide", () => persist(audio, !audio.paused));
   window.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") persist(audio, !audio.paused);
   });
 
+  // Start autoplay sequence if the saved state says we should be playing
   if (state.playing !== false) {
     tryPlay().then((ok) => {
       if (ok) return;
-      // Autoplay blocked — unlock on any user gesture OR when sign-in completes.
+      // Both normal and muted play failed — wait for any user interaction.
       const unlock = () => unlockAndPlay();
       window.addEventListener("pointerdown", unlock, { once: true, capture: true });
-      window.addEventListener("keydown", unlock, { once: true, capture: true });
+      window.addEventListener("keydown",     unlock, { once: true, capture: true });
       window.addEventListener("hub:signed-in", unlock, { once: true });
     });
   }
