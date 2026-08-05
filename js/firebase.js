@@ -75,9 +75,20 @@ export function sourcesRef(uid) {
   return collection(db, "users", uid, "sources");
 }
 
+// Wraps a promise so it rejects after `ms` milliseconds.
+// Prevents Firestore reads from hanging forever when the DB is slow / misconfigured.
+function withTimeout(promise, ms = 3000) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Firestore timeout")), ms)
+    ),
+  ]);
+}
+
 export async function loadUserPrefs(uid) {
   try {
-    const snap = await getDoc(prefsRef(uid));
+    const snap = await withTimeout(getDoc(prefsRef(uid)));
     return snap.exists() ? snap.data() : {};
   } catch {
     return {};
@@ -86,15 +97,15 @@ export async function loadUserPrefs(uid) {
 
 export async function saveUserPrefs(uid, data) {
   try {
-    await setDoc(prefsRef(uid), data, { merge: true });
+    await withTimeout(setDoc(prefsRef(uid), data, { merge: true }));
   } catch {
-    /* Firestore not yet enabled — ignore */
+    /* Firestore not yet enabled or timed out — ignore */
   }
 }
 
 export async function loadUserSources(uid) {
   try {
-    const snap = await getDocs(sourcesRef(uid));
+    const snap = await withTimeout(getDocs(sourcesRef(uid)));
     return snap.docs.map((d) => ({ _docId: d.id, ...d.data() }));
   } catch {
     return [];
@@ -103,10 +114,9 @@ export async function loadUserSources(uid) {
 
 export async function addUserSource(uid, source) {
   try {
-    const ref = await addDoc(sourcesRef(uid), {
-      ...source,
-      createdAt: serverTimestamp(),
-    });
+    const ref = await withTimeout(
+      addDoc(sourcesRef(uid), { ...source, createdAt: serverTimestamp() })
+    );
     return ref.id;
   } catch {
     return null;
@@ -115,7 +125,7 @@ export async function addUserSource(uid, source) {
 
 export async function removeUserSource(uid, docId) {
   try {
-    await deleteDoc(doc(db, "users", uid, "sources", docId));
+    await withTimeout(deleteDoc(doc(db, "users", uid, "sources", docId)));
   } catch {
     /* ignore */
   }

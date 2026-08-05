@@ -180,28 +180,29 @@ async function renderLibrary() {
     button.addEventListener("click", async () => {
       const id = button.dataset.id;
       const isOwned = button.dataset.owned === "true";
-      if (!window.confirm(`Remove this source from your library?`)) return;
-      button.disabled = true;
-      try {
-        if (currentUser) {
-          if (isOwned) {
-            // User's own Firestore source — delete the document
-            const us = userSources.find((s) => s.id === id);
-            if (us?._docId) await removeUserSource(currentUser.uid, us._docId);
-          } else {
-            // Base source — hide it in user prefs so it disappears for this user
-            const updatedHidden = [...hiddenIds, id];
-            await saveUserPrefs(currentUser.uid, { hiddenSources: updatedHidden });
+      if (!window.confirm("Remove this source from your library?")) return;
+
+      // Optimistic: remove the card from the DOM immediately so the user sees
+      // instant feedback regardless of how long Firestore takes.
+      const card = button.closest("article");
+      if (card) card.remove();
+      setSyncStatus("Removed from your library.");
+
+      // Persist removal in background — errors are silent (card is already gone).
+      if (currentUser) {
+        if (isOwned) {
+          const us = userSources.find((s) => s.id === id);
+          if (us?._docId) {
+            removeUserSource(currentUser.uid, us._docId).catch(() => {});
           }
         } else {
-          // Fallback: server API (not signed in)
-          await removeLibrarySource(id);
+          // Base source — record it as hidden in user prefs.
+          const updatedHidden = [...hiddenIds, id];
+          hiddenIds.add(id); // keep local state in sync for multi-removes
+          saveUserPrefs(currentUser.uid, { hiddenSources: updatedHidden }).catch(() => {});
         }
-        setSyncStatus(`Removed from your library.`);
-        await renderLibrary();
-      } catch (error) {
-        setSyncStatus(error.message || "Remove failed");
-        button.disabled = false;
+      } else {
+        removeLibrarySource(id).catch(() => {});
       }
     });
   });

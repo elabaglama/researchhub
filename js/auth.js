@@ -14,7 +14,7 @@ import {
   setDoc,
 } from "./firebase.js";
 import { saveNotionConfig } from "./shared.js";
-import { showOnboardingIfNeeded } from "./onboarding.js";
+import { showOnboardingIfNeeded, forceShowGuide } from "./onboarding.js";
 
 // ── Public state ─────────────────────────────────────────────────────────────
 export let currentUser = null;
@@ -379,6 +379,22 @@ function _renderAllAuthRoots() {
       ? `Here is your daily report, ${name}.`
       : "Here is your daily report.";
   }
+}
+
+// Guide button — shows the onboarding tour again regardless of seen state.
+// Wired eagerly; uses `currentUser` at click time (not at module-load time).
+function _wireGuideBtn() {
+  const btn = document.getElementById("guide-btn");
+  if (!btn) return;
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (currentUser) forceShowGuide(currentUser);
+  });
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", _wireGuideBtn);
+} else {
+  _wireGuideBtn();
 }
 
 // Mount when DOM is ready

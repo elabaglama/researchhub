@@ -45,6 +45,14 @@ const STEPS = [
   },
 ];
 
+// Called by the "Guide" nav button — always shows the guide, ignoring all guards.
+export function forceShowGuide(user) {
+  if (!user) return;
+  sessionStorage.removeItem(SESSION_KEY);
+  localStorage.removeItem(localKey(user.uid));
+  _showGuide(user);
+}
+
 export async function showOnboardingIfNeeded(user) {
   if (!user) return;
 
