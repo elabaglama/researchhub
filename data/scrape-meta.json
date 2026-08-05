@@ -1,5 +1,5 @@
 {
-  "scrapedAt": "2026-08-05T11:33:42.015963+00:00",
+  "scrapedAt": "2026-08-05T11:46:23.004574+00:00",
   "sources": {
     "opportunities-for-youth": {
       "ok": true,
@@ -25,8 +25,13 @@
       "ok": true,
       "count": 1,
       "mode": "generic"
+    },
+    "custom-creativetechnologist-xyz": {
+      "ok": true,
+      "count": 1,
+      "mode": "generic"
     }
   },
-  "mode": "full",
-  "total": 1412
+  "mode": "partial",
+  "total": 1413
 }
