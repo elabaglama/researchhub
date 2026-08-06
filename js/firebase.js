@@ -220,12 +220,20 @@ function makeShareCode() {
 }
 
 /**
- * Publish a snapshot of the user's library under sharedLibraries/{code}.
+ * Publish (or refresh) the user's stable shared-library link.
+ * Each user gets one code forever; Condividi/Share updates the same snapshot.
  * Returns { ok, code, url } or { ok:false, error }.
  */
-export async function createSharedLibrary(uid, sources, { name = "" } = {}) {
+export async function publishSharedLibrary(uid, sources, { name = "" } = {}) {
   try {
-    const code = makeShareCode();
+    const prefs = await loadUserPrefs(uid);
+    let code = String(prefs.shareCode || "").trim();
+    if (!code) {
+      code = makeShareCode();
+      const saved = await saveUserPrefs(uid, { shareCode: code });
+      if (!saved.ok) return { ok: false, error: saved.error || "Could not save share code." };
+    }
+
     const payload = {
       code,
       ownerUid: uid,
@@ -237,15 +245,28 @@ export async function createSharedLibrary(uid, sources, { name = "" } = {}) {
         focus: s.focus || "",
         blurb: s.blurb || "",
       })),
-      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
     };
-    await withTimeout(setDoc(doc(db, "sharedLibraries", code), payload));
+
+    const ref = doc(db, "sharedLibraries", code);
+    const existing = await withTimeout(getDoc(ref));
+    if (existing.exists()) {
+      await withTimeout(updateDoc(ref, payload));
+    } else {
+      await withTimeout(setDoc(ref, { ...payload, createdAt: serverTimestamp() }));
+    }
+
     const base = window.__APP_BASE__ || "";
     const url = `${location.origin}${base}/library?import=${encodeURIComponent(code)}`;
     return { ok: true, code, url };
   } catch (err) {
     return { ok: false, error: firestoreErrorMessage(err) };
   }
+}
+
+/** @deprecated use publishSharedLibrary — kept for older imports */
+export async function createSharedLibrary(uid, sources, opts) {
+  return publishSharedLibrary(uid, sources, opts);
 }
 
 export async function loadSharedLibrary(code) {

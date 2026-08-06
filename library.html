@@ -20,7 +20,7 @@
     </script>
     <script src="js/base.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Libreria — Research Hub</title>
+    <title>dammi di più</title>
     <meta name="description" content="Gestisci le tue fonti di opportunità personali in Research Hub." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Research Hub" />
@@ -68,7 +68,7 @@
         <div class="library-actions">
           <button type="button" class="ghost-btn" id="sync-all-btn" data-i18n="lib.syncAll">Sincronizza tutto</button>
           <button type="button" class="ghost-btn" id="share-library-btn" data-i18n="lib.share">Condividi</button>
-          <button type="button" class="ghost-btn" id="notion-toggle-btn">Connetti Notion</button>
+          <button type="button" class="ghost-btn" id="notion-toggle-btn" data-i18n="notion.connect">Notion</button>
         </div>
       </div>
 
@@ -80,30 +80,29 @@
           <span data-i18n="lib.urlLabel">Link al sito web</span>
           <input name="url" type="url" required data-i18n-ph="lib.urlPlaceholder" placeholder="https://esempio.com" />
         </label>
-        <div class="form-actions">
+        <div class="form-actions form-actions--library">
           <button type="submit" class="add-resource-btn" id="save-resource-btn" data-i18n="lib.saveBtn">
             Salva e indicizza
+          </button>
+          <button type="button" class="ghost-btn bulk-import-toggle" id="bulk-import-toggle" data-i18n="lib.bulkImport">
+            Importa in blocco
           </button>
           <button type="button" class="cancel-btn" id="cancel-add-btn" hidden data-i18n="lib.cancel">Annulla</button>
         </div>
       </form>
 
-      <!-- Bulk import form -->
-      <details class="bulk-import-details" id="bulk-import-details">
-        <summary class="ghost-btn bulk-import-toggle" data-i18n="lib.bulkImport">Importa in blocco</summary>
-        <form class="bulk-import-form" id="bulk-import-form">
-          <textarea
-            id="bulk-urls"
-            class="bulk-textarea"
-            rows="6"
-            data-i18n-ph="lib.bulkPlaceholder"
-            placeholder="Un link per riga…"
-          ></textarea>
-          <div class="form-actions">
-            <button type="submit" class="add-resource-btn" id="bulk-add-btn" data-i18n="lib.bulkAdd">Aggiungi tutti</button>
-          </div>
-        </form>
-      </details>
+      <div class="bulk-import-panel" id="bulk-import-panel" hidden>
+        <textarea
+          id="bulk-urls"
+          class="bulk-textarea"
+          rows="6"
+          data-i18n-ph="lib.bulkPlaceholder"
+          placeholder="Un link per riga…"
+        ></textarea>
+        <div class="form-actions">
+          <button type="button" class="add-resource-btn" id="bulk-add-btn" data-i18n="lib.bulkAdd">Aggiungi tutti</button>
+        </div>
+      </div>
 
       <div id="library-list" class="simple-list"></div>
     </main>

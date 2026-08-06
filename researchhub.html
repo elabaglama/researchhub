@@ -114,6 +114,15 @@
             aria-label="Filtra per paese"
           />
         </div>
+        <div class="filter-group">
+          <select id="filter-date" class="filter-select" aria-label="Filtra per data">
+            <option value="" data-i18n="filter.anyDate">Qualsiasi data</option>
+            <option value="today" data-i18n="filter.today">Oggi</option>
+            <option value="tomorrow" data-i18n="filter.tomorrow">Domani</option>
+            <option value="this-week" data-i18n="filter.thisWeek">Questa settimana</option>
+            <option value="next-month" data-i18n="filter.nextMonth">Prossimo mese</option>
+          </select>
+        </div>
       </div>
 
       <section class="home-results" id="home-results" hidden>

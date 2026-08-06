@@ -25,7 +25,7 @@ import {
   removeUserSource,
   getIdToken,
   loadScrapeCaches,
-  createSharedLibrary,
+  publishSharedLibrary,
   loadSharedLibrary,
 } from "./firebase.js";
 import { t, initI18n, toggleLang } from "./i18n.js";
@@ -81,7 +81,8 @@ const importCloseBtn = document.getElementById("import-close-btn");
 const importStatus = document.getElementById("import-status");
 const importConfirmBtn = document.getElementById("import-confirm-btn");
 
-const bulkForm = document.getElementById("bulk-import-form");
+const bulkImportToggle = document.getElementById("bulk-import-toggle");
+const bulkImportPanel = document.getElementById("bulk-import-panel");
 const bulkUrls = document.getElementById("bulk-urls");
 const bulkAddBtn = document.getElementById("bulk-add-btn");
 
@@ -291,8 +292,9 @@ async function renderLibrary() {
 
   const pendingNote = await refreshCacheStatuses(userSources);
   paintList(userSources);
-  if (pendingNote) setSyncStatus(pendingNote);
-  else if (loadResult.error) setSyncStatus(loadResult.error);
+  if (loadResult.error) setSyncStatus(loadResult.error);
+  else if (!pendingNote) setSyncStatus("");
+  // pending scrapes no longer show a cryptic "N…" under the title
 }
 
 async function addOneSource(url, { scrape = true } = {}) {
@@ -388,7 +390,7 @@ shareBtn?.addEventListener("click", async () => {
   shareBtn.disabled = true;
   shareStatus.textContent = "…";
   openOverlay(shareOverlay);
-  const result = await createSharedLibrary(currentUser.uid, userSources, {
+  const result = await publishSharedLibrary(currentUser.uid, userSources, {
     name: currentUser.displayName || "Research Hub",
   });
   shareBtn.disabled = false;
@@ -459,8 +461,14 @@ importConfirmBtn?.addEventListener("click", async () => {
 });
 
 // ── Bulk import ──────────────────────────────────────────────────────────────
-bulkForm?.addEventListener("submit", async (event) => {
-  event.preventDefault();
+bulkImportToggle?.addEventListener("click", () => {
+  if (!bulkImportPanel) return;
+  const open = bulkImportPanel.hidden;
+  bulkImportPanel.hidden = !open;
+  if (open) bulkUrls?.focus();
+});
+
+bulkAddBtn?.addEventListener("click", async () => {
   if (!currentUser) {
     setSyncStatus(t("lib.signIn"));
     return;
@@ -484,6 +492,7 @@ bulkForm?.addEventListener("submit", async (event) => {
   }
   bulkAddBtn.disabled = false;
   bulkUrls.value = "";
+  if (bulkImportPanel) bulkImportPanel.hidden = true;
   paintList(userSources);
   setSyncStatus(`+${added}`);
 });

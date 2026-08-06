@@ -77,7 +77,7 @@ const CONTINENT_KEYWORDS = {
   oceania: ["australia", "australian", "new zealand", "pacific", "oceania", "fiji", "fijian", "papua new guinea", "solomon islands", "vanuatu", "samoa", "tonga", "micronesia", "polynesia"],
 };
 
-function matchesFilters(item, { type = "", continent = "", country = "", age = "" } = {}) {
+function matchesFilters(item, { type = "", continent = "", country = "", age = "", date = "" } = {}) {
   if (type && classifyItem(item) !== type) return false;
 
   if (continent || country) {
@@ -104,6 +104,105 @@ function matchesFilters(item, { type = "", continent = "", country = "", age = "
     }
   }
 
+  if (date) {
+    const deadline = parseDeadlineDate(item.deadline);
+    if (!deadline) return false;
+    if (!deadlineMatchesRange(deadline, date)) return false;
+  }
+
+  return true;
+}
+
+/** Parse common free-text deadlines into a local Date at midnight, or null. */
+function parseDeadlineDate(raw) {
+  if (!raw) return null;
+  const s = String(raw).trim();
+  if (!s || /^(open|ongoing|n\/a|tba|tbd)$/i.test(s)) return null;
+
+  const months = {
+    january: 0, jan: 0, febbraio: 1, february: 1, feb: 1,
+    march: 2, mar: 2, marzo: 2, april: 3, apr: 3, aprile: 3,
+    may: 4, maggio: 4, june: 5, jun: 5, giugno: 5,
+    july: 6, jul: 6, luglio: 6, august: 7, aug: 7, agosto: 7,
+    september: 8, sep: 8, sept: 8, settembre: 8,
+    october: 9, oct: 9, ottobre: 9, november: 10, nov: 10, novembre: 10,
+    december: 11, dec: 11, dicembre: 11,
+  };
+
+  let m =
+    s.match(/^([A-Za-zÀ-ÿ]+)\s+(\d{1,2})(?:st|nd|rd|th)?,?\s*(\d{4})$/i);
+  if (m) {
+    const month = months[String(m[1]).toLowerCase()];
+    const day = Number(m[2]);
+    const year = Number(m[3]);
+    if (month != null && day >= 1 && day <= 31 && year > 2000) {
+      return new Date(year, month, day);
+    }
+  }
+
+  m = s.match(/^(\d{1,2})\s+([A-Za-zÀ-ÿ]+)\s+(\d{4})$/i);
+  if (m) {
+    const day = Number(m[1]);
+    const month = months[String(m[2]).toLowerCase()];
+    const year = Number(m[3]);
+    if (month != null && day >= 1 && day <= 31 && year > 2000) {
+      return new Date(year, month, day);
+    }
+  }
+
+  m = s.match(/^(\d{4})[/-](\d{1,2})[/-](\d{1,2})$/);
+  if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+
+  m = s.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})$/);
+  if (m) {
+    let year = Number(m[3]);
+    if (year < 100) year += 2000;
+    // Prefer day/month/year (EU) when day > 12; else try month/day then day/month
+    const n1 = Number(m[1]);
+    const n2 = Number(m[2]);
+    if (n1 > 12) return new Date(year, n2 - 1, n1);
+    if (n2 > 12) return new Date(year, n1 - 1, n2);
+    return new Date(year, n2 - 1, n1); // EU default
+  }
+
+  const native = Date.parse(s);
+  if (!Number.isNaN(native)) {
+    const d = new Date(native);
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
+  return null;
+}
+
+function startOfDay(d) {
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
+
+function deadlineMatchesRange(deadline, range) {
+  const today = startOfDay(new Date());
+  const d = startOfDay(deadline);
+
+  if (range === "today") {
+    return d.getTime() === today.getTime();
+  }
+  if (range === "tomorrow") {
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return d.getTime() === tomorrow.getTime();
+  }
+  if (range === "this-week") {
+    const day = today.getDay(); // 0 Sun
+    const mondayOffset = day === 0 ? -6 : 1 - day;
+    const weekStart = new Date(today);
+    weekStart.setDate(today.getDate() + mondayOffset);
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
+    return d >= weekStart && d <= weekEnd;
+  }
+  if (range === "next-month") {
+    const start = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+    const end = new Date(today.getFullYear(), today.getMonth() + 2, 0);
+    return d >= start && d <= end;
+  }
   return true;
 }
 

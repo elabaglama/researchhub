@@ -126,6 +126,26 @@ body {
   margin-top: 0.75rem;
 }
 
+.bulk-import-panel {
+  margin: -1rem 0 1.5rem;
+  padding: 1rem 1.25rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fafafa;
+}
+
+.bulk-import-panel[hidden] {
+  display: none !important;
+}
+
+.form-actions--library {
+  align-items: center;
+}
+
+.bulk-import-toggle {
+  cursor: pointer;
+}
+
 .bulk-textarea {
   width: 100%;
   min-height: 8rem;
@@ -696,6 +716,29 @@ body {
   .top-right-bar {
     top: 0.9rem;
     right: 0.9rem;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.45rem;
+  }
+
+  /* Keep profile/sign-out clear of top nav and music player */
+  .auth-root-home,
+  .auth-root-light {
+    top: auto;
+    bottom: 6.75rem;
+    left: 0.9rem;
+    right: auto;
+    transform: none;
+    z-index: 6;
+  }
+
+  .auth-user-pill {
+    max-width: min(72vw, 14rem);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .auth-user-name {
+    max-width: 5.5rem;
   }
 
   .count-number {

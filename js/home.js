@@ -36,6 +36,7 @@ const body = document.body;
 const filterType = document.getElementById("filter-type");
 const filterContinent = document.getElementById("filter-continent");
 const filterCountry = document.getElementById("filter-country");
+const filterDate = document.getElementById("filter-date");
 const countNumber = document.getElementById("count-number");
 
 let sources = [];
@@ -101,11 +102,12 @@ function getActiveFilters() {
     type: filterType?.value || "",
     continent: filterContinent?.value || "",
     country: filterCountry?.value?.trim() || "",
+    date: filterDate?.value || "",
   };
 }
 
 function hasActiveFilters(filters) {
-  return Boolean(filters.type || filters.continent || filters.country);
+  return Boolean(filters.type || filters.continent || filters.country || filters.date);
 }
 
 function buildFilterLabel(filters) {
@@ -113,6 +115,7 @@ function buildFilterLabel(filters) {
   if (filters.type) parts.push(filterType.options[filterType.selectedIndex]?.text || filters.type);
   if (filters.continent) parts.push(filterContinent.options[filterContinent.selectedIndex]?.text || filters.continent);
   if (filters.country) parts.push(filters.country);
+  if (filters.date) parts.push(filterDate.options[filterDate.selectedIndex]?.text || filters.date);
   return parts.join(", ");
 }
 
@@ -120,6 +123,7 @@ function markActiveFilters(filters) {
   filterType?.classList.toggle("filter-active", Boolean(filters.type));
   filterContinent?.classList.toggle("filter-active", Boolean(filters.continent));
   filterCountry?.classList.toggle("filter-active", Boolean(filters.country));
+  filterDate?.classList.toggle("filter-active", Boolean(filters.date));
 }
 
 function runSearch(query) {
@@ -181,10 +185,12 @@ form.addEventListener("submit", (event) => {
 filterType?.addEventListener("change", () => runSearch(input.value));
 filterContinent?.addEventListener("change", () => runSearch(input.value));
 filterCountry?.addEventListener("input", () => runSearch(input.value));
+filterDate?.addEventListener("change", () => runSearch(input.value));
 
 filterType?.addEventListener("focus", showFilters);
 filterContinent?.addEventListener("focus", showFilters);
 filterCountry?.addEventListener("focus", showFilters);
+filterDate?.addEventListener("focus", showFilters);
 
 await refreshFeed();
 
