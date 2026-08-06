@@ -13,12 +13,12 @@ import {
   markRemovedSourceId,
   unmarkRemovedSourceId,
   mergePersonalSources,
-} from "./shared.js";
+} from "./shared.js?v=20260806b";
 import {
   currentUser,
   onUserChange,
   persistNotionToFirestore,
-} from "./auth.js";
+} from "./auth.js?v=20260806b";
 import {
   loadUserSources,
   addUserSource,
@@ -27,8 +27,8 @@ import {
   loadScrapeCaches,
   publishSharedLibrary,
   loadSharedLibrary,
-} from "./firebase.js";
-import { t, initI18n, toggleLang } from "./i18n.js";
+} from "./firebase.js?v=20260806b";
+import { t, initI18n, toggleLang } from "./i18n.js?v=20260806b";
 
 initI18n();
 

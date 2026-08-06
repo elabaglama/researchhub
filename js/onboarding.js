@@ -1,5 +1,5 @@
-import { loadUserPrefs, saveUserPrefs } from "./firebase.js";
-import { t } from "./i18n.js";
+import { loadUserPrefs, saveUserPrefs } from "./firebase.js?v=20260806b";
+import { t } from "./i18n.js?v=20260806b";
 
 const WISHLIST_URL =
   "https://www.amazon.it/hz/wishlist/ls/6CV4RB9T1Y5S?ref_=wl_share";

@@ -1,4 +1,4 @@
-import { t } from "./i18n.js";
+import { t } from "./i18n.js?v=20260806b";
 
 const SOURCES_KEY = "research-hub-sources";
 const NOTION_KEY = "research-hub-notion";

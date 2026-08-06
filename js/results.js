@@ -5,13 +5,13 @@ import {
   loadLibraryCache,
   loadRemovedSourceIds,
   mergePersonalSources,
-} from "./shared.js";
-import { currentUser, onUserChange } from "./auth.js";
+} from "./shared.js?v=20260806b";
+import { currentUser, onUserChange } from "./auth.js?v=20260806b";
 import {
   loadUserSources,
   loadScrapeCaches,
   opportunitiesFromCaches,
-} from "./firebase.js";
+} from "./firebase.js?v=20260806b";
 
 // results.html redirects to index — keep export helper available if needed
 void wireXlsButton;

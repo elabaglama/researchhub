@@ -12,13 +12,13 @@ import {
   loadUserPrefs,
   saveUserPrefs,
   setDoc,
-} from "./firebase.js";
-import { saveNotionConfig } from "./shared.js";
+} from "./firebase.js?v=20260806b";
+import { saveNotionConfig } from "./shared.js?v=20260806b";
 import {
   showOnboardingIfNeeded,
   forceShowGuide,
   markPendingGuide,
-} from "./onboarding.js";
+} from "./onboarding.js?v=20260806b";
 
 // ── Public state ─────────────────────────────────────────────────────────────
 export let currentUser = null;

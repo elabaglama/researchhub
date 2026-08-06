@@ -8,16 +8,16 @@ import {
   loadLibraryCache,
   loadRemovedSourceIds,
   mergePersonalSources,
-} from "./shared.js";
-import { currentUser, onUserChange } from "./auth.js";
+} from "./shared.js?v=20260806b";
+import { currentUser, onUserChange } from "./auth.js?v=20260806b";
 import {
   loadUserPrefs,
   saveUserPrefs,
   loadUserSources,
   loadScrapeCaches,
   opportunitiesFromCaches,
-} from "./firebase.js";
-import { t, initI18n, toggleLang, getLang } from "./i18n.js";
+} from "./firebase.js?v=20260806b";
+import { t, initI18n, toggleLang, getLang } from "./i18n.js?v=20260806b";
 
 initI18n();
 
