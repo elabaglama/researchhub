@@ -477,9 +477,10 @@ body {
 
 .library-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.55rem;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .ghost-btn {
@@ -706,56 +707,99 @@ body {
 }
 
 @media (max-width: 640px) {
-  .top-pills {
+  /* ——— Home: clear chrome bands so nothing stacks ——— */
+  .page-home .top-pills {
+    top: 0.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    max-width: none;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.4rem;
+  }
+
+  .page-home .top-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page-home .top-pills .pill {
+    flex-shrink: 0;
+    font-size: 0.72rem;
+    min-height: 1.9rem;
+    padding: 0.35rem 0.8rem;
+  }
+
+  .page-home .top-right-bar {
+    top: 3.35rem;
+    right: 0.75rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .page-home .auth-root-home {
+    top: 3.35rem;
+    left: 0.75rem;
+    right: auto;
+    bottom: auto;
+    transform: none;
+  }
+
+  .page-home .auth-user-pill {
+    max-width: min(58vw, 11rem);
+    box-shadow: none;
+  }
+
+  .page-home .auth-user-name {
+    max-width: 4.5rem;
+  }
+
+  .page-home .home-main {
+    padding: 7.25rem 1rem 6.5rem;
+  }
+
+  .page-home.is-searching .home-main {
+    padding-top: 7.5rem;
+  }
+
+  .page-home .brand-mark {
+    left: 0.75rem;
+    bottom: 0.85rem;
+    font-size: 1.15rem;
+  }
+
+  .page-home .music-player {
+    right: 0.75rem;
+    bottom: 0.75rem;
+    width: 72px;
+    height: 72px;
+  }
+
+  /* ——— Other pages ——— */
+  .page-white .top-pills {
     top: 0.9rem;
     left: 0.9rem;
     right: auto;
-    max-width: calc(100% - 7.5rem);
+    max-width: calc(100% - 6.5rem);
   }
 
-  .top-right-bar {
+  .page-white .top-right-bar {
     top: 0.9rem;
     right: 0.9rem;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.45rem;
   }
 
-  /* Keep profile/sign-out clear of top nav and music player */
-  .auth-root-home,
-  .auth-root-light {
+  .page-white .auth-root-light {
     top: auto;
-    bottom: 6.75rem;
+    bottom: 6.5rem;
     left: 0.9rem;
     right: auto;
     transform: none;
-    z-index: 6;
-  }
-
-  .auth-user-pill {
-    max-width: min(72vw, 14rem);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-  }
-
-  .auth-user-name {
-    max-width: 5.5rem;
   }
 
   .count-number {
     font-size: 1.15rem;
-  }
-
-  .brand-mark {
-    left: 0.9rem;
-    bottom: 1rem;
-    font-size: 1.25rem;
-  }
-
-  .music-player {
-    right: 0.9rem;
-    bottom: 0.9rem;
-    width: 96px;
-    height: 96px;
   }
 
   .white-main {
@@ -764,6 +808,26 @@ body {
 
   .library-head {
     flex-direction: column;
+    align-items: stretch;
+  }
+
+  .library-actions {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.15rem;
+  }
+
+  .library-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .library-actions .ghost-btn {
+    flex-shrink: 0;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.82rem;
   }
 }
 

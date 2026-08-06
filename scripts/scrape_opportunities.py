@@ -562,8 +562,6 @@ def scrape_html_listings(source: dict) -> list[dict]:
                     "summary": title[:280],
                 }
             )
-        if len(items) >= 12:
-            break
     return items
 
 
@@ -739,7 +737,6 @@ def scrape_github_repo(source: dict) -> list[dict]:
 
     relevant = [f for f in all_files if _rank(f) < 99 and f.count("/") <= 4]
     relevant.sort(key=_rank)
-    relevant = relevant[:20]
 
     # ── Fetch and parse each file ───────────────────────────────────────────
     all_items: list[dict] = []
